@@ -4,7 +4,6 @@
     Author     : night
 --%>
 <%
-    // Set a request attribute with the value you want to pass to the header
     String currentPage = "dashboard";  // or any dynamic value
     request.setAttribute("currentPage", currentPage);
 %>
@@ -38,11 +37,19 @@
 
     </head>
     <body>
-        <%@ include file="/views/header.jsp" %>
+    <%@ include file="/views/header.jsp" %>
+    <%@ include file="/views/side_bar.jsp" %>
+
+    <!-- Main content -->
+    <main class="main" id="main">
         
-        <h1>Hello World!zzzzzzzzzz</h1>
-        Rooms, Residents, Payments, Maintenance, Statistics
-        admin dashboard
-        
+        <h1>Welcome</h1>
+        <p>This is the main content area.</p>
+    </main>
+
+    
+    
+    <script src="${pageContext.request.contextPath}/component/js/tools/jquery-3.3.1.min.js"></script>
+    <script src="${pageContext.request.contextPath}/component/js/script.js"></script>
     </body>
 </html>

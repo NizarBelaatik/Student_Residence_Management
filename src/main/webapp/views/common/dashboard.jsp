@@ -4,6 +4,10 @@
     Author     : night
 --%>
 
+<%
+    String currentPage = "dashboard";  // or any dynamic value
+    request.setAttribute("currentPage", currentPage);
+%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -35,48 +39,18 @@
     </head>
     <body>
         <!-- Header -->
-    <header>
-        <div class="logo"> <a class="toggle-btn" id="toggleBtn"><i class="fas fa-bars"></i></a> Logo</div>
-        <div class="profile">
-            <div class="dropdown">
-                Profile
-                <div class="dropdown-content">
-                    <a href="#">Settings</a>
-                    <a href="#">Logout</a>
-                </div>
-            </div>
-            <div class="notifications">Notifications</div>
-        </div>
-    </header>
-
-    <!-- Sidebar -->
-    <aside class="sidebar" id="sidebar">
-        <a href="#" class="<%= request.getAttribute("currentPage").equals("dashboard") ? "active" : "" %>" >Home</a>
-        <a href="#" class="<%= request.getAttribute("currentPage").equals("Rooms") ? "active" : "" %>">Rooms</a>
-        <a href="#" class="<%= request.getAttribute("currentPage").equals("Residents") ? "active" : "" %>">Residents</a>
-        <a href="#" class="<%= request.getAttribute("currentPage").equals("Payments") ? "active" : "" %>">Payments</a>
-        <a href="#" class="<%= request.getAttribute("currentPage").equals("Maintenance") ? "active" : "" %>">Maintenance</a>
-        <a href="#" class="<%= request.getAttribute("currentPage").equals("Statistics") ? "active" : "" %>">Statistics</a>
-    </aside>
+    
+    <%@ include file="/views/header.jsp" %>
+    <%@ include file="/views/side_bar.jsp" %>
 
     <!-- Main content -->
     <main class="main" id="main">
         
         <h1>Welcome</h1>
-        <p>This is the main content area.</p>
+        <p>This is the main content aressssa.</p>
     </main>
 
-    <script>
-        const toggleBtn = document.getElementById('toggleBtn');
-        const sidebar = document.getElementById('sidebar');
-        const main = document.getElementById('main');
-
-        toggleBtn.addEventListener('click', () => {
-            sidebar.classList.toggle('active');
-            main.classList.toggle('sidebar-open');
-        });
-    </script>
     
-    
+    <script src="${pageContext.request.contextPath}/component/js/script.js"></script>    
     </body>
 </html>
