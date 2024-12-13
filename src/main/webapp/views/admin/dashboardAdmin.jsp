@@ -26,25 +26,27 @@
         <link rel="stylesheet" href="${pageContext.request.contextPath}/component/css/template-style.css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/component/css/style.css">
 
-        
-
-        
-        
-
-
         <!-- Boxicons CSS -->
         <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
 
     </head>
     <body>
+        
     <%@ include file="/views/header.jsp" %>
-    <%@ include file="/views/side_bar.jsp" %>
+    <%@ include file="/views/asideadmin.jsp" %>
 
     <!-- Main content -->
     <main class="main" id="main">
         
         <h1>Welcome</h1>
         <p>This is the main content area.</p>
+        Total Rooms.
+        Occupancy Rate.
+        Pending Payments.
+        Pending Maintenance Requests.
+        
+        Statistics: occupancy rates, overdue payments, pending maintenance requests.
+Quick links to manage rooms, residents, payments, and maintenance.
     </main>
 
     
