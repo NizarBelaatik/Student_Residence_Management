@@ -3,15 +3,43 @@
     Created on : Dec 11, 2024, 4:27:26 PM
     Author     : night
 --%>
-
+<%
+    // Set a request attribute with the value you want to pass to the header
+    String currentPage = "dashboard";  // or any dynamic value
+    request.setAttribute("currentPage", currentPage);
+%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
+        <title>Start Page</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        
+        
+
+        <!-- Google Fonts -->
+        <link href="https://fonts.gstatic.com" rel="preconnect">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700">
+        
+        
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/component/css/fontawesome.min.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/component/css/bootstrap.min.css"> 
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/component/css/template-style.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/component/css/style.css">
+
+        
+
+        
+        
+
+
+        <!-- Boxicons CSS -->
+        <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+
     </head>
     <body>
+        <%@ include file="/views/header.jsp" %>
+        
         <h1>Hello World!zzzzzzzzzz</h1>
         Rooms, Residents, Payments, Maintenance, Statistics
         admin dashboard
