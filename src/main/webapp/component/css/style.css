@@ -28,8 +28,7 @@
 
 body {
   font-family: "Open Sans", sans-serif;
-  background: #f6f9ff;
-  color: #444444;
+  background: #F0F0F0;
 }
 
 a {
@@ -249,15 +248,17 @@ header .profile .dropdown-content a:hover {
 }
 
 
+
 .card_1 {
     margin-bottom: 30px;
     border: none;
     border-radius: 5px;
-    box-shadow: 0px 0 30px rgba(1, 41, 112, 0.1);
+    box-shadow: 0px 0 30px rgba(0, 0, 0, 0.2);/*rgba(1, 41, 112, 0.1)*/
+    background-color: #fff;
 }
 .card_1-header,
 .card_1-footer {
-  border-color: #ebeef4;
+  border-bottom: 1px solid #ebeef4;
   
   color: #798eb3;
   padding: 15px;
@@ -321,5 +322,14 @@ header .profile .dropdown-content a:hover {
   font-size: 12px;
   color: #dc3545; }
 
-
+.StatusSpan{
+    border: 3px solid;
+    border-radius: 25px;
+    padding: 0 10px;
+    text-align: center;
+    font-weight:bold;
+}
+.StatusSpan[data-badge='Availability']{    
+    color:green;
+    border-color:green;}
 

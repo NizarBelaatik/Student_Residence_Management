@@ -36,8 +36,8 @@
             <nav>
               <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="">Home</a></li>
-                <li class="breadcrumb-item ">Dashboard</li>
-                <li class="breadcrumb-item active">Manage Rooms</li>
+                <li class="breadcrumb-item">Dashboard</li>
+                <li class="breadcrumb-item active">Rooms</li>
               </ol>
             </nav>
           </div>
@@ -84,7 +84,7 @@
                                         <td>Single</td>
                                         <td>$3000</td>
                                         <td>.....</td>
-                                        <td><a href="#" class="btn btn-success">Available</a></td>
+                                        <td><sapn class="StatusSpan" data-badge='Availability'>Available</sapn><a href="#" class="btn btn-success">Available</a></td>
                                         <td>
                                             <a class="btn btn-warning">Edit</a>
                                             <a class="btn btn-danger">Delete</a>
