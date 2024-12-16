@@ -28,7 +28,7 @@
 
 body {
   font-family: "Open Sans", sans-serif;
-  background: #F0F0F0;
+  background: #F0F0F3;
 }
 
 a {
@@ -333,3 +333,26 @@ header .profile .dropdown-content a:hover {
     color:green;
     border-color:green;}
 
+.StatusSpan[data-badge='Occupied']{    
+    color:red;
+    border-color:red;}
+
+.StatusSpan[data-badge='Maintenance']{    
+    color:orange;
+    border-color:orange;}
+
+.StatusSpan[data-badge='Maintenance']{    
+    color:orange;
+    border-color:orange;}
+
+.StatusSpan2[data-badge='Maintenance'] {    
+    color:orange;
+    border-color:orange;
+}
+.StatusSpan2[data-badge='Maintenance'] .dot {  
+    height: 15px;
+    width: 15px;
+    border-radius: 50%;
+    display: inline-block;
+    background-color: orange;
+}

@@ -26,8 +26,8 @@
     </head>
     </head>
     <body>
-        < <%@ include file="/views/header.jsp" %>
-    <%@ include file="/views/asideadmin.jsp" %>
+        <%@ include file="/views/header.jsp" %>
+        <%@ include file="/views/asideadmin.jsp" %>
 
     <!-- Main content -->
     <main class="main" id="main">
@@ -84,7 +84,7 @@
                                         <td>Single</td>
                                         <td>$3000</td>
                                         <td>.....</td>
-                                        <td><sapn class="StatusSpan" data-badge='Availability'>Available</sapn><a href="#" class="btn btn-success">Available</a></td>
+                                        <td><sapn class="StatusSpan" data-badge='Availability'>Available</sapn></td>
                                         <td>
                                             <a class="btn btn-warning">Edit</a>
                                             <a class="btn btn-danger">Delete</a>
@@ -96,7 +96,7 @@
                                         <td>Mark Otto</td>
                                         <td>$3000</td>
                                         <td>.....</td>
-                                        <td><a href="#" class="btn btn-warning">Occupied</a></td>
+                                        <td><sapn class="StatusSpan" data-badge='Occupied'>Occupied</sapn></td>
                                         <td>
                                             <a class="btn btn-warning">Edit</a>
                                             <a class="btn btn-danger">Delete</a>
@@ -108,7 +108,7 @@
                                         <td>Mark Otto</td>
                                         <td>$3000</td>
                                         <td>.....</td>
-                                        <td><a href="#" class="btn btn-danger">Maintenance</a></td>
+                                        <td><sapn class="StatusSpan" data-badge='Maintenance'>Maintenance</sapn></td>
                                         <td></td>
                                       </tr>
 
@@ -117,7 +117,7 @@
                                         <td>Mark Otto</td>
                                         <td>$3000</td>
                                         <td>.....</td>
-                                        <td><a href="#" class="btn btn-success">Maintenance</a></td>
+                                        <td><sapn class="StatusSpan2" data-badge='Maintenance'><i class="dot"></i>Maintenance</sapn></td>
                                         <td></td>
                                       </tr>
 
