@@ -11,7 +11,7 @@ import jakarta.servlet.RequestDispatcher;
 /**
  * Servlet implementation class Chambre
  */
-@WebServlet("/Chambre")
+
 public class Chambre extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

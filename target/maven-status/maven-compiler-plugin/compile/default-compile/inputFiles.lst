@@ -1,3 +1,4 @@
+C:\Users\night\Documents\NetBeansProjects\Student_Residence_Management\src\main\java\admin_pages\Dashboard.java
 C:\Users\night\Documents\NetBeansProjects\Student_Residence_Management\src\main\java\controller\PaiementController.java
 C:\Users\night\Documents\NetBeansProjects\Student_Residence_Management\src\main\java\controller\ResidentController.java
 C:\Users\night\Documents\NetBeansProjects\Student_Residence_Management\src\main\java\model\MaintenanceRequest.java
@@ -5,6 +6,7 @@ C:\Users\night\Documents\NetBeansProjects\Student_Residence_Management\src\main\
 C:\Users\night\Documents\NetBeansProjects\Student_Residence_Management\src\main\java\com\mycompany\student_residence_management\resources\JakartaEE10Resource.java
 C:\Users\night\Documents\NetBeansProjects\Student_Residence_Management\src\main\java\dao\MaintenanceRequestDAO.java
 C:\Users\night\Documents\NetBeansProjects\Student_Residence_Management\src\main\java\controller\MaintenanceController.java
+C:\Users\night\Documents\NetBeansProjects\Student_Residence_Management\src\main\java\RestApplication\RestApplication.java
 C:\Users\night\Documents\NetBeansProjects\Student_Residence_Management\src\main\java\service\ResidentService.java
 C:\Users\night\Documents\NetBeansProjects\Student_Residence_Management\src\main\java\service\ChambreService.java
 C:\Users\night\Documents\NetBeansProjects\Student_Residence_Management\src\main\java\dao\ResidentDAO.java
@@ -14,6 +16,7 @@ C:\Users\night\Documents\NetBeansProjects\Student_Residence_Management\src\main\
 C:\Users\night\Documents\NetBeansProjects\Student_Residence_Management\src\main\java\service\MaintenanceService.java
 C:\Users\night\Documents\NetBeansProjects\Student_Residence_Management\src\main\java\utils\JavaMailUtil.java
 C:\Users\night\Documents\NetBeansProjects\Student_Residence_Management\src\main\java\service\PaiementService.java
+C:\Users\night\Documents\NetBeansProjects\Student_Residence_Management\src\main\java\common_pages\dashboard_common.java
 C:\Users\night\Documents\NetBeansProjects\Student_Residence_Management\src\main\java\model\Paiment.java
 C:\Users\night\Documents\NetBeansProjects\Student_Residence_Management\src\main\java\dao\ChambreDAO.java
 C:\Users\night\Documents\NetBeansProjects\Student_Residence_Management\src\main\java\model\Chambre.java

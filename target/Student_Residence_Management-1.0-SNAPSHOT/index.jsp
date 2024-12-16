@@ -4,6 +4,11 @@
     Author     : night
 --%>
 
+<%
+    String currentPage = "dashboard";  // or any dynamic value
+    request.setAttribute("currentPage", currentPage);
+%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -21,7 +26,6 @@
         <link rel="stylesheet" href="${pageContext.request.contextPath}/component/css/fontawesome.min.css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/component/css/bootstrap.min.css"> 
         <link rel="stylesheet" href="${pageContext.request.contextPath}/component/css/template-style.css">
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/component/css/style.css">
 
         
 
@@ -41,6 +45,9 @@
         
 <body id="reportsPage">
     <div class="" id="home">
+        
+        
+        
         <nav class="navbar navbar-expand-xl">
             <div class="container h-100">
                 <a class="navbar-brand" href="index.html">
@@ -54,7 +61,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mx-auto h-100">
                         <li class="nav-item">
-                            <a class="nav-link active" href="#">
+                            <a class="nav-link <%= request.getAttribute("currentPage").equals("dashboard") ? "active" : "" %>" href="#">
                                 <i class="fas fa-tachometer-alt"></i>
                                 Dashboard
                                 <span class="sr-only">(current)</span>
@@ -62,7 +69,7 @@
                         </li>
                         <li class="nav-item dropdown">
 
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                            <a class="nav-link dropdown-toggle <%= request.getAttribute("currentPage").equals("reports") ? "active" : "" %>" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                                 aria-haspopup="true" aria-expanded="false">
                                 <i class="far fa-file-alt"></i>
                                 <span>
@@ -114,6 +121,7 @@
             </div>
 
         </nav>
+        
         <div class="container">
             <div class="row">
                 <div class="col">
@@ -378,9 +386,9 @@
         <footer class="tm-footer row tm-mt-small">
             <div class="col-12 font-weight-light">
                 <p class="text-center text-white mb-0 px-4 small">
-                    Copyright &copy; <b>2018</b> All rights reserved. 
+                    Copyright &copy; <b>2024</b> All rights reserved. 
                     
-                    Design: <a rel="nofollow noopener" href="https://templatemo.com" class="tm-footer-link">Template Mo</a>
+                    Design: <a rel="nofollow noopener" href="#" class="tm-footer-link">NightCode</a>
                 </p>
             </div>
         </footer>

@@ -5,13 +5,16 @@ model\MaintenanceRequest.class
 model\Paiment.class
 service\PaiementService.class
 com\mycompany\student_residence_management\JakartaRestConfiguration.class
+common_pages\dashboard_common.class
 controller\RoomController.class
 admin_pages\Dashboard.class
 controller\MaintenanceController.class
 utils\JavaMailUtil.class
 controller\ResidentController.class
+admin_pages\managerooms.class
 com\mycompany\student_residence_management\resources\JakartaEE10Resource.class
 model\Chambre.class
+RestApplication\RestApplication.class
 dao\ChambreDAO.class
 service\MaintenanceService.class
 dao\PaiementDAO.class

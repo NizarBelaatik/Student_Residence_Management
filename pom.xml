@@ -17,7 +17,7 @@
         <dependency>
             <groupId>jakarta.platform</groupId>
             <artifactId>jakarta.jakartaee-api</artifactId>
-            <version>${jakartaee.version}</version>
+            <version>10.0.0</version><!-- ${jakartaee.version} -->
             <scope>provided</scope>
         </dependency>
         
@@ -45,6 +45,22 @@
             <version>4.0.0</version> <!-- or the version you need -->
             <scope>provided</scope>
         </dependency>
+        
+        <!-- JPA (Java Persistence API) -->
+        <dependency>
+            <groupId>jakarta.persistence</groupId>
+            <artifactId>jakarta.persistence-api</artifactId>
+            <version>3.1.0</version> <!-- Ensure the correct version -->
+        </dependency>
+        
+        <dependency>
+            <groupId>jakarta.enterprise</groupId>
+            <artifactId>jakarta.enterprise.cdi-api</artifactId>
+            <version>3.0.0</version>  <!-- Version should match your Jakarta EE version -->
+            <scope>provided</scope>
+        </dependency>
+
+
     </dependencies>
     
     <build>

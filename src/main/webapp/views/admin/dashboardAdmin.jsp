@@ -11,7 +11,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Start Page</title>
+        <title>Dashboard</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         
         
@@ -28,7 +28,7 @@
 
         <!-- Boxicons CSS -->
         <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
-
+        
     </head>
     <body>
         
@@ -37,16 +37,43 @@
 
     <!-- Main content -->
     <main class="main" id="main">
+        <div class="pagetitle">
+            <h1>Dashboard</h1>
+            <nav>
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="">Home</a></li>
+                <li class="breadcrumb-item active">Dashboard</li>
+              </ol>
+            </nav>
+          </div>
+        <section>
+            <div class="row">
+                <div class="col-lg-8">
+                    
+                    
+                    <h1>Welcome</h1>
+                        <p>This is the main content area.</p>
+                        Total Rooms.
+                        Occupancy Rate.
+                        Pending Payments.
+                        Pending Maintenance Requests.
+
+                        Statistics: occupancy rates, overdue payments, pending maintenance requests.
+                Quick links to manage rooms, residents, payments, and maintenance.
+
+                </div>
+                
+                
+                <div class="col-lg-4">
+                    recent activity
+                </div>
+                
+            </div>
+            
+        </section>
         
-        <h1>Welcome</h1>
-        <p>This is the main content area.</p>
-        Total Rooms.
-        Occupancy Rate.
-        Pending Payments.
-        Pending Maintenance Requests.
         
-        Statistics: occupancy rates, overdue payments, pending maintenance requests.
-Quick links to manage rooms, residents, payments, and maintenance.
+        
     </main>
 
     

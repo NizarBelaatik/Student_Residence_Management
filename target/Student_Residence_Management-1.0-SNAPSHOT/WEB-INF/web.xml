@@ -42,4 +42,12 @@
         <servlet-name>static-resources</servlet-name>
         <url-pattern>/resources/*</url-pattern>
     </servlet-mapping>
+    
+    <resource-ref>
+        <description>My DataSource</description>
+        <res-ref-name>jdbc/myDataSource</res-ref-name>
+        <res-type>javax.sql.DataSource</res-type>
+        <res-auth>Container</res-auth>
+    </resource-ref>
+
 </web-app>

@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
+
 package admin_pages;
 
 import java.io.IOException;
@@ -21,16 +18,15 @@ import jakarta.servlet.RequestDispatcher;
 public class Dashboard extends HttpServlet {
 
     public Dashboard() {
-            super();
-            // TODO Auto-generated constructor stub
-        }
+        super();
+        // TODO Auto-generated constructor stub
+    }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-            // Forward the request to the actual JSP page
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/views/admin/dashboard.jsp");
-            dispatcher.forward(request, response);
-        }
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // Forward the request to the actual JSP page
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/views/admin/dashboardadmin.jsp");
+        request.setAttribute("activePage", "dashboard");  // Set active page
+        dispatcher.forward(request, response);
+    }
 }
