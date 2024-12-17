@@ -14,9 +14,9 @@ import jakarta.servlet.RequestDispatcher;
  *
  * @author night
  */
-@WebServlet(name = "ManageRooms", urlPatterns = {"/ManageRooms"})
-public class managerooms extends HttpServlet {
-    public managerooms(){
+@WebServlet(name = "rooms", urlPatterns = {"/admin/rooms"})
+public class rooms extends HttpServlet {
+    public rooms(){
             super();
     }
 
