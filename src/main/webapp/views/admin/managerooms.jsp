@@ -2,6 +2,9 @@
     String currentPage = "rooms";  // or any dynamic value
     request.setAttribute("currentPage", currentPage);
 %>
+
+<%@ page import="java.util.List" %>
+<%@ page import="model.Room" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -17,7 +20,10 @@
         
         <link rel="stylesheet" href="${pageContext.request.contextPath}/component/css/fontawesome.min.css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/component/css/bootstrap.min.css"> 
-
+        
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/component/css/bootstrap-icons/bootstrap-icons.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/component/css/bootstrap-icons/bootstrap-icons.min.css">
+        
         <link rel="stylesheet" href="${pageContext.request.contextPath}/component/css/style.css">
 
         <!-- Boxicons CSS -->
@@ -63,7 +69,7 @@
                             <div class="card_1-header">
                                 
                                 <input class="form-control" type="text" id="filterInput" placeholder="Search..." style="width:30%;min-width:100px;">
-                                <div class="row add_btn_container"><a href="#" class="add_btn btn btn-success">ADD</a></div>
+                                <div class="row add_btn_container"><a href="${pageContext.request.contextPath}/admin/rooms/addRoom" class="add_btn btn btn-success">ADD</a></div>
                             </div>
                             <div class="table-wrap">
 
@@ -84,42 +90,30 @@
                                         <td>Single</td>
                                         <td>$3000</td>
                                         <td>.....</td>
-                                        <td><sapn class="StatusSpan" data-badge='Availability'>Available</sapn></td>
+                                        <td><sapn class="StatusSpan" data-badge='Available'>Available</sapn></td>
                                         <td>
                                             <a class="btn btn-warning">Edit</a>
                                             <a class="btn btn-danger">Delete</a>
                                         </td>
                                       </tr>
-
-                                      <tr>
-                                        <th scope="row">1001</th>
-                                        <td>Mark Otto</td>
-                                        <td>$3000</td>
-                                        <td>.....</td>
-                                        <td><sapn class="StatusSpan" data-badge='Occupied'>Occupied</sapn></td>
-                                        <td>
-                                            <a class="btn btn-warning">Edit</a>
-                                            <a class="btn btn-danger">Delete</a>
-                                        </td>
-                                      </tr>
-
-                                      <tr>
-                                        <th scope="row">1001</th>
-                                        <td>Mark Otto</td>
-                                        <td>$3000</td>
-                                        <td>.....</td>
-                                        <td><sapn class="StatusSpan" data-badge='Maintenance'>Maintenance</sapn></td>
-                                        <td></td>
-                                      </tr>
-
-                                      <tr>
-                                        <th scope="row">1001</th>
-                                        <td>Mark Otto</td>
-                                        <td>$3000</td>
-                                        <td>.....</td>
-                                        <td><sapn class="StatusSpan2" data-badge='Maintenance'><i class="dot"></i>Maintenance</sapn></td>
-                                        <td></td>
-                                      </tr>
+                                      
+                                        <% List<Room> roomList = (List<Room>) request.getAttribute("roomList");
+                                            for (Room data : roomList) {%>
+                                            
+                                            <tr>
+                                              <th scope="row"><%= data.getRoomId() %></th>
+                                              <td><%= data.getSize() %></td>
+                                              <td><%= data.getPrice() %></td>
+                                              <td><%= data.getAmenities() %></td>
+                                              <td><sapn class="StatusSpan" data-badge='<%= data.getState() %>'><%= data.getState() %></sapn></td>
+                                              <td>
+                                                  <a class="btn btn-warning">Edit</a>
+                                                  <a class="btn btn-danger">Delete</a>
+                                              </td>
+                                            </tr>
+                                    
+                                        <% } %>
+                                     
 
 
                                     </tbody>

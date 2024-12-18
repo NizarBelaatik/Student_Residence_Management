@@ -62,24 +62,19 @@ public class roomsAdd extends HttpServlet {
                     return;
                 }
             }
-            float roomPrice1 = 29.4f;
-            Room ADD_Room = new Room(roomIdParam, roomSize, roomName, roomPrice1, roomState);
-            response.getWriter().append("Served at:PaiementController  ");
-            response.getWriter().append(ADD_Room.getId());
-            response.getWriter().append(ADD_Room.getName());
-            response.getWriter().append(ADD_Room.getName());
-            response.getWriter().append(ADD_Room.getState());
+            Room ADD_Room = new Room(roomIdParam, roomSize, roomName, roomPrice, roomState);
+
             
 
-            String sql = "INSERT INTO rooms (name, size, price, state, id) VALUES (?, ?, ?, ?)";
+            String sql = "INSERT INTO rooms (amenities, size, price, state, id) VALUES (?, ?, ?, ?)";
             String url = "jdbc:mysql://localhost:3306/test";
             String driver = "com.mysql.cj.jdbc.Driver";
             String user = "root"; // Change to your MySQL username
-            String password = "password"; // Change to your MySQL password
+            String password = ""; // Change to your MySQL password
             try (Connection connection = DriverManager.getConnection(url, user, password);
                 PreparedStatement preparedStatement = connection.prepareStatement(sql)) {   
 
-                    preparedStatement.setString(1, ADD_Room.getName());
+                    preparedStatement.setString(1, ADD_Room.getAmenities());
                     preparedStatement.setString(2, ADD_Room.getSize());
                     preparedStatement.setFloat(3, ADD_Room.getPrice());
                     preparedStatement.setString(4, ADD_Room.getState());
