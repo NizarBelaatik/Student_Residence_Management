@@ -15,39 +15,57 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import model.Room;
 import dao.roomDAO;
+import jakarta.servlet.RequestDispatcher;
 import java.sql.SQLException;
+import java.util.List;
 
 
 
 
-@WebServlet(name = "roomsEdit", urlPatterns = {"/roomsEdit"})
+
+@WebServlet(name = "editRoom", urlPatterns = {"/admin/rooms/editRoom"})
 public class roomsEdit extends HttpServlet {
-    private roomDAO ROOMDAO = new roomDAO();
-    
-    
+    private roomDAO RoomDAO = new roomDAO();
+
+    public roomsEdit(){
+                super();
+        }
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // Forward the request to the actual JSP page
+        String roomId = request.getParameter("roomId");
+        Room roomData ;
+        try{
+            roomData = RoomDAO.getRoomById(roomId);
+            request.setAttribute("room", roomData);
+        }catch(SQLException e){
+        }
+        
+        // Set the response content type
+        response.setContentType("text/html");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/views/admin/roomsEdit.jsp");
+        
+        request.setAttribute("activePage", "managerooms");  // Set active page
+        dispatcher.forward(request, response);
+    }
+
     
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException  {
-        try {
-            String roomIdParam  = request.getParameter("roomId");
+        
+ 
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            
+            String roomIdParam  = request.getParameter("inputRoomId");
 
-            // Check if the roomId exists and is not empty
-            if (roomIdParam == null || roomIdParam.isEmpty()) {
-                response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Room ID is missing.");
-                return;
-            }
-
-            // Parse room ID to integer
-            //String roomId = Integer.parseInt(roomIdParam);
-
-            // Get the updated values from the form
             String roomSize = request.getParameter("inputSize");
-            String roomName = request.getParameter("inputAmenities");
-            String roomPriceS = request.getParameter("inputPrice");
+            String roomAmenities = request.getParameter("inputAmenities");
+            String roomPriceS = request.getParameter("inputPrice");            
             String roomState = request.getParameter("inputState");
 
-            // Convert the room price string to a float
             float roomPrice = 0.0f;
             if (roomPriceS != null && !roomPriceS.isEmpty()) {
                 try {
@@ -58,24 +76,29 @@ public class roomsEdit extends HttpServlet {
                     return;
                 }
             }
-
-            // Create an updated Room object
-            Room updatedRoom = new Room(roomIdParam, roomSize, roomName, roomPrice, roomState);
-            //Room updatedRoom = new Room(roomId, roomSize, roomName, roomPrice, roomState);
-
-            // Handle SQLException here by declaring the exception to be thrown
-
-            boolean updateSuccessful = ROOMDAO.updateRoom(updatedRoom); // Now it is correctly handled.
-
-            if (updateSuccessful) {
-                response.sendRedirect("/admin/rooms/list");
-            } else {
-                response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Failed to update room.");
+            Room Edit_Room = new Room(roomIdParam, roomSize, roomAmenities, roomPrice, roomState);
+            
+            boolean success = false;
+            String message = "";
+            try {
+                // Add the room via DAO
+                RoomDAO.updateRoom(Edit_Room);
+                success = true;
+                message = "Room "+roomIdParam+" has been successfully Updated!";
+            } catch (SQLException e) {
+                // Handle SQL exceptions and set error message
+                success = false;
+                message = "Something went wrong. Please try again.";
             }
-        } catch (SQLException e) {
-            // Handle SQLException (e.g., Database issues)
-            e.printStackTrace();  // Log the exception details for debugging
-            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Database error occurred while updating room.");
-        }
+
+            // Send the response as JSON
+            if (success) {
+                String jsonResponse = "{\"messageType\":\"success\", \"message\":\"" + message + "\"}";
+                response.getWriter().write(jsonResponse);
+            } else {
+                String jsonResponse = "{\"messageType\":\"error\", \"message\":\"" + message + "\"}";
+                response.getWriter().write(jsonResponse);
+            }
+
     }
 }

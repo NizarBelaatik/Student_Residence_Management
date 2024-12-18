@@ -466,23 +466,28 @@ header .profile .dropdown-content a:hover {
     border-radius: .25rem;
     transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
 }
-form .submit_btn{
+form .submit_btn, .swal2-actions .swal2-confirm{
     color: #fff;
     background-color: var(--clr1);
     border: 1px solid var(--clr1);
 }
 form .submit_btn:hover,
-form .submit_btn:active{
+form .submit_btn:active,
+.swal2-actions .swal2-confirm:hover,
+.swal2-actions .swal2-confirm:active{
     color:var(--clr1) ;
     background-color: #fff;
     
 }
-form .submit_btn:active {
+form .submit_btn:active ,
+.swal2-actions .swal2-confirm:active,
+.swal2-actions .swal2-confirm:hover,
+.swal2-actions .swal2-confirm:focus{
     outline: 0;
     box-shadow: 0 0 0 .2rem rgba(0, 2, 38, .25);
 }
 
-
+/*-------*/
 form .cancle_btn:focus {
     outline: 0;
     box-shadow: 0 0 0 .2rem rgba(255, 0, 0, .25);
@@ -502,5 +507,13 @@ form .cancle_btn:active {
     outline: 0;
     box-shadow: 0 0 0 .2rem rgba(255, 0, 0, .25);
 }
+
+ .actions_button{
+    font-size: 28px;
+    margin:0 5px;
+}
+.clr_red{color:red;}
+.clr_orange{color:orange}
+                
 
 

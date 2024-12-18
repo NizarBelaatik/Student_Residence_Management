@@ -43,14 +43,14 @@ public class roomsAdd extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        
+                    // Set response type to JSON
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            
             String roomSize = request.getParameter("inputSize");
             String roomName = request.getParameter("inputAmenities");
-            String roomPriceS = request.getParameter("inputPrice");
-            //float roomPrice = Float.parseFloat(request.getParameter("inputPrice"));
+            String roomPriceS = request.getParameter("inputPrice");            
             String roomState = request.getParameter("inputState");
-
-            String roomIdParam="34df456";
 
             float roomPrice = 0.0f;
             if (roomPriceS != null && !roomPriceS.isEmpty()) {
@@ -62,28 +62,29 @@ public class roomsAdd extends HttpServlet {
                     return;
                 }
             }
-            Room ADD_Room = new Room(roomIdParam, roomSize, roomName, roomPrice, roomState);
+            Room ADD_Room = new Room("9999", roomSize, roomName, roomPrice, roomState);
 
-            
-
-            String sql = "INSERT INTO rooms (amenities, size, price, state, id) VALUES (?, ?, ?, ?)";
-            String url = "jdbc:mysql://localhost:3306/test";
-            String driver = "com.mysql.cj.jdbc.Driver";
-            String user = "root"; // Change to your MySQL username
-            String password = ""; // Change to your MySQL password
-            try (Connection connection = DriverManager.getConnection(url, user, password);
-                PreparedStatement preparedStatement = connection.prepareStatement(sql)) {   
-
-                    preparedStatement.setString(1, ADD_Room.getAmenities());
-                    preparedStatement.setString(2, ADD_Room.getSize());
-                    preparedStatement.setFloat(3, ADD_Room.getPrice());
-                    preparedStatement.setString(4, ADD_Room.getState());
-                    int rowsAffected = preparedStatement.executeUpdate();
-
-            }catch (Exception e) {
-			System.err.print("error connection "+e);
+            boolean success = false;
+            String message = "";
+            try {
+                // Add the room via DAO
+                RoomDAO.addRoom(ADD_Room);
+                success = true;
+                message = "Room has been successfully added!";
+            } catch (SQLException e) {
+                // Handle SQL exceptions and set error message
+                success = false;
+                message = "Something went wrong. Please try again.";
             }
-            
+
+            // Send the response as JSON
+            if (success) {
+                String jsonResponse = "{\"messageType\":\"success\", \"message\":\"" + message + "\"}";
+                response.getWriter().write(jsonResponse);
+            } else {
+                String jsonResponse = "{\"messageType\":\"error\", \"message\":\"" + message + "\"}";
+                response.getWriter().write(jsonResponse);
+            }
                
 
                    

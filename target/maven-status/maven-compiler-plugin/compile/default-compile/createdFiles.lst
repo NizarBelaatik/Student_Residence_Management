@@ -1,5 +1,4 @@
 controller\PaiementController.class
-dao\MaintenanceRequestDAO.class
 dao\roomDAO.class
 service\PaiementService.class
 com\mycompany\student_residence_management\JakartaRestConfiguration.class
@@ -12,12 +11,10 @@ utils\JavaMailUtil.class
 controller\ResidentController.class
 com\mycompany\student_residence_management\resources\JakartaEE10Resource.class
 RestApplication\RestApplication.class
-dao\ChambreDAO.class
 service\MaintenanceService.class
-dao\PaiementDAO.class
 service\ChambreService.class
+admin_pages\roomsDelete.class
 admin_pages\roomsEdit.class
 admin_pages\rooms.class
-dao\ResidentDAO.class
 admin_pages\roomsAdd.class
 service\ResidentService.class

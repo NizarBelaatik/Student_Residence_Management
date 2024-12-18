@@ -8,7 +8,7 @@ import model.Room;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-
+import java.util.Random;
 /**
  *
  * @author night
@@ -29,18 +29,53 @@ public class roomDAO {
             throw new SQLException("MySQL JDBC Driver not found.");
         }
     }
+        // Method to generate a unique roomId
+    public static String generateUniqueRoomId() {
+        int length = 10;
+        String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        Random random = new Random();
+        StringBuilder randomString = new StringBuilder();
 
+        // Loop to generate a random string
+        for (int i = 0; i < length; i++) {
+            int randomIndex = random.nextInt(characters.length());
+            randomString.append(characters.charAt(randomIndex));
+        }
+
+        return randomString.toString();
+    }
+    private static boolean roomIdExists(String roomId) {
+        String query = "SELECT COUNT(*) FROM rooms WHERE roomId = ?";
+        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, roomId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                return resultSet.getInt(1) > 0;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+    
     // Add a Room
     public boolean addRoom(Room room) throws SQLException {
-        String sql = "INSERT INTO rooms (amenities, size, price, state, roomId) VALUES (?, ?, ?, ?)";
+        String roomId = generateUniqueRoomId();
+        
+        // Ensure the generated roomId is unique
+        while (roomIdExists(roomId)) {
+            roomId = generateUniqueRoomId(); // Generate a new ID if it exists
+        }
+        String sql = "INSERT INTO rooms (roomId,amenities, size, price, state ) VALUES (?, ?, ?, ?,?)";
         try (Connection conn = getConnection();
                  PreparedStatement ps = conn.prepareStatement(sql)) {
-
-                ps.setString(1, room.getAmenities());
-                ps.setString(2, room.getSize());
-                ps.setFloat(3, room.getPrice());
-                ps.setString(4, room.getState());
-
+                ps.setString(1, roomId);
+                ps.setString(2, room.getAmenities());
+                ps.setString(3, room.getSize());
+                ps.setFloat(4, room.getPrice());
+                ps.setString(5, room.getState());
+                
                 int rowsAffected = ps.executeUpdate();
                 return rowsAffected > 0; // Returns true if the insertion was successful
         }
@@ -56,8 +91,8 @@ public class roomDAO {
                 if (rs.next()) {
                     return new Room(
                         rs.getString("roomId"),
-                        rs.getString("amenities"),
                         rs.getString("size"),
+                        rs.getString("amenities"),
                         rs.getFloat("price"),
                         rs.getString("state")
                     );
@@ -77,8 +112,8 @@ public class roomDAO {
             while (rs.next()) {
                 rooms.add(new Room(
                     rs.getString("roomId"),
-                    rs.getString("amenities"),
                     rs.getString("size"),
+                    rs.getString("amenities"),
                     rs.getFloat("price"),
                     rs.getString("state")
                 ));
@@ -105,12 +140,14 @@ public class roomDAO {
     }
 
     // Delete Room
-    public void deleteRoom(String roomId) throws SQLException {
+    public boolean deleteRoom(String roomId) throws SQLException {
         String sql = "DELETE FROM rooms WHERE roomId = ?";
         try (Connection conn = getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, roomId);
-            ps.executeUpdate();
+            
+            int rowsUpdated = ps.executeUpdate();
+            return rowsUpdated > 0;
         }
     }
 }

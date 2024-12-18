@@ -30,6 +30,7 @@ public class Room {
         this.state = state;
     }
 
+
     // Getters and setters
     public String getRoomId() {return roomId;}
     public void setRoomId(String id) {this.roomId = roomId;}
