@@ -12,29 +12,10 @@
 <html>
     <head>
         
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Manage Rooms</title>
-
-        <!-- Google Fonts -->
-        <link href="https://fonts.gstatic.com" rel="preconnect">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700">
+        <%@ include file="/views/common/head.jsp" %>
         
         
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/component/css/fontawesome.min.css">
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/component/css/bootstrap.min.css"> 
-        
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/component/css/bootstrap-icons/bootstrap-icons.css">
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/component/css/bootstrap-icons/bootstrap-icons.min.css">
-        
-        <!-- Boxicons CSS -->
-        <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
-        <!-- SweetAlert2 for notifications -->
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <!-- jQuery -->
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        
-        
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/component/css/style.css">
     </head>
     </head>
     <body>
@@ -54,25 +35,13 @@
             </nav>
           </div>
         <section>
-            <div class="row">
-                <div class="col-lg-12">
-                    
-                    
-                    Table with room details (ID, size, status).
-                    Buttons for Add Room, Edit, Delete.
-                    Form for adding/editing a room.
 
-                </div>
-                
-
-                
-            </div>
            
             <div class="row justify-content-center">
                 <div class=" ">
                     <div class="card_1">
                         <div class="card_1-body">
-                            <div class="card_1-header">
+                            <div class="card_1-header" style="display: flex;">
                                 
                                 <input class="form-control" type="text" id="filterInput" placeholder="Search..." style="width:45%;min-width:150px;">
                                 <div class="row add_btn_container"><a href="${pageContext.request.contextPath}/admin/rooms/addRoom" class="add_btn btn btn-success">ADD</a></div>

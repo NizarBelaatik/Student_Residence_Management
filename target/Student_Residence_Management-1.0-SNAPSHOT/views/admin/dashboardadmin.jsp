@@ -12,22 +12,9 @@
 <html>
     <head>
         <title>Dashboard</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        
-        
 
-        <!-- Google Fonts -->
-        <link href="https://fonts.gstatic.com" rel="preconnect">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700">
+        <%@ include file="/views/common/head.jsp" %>
         
-        
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/component/css/fontawesome.min.css">
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/component/css/bootstrap.min.css"> 
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/component/css/template-style.css">
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/component/css/style.css">
-
-        <!-- Boxicons CSS -->
-        <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
         
     </head>
     <body>
