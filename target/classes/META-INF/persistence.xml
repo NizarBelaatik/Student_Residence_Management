@@ -7,8 +7,8 @@
       <property name="jakarta.persistence.schema-generation.database.action" value="create"/>
       <property name="jakarta.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
       <property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/test"/>
-      <property name="jakarta.persistence.jdbc.user" value="srm_user"/>
-      <property name="jakarta.persistence.jdbc.password" value="srm_pw"/>
+      <property name="jakarta.persistence.jdbc.user" value="root"/>
+      <property name="jakarta.persistence.jdbc.password" value=""/>
       <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
       <property name="hibernate.hbm2ddl.auto" value="update"/>
       <property name="hibernate.show_sql" value="true"/>
