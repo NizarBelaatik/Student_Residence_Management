@@ -43,7 +43,7 @@ public class rooms extends HttpServlet {
         }
         
         
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/views/admin/managerooms.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/views/admin/rooms.jsp");
         request.setAttribute("activePage", "managerooms");  // Set active page
         request.setAttribute("roomList", roomList);
         dispatcher.forward(request, response);

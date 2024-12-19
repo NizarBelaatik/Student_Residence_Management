@@ -1,87 +1,86 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
+
 package admin_pages;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.RequestDispatcher;
+
+import java.io.*;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+
+import model.Resident;
+import dao.ResidentDAO;
 
 /**
  *
  * @author night
  */
-@WebServlet(name = "residentsAdd", urlPatterns = {"/residentsAdd"})
+@WebServlet(name = "residentsAdd", urlPatterns = {"/admin/rooms/addResident"})
 public class residentsAdd extends HttpServlet {
+    private ResidentDAO residentDAO = new ResidentDAO();
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet residentsAdd</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet residentsAdd at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+    public residentsAdd(){
+        super();
         }
-    }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // Forward the request to the actual JSP page
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/views/admin/residentsAdd.jsp");
+        request.setAttribute("activePage", "residents");  // Set active page
+        dispatcher.forward(request, response);
     }
-
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+    
+    
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        
+                    // Set response type to JSON
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            
+            String residentUserId = request.getParameter("inputuserId");
+            String residentFirstname = request.getParameter("inputfirstname");
+            String residentLastname = request.getParameter("inputlastname");            
+            String residentPhone = request.getParameter("inputphone");
+            String residentAddress = request.getParameter("inputaddress");            
+            String residentRoomId = request.getParameter("inputroomId");
+
+  
+            Resident ADD_Resident = new Resident("9999", residentUserId, residentFirstname, residentLastname, residentPhone,residentAddress,residentRoomId);
+
+            boolean success = false;
+            String message = "";
+            try {
+                // Add the room via DAO
+                residentDAO.addResident(ADD_Resident);
+                success = true;
+                message = "Resident has been successfully added!";
+            } catch (SQLException e) {
+                // Handle SQL exceptions and set error message
+                success = false;
+                message = "Something went wrong. Please try again.";
+            }
+
+            // Send the response as JSON
+            if (success) {
+                String jsonResponse = "{\"messageType\":\"success\", \"message\":\"" + message + "\"}";
+                response.getWriter().write(jsonResponse);
+            } else {
+                String jsonResponse = "{\"messageType\":\"error\", \"message\":\"" + message + "\"}";
+                response.getWriter().write(jsonResponse);
+            }
+               
+
+                   
+        
+        
     }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
 }

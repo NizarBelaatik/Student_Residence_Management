@@ -42,7 +42,7 @@ public class ResidentDAO {
     }
     
     // Add a Room
-    public boolean addRoom(Resident resident) throws SQLException {
+    public boolean addResident(Resident resident) throws SQLException {
         String residentId = utils.generateUniqueId();
         
         // Ensure the generated roomId is unique
@@ -66,7 +66,7 @@ public class ResidentDAO {
     }
     
     
-    public Resident getRoomById(String residentId) throws SQLException {
+    public Resident getResidentById(String residentId) throws SQLException {
         String sql = "SELECT residentId,userId, firstname,lastname, phone, address, roomId FROM residents WHERE residentId = ?";
         try (Connection conn = getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -88,7 +88,7 @@ public class ResidentDAO {
         return null;
     }
     
-    public List<Resident> getAllRooms() throws SQLException {
+    public List<Resident> getAllResidents() throws SQLException {
         String sql = "SELECT residentId,userId, firstname,lastname, phone, address, roomId FROM residents ";
         List<Resident> residentsL = new ArrayList<>();
         try (Connection conn = getConnection();
@@ -109,7 +109,7 @@ public class ResidentDAO {
         return residentsL;
     }
     
-        public boolean updateRoom(Resident resident) throws SQLException {
+        public boolean updateResident(Resident resident) throws SQLException {
         String sql = "UPDATE residents SET userId=?, firstname=?,lastname=?, phone=?, address=?, roomId=? WHERE residentId = ?";
         try (Connection conn = getConnection();
             PreparedStatement ps = conn.prepareStatement(sql)) {

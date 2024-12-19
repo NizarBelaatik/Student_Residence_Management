@@ -1,16 +1,14 @@
 controller\PaiementController.class
-api\ResidentEndpoint.class
 service\PaiementService.class
 com\mycompany\student_residence_management\JakartaRestConfiguration.class
 controller\RoomController.class
-api\ApplicationConfig.class
 controller\MaintenanceController.class
 com\mycompany\student_residence_management\resources\JakartaEE10Resource.class
 service\MaintenanceService.class
 admin_pages\roomsDelete.class
 admin_pages\roomsEdit.class
 admin_pages\roomsAdd.class
-service\ResidentServic.class
+admin_pages\residentsAdd.class
 model\Resident.class
 dao\roomDAO.class
 common_pages\dashboard_common.class
@@ -19,7 +17,8 @@ admin_pages\Dashboard.class
 utils\JavaMailUtil.class
 controller\ResidentController.class
 RestApplication\RestApplication.class
+admin_pages\residents.class
 service\ChambreService.class
 admin_pages\rooms.class
 dao\ResidentDAO.class
-service\ResidentService.class
+utils\utils.class
