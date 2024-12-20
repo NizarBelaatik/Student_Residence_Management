@@ -1,7 +1,7 @@
     
     
 :root{
-    --bg:#fff;
+    --bg:#F5F5F5;
     --clr0:#f8f9fa;
     --clr1:#000226;
     --clr2:#6c757d;
@@ -21,6 +21,24 @@
     --clr_Available:green;
     --clr_Occupied:red;
     --clr_Maintenance:orange;
+    
+    
+    
+    
+    
+    --p1:#4A90E2 ;/*Blue*/
+    --p1:#4CAF50 ;/*green*/
+    --p1:#F5F5F5 ;/*gray*/
+    
+    --s1:#FFB74D ;/*yellow*/
+    --s1:#FF7043 ;/*coral*/
+    --s1:#9C27B0 ;/*purple*/
+    
+    --a1:#2C3E50 ;/*slate*/
+    --a1:#00BCD4 ;/*skyblue*/
+    
+    
+    
 }
 
 /*--------------------------------------------------------------
@@ -32,7 +50,7 @@
 
 body {
   font-family: "Open Sans", sans-serif;
-  background: #F0F0F3;
+  background: #F5F5F5;
 }
 
 a {

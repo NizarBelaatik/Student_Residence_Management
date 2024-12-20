@@ -5,6 +5,10 @@
 package utils;
 
 import java.util.Random;
+import java.util.UUID;
+
+import java.security.SecureRandom;
+import java.math.BigInteger;
 
 /**
  *
@@ -12,17 +16,26 @@ import java.util.Random;
  */
 public class utils {
         public static String generateUniqueId() {
-        int length = 10;
-        String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-        Random random = new Random();
-        StringBuilder randomString = new StringBuilder();
+            int length = 10;
+            String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            Random random = new Random();
+            StringBuilder randomString = new StringBuilder();
 
-        // Loop to generate a random string
-        for (int i = 0; i < length; i++) {
-            int randomIndex = random.nextInt(characters.length());
-            randomString.append(characters.charAt(randomIndex));
+            // Loop to generate a random string
+            for (int i = 0; i < length; i++) {
+                int randomIndex = random.nextInt(characters.length());
+                randomString.append(characters.charAt(randomIndex));
+            }
+
+            return randomString.toString();
         }
-
-        return randomString.toString();
-    }
+        
+        
+        public static String generateTokenUUID() {
+            return UUID.randomUUID().toString();
+        }
+        public static String generateToken(int length) {
+            SecureRandom random = new SecureRandom();
+            return new BigInteger(length * 5, random).toString(32); // Generates a base32 string
+        }
 }

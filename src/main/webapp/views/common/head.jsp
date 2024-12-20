@@ -7,10 +7,10 @@
 
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/component/css/fontawesome.min.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/component/css/bootstrap.min.css"> 
+<link rel="stylesheet" href="${pageContext.request.contextPath}/component/css/vendor/bootstrap.min.css"> 
 
-<link rel="stylesheet" href="${pageContext.request.contextPath}/component/css/bootstrap-icons/bootstrap-icons.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/component/css/bootstrap-icons/bootstrap-icons.min.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/component/css/vendor/bootstrap-icons/bootstrap-icons.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/component/css/vendor/bootstrap-icons/bootstrap-icons.min.css">
 
 <!-- Boxicons CSS -->
 <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
