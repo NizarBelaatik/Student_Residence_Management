@@ -7,10 +7,11 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 
 public class Resident {
-    private String residentId;
-    private String userId; // FK to User
+    private String id;
+    private String email; // FK to User
     private String firstname;
     private String lastname;
+    private String gender;
     private String phone;
     private String address;
     private String roomId; // FK to Room
@@ -18,32 +19,17 @@ public class Resident {
     // Constructors
     public Resident() {}
 
-    public Resident(String residentId, String userId, String firstName, String lastName, String phone, String address, String roomId) {
-        this.residentId = residentId;
-        this.userId = userId;
+    public Resident( String email, String firstName, String lastName, String gender, String phone, String address, String roomId) {
+        this.email = email;
         this.firstname = firstName;
         this.lastname = lastName;
+        this.gender = gender;
         this.phone = phone;
         this.address = address;
         this.roomId = roomId;
     }
 
     // Getters and Setters
-    public String getResidentId() {
-        return residentId;
-    }
-
-    public void setResidentId(String residentId) {
-        this.residentId = residentId;
-    }
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
 
     public String getFirstname() {
         return firstname;

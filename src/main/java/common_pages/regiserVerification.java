@@ -86,7 +86,6 @@ public class regiserVerification extends HttpServlet {
         
         if (success) {
             String jsonResponse = "{\"messageType\":\"success\", \"message\":\"" + message + "\"}";
-            
             response.getWriter().write(jsonResponse);
         } else {
             

@@ -67,14 +67,15 @@ public class roomDAO {
         while (roomIdExists(roomId)) {
             roomId = generateUniqueRoomId(); // Generate a new ID if it exists
         }
-        String sql = "INSERT INTO rooms (roomId,amenities, size, price, state ) VALUES (?, ?, ?, ?,?)";
+        String sql = "INSERT INTO rooms (roomId,name,equipment, size, price, state ) VALUES (?, ?, ?, ?,?)";
         try (Connection conn = getConnection();
                  PreparedStatement ps = conn.prepareStatement(sql)) {
                 ps.setString(1, roomId);
-                ps.setString(2, room.getAmenities());
-                ps.setString(3, room.getSize());
-                ps.setFloat(4, room.getPrice());
-                ps.setString(5, room.getState());
+                ps.setString(2, room.getRoomName());
+                ps.setString(3, room.getEquipment());
+                ps.setString(4, room.getSize());
+                ps.setFloat(5, room.getPrice());
+                ps.setString(6, room.getState());
                 
                 int rowsAffected = ps.executeUpdate();
                 return rowsAffected > 0; // Returns true if the insertion was successful
@@ -83,7 +84,7 @@ public class roomDAO {
 
     // Get Room by ID
     public Room getRoomById(String roomId) throws SQLException {
-        String sql = "SELECT roomId, amenities, size, price, state FROM rooms WHERE roomId = ?";
+        String sql = "SELECT roomId,name, equipment, size, price, state FROM rooms WHERE roomId = ?";
         try (Connection conn = getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, roomId);
@@ -91,8 +92,9 @@ public class roomDAO {
                 if (rs.next()) {
                     return new Room(
                         rs.getString("roomId"),
+                        rs.getString("name"),
                         rs.getString("size"),
-                        rs.getString("amenities"),
+                        rs.getString("equipment"),
                         rs.getFloat("price"),
                         rs.getString("state")
                     );
@@ -104,7 +106,7 @@ public class roomDAO {
 
     // Get all rooms
     public List<Room> getAllRooms() throws SQLException {
-        String sql = "SELECT roomId, amenities, size, price, state FROM rooms";
+        String sql = "SELECT roomId, name, equipment, size, price, state FROM rooms";
         List<Room> rooms = new ArrayList<>();
         try (Connection conn = getConnection();
              Statement stmt = conn.createStatement();
@@ -112,8 +114,9 @@ public class roomDAO {
             while (rs.next()) {
                 rooms.add(new Room(
                     rs.getString("roomId"),
+                    rs.getString("name"),
                     rs.getString("size"),
-                    rs.getString("amenities"),
+                    rs.getString("equipment"),
                     rs.getFloat("price"),
                     rs.getString("state")
                 ));
@@ -125,14 +128,15 @@ public class roomDAO {
 
     // Update Room
     public boolean updateRoom(Room room) throws SQLException {
-        String sql = "UPDATE rooms SET amenities = ?, size = ?, price = ?, state = ? WHERE roomId = ?";
+        String sql = "UPDATE rooms SET name = ?, equipment = ?, size = ?, price = ?, state = ? WHERE roomId = ?";
         try (Connection conn = getConnection();
             PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setString(1, room.getAmenities());
-            ps.setString(2, room.getSize());
-            ps.setFloat(3, room.getPrice());
-            ps.setString(4, room.getState());
-            ps.setString(5, room.getRoomId());  // Assuming 'id' is String, change it if needed.
+            ps.setString(1, room.getRoomName());
+            ps.setString(2, room.getEquipment());
+            ps.setString(3, room.getSize());
+            ps.setFloat(4, room.getPrice());
+            ps.setString(5, room.getState());
+            ps.setString(6, room.getRoomId());  // Assuming 'id' is String, change it if needed.
 
             int rowsUpdated = ps.executeUpdate();
             return rowsUpdated > 0;  // Return true if at least one row is updated.

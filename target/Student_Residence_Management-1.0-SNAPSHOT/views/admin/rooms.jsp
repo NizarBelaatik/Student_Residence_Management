@@ -52,9 +52,10 @@
                                     <thead>
                                       <tr>
                                         <th>ID</th>
-                                        <th>size</th>
+                                        <th>Name</th>
+                                        <th>Size</th>
                                         <th>Price</th>
-                                        <th>Amenities</th>
+                                        <th>Equipments</th>
                                         <th>Status</th>
                                         <th></th>
                                       </tr>
@@ -67,9 +68,10 @@
                                             
                                             <tr>
                                               <th scope="row"><%= data.getRoomId() %></th>
+                                              <td><%= data.getRoomName() %></td>
                                               <td><%= data.getSize() %></td>
                                               <td><%= data.getPrice() %></td>
-                                              <td><%= data.getAmenities() %></td>
+                                              <td><%= data.getEquipment() %></td>
                                               <td><sapn class="StatusSpan" data-badge='<%= data.getState() %>'><%= data.getState() %></sapn></td>
                                               <td>
                                                   <a class="actions_button" href="${pageContext.request.contextPath}/admin/rooms/editRoom?roomId=<%= data.getRoomId() %>"><i class="bi bi-pencil-square clr_orange"></i></a>

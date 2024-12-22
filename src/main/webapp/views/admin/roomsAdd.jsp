@@ -44,11 +44,17 @@
                                     <input type="text" class="form-control" name="inputSize" required>
                                   </div>
                                 </div>
+                                <div class="row mb-3">
+                                  <label for="inputEmail3" class="col-sm-2 col-form-label">Room Name</label>
+                                  <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="inputName" required>
+                                  </div>
+                                </div>
                                 
                                 <div class="row mb-3">
-                                  <label for="inputEmail3" class="col-sm-2 col-form-label">Amenities</label>
+                                  <label for="inputEmail3" class="col-sm-2 col-form-label">Equipments</label>
                                   <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="inputAmenities" required>
+                                    <input type="text" class="form-control" name="inputEquipment" required>
                                   </div>
                                 </div>
                                 

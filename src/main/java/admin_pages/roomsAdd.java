@@ -48,7 +48,8 @@ public class roomsAdd extends HttpServlet {
             response.setCharacterEncoding("UTF-8");
             
             String roomSize = request.getParameter("inputSize");
-            String roomName = request.getParameter("inputAmenities");
+            String roomName = request.getParameter("inputName");
+            String equipment = request.getParameter("inputEquipment");
             String roomPriceS = request.getParameter("inputPrice");            
             String roomState = request.getParameter("inputState");
 
@@ -62,7 +63,7 @@ public class roomsAdd extends HttpServlet {
                     return;
                 }
             }
-            Room ADD_Room = new Room("9999", roomSize, roomName, roomPrice, roomState);
+            Room ADD_Room = new Room("9999",roomName, roomSize, equipment, roomPrice, roomState);
 
             boolean success = false;
             String message = "";

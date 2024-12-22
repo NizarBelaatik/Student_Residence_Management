@@ -23,7 +23,7 @@ public class User {
     }
 
     // Getters and setters
-    public int getId() {
+    public int getId(){
         return id;
     }
 

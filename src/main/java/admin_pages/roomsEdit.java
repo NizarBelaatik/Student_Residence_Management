@@ -62,7 +62,8 @@ public class roomsEdit extends HttpServlet {
             String roomIdParam  = request.getParameter("inputRoomId");
 
             String roomSize = request.getParameter("inputSize");
-            String roomAmenities = request.getParameter("inputAmenities");
+            String roomName = request.getParameter("inputName");
+            String equipment = request.getParameter("inputEquipment");
             String roomPriceS = request.getParameter("inputPrice");            
             String roomState = request.getParameter("inputState");
 
@@ -76,7 +77,7 @@ public class roomsEdit extends HttpServlet {
                     return;
                 }
             }
-            Room Edit_Room = new Room(roomIdParam, roomSize, roomAmenities, roomPrice, roomState);
+            Room Edit_Room = new Room(roomIdParam, roomName,roomSize, equipment, roomPrice, roomState);
             
             boolean success = false;
             String message = "";

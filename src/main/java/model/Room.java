@@ -16,15 +16,17 @@ import java.io.Serializable;
  */
 public class Room {
     private String roomId;
-    private String amenities;
+    private String name;
+    private String equipment;
     private String size;
     private float price;
     private String state;
 
     // Constructor with the ID field included
-    public Room(String roomId, String size, String amenities, float price, String state) {
+    public Room(String roomId, String name, String size, String equipment, float price, String state) {
         this.roomId = roomId;
-        this.amenities = amenities;
+        this.name = name;
+        this.equipment = equipment;
         this.size = size;
         this.price = price;
         this.state = state;
@@ -34,9 +36,12 @@ public class Room {
     // Getters and setters
     public String getRoomId() {return roomId;}
     public void setRoomId(String id) {this.roomId = roomId;}
+    
+    public String getRoomName() {return name;}
+    public void setRoomName(String name) {this.name = name;}
   
-    public String getAmenities() {return amenities;}
-    public void setAmenities(String amenities) {this.amenities = amenities;}
+    public String getEquipment() {return equipment;}
+    public void setEquipment(String amenities) {this.equipment = amenities;}
 
     public String getSize() {return size;}
     public void setSize(String size) {this.size = size;}

@@ -53,7 +53,7 @@ public class ResidentDAO {
         try (Connection conn = getConnection();
                  PreparedStatement ps = conn.prepareStatement(sql)) {
                 ps.setString(1, residentId);
-                ps.setString(2, resident.getUserId());
+                //ps.setString(2, resident.getUserId());
                 ps.setString(3, resident.getFirstname());
                 ps.setString(4, resident.getLastname());
                 ps.setString(5, resident.getPhone());
@@ -114,13 +114,13 @@ public class ResidentDAO {
         try (Connection conn = getConnection();
             PreparedStatement ps = conn.prepareStatement(sql)) {
             
-            ps.setString(1, resident.getUserId());
+            //ps.setString(1, resident.getUserId());
             ps.setString(2, resident.getFirstname());
             ps.setString(3, resident.getLastname());
             ps.setString(4, resident.getPhone());
             ps.setString(5, resident.getAddress());
             ps.setString(6, resident.getRoomId());
-            ps.setString(7, resident.getResidentId());
+            //ps.setString(7, resident.getResidentId());
             
             int rowsUpdated = ps.executeUpdate();
             return rowsUpdated > 0;  // Return true if at least one row is updated.
