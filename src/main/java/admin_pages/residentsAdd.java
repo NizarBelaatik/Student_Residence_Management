@@ -9,10 +9,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.RequestDispatcher;
 
-import java.io.*;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
 
 import model.Resident;
 import dao.ResidentDAO;
@@ -21,7 +18,7 @@ import dao.ResidentDAO;
  *
  * @author night
  */
-@WebServlet(name = "residentsAdd", urlPatterns = {"/admin/rooms/addResident"})
+@WebServlet(name = "residentsAdd", urlPatterns = {"/admin/residents/addResident"})
 public class residentsAdd extends HttpServlet {
     private ResidentDAO residentDAO = new ResidentDAO();
 
@@ -46,15 +43,16 @@ public class residentsAdd extends HttpServlet {
             response.setContentType("application/json");
             response.setCharacterEncoding("UTF-8");
             
-            String residentUserId = request.getParameter("inputuserId");
+            String residentEmail = request.getParameter("inputemail");
             String residentFirstname = request.getParameter("inputfirstname");
-            String residentLastname = request.getParameter("inputlastname");            
+            String residentLastname = request.getParameter("inputlastname");   
+            String residentGender = request.getParameter("inputgender");
             String residentPhone = request.getParameter("inputphone");
             String residentAddress = request.getParameter("inputaddress");            
             String residentRoomId = request.getParameter("inputroomId");
 
   
-            Resident ADD_Resident = new Resident("9999", residentUserId, residentFirstname, residentLastname, residentPhone,residentAddress,residentRoomId);
+            Resident ADD_Resident = new Resident( residentEmail, residentFirstname, residentLastname, residentGender, residentPhone,residentAddress,residentRoomId);
 
             boolean success = false;
             String message = "";
@@ -66,7 +64,7 @@ public class residentsAdd extends HttpServlet {
             } catch (SQLException e) {
                 // Handle SQL exceptions and set error message
                 success = false;
-                message = "Something went wrong. Please try again.";
+                message = "Something went wrong. Please try again."+e;
             }
 
             // Send the response as JSON

@@ -7,7 +7,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Edit Room: ${room.getSize()}</title>
+    <title>Edit Room: ${room.getRoomId()}</title>
 
     <%@ include file="/views/common/head.jsp" %>
 

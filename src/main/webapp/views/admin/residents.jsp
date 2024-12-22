@@ -44,7 +44,7 @@
                             <div class="card_1-header" style="display: flex;">
                                 
                                 <input class="form-control" type="text" id="filterInput" placeholder="Search..." style="width:45%;min-width:150px;">
-                                <div class="row add_btn_container"><a href="${pageContext.request.contextPath}/admin/rooms/addResident" class="add_btn btn btn-success">ADD</a></div>
+                                <div class="row add_btn_container"><a href="${pageContext.request.contextPath}/admin/residents/addResident" class="add_btn btn btn-success">ADD</a></div>
                             </div>
                             <div class="table-wrap">
 
@@ -55,6 +55,7 @@
                                         <th>User ID</th>
                                         <th>First name</th>
                                         <th>Last name</th>
+                                        <th>Gender</th>
                                         <th>Phone</th>
                                         <th>Address</th>
                                         <th>Room Id</th>
@@ -69,16 +70,17 @@
                                             
                                             <tr>
                                               <th scope="row"><%= data.getResidentId() %></th>
-                                              <td><%= data.getUserId() %></td>
+                                              <td><%= data.getEmail() %></td>
                                               <td><%= data.getFirstname() %></td>
                                               <td><%= data.getLastname() %></td>
+                                              <td><%= data.getGender() %></td>
                                               <td><%= data.getPhone() %></td>
                                               <td><%= data.getAddress() %></td>
                                               <td><%= data.getRoomId() %></td>
                                               
                                               <td>
-                                                  <a class="actions_button" href="${pageContext.request.contextPath}/admin/rooms/editResident?residentId=<%= data.getResidentId() %>"><i class="bi bi-pencil-square clr_orange"></i></a>
-                                                  <a class="actions_button" onclick="deleteResident('<%= data.getResidentId() %>')"><i class="bi bi-trash3-fill clr_red"></i></a>
+                                                  <a class="actions_button" href="${pageContext.request.contextPath}/admin/residents/editResident?email=<%= data.getEmail() %>"><i class="bi bi-pencil-square clr_orange"></i></a>
+                                                  <a class="actions_button" onclick="deleteResident('<%= data.getEmail() %>')"><i class="bi bi-trash3-fill clr_red"></i></a>
                                               </td>
                                             </tr>
                                     
@@ -101,7 +103,7 @@
         <script>
             var contextPath = "${pageContext.request.contextPath}";
 
-            function deleteRoom(roomId) {
+            function deleteResident(roomId) {
                 // Confirm deletion before proceeding
                 Swal.fire({
                     title: 'Are you sure?',
@@ -115,7 +117,7 @@
                     if (result.isConfirmed) {
                         // Perform AJAX request to delete the room
                         $.ajax({
-                            url: contextPath + '/admin/rooms/residentsDelete', // The servlet URL
+                            url: contextPath + '/admin/resident/residentsDelete', // The servlet URL
                             method: 'GET', // We are using GET for this case
                             data: { roomId: roomId }, // Send roomId in the data
                             dataType: 'json', // Expect JSON response

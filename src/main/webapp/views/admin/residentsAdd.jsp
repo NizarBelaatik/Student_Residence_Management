@@ -37,11 +37,11 @@
                                 <h5>Add Residents</h5>
                             </div>
 
-                            <form id="addRoomForm" method="post" action="${pageContext.request.contextPath}/admin/Residents/addResident">
+                            <form id="addResidentForm" method="post" action="${pageContext.request.contextPath}/admin/Residents/addResident">
                                 <div class="row mb-3">
-                                  <label for="inputEmail3" class="col-sm-2 col-form-label">User Id</label>
+                                  <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
                                   <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="inputuserId" required>
+                                    <input type="email" class="form-control" name="inputemail" required>
                                   </div>
                                 </div>
                                 
@@ -59,7 +59,19 @@
                                   </div>
                                 </div>
                                 
+                               
+                                
                                 <div class="row mb-3">
+                                    <label for="inputState" class="col-sm-2 col-form-label">Gender</label>
+                                    <div class="col-sm-10">
+                                    <select name="inputgender" class="form-select" required>
+                                      <option value="Male">Male</option>
+                                      <option value="Female">Female</option>
+                                    </select>
+                                  </div>
+                                </div>
+                                
+                                 <div class="row mb-3">
                                   <label for="inputEmail3" class="col-sm-2 col-form-label">Phone</label>
                                   <div class="col-sm-10">
                                     <input type="text" class="form-control" name="inputphone" required>
@@ -97,12 +109,12 @@
         var contextPath = "${pageContext.request.contextPath}";
         $(document).ready(function() {
             // Handle form submission
-            $('#addRoomForm').submit(function(e) {
+            $('#addResidentForm').submit(function(e) {
                 e.preventDefault(); // Prevent default form submission
                 
                 // Perform AJAX request
                 $.ajax({
-                    url: contextPath+'/admin/rooms/addRoom', // The servlet URL
+                    url: contextPath+'/admin/residents/addResident', // The servlet URL
                     method: 'POST',
                     data: $(this).serialize(), // Serialize the form data
                     dataType: 'json', // Expect a JSON response

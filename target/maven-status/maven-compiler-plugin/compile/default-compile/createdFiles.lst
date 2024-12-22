@@ -6,6 +6,7 @@ model\EmailVerification.class
 controller\RoomController.class
 controller\MaintenanceController.class
 com\mycompany\student_residence_management\resources\JakartaEE10Resource.class
+admin_pages\residentsEdit.class
 service\MaintenanceService.class
 admin_pages\roomsDelete.class
 admin_pages\roomsEdit.class

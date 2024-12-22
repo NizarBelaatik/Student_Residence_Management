@@ -49,13 +49,14 @@ public class ResidentDAO {
         while (residentIdExists(residentId)) {
             residentId = utils.generateUniqueId(); // Generate a new ID if it exists
         }
-        String sql = "INSERT INTO residents (residentId,userId, firstname,lastname, phone, address, roomId ) VALUES (?, ?, ?, ?,?,?)";
+        String sql = "INSERT INTO residents (email, firstname,lastname,gender, phone, address, roomId ) VALUES ( ?, ?, ?,?,?)";
         try (Connection conn = getConnection();
                  PreparedStatement ps = conn.prepareStatement(sql)) {
-                ps.setString(1, residentId);
-                //ps.setString(2, resident.getUserId());
-                ps.setString(3, resident.getFirstname());
-                ps.setString(4, resident.getLastname());
+                //ps.setString(1, residentId);
+                ps.setString(1, resident.getEmail());
+                ps.setString(2, resident.getFirstname());
+                ps.setString(3, resident.getLastname());
+                ps.setString(4, resident.getGender());
                 ps.setString(5, resident.getPhone());
                 ps.setString(6, resident.getAddress());
                 ps.setString(7, resident.getRoomId());
@@ -66,18 +67,18 @@ public class ResidentDAO {
     }
     
     
-    public Resident getResidentById(String residentId) throws SQLException {
-        String sql = "SELECT residentId,userId, firstname,lastname, phone, address, roomId FROM residents WHERE residentId = ?";
+    public Resident getResidentByEmail(String email) throws SQLException {
+        String sql = "SELECT email, firstname,lastname,gender, phone, address, roomId FROM residents WHERE email = ?";
         try (Connection conn = getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setString(1, residentId);
+            ps.setString(1, email);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
                     return new Resident(
-                        rs.getString("residentId"),
-                        rs.getString("userId"),
+                        rs.getString("email"),
                         rs.getString("firstname"),
                         rs.getString("lastname"),
+                        rs.getString("gender"),
                         rs.getString("phone"),
                         rs.getString("address"),
                         rs.getString("roomId")
@@ -89,17 +90,17 @@ public class ResidentDAO {
     }
     
     public List<Resident> getAllResidents() throws SQLException {
-        String sql = "SELECT residentId,userId, firstname,lastname, phone, address, roomId FROM residents ";
+        String sql = "SELECT email, firstname,lastname,gender, phone, address, roomId FROM residents ";
         List<Resident> residentsL = new ArrayList<>();
         try (Connection conn = getConnection();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
             while (rs.next()) {
                 residentsL.add(new Resident(
-                    rs.getString("residentId"),
-                    rs.getString("userId"),
+                    rs.getString("email"),
                     rs.getString("firstname"),
                     rs.getString("lastname"),
+                    rs.getString("gender"),
                     rs.getString("phone"),
                     rs.getString("address"),
                     rs.getString("roomId")
@@ -110,16 +111,17 @@ public class ResidentDAO {
     }
     
         public boolean updateResident(Resident resident) throws SQLException {
-        String sql = "UPDATE residents SET userId=?, firstname=?,lastname=?, phone=?, address=?, roomId=? WHERE residentId = ?";
+        String sql = "UPDATE residents SET email=?, firstname=?,lastname=?, gender=?,  phone=?, address=?, roomId=? WHERE email = ?";
         try (Connection conn = getConnection();
             PreparedStatement ps = conn.prepareStatement(sql)) {
             
-            //ps.setString(1, resident.getUserId());
+            ps.setString(1, resident.getEmail());
             ps.setString(2, resident.getFirstname());
             ps.setString(3, resident.getLastname());
-            ps.setString(4, resident.getPhone());
-            ps.setString(5, resident.getAddress());
-            ps.setString(6, resident.getRoomId());
+            ps.setString(4, resident.getGender());
+            ps.setString(5, resident.getPhone());
+            ps.setString(6, resident.getAddress());
+            ps.setString(7, resident.getRoomId());
             //ps.setString(7, resident.getResidentId());
             
             int rowsUpdated = ps.executeUpdate();
