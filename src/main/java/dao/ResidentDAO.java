@@ -49,7 +49,7 @@ public class ResidentDAO {
         while (residentIdExists(residentId)) {
             residentId = utils.generateUniqueId(); // Generate a new ID if it exists
         }
-        String sql = "INSERT INTO residents (email, firstname,lastname,gender, phone, address, roomId ) VALUES ( ?, ?, ?,?,?)";
+        String sql = "INSERT INTO residents (email, firstname,lastname,gender, phone, address, roomId ) VALUES ( ?, ?,?, ?,?,?,?)";
         try (Connection conn = getConnection();
                  PreparedStatement ps = conn.prepareStatement(sql)) {
                 //ps.setString(1, residentId);

@@ -64,7 +64,7 @@ public class residentsAdd extends HttpServlet {
             } catch (SQLException e) {
                 // Handle SQL exceptions and set error message
                 success = false;
-                message = "Something went wrong. Please try again."+e;
+                message = "Something went wrong. Please try again.";
             }
 
             // Send the response as JSON
