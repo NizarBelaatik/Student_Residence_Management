@@ -109,8 +109,8 @@ public class ResidentDAO {
         }
         return residentsL;
     }
-    
-        public boolean updateResident(Resident resident) throws SQLException {
+
+    public boolean updateResident(Resident resident) throws SQLException {
         String sql = "UPDATE residents SET email=?, firstname=?,lastname=?, gender=?,  phone=?, address=?, roomId=? WHERE email = ?";
         try (Connection conn = getConnection();
             PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -122,7 +122,7 @@ public class ResidentDAO {
             ps.setString(5, resident.getPhone());
             ps.setString(6, resident.getAddress());
             ps.setString(7, resident.getRoomId());
-            //ps.setString(7, resident.getResidentId());
+            ps.setString(8, resident.getEmail());
             
             int rowsUpdated = ps.executeUpdate();
             return rowsUpdated > 0;  // Return true if at least one row is updated.

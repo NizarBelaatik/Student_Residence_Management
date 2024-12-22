@@ -51,8 +51,7 @@
                                 <table class="table table-striped table-hover">
                                     <thead>
                                       <tr>
-                                        <th>Resident ID</th>
-                                        <th>User ID</th>
+                                        <th>Email</th>
                                         <th>First name</th>
                                         <th>Last name</th>
                                         <th>Gender</th>
@@ -69,8 +68,7 @@
                                             for (Resident data : residentList) {%>
                                             
                                             <tr>
-                                              <th scope="row"><%= data.getResidentId() %></th>
-                                              <td><%= data.getEmail() %></td>
+                                              <th scope="row"><%= data.getEmail() %></th>
                                               <td><%= data.getFirstname() %></td>
                                               <td><%= data.getLastname() %></td>
                                               <td><%= data.getGender() %></td>
@@ -79,8 +77,8 @@
                                               <td><%= data.getRoomId() %></td>
                                               
                                               <td>
-                                                  <a class="actions_button" href="${pageContext.request.contextPath}/admin/residents/editResident?email=<%= data.getEmail() %>"><i class="bi bi-pencil-square clr_orange"></i></a>
-                                                  <a class="actions_button" onclick="deleteResident('<%= data.getEmail() %>')"><i class="bi bi-trash3-fill clr_red"></i></a>
+                                                  <a class="actions_button" href="${pageContext.request.contextPath}/admin/residents/editResident?email=<%= data.getEmail() %>"><i class="bi bi-pencil-square actions_button_orange"></i></a>
+                                                  <a class="actions_button" onclick="deleteResident('<%= data.getEmail() %>')"><i class="bi bi-trash3-fill actions_button_red"></i></a>
                                               </td>
                                             </tr>
                                     

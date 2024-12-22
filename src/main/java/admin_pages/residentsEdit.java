@@ -42,10 +42,57 @@ public class residentsEdit extends HttpServlet {
         }catch(SQLException e){
         }
         
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/views/admin/residentsAdd.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/views/admin/residentsEdit.jsp");
         request.setAttribute("activePage", "residents");  // Set active page
         dispatcher.forward(request, response);
     }
     
+    
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        
+                    // Set response type to JSON
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            
+            String residentEmail = request.getParameter("inputemail");
+            String residentFirstname = request.getParameter("inputfirstname");
+            String residentLastname = request.getParameter("inputlastname");   
+            String residentGender = request.getParameter("inputgender");
+            String residentPhone = request.getParameter("inputphone");
+            String residentAddress = request.getParameter("inputaddress");            
+            String residentRoomId = request.getParameter("inputroomId");
+
+  
+            Resident Edit_Resident = new Resident( residentEmail, residentFirstname, residentLastname, residentGender, residentPhone,residentAddress,residentRoomId);
+
+            boolean success = false;
+            String message = "";
+            try {
+                // Add the room via DAO
+                residentDAO.updateResident(Edit_Resident);
+                success = true;
+                message = "Resident has been successfully Edited!";
+            } catch (SQLException e) {
+                // Handle SQL exceptions and set error message
+                success = false;
+                message = "Something went wrong. Please try again."+e;
+            }
+
+            // Send the response as JSON
+            if (success) {
+                String jsonResponse = "{\"messageType\":\"success\", \"message\":\"" + message + "\"}";
+                response.getWriter().write(jsonResponse);
+            } else {
+                String jsonResponse = "{\"messageType\":\"error\", \"message\":\"" + message + "\"}";
+                response.getWriter().write(jsonResponse);
+            }
+               
+
+                   
+        
+        
+    }
     
 }

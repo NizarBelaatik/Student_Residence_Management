@@ -529,9 +529,11 @@ form .cancle_btn:active {
  .actions_button{
     font-size: 28px;
     margin:0 5px;
+    cursor:pointer;
 }
-.clr_red{color:red;}
-.clr_orange{color:orange}
-                
-
+.actions_button_red{color:red;}
+.actions_button_orange{color:rgb(255,127,39)}
+  
+.actions_button_red:hover,.actions_button_red:focus{color:rgba(255,0,0,0.5);}
+.actions_button_orange:hover,.actions_button_orange:focus{color:rgba(255,127,39,0.5);}
 

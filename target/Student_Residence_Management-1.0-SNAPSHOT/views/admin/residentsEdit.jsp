@@ -25,7 +25,7 @@
               <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="">Home</a></li>
                 <li class="breadcrumb-item">Dashboard</li>
-                <li class="breadcrumb-item"><a href="${pageContext.request.contextPath}/admin/residents/editResident">Residents</a></li>
+                <li class="breadcrumb-item"><a href="${pageContext.request.contextPath}/admin/residents">Residents</a></li>
                 <li class="breadcrumb-item active">Edit</li>
               </ol>
             </nav>
@@ -39,25 +39,25 @@
                                 <h5>Edit Residents</h5>
                             </div>
 
-                            <form id="addRoomForm" method="post" action="${pageContext.request.contextPath}/admin/Residents/addResident">
+                            <form id="editResidentForm" method="post" action="${pageContext.request.contextPath}/admin/Residents/editResident">
                                 <div class="row mb-3">
                                   <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
                                   <div class="col-sm-10">
-                                    <input type="email" class="form-control" name="inputemail" value="${Res.getFirstname()}" required>
+                                    <input type="email" class="form-control" name="inputemail" value="${Res.getEmail()}" required>
                                   </div>
                                 </div>
                                 
                                 <div class="row mb-3">
                                   <label for="inputEmail3" class="col-sm-2 col-form-label">First name</label>
                                   <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="inputfirstname" required>
+                                    <input type="text" class="form-control" name="inputfirstname" value="${Res.getFirstname()}" required>
                                   </div>
                                 </div>
                                 
                                 <div class="row mb-3">
                                   <label for="inputEmail3" class="col-sm-2 col-form-label">Firs last</label>
                                   <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="inputlastname" required>
+                                    <input type="text" class="form-control" name="inputlastname" value="${Res.getLastname()}" required>
                                   </div>
                                 </div>
                                 
@@ -66,31 +66,30 @@
                                 <div class="row mb-3">
                                     <label for="inputState" class="col-sm-2 col-form-label">Gender</label>
                                     <div class="col-sm-10">
-                                    <select name="inputState" class="form-select" required>
-                                      <option value="Male">Male</option>
-                                      <option value="Female">Female</option>
-                                    </select>
+                                    <select name="inputgender" class="form-select" required>
+                                        <option value="Male" ${Res.getGender() == 'Male' ? 'selected' : ''}>Male</option>
+                                        <option value="Female" ${Res.getGender() == 'Female' ? 'selected' : ''}>Female</option>                                    </select>
                                   </div>
                                 </div>
-                                
+
                                  <div class="row mb-3">
                                   <label for="inputEmail3" class="col-sm-2 col-form-label">Phone</label>
                                   <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="inputphone" required>
+                                    <input type="text" class="form-control" name="inputphone"  value="${Res.getPhone()}"required>
                                   </div>
                                 </div>
                                 
                                 <div class="row mb-3">
                                   <label for="inputEmail3" class="col-sm-2 col-form-label">Address</label>
                                   <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="inputaddress" required>
+                                    <input type="text" class="form-control" name="inputaddress" value="${Res.getAddress()}" required>
                                   </div>
                                 </div>
                                 
                                 <div class="row mb-3">
                                   <label for="inputEmail3" class="col-sm-2 col-form-label">Room ID</label>
                                   <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="inputroomId" required>
+                                    <input type="text" class="form-control" name="inputroomId" value="${Res.getRoomId()}" required>
                                   </div>
                                 </div>
                                 
@@ -111,12 +110,12 @@
         var contextPath = "${pageContext.request.contextPath}";
         $(document).ready(function() {
             // Handle form submission
-            $('#addRoomForm').submit(function(e) {
+            $('#editResidentForm').submit(function(e) {
                 e.preventDefault(); // Prevent default form submission
                 
                 // Perform AJAX request
                 $.ajax({
-                    url: contextPath+'/admin/rooms/addRoom', // The servlet URL
+                    url: contextPath+'/admin/residents/editResident', // The servlet URL
                     method: 'POST',
                     data: $(this).serialize(), // Serialize the form data
                     dataType: 'json', // Expect a JSON response
