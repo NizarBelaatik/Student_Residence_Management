@@ -67,7 +67,7 @@ public class regiserVerification extends HttpServlet {
                         userDAO.addUser(user);
                         
                         
-                        Resident resident = new Resident();
+                        Resident resident = new Resident( email, firstname, lastname, gender, phone,address,null);
                         residentDAO.addResident(resident);
                         success = true;
                     }catch(SQLException e){

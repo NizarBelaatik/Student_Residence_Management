@@ -13,7 +13,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.RequestDispatcher;
 
-import utils.utils;
+import utils.GenerateRandomString;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.sql.Timestamp;
@@ -78,7 +78,7 @@ public class register extends HttpServlet {
         if(!usercheck && userchecker == null){
             if(password.contains(confirm_password) ){
             
-                String Verification_token=utils.generateToken(8);
+                String Verification_token=GenerateRandomString.generateToken(8);
 
                 Timestamp createdAt = new Timestamp(System.currentTimeMillis());  // Current time as Timestamp
 

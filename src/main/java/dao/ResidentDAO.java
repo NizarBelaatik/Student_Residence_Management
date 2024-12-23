@@ -1,7 +1,7 @@
 package dao;
 
 import model.Resident;
-import utils.utils;
+import utils.GenerateRandomString;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -43,11 +43,11 @@ public class ResidentDAO {
     
     // Add a Room
     public boolean addResident(Resident resident) throws SQLException {
-        String residentId = utils.generateUniqueId();
+        String residentId = GenerateRandomString.generateUniqueId();
         
         // Ensure the generated roomId is unique
         while (residentIdExists(residentId)) {
-            residentId = utils.generateUniqueId(); // Generate a new ID if it exists
+            residentId = GenerateRandomString.generateUniqueId(); // Generate a new ID if it exists
         }
         String sql = "INSERT INTO residents (email, firstname,lastname,gender, phone, address, roomId ) VALUES ( ?, ?,?, ?,?,?,?)";
         try (Connection conn = getConnection();
