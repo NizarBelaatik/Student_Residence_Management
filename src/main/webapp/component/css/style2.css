@@ -223,7 +223,7 @@ header {
 .dropdown-notifications {
     display: none;
     position: absolute;
-    right: 0; /* Align dropdown to the right side of the button */
+    right: -150px; /* Align dropdown to the right side of the button */
     background-color: white;
     min-width: 230px; /* Match width with profile dropdown */
     box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
@@ -315,3 +315,84 @@ header {
   
 }
 
+.menu-items {display: none;}
+/* Responsive Design (Mobile and Tablet) */
+@media screen and (max-width: 600px) {
+    /* Stack navigation vertically */
+    header {
+        display: flex;
+    }
+
+    .left-tabs {
+        flex-direction: column;
+        margin-bottom: 15px;
+    }
+
+    .tab-button {
+        margin-right: 0;
+        margin-bottom: 10px;
+        width: 100%;
+        text-align: left;
+    }
+
+    
+
+    /* Increase icon and button size for better touch targets */
+    .notification-button {
+        font-size: 30px;
+    }
+
+    .dropdown-btn {
+        font-size: 18px;
+    }
+
+    .dropdown-profile {
+        min-width: 100%;
+    }
+
+    .dropdown-item {
+        padding: 12px 20px;
+        font-size: 16px;
+    }
+
+    /* Add Hamburger Menu for smaller screens */
+    .hamburger-menu {
+        display: block;
+        cursor: pointer;
+        font-size: 30px;
+        background-color: transparent;
+        border: none;
+    }
+
+    /* Show/hide navigation links */
+    .left-tabs{display: none;}
+    .menu-items {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .menu-items.active {
+        display: flex;
+    }
+
+    .menu-items a {
+        padding: 10px;
+        text-decoration: none;
+        color: #333;
+        border-bottom: 1px solid #ddd;
+        width: 100%;
+        text-align: left;
+    }
+
+    .menu-items a:hover {
+        background-color: #f1f1f1;
+    }
+}
+
+/* Styling for desktop */
+@media screen and (min-width: 601px) {
+    .hamburger-menu {
+        display: none;
+    }
+}
