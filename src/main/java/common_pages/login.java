@@ -17,7 +17,9 @@ import jakarta.servlet.RequestDispatcher;
 
 import java.sql.SQLException;
 
+import dao.ResidentDAO;
 import dao.UserDAO;
+import model.Resident;
 import model.User;
 /**
  *
@@ -25,6 +27,7 @@ import model.User;
  */
 @WebServlet(name = "login", urlPatterns = {"/login"})
 public class login extends HttpServlet {
+    private ResidentDAO residentDAO = new ResidentDAO();
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -48,7 +51,12 @@ public class login extends HttpServlet {
                 if("admin".equals(user.getRole())){
                     response.sendRedirect(request.getContextPath()+"/admin");
                 }else if("resident".equals(user.getRole())){
+                    // Get the user object from the session
+                    
+                    
+                    
                     response.sendRedirect(request.getContextPath()+"/u");
+                    
                 }
                 
             } else {

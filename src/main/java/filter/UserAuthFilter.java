@@ -1,15 +1,18 @@
 package filter;
 
+import dao.ResidentDAO;
 import model.User;
 
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.*;
 import java.io.IOException;
+import java.sql.SQLException;
+import model.Resident;
 
 @WebFilter("/u/*")  // Filter for URLs starting with /user/
 public class UserAuthFilter implements Filter {
-
+    private ResidentDAO residentDAO = new ResidentDAO();
     @Override
     public void init(FilterConfig fConfig) throws ServletException {
         // No initialization needed
@@ -35,6 +38,14 @@ public class UserAuthFilter implements Filter {
         // Check if the user has the required role (user in this case)
         if ("resident".equals(user.getRole())) {
             // User has the correct role, continue with the request
+            
+            try{
+                Resident resident = residentDAO.getResidentByEmail(user.getEmail());
+
+                session.setAttribute("resident", resident);
+            }catch(SQLException e){
+
+            }
             chain.doFilter(request, response);
         } else {
             // User does not have the correct role, redirect to error page

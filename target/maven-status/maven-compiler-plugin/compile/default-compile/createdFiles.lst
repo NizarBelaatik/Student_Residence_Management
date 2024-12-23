@@ -23,6 +23,7 @@ common_pages\dashboard_common.class
 adminServlet\rooms.class
 adminServlet\roomsEdit.class
 model\Room.class
+residentServlet\resident.class
 utils\EmailSender$1.class
 utils\JavaMailUtil.class
 utils\PasswordHasher.class

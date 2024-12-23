@@ -1,0 +1,317 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #dee2e6;
+}
+/*<img src="profile-image.jpg" alt="Profile Image" class="profile-image">*/
+.left-tabs {
+    display: flex;
+}
+
+.tab-button {
+    margin-right: 15px;
+    padding: 10px 15px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.tab-button:hover {
+    background-color: #0056b3;
+}
+
+.right-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+    position: relative;
+    margin-right: 20px;
+}
+
+.profile-image {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.username {
+    margin-right: 10px;
+}
+
+.dropdown {
+    position: relative;
+}
+
+.dropbtn {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 9999;
+    right: 0;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+
+.dropdown_header{
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    
+    max-width : 230px;
+    overflow:hidden;
+    display:inline-block;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.notification {
+    position: relative;
+}
+
+.notification-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 24px;
+}
+
+.notification-dropdown {
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.notification:hover .notification-dropdown {
+    display: block;
+}
+
+ .badge-number {
+    background-color:red; 
+    color: white;
+    position: absolute;
+    inset: 0px 0px auto auto;
+    font-weight: normal;
+    font-size: 12px;
+    font-style: normal;
+    padding: 3px 6px;
+  
+}
+
+
+
+
+
+
+
+
+
+
+
+/* Dropdown menu content renamed to dropdown-profile and adjusted to open right to left */
+.dropdown-profile {
+    display: none;
+    position: absolute;
+    right: 0; /* Align dropdown to the right side of the button */
+    background-color: white;
+    min-width: 200px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    border-radius: 5px;
+    list-style: none;
+    padding: 10px;
+    margin-top: -8px;
+}
+
+/* Keep dropdown visible when hovering over both button and dropdown */
+.dropdown:hover .dropdown-profile {
+    display: block;
+}
+
+.dropdown-header {
+    font-weight: bold;
+    margin-bottom: 0;
+    color: #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dropdown-divider {
+    border-top: 1px solid #ccc;
+    margin: 10px 0;
+}
+
+.dropdown-item {
+    display: block;
+    padding: 8px 15px;
+    text-decoration: none;
+    color: #333;
+    width: 100%;
+}
+
+.dropdown-item:hover {
+    background-color: #f1f1f1;
+    border-radius: 5px;
+}
+
+.dropdown-item:active {
+    background-color: #ddd;
+}
+
+/* Email text styling with ellipsis */
+.dropdown-profile li {
+    max-width: 230px;        /* Set the max width of the list item */
+    overflow: hidden;        /* Hide any content that overflows the max width */
+    white-space: nowrap;     /* Prevent the text from wrapping onto multiple lines */
+    text-overflow: ellipsis; /* Add ellipsis (...) if the text overflows */
+}
+
+/* For mobile responsiveness */
+@media screen and (max-width: 600px) {
+    .dropdown-btn {
+        width: 100%;
+        font-size: 18px;
+    }
+}
+
+
+
+/* Notifications Dropdown */
+.dropdown-notifications {
+    display: none;
+    position: absolute;
+    right: 0; /* Align dropdown to the right side of the button */
+    background-color: white;
+    min-width: 230px; /* Match width with profile dropdown */
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    border-radius: 5px;
+    list-style: none;
+    padding: 10px;
+    margin-top: -8px; /* Align it with the other dropdown */
+    width: 270px;
+}
+
+/* Keep notifications dropdown visible when hovering over both button and dropdown */
+.dropdown:hover .dropdown-notifications {
+    display: block;
+}
+
+/* Styling for notification items */
+.notification-item {
+    display: flex;
+    align-items: center;
+    padding: 8px 15px;
+}
+
+.notification-icon {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+    border-radius: 50%;
+}
+
+.notification-content {
+    flex-grow: 1;
+    max-width: 180px; /* Adjust the width to fit your design */
+    overflow: hidden; /* Hide any overflowing content */
+    
+}
+
+.notification-content strong {
+    display: block;
+    color: #333;
+    font-weight: bold;
+}
+
+.notification-content p {
+    margin: 0;
+    color: #777;
+    white-space: normal; /* Allow text to wrap normally */
+    text-overflow: ellipsis; /* Add ellipsis if content overflows */
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Limit the content to 2 lines */
+    -webkit-box-orient: vertical; /* Ensure the content is vertically oriented */
+    line-height: 1.4em; /* Adjust line height for readability */
+   
+}
+
+/* Divider line for notifications */
+.notification-divider {
+    border-top: 1px solid #ccc;
+    margin: 10px 0;
+}
+
+/* "Show All Notifications" button at the bottom */
+.show-all-notifications {
+    display: block;
+    padding: 8px 15px;
+    text-decoration: none;
+    color: #333;
+    width: 100%;
+    text-align: center;
+}
+
+.show-all-notifications:hover {
+    background-color: #f1f1f1;
+    border-radius: 5px;
+}
+
+.show-all-notifications:active {
+    background-color: #ddd;
+}
+.badge-number {
+    background-color:red; 
+    color: white;
+    position: absolute;
+    inset: -2px -8px auto auto;
+    font-weight: normal;
+    font-size: 12px;
+    font-style: normal;
+    padding: 3px 6px;
+  
+}
+

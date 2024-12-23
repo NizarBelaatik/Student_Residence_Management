@@ -24,7 +24,7 @@
         
         
         <link rel="stylesheet" href="${pageContext.request.contextPath}/component/css/fontawesome.min.css">
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/component/css/bootstrap.min.css"> 
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/component/css/vendor/bootstrap.min.css"> 
         <link rel="stylesheet" href="${pageContext.request.contextPath}/component/css/template-style.css">
 
         
