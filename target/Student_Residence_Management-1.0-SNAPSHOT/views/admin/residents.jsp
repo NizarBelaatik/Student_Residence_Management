@@ -28,8 +28,7 @@
             <h1>Manage Residents</h1>
             <nav>
               <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="">Home</a></li>
-                <li class="breadcrumb-item">Dashboard</li>
+                <li class="breadcrumb-item"><a href="${pageContext.request.contextPath}/admin">Dashboard</a></li>
                 <li class="breadcrumb-item active">Residents</li>
               </ol>
             </nav>

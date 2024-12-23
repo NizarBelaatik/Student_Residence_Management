@@ -6,6 +6,8 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.mindrot.jbcrypt.BCrypt;
+
 public class UserDAO {
 
     // Database connection details
@@ -23,7 +25,39 @@ public class UserDAO {
             throw new SQLException("MySQL JDBC Driver not found.");
         }
     }
+ // Login user method
+    public User loginUser(String email, String password) throws SQLException {
+        String sql = "SELECT id, email, password_hash, role, active, created_at, updated_at FROM users WHERE email = ?";
+        
+        try (Connection conn = getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, email);
+            
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    // Get the stored password hash from the database
+                    String storedHash = rs.getString("password_hash");
 
+                    // Verify the provided password against the stored hash
+                    if (BCrypt.checkpw(password, storedHash)) {
+                        // Password matches, create a User object
+                        User user = new User(
+                            rs.getString("email"),
+                            rs.getString("password_hash"),
+                            rs.getString("role")
+                        );
+                        user.setId(rs.getInt("id"));
+                        user.setActive(rs.getBoolean("active"));
+                        user.setCreatedAt(rs.getTimestamp("created_at"));
+                        user.setUpdatedAt(rs.getTimestamp("updated_at"));
+
+                        return user; // Return the user object if login is successful
+                    }
+                }
+            }
+        }
+        return null; // Return null if no matching user or incorrect password
+    }
     // Add a User to the database
     public boolean addUser(User user) throws SQLException {
         String sql = "INSERT INTO users (email, password_hash, role, active, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?)";
