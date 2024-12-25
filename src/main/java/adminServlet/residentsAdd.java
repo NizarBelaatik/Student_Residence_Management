@@ -2,6 +2,8 @@
 package adminServlet;
 
 import java.io.IOException;
+
+import dao.RoomDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -10,10 +12,13 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.RequestDispatcher;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import model.Resident;
 import dao.ResidentDAO;
 
+import model.Room;
 import model.User;
 import dao.UserDAO;
 
@@ -30,6 +35,7 @@ import utils.EmailSender;
 public class residentsAdd extends HttpServlet {
     private ResidentDAO residentDAO = new ResidentDAO();
     private UserDAO userDAO = new UserDAO();
+    private RoomDAO roomDAO = new RoomDAO();
     public residentsAdd(){
         super();
         }
@@ -37,7 +43,13 @@ public class residentsAdd extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // Forward the request to the actual JSP page
-
+        List<Room> roomList = new ArrayList<>();
+        try{
+            roomList = roomDAO.getAllRoomsAvailable();
+            request.setAttribute("roomList", roomList);
+        }catch(SQLException e){
+            System.out.println(e);
+        }
         RequestDispatcher dispatcher = request.getRequestDispatcher("/views/admin/residentsAdd.jsp");
         request.setAttribute("activePage", "residents");  // Set active page
         dispatcher.forward(request, response);
@@ -59,9 +71,10 @@ public class residentsAdd extends HttpServlet {
             String residentPhone = request.getParameter("inputphone");
             String residentAddress = request.getParameter("inputaddress");            
             String residentRoomId = request.getParameter("inputroomId");
-
+            String contractStartDate = request.getParameter("inputStartDate");
+            String contractEndDate = request.getParameter("inputEndDate");
   
-            Resident ADD_Resident = new Resident( residentEmail, residentFirstname, residentLastname, residentGender, residentPhone,residentAddress,residentRoomId);
+            Resident ADD_Resident = new Resident( residentEmail, residentFirstname, residentLastname, residentGender, residentPhone,residentAddress,residentRoomId,contractStartDate,contractEndDate);
 
             boolean success = false;
             String message = "";

@@ -52,7 +52,8 @@ public class regiserVerification extends HttpServlet {
         String password = request.getParameter("password");
         String passwordHash="";
         String token = request.getParameter("tokenKey");
-        
+
+
         boolean success = false;
         String message = "";
         
@@ -67,7 +68,7 @@ public class regiserVerification extends HttpServlet {
                         userDAO.addUser(user);
                         
                         
-                        Resident resident = new Resident( email, firstname, lastname, gender, phone,address,null);
+                        Resident resident = new Resident( email, firstname, lastname, gender, phone,address,null,null,null);
                         residentDAO.addResident(resident);
                         success = true;
                     }catch(SQLException e){

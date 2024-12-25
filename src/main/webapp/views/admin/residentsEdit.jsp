@@ -6,6 +6,8 @@
 %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="jakarta.servlet.*,jakarta.servlet.http.*,java.io.*,java.util.*,java.sql.*"%>
+<%@ page import="model.Room" %>
+<%@ page import="model.Resident" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,8 +32,8 @@
             </nav>
         </div>
         <section>
-            <div class="row">
-                <div class="col-12">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
                     <div class="card_1">
                         <div class="card_1-body">
                             <div class="card_1-header">
@@ -85,13 +87,48 @@
                                   </div>
                                 </div>
                                 
+
+
                                 <div class="row mb-3">
-                                  <label for="inputEmail3" class="col-sm-2 col-form-label">Room ID</label>
-                                  <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="inputroomId" value="${Res.getRoomId()}" required>
-                                  </div>
+                                    <label for="inputroomId" class="col-sm-2 col-form-label">Room</label>
+                                    <div class="col-sm-10">
+                                        <%
+                                            Resident res = (Resident) request.getAttribute("Res");
+
+                                            String selectedRoomId = res.getRoomId();
+                                            // Retrieve the list of rooms from the request
+                                            List<Room> roomList = (List<Room>) request.getAttribute("roomList");
+                                        %>
+
+                                        <select name="inputroomId" class="form-select" required>
+                                            <option value="" disabled selected>Select Room</option>
+                                            <%
+                                                // Iterate over the room list and create the option tags
+                                                for (Room room : roomList) {
+                                            %>
+                                                <option value="<%= room.getRoomId() %>" <%= (room.getRoomId().equals(selectedRoomId)) ? "selected" : "" %> >
+                                                    ID:<%= room.getRoomId() %> | Name:<%= room.getRoomName() %> | Size:<%= room.getSize() %> | Price:<%= room.getPrice() %>
+                                                </option>
+                                            <%
+                                                }
+                                            %>
+                                        </select>
+                                    </div>
                                 </div>
-                                
+
+                                <div class="row mb-3">
+                                    <label for="inputDate" class="col-sm-2 col-form-label">Start Date</label>
+                                    <div class="col-sm-3">
+                                        <input type="date" class="form-control" name="inputStartDate" value="${Res.getCStartDate()}">
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <label for="inputDate" class="col-sm-2 col-form-label">End Date</label>
+                                    <div class="col-sm-3">
+                                        <input type="date" class="form-control" name="inputEndDate" value="${Res.getCEndDate()}">
+                                    </div>
+                                </div>
                                 
                                 <div class="text-center">
                                   <button type="submit" class="btn1 submit_btn">Submit</button>

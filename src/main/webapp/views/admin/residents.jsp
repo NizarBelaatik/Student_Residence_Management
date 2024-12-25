@@ -57,6 +57,8 @@
                                         <th>Phone</th>
                                         <th>Address</th>
                                         <th>Room Id</th>
+                                        <th>Contract Start Date</th>
+                                        <th>Contract End Date</th>
                                         <th></th>
                                       </tr>
                                     </thead>
@@ -74,6 +76,8 @@
                                               <td><%= data.getPhone() %></td>
                                               <td><%= data.getAddress() %></td>
                                               <td><%= data.getRoomId() %></td>
+                                              <td><%= data.getCStartDate() %></td>
+                                              <td><%= data.getCEndDate() %></td>
                                               
                                               <td>
                                                   <a class="actions_button" href="${pageContext.request.contextPath}/admin/residents/editResident?email=<%= data.getEmail() %>"><i class="bi bi-pencil-square actions_button_orange"></i></a>

@@ -5,7 +5,7 @@
 package adminServlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -14,18 +14,14 @@ import jakarta.servlet.http.HttpServletResponse;
 
 
 import model.Room;
-import dao.roomDAO;
+import dao.RoomDAO;
 import jakarta.servlet.RequestDispatcher;
 import java.sql.SQLException;
-import java.util.List;
-
-
-
 
 
 @WebServlet(name = "editRoom", urlPatterns = {"/admin/rooms/editRoom"})
 public class roomsEdit extends HttpServlet {
-    private roomDAO RoomDAO = new roomDAO();
+    private dao.RoomDAO RoomDAO = new RoomDAO();
 
     public roomsEdit(){
                 super();

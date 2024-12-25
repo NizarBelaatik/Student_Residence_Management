@@ -14,12 +14,14 @@ public class Resident {
     private String gender;
     private String phone;
     private String address;
-    private String roomId; // FK to Room
+    private String roomId;
+    private String c_start_date;
+    private String c_end_date;// FK to Room
 
     // Constructors
     
 
-    public Resident( String email, String firstName, String lastName, String gender, String phone, String address, String roomId) {
+    public Resident( String email, String firstName, String lastName, String gender, String phone, String address, String roomId , String c_start_date , String c_end_date) {
         this.email = email;
         this.firstname = firstName;
         this.lastname = lastName;
@@ -27,6 +29,8 @@ public class Resident {
         this.phone = phone;
         this.address = address;
         this.roomId = roomId;
+        this.c_start_date = c_start_date;
+        this.c_end_date = c_end_date;
     }
     
 
@@ -86,8 +90,21 @@ public class Resident {
     public String getRoomId() {
         return roomId;
     }
-
     public void setRoomId(String roomId) {
         this.roomId = roomId;
+}
+
+    public String getCStartDate() {
+        return c_start_date;
+    }
+    public void setCStartDate(String c_start_date) {
+        this.c_start_date = c_start_date;
+    }
+
+    public String getCEndDate() {
+        return c_end_date;
+    }
+    public void setCEndDate(String c_end_date) {
+        this.c_end_date = c_end_date;
     }
 }

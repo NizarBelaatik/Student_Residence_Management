@@ -29,8 +29,8 @@
             </nav>
         </div>
         <section>
-            <div class="row">
-                <div class="col-12">
+            <div class="row ">
+                <div class="col-lg-8">
                     <div class="card_1">
                         <div class="card_1-body">
                             <div class="card_1-header">

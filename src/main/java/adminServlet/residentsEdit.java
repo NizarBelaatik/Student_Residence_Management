@@ -15,10 +15,15 @@ import jakarta.servlet.http.HttpServletResponse;
 
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 
 import model.Resident;
 import dao.ResidentDAO;
+
+import model.Room;
+import dao.RoomDAO;
 
 /**
  *
@@ -27,7 +32,7 @@ import dao.ResidentDAO;
 @WebServlet(name = "residentsEdit", urlPatterns = {"/admin/residents/editResident"})
 public class residentsEdit extends HttpServlet {
     private ResidentDAO residentDAO = new ResidentDAO();
-
+    private RoomDAO roomDAO = new RoomDAO();
     public residentsEdit(){
         super();
         }
@@ -36,9 +41,12 @@ public class residentsEdit extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String email = request.getParameter("email");
         Resident ReData ;
+        List<Room> roomList = new ArrayList<>();
         try{
             ReData = residentDAO.getResidentByEmail(email);
             request.setAttribute("Res", ReData);
+            roomList = roomDAO.getAllRoomsAvailable();
+            request.setAttribute("roomList", roomList);
         }catch(SQLException e){
         }
         
@@ -63,9 +71,10 @@ public class residentsEdit extends HttpServlet {
             String residentPhone = request.getParameter("inputphone");
             String residentAddress = request.getParameter("inputaddress");            
             String residentRoomId = request.getParameter("inputroomId");
+            String contractStartDate = request.getParameter("inputStartDate");
+            String contractEndDate = request.getParameter("inputEndDate");
 
-  
-            Resident Edit_Resident = new Resident( residentEmail, residentFirstname, residentLastname, residentGender, residentPhone,residentAddress,residentRoomId);
+            Resident Edit_Resident = new Resident( residentEmail, residentFirstname, residentLastname, residentGender, residentPhone,residentAddress,residentRoomId,contractStartDate,contractEndDate);
 
             boolean success = false;
             String message = "";

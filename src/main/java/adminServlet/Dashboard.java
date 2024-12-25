@@ -41,7 +41,7 @@ public class Dashboard extends HttpServlet {
         if(role.equals(user.getRole())){
             // Forward to the dashboard JSP with user and role info
             request.setAttribute("user", user);
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/views/admin/dashboardadmin.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/views/admin/dashboardAdmin.jsp");
             request.setAttribute("activePage", "dashboard");  // Set active page
             dispatcher.forward(request, response);
         }else{
