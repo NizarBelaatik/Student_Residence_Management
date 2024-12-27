@@ -21,7 +21,7 @@ public class PaymentManager {
     private RoomDAO roomDAO= new RoomDAO();
 
 
-    private boolean generatePayment(){
+    public boolean generatePayment(){
         //return number of resident that received Payment
 
         try {
@@ -35,9 +35,7 @@ public class PaymentManager {
                             Room room = roomDAO.getRoomById(Res.getRoomId());
                             String dueDate= GetDate.getLDayOfMonthStr();
 
-                            boolean generatePay=generatePayementByResident(Res,room,dueDate);
-
-
+                            generatePayementByResident(Res,room,dueDate);
                             String residentName = Res.getFirstname() +" "+ Res.getLastname();  // Example: replace with actual resident name
                             float amountDue = room.getPrice();         // Example: replace with actual amount due
                             String paymentLink = Res.getEmail();  // Example: replace with actual payment link
@@ -59,23 +57,28 @@ public class PaymentManager {
 
 
                     });
-                    if(generatePay){
-                        try{
-                            markPaymentsAsGeneratedForCurrentMonth();
 
-                        }catch (SQLException e){e.printStackTrace();}
+                    markPaymentsAsGeneratedForCurrentMonth();
 
-                    }
 
                 }catch (SQLException e){
                     e.printStackTrace();
                     return false;
                 }
             }
-        }catch (SQLException e){e.printStackTrace();return false;}
-        return true;
+            if(!isPaymentsGeneratedForCurrentMonth()){
+                try{
+                    markPaymentsAsGeneratedForCurrentMonth();
+                }catch (SQLException e){e.printStackTrace();}
 
+            }
+        }catch (SQLException e){e.printStackTrace();return false;}
+
+
+        return true;
     }
+
+
     private boolean generatePayementByResident(Resident Res,Room room ,String dueDate){
         try {
             Payment payment= new Payment(null,Res.getEmail(),Res.getRoomId(),room.getPrice(),0.0f,dueDate,null,null);
@@ -97,18 +100,22 @@ public class PaymentManager {
         int currentYear = today.getYear();
         int currentMonth = today.getMonthValue();
 
-        String query = "SELECT generated FROM payment_generation_status WHERE year = ? AND month = ?";
+        String query = "SELECT status FROM payment_generation_status WHERE month_year = ?";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {
-            stmt.setInt(1, currentYear);
-            stmt.setInt(2, currentMonth);
+            // Format the month_year as "YYYY-MM"
+            String monthYear = currentYear + "-" + String.format("%02d", currentMonth); // e.g., "2024-12"
+
+            stmt.setString(1, monthYear);  // Pass the formatted month_year
 
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
-                return rs.getBoolean("generated");
+                String status = rs.getString("status");
+                return "Generated".equals(status);  // Return true if status is "Generated"
             }
             return false;  // If no record exists, return false (i.e., payments not generated)
         }
+
     }
 
     // Mark payments as generated for the current month
@@ -117,14 +124,17 @@ public class PaymentManager {
         int currentYear = today.getYear();
         int currentMonth = today.getMonthValue();
 
-        String query = "INSERT INTO payment_generation_status (year, month, generated) VALUES (?, ?, ?) " +
-                "ON DUPLICATE KEY UPDATE generated = ?";
+        // Format the month_year as "YYYY-MM"
+        String monthYear = currentYear + "-" + String.format("%02d", currentMonth);  // e.g., "2024-12"
+
+        String query = "INSERT INTO payment_generation_status (month_year, status) " +
+                "VALUES (?, ?) " +
+                "ON DUPLICATE KEY UPDATE status = ?";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {
-            stmt.setInt(1, currentYear);
-            stmt.setInt(2, currentMonth);
-            stmt.setBoolean(3, true);  // Mark as generated
-            stmt.setBoolean(4, true);  // Update in case the record already exists
+            stmt.setString(1, monthYear);  // Set the month_year (e.g., "2024-12")
+            stmt.setString(2, "Generated");  // Mark as "Generated"
+            stmt.setString(3, "Generated");  // Update to "Generated" if record already exists
             stmt.executeUpdate();
         }
     }

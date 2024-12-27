@@ -18,11 +18,13 @@ import dao.ResidentDAO;
 
 import model.Payment;
 import dao.PaymentDAO;
+import utils.PaymentManager;
 
 @WebServlet(name = "payments", urlPatterns = {"/admin/payments"})
 public class payments extends HttpServlet  {
 
     private ResidentDAO residentDAO = new ResidentDAO();
+    private PaymentManager paymentManager = new PaymentManager();
     public payments(){
         super();
     }
@@ -39,6 +41,7 @@ public class payments extends HttpServlet  {
 
         }
 
+        paymentManager.generatePayment();
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("/views/admin/payments.jsp");
         request.setAttribute("activePage", "residents");  // Set active page
