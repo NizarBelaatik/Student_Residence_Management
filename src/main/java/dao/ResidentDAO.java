@@ -101,6 +101,35 @@ public class ResidentDAO {
         return residents;
     }
 
+    public List<Resident> getAllResidentsForPaymentGeneration() throws SQLException {
+        // SQL query to get residents with active contracts (based on current date)
+        String sql = "SELECT email, firstname, lastname, gender, phone, address, roomId, c_start_date, c_end_date " +
+                "FROM residents " +
+                "WHERE c_end_date >= CURDATE()";  // Ensuring residents with active contracts are selected
+
+        List<Resident> residents = new ArrayList<>();
+        try (Connection conn = DatabaseConnection.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+
+            while (rs.next()) {
+                // Add each resident to the list
+                residents.add(new Resident(
+                        rs.getString("email"),
+                        rs.getString("firstname"),
+                        rs.getString("lastname"),
+                        rs.getString("gender"),
+                        rs.getString("phone"),
+                        rs.getString("address"),
+                        rs.getString("roomId"),
+                        rs.getString("c_start_date"),
+                        rs.getString("c_end_date")
+                ));
+            }
+        }
+        return residents;
+    }
+
     // Update Resident
     public boolean updateResident(Resident resident) throws SQLException {
         String sql = "UPDATE residents SET email = ?, firstname = ?, lastname = ?, gender = ?, phone = ?, address = ?, roomId = ?, c_start_date = ?, c_end_date = ? WHERE email = ?";
