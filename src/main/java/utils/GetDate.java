@@ -3,7 +3,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAdjusters;
 
-public class GetData {
+public class GetDate {
     public static LocalDate getFirstDayOfMonth() {
         // Get the current date and adjust it to the first day of the month
         LocalDate today = LocalDate.now();

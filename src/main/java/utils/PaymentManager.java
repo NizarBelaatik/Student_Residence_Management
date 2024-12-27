@@ -1,12 +1,8 @@
 package utils;
 
-import java.util.concurrent.*;
 import java.time.*;
-import java.time.temporal.ChronoUnit;
 import java.sql.*;
 import java.util.List;
-
-import utils.GetData;
 
 import dao.PaymentDAO;
 import model.Payment;
@@ -17,7 +13,7 @@ import dao.ResidentDAO;
 import model.Room;
 import dao.RoomDAO;
 
-
+import utils.EmailSender;
 
 public class PaymentManager {
     private PaymentDAO paymentDAO= new PaymentDAO();
@@ -26,19 +22,51 @@ public class PaymentManager {
 
 
     private boolean generatePayment(){
+        //return number of resident that received Payment
+
         try {
             if(!isPaymentsGeneratedForCurrentMonth()){
+
                 try {
+
                     List<Resident> residents = residentDAO.getAllResidentsForPaymentGeneration();
                     residents.forEach(Res->{
-                        boolean generatePayment=generatePayementByResident(Res);
-                        if(generatePayment){
-                            try{
-                                markPaymentsAsGeneratedForCurrentMonth();
-                            }catch (SQLException e){e.printStackTrace();}
+                        try{
+                            Room room = roomDAO.getRoomById(Res.getRoomId());
+                            String dueDate= GetDate.getLDayOfMonthStr();
 
-                        }
+                            boolean generatePay=generatePayementByResident(Res,room,dueDate);
+
+
+                            String residentName = Res.getFirstname() +" "+ Res.getLastname();  // Example: replace with actual resident name
+                            float amountDue = room.getPrice();         // Example: replace with actual amount due
+                            String paymentLink = Res.getEmail();  // Example: replace with actual payment link
+
+                            String emailSubject = "Rent Payment Reminder - Due " + dueDate;
+
+                            String emailBody = "Dear " + residentName + ",\n\n" +
+                                    "This is a reminder that your rent payment of " + amountDue + " is due on " + dueDate + ".\n\n" +
+                                    "Please ensure that the payment is made by the due date to avoid any late fees. "+
+                                    "If you have already made the payment, please disregard this message.\n\n" +
+                                    "Thank you!!";
+
+
+                            EmailSender.sendEmail( Res.getEmail(),  emailSubject,  emailBody);
+
+
+                        }catch (SQLException e){e.printStackTrace();}
+
+
+
                     });
+                    if(generatePay){
+                        try{
+                            markPaymentsAsGeneratedForCurrentMonth();
+
+                        }catch (SQLException e){e.printStackTrace();}
+
+                    }
+
                 }catch (SQLException e){
                     e.printStackTrace();
                     return false;
@@ -48,11 +76,8 @@ public class PaymentManager {
         return true;
 
     }
-    private boolean generatePayementByResident(Resident Res){
+    private boolean generatePayementByResident(Resident Res,Room room ,String dueDate){
         try {
-            Room room = roomDAO.getRoomById(Res.getRoomId());
-            String dueDate=GetData.getFDayOfMonthStr();
-
             Payment payment= new Payment(null,Res.getEmail(),Res.getRoomId(),room.getPrice(),0.0f,dueDate,null,null);
             paymentDAO.createPayment(payment);
         }catch (SQLException e){
