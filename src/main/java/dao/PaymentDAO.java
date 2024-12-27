@@ -29,7 +29,7 @@ public class PaymentDAO {
     }
 
     public void createPayment(Payment payment) throws SQLException {
-        String query = "INSERT INTO payments (paymentId,email, amount_due, due_date,amount_paid, status) VALUES (?, ?, ?, ?,?)";
+        String query = "INSERT INTO payments (paymentId,email,roomId, amount_due, due_date,amount_paid, status) VALUES (?,?, ?, ?,?, ?,?)";
 
         String Id = GenerateRandomString.generateUniqueId();
         while (paymentIdExists(Id)) {
@@ -40,10 +40,11 @@ public class PaymentDAO {
              PreparedStatement stmt = conn.prepareStatement(query)) {
             stmt.setString(1,Id);
             stmt.setString(2, payment.getEmail());
-            stmt.setFloat(3, payment.getAmountDue());
-            stmt.setString(4, payment.getDueDate());
-            stmt.setFloat(5, payment.getAmountPaid());
-            stmt.setString(6, payment.getStatus());
+            stmt.setString(3, payment.getRoomId());
+            stmt.setFloat(4, payment.getAmountDue());
+            stmt.setString(5, payment.getDueDate());
+            stmt.setFloat(6, payment.getAmountPaid());
+            stmt.setString(7, payment.getStatus());
             stmt.executeUpdate();
         }
     }
@@ -69,6 +70,7 @@ public class PaymentDAO {
                 Payment payment = new Payment(
                         rs.getString("paymentId"),
                         rs.getString("email"),
+                        rs.getString("roomId"),
                         rs.getFloat("amount_due"),
                         rs.getFloat("amount_paid"),
                         rs.getString("due_date"),

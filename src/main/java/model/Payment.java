@@ -3,15 +3,17 @@ package model;
 public class Payment {
     private String paymentId;
     private String email;
+    private String roomId;
     private float amountDue;
     private float amountPaid;
     private String dueDate;
     private String paymentDate;
     private String status;
 
-    public Payment(String paymentId,String email,float amountDue,float amountPaid,String dueDate, String paymentDate,String status){
+    public Payment(String paymentId,String email,String roomId,float amountDue,float amountPaid,String dueDate, String paymentDate,String status ){
         this.paymentId = paymentId;
         this.email = email;
+        this.roomId = roomId;
         this.amountDue = amountDue;
         this.amountPaid = amountPaid;
         this.dueDate = dueDate;
@@ -33,9 +35,15 @@ public class Payment {
     public String getEmail() {
         return email;
     }
-
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getRoomId() {
+        return roomId;
+    }
+    public void setRoomId(String roomId) {
+        this.roomId = roomId;
     }
 
     public float getAmountDue() {
