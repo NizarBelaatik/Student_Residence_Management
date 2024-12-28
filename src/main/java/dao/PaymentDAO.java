@@ -14,11 +14,11 @@ public class PaymentDAO {
 
 
     private static boolean paymentIdExists(String Id) {
-        String query = "SELECT COUNT(*) FROM payment WHERE paymentId = ?";
+        String query = "SELECT COUNT(*) FROM payments WHERE paymentId = ?";
         try (Connection connection = DatabaseConnection.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-            preparedStatement.setString(1, Id);
-            ResultSet resultSet = preparedStatement.executeQuery();
+             PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setString(1, Id);
+            ResultSet resultSet = stmt.executeQuery();
             if (resultSet.next()) {
                 return resultSet.getInt(1) > 0;
             }
@@ -60,12 +60,16 @@ public class PaymentDAO {
         }
     }
 
-    public List<Payment> getOverduePayments() throws SQLException {
-        String query = "SELECT * FROM payments WHERE status = 'Overdue'";
+    public List<Payment> getPaymentsByStatus(String status) throws SQLException {
+        String query = "SELECT * FROM payments WHERE status = ? " +
+                "ORDER BY CASE WHEN payment_date IS NULL THEN due_date ELSE payment_date END";
         List<Payment> payments = new ArrayList<>();
         try (Connection conn = DatabaseConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(query);
-             ResultSet rs = stmt.executeQuery()) {
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+
+            stmt.setString(1, status);
+
+            ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 Payment payment = new Payment(
                         rs.getString("paymentId"),
@@ -74,11 +78,28 @@ public class PaymentDAO {
                         rs.getFloat("amount_due"),
                         rs.getFloat("amount_paid"),
                         rs.getString("due_date"),
-                        rs.getString("paymentDate"),
+                        rs.getString("payment_date"),
                         rs.getString("status"));
                 payments.add(payment);
             }
         }
         return payments;
+    }
+
+    public int getPaymentsByStatusSize(String status) {
+        String query = "SELECT COUNT(*) FROM payments WHERE status = ?";
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setString(1, status);
+            ResultSet resultSet = stmt.executeQuery();
+
+            // Since COUNT(*) returns a single value, retrieve it directly
+            if (resultSet.next()) {
+                return resultSet.getInt(1);  // Get the count from the first column (which is the count)
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
 }

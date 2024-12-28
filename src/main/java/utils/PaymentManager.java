@@ -81,7 +81,7 @@ public class PaymentManager {
 
     private boolean generatePayementByResident(Resident Res,Room room ,String dueDate){
         try {
-            Payment payment= new Payment(null,Res.getEmail(),Res.getRoomId(),room.getPrice(),0.0f,dueDate,null,null);
+            Payment payment= new Payment(null,Res.getEmail(),Res.getRoomId(),room.getPrice(),0.0f,dueDate,null,"overdue");
             paymentDAO.createPayment(payment);
         }catch (SQLException e){
             e.printStackTrace();

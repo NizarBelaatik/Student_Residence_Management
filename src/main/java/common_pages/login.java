@@ -51,23 +51,20 @@ public class login extends HttpServlet {
                 if("admin".equals(user.getRole())){
                     response.sendRedirect(request.getContextPath()+"/admin");
                 }else if("resident".equals(user.getRole())){
-                    // Get the user object from the session
-                    
-                    
-                    
                     response.sendRedirect(request.getContextPath()+"/u");
-                    
+                }else if("tech".equals(user.getRole())){
+                    response.sendRedirect(request.getContextPath()+"/t");
                 }
                 
             } else {
                 // Invalid login or inactive user
                 request.setAttribute("error", "Invalid email or password.");
-                RequestDispatcher dispatcher = request.getRequestDispatcher("/views/login.jsp");
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/views/common/login.jsp");
                 dispatcher.forward(request, response);
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            response.sendRedirect("error.jsp");
+            response.sendRedirect(request.getContextPath()+"/error");
         }
     }
 }

@@ -24,9 +24,14 @@ const toggleBtn = document.getElementById('toggleBtn');
 document.getElementById('filterInput').addEventListener('keyup', function() {
     // Get the value of the search input
     var filter = this.value.toLowerCase();
+    // Find the closest parent div containing the input and the table (no need for '.table-wrap')
+    var tableWrap = this.closest('.card_1-body'); // Assuming .card_1-body is the container for each card
 
-    // Get all rows in the table
-    var rows = document.querySelectorAll('table tbody tr');
+    // Get the table inside this div (if there are multiple tables in the same card)
+    var table = tableWrap.querySelector('table');
+
+    // Get all rows in the table (tbody tr)
+    var rows = table.querySelectorAll('tbody tr');
 
     // Loop through all rows and hide those that don't match the search
     rows.forEach(function(row) {
@@ -46,3 +51,4 @@ document.getElementById('filterInput').addEventListener('keyup', function() {
         }
     });
 });
+

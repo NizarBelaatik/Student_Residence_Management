@@ -25,6 +25,8 @@ public class payments extends HttpServlet  {
 
     private ResidentDAO residentDAO = new ResidentDAO();
     private PaymentManager paymentManager = new PaymentManager();
+    private PaymentDAO paymentDAO = new PaymentDAO();
+
     public payments(){
         super();
     }
@@ -34,14 +36,25 @@ public class payments extends HttpServlet  {
         // Forward the request to the actual JSP page
         //roomDAO RoomDAO = new roomDAO();
         List<Resident> residentList = new ArrayList<>();
-
+        List<Payment> P_overdue = new ArrayList<>();
         try{
             residentList = residentDAO.getAllResidentsForPaymentGeneration();
-        }catch(SQLException e){
+            List<String> paymentL=new ArrayList<String>();
+            paymentL.add("overdue");
+            paymentL.add("paid");
+            paymentL.add("pending");
 
-        }
+            paymentL.forEach(p->{
+                try{
+                    List<Payment> p_list = paymentDAO.getPaymentsByStatus(p);
+                    request.setAttribute("P_"+p, p_list);
+                } catch (SQLException e) {e.printStackTrace();}
 
-        paymentManager.generatePayment();
+            });
+
+        }catch(SQLException e){e.printStackTrace(); }
+
+        //paymentManager.generatePayment();
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("/views/admin/payments.jsp");
         request.setAttribute("activePage", "residents");  // Set active page

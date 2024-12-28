@@ -3,6 +3,8 @@ package adminServlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -13,6 +15,7 @@ import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.http.HttpSession;
 
 import model.User;
+import dao.PaymentDAO;
 
 /**
  *
@@ -20,6 +23,7 @@ import model.User;
  */
 @WebServlet(name = "Dashboard", urlPatterns = {"/admin/dashboard"})
 public class Dashboard extends HttpServlet {
+    private PaymentDAO paymentDAO = new PaymentDAO();
 
     public Dashboard() {
         super();
@@ -40,6 +44,15 @@ public class Dashboard extends HttpServlet {
         String role="admin";
         if(role.equals(user.getRole())){
             // Forward to the dashboard JSP with user and role info
+            int overdue = paymentDAO.getPaymentsByStatusSize("overdue");
+            int paid = paymentDAO.getPaymentsByStatusSize("paid");
+            int pending = paymentDAO.getPaymentsByStatusSize("pending");
+            int maintenance_requests = 0;
+            request.setAttribute("overdue", overdue);
+            request.setAttribute("paid", paid);
+            request.setAttribute("pending", pending);
+            request.setAttribute("maintenance_requests", maintenance_requests);
+
             request.setAttribute("user", user);
             RequestDispatcher dispatcher = request.getRequestDispatcher("/views/admin/dashboardAdmin.jsp");
             request.setAttribute("activePage", "dashboard");  // Set active page

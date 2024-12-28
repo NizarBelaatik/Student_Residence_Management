@@ -7,7 +7,7 @@
                 Profile
                 <div class="dropdown-content">
                     <a href="#">Settings</a>
-                    <a href="logout">Logout</a>
+                    <a href="${pageContext.request.contextPath}/logout">Logout</a>
                 </div>
             </div>
             <div class="notifications">Notifications</div>

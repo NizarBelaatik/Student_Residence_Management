@@ -8,6 +8,8 @@
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/component/css/fontawesome.min.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/component/css/vendor/bootstrap.min.css"> 
+<link rel="stylesheet" href="${pageContext.request.contextPath}/component/css/vendor/bootstrap-utilities.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/component/css/vendor/bootstrap-utilities.min.css">
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/component/css/vendor/bootstrap-icons/bootstrap-icons.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/component/css/vendor/bootstrap-icons/bootstrap-icons.min.css">

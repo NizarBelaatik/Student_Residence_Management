@@ -24,6 +24,12 @@
                 <form action="login" method="post">
                     <input type="email" name="email" placeholder="Email" required><br>
                     <input type="password" name="password" placeholder="Password" required><br>
+                        <%
+                            String error = (String) request.getAttribute("error");
+                            if (error != null) {
+                        %>
+                            <p style="color:red;"><%= error %></p>
+                        <% } %>
                     <button type="submit">Login</button>
                 </form>
                 <a href="${pageContext.request.contextPath}/forgot-password" class="forgot-password">Forgot Password?</a>
@@ -32,11 +38,6 @@
 
 
     <%-- Display error message if any --%>
-    <%
-        String error = (String) request.getAttribute("error");
-        if (error != null) {
-    %>
-        <p style="color:red;"><%= error %></p>
-    <% } %>
+
 </body>
 </html>

@@ -17,7 +17,7 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author night
  */
-@WebServlet(name = "dashboard_common", urlPatterns = {"/dashboard_common"})
+@WebServlet(name = "main", urlPatterns = {""})
 public class dashboard_common extends HttpServlet {
 
         public dashboard_common() {
@@ -30,9 +30,7 @@ public class dashboard_common extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
             // Forward the request to the actual JSP page
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/views/common/dashboard.jsp");
-            request.setAttribute("activePage", "dashboard");  // Set active page
-            dispatcher.forward(request, response);
+            response.sendRedirect(request.getContextPath() + "/login");
         }
 
 }
