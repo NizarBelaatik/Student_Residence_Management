@@ -142,6 +142,20 @@ public class UserDAO {
         }
     }
 
+    public boolean updatePassword(String email, String PasswordHash) throws SQLException {
+        String sql = "UPDATE users SET password_hash = ?,  updated_at = ? WHERE email = ?";
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, PasswordHash);
+            ps.setTimestamp(2, new Timestamp(System.currentTimeMillis())); // updated_at to current timestamp
+            ps.setString(3, email);
+
+            int rowsUpdated = ps.executeUpdate();
+            return rowsUpdated > 0;
+        }
+    }
+
     // Delete User by ID
     public boolean deleteUser(int userId) throws SQLException {
         String sql = "DELETE FROM users WHERE id = ?";

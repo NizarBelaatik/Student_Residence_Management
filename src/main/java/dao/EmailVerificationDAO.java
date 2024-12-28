@@ -79,12 +79,13 @@ public class EmailVerificationDAO {
     }
 
     // Update Email Verification as Verified
-    public boolean verifyEmail(String token) throws SQLException {
-        String sql = "UPDATE email_verification SET verified_at = CURRENT_TIMESTAMP WHERE verification_token = ?";
+    public boolean verifyEmail(String email, String token) throws SQLException {
+        String sql = "UPDATE email_verification SET verified_at = CURRENT_TIMESTAMP WHERE email = ? AND verification_token = ?";
         try (Connection conn = getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
 
-            ps.setString(1, token);
+            ps.setString(1, email);
+            ps.setString(2, token);
             int rowsUpdated = ps.executeUpdate();
             return rowsUpdated > 0;
         }
