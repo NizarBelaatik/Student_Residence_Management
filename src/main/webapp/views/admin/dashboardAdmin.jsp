@@ -13,14 +13,14 @@
     <head>
         <title>Dashboard</title>
 
-        <%@ include file="/views/common/head.jsp" %>
+        <%@ include file="/views/common/headadminlinks.jsp" %>
         
         
     </head>
     <body>
         
-    <%@ include file="/views/header.jsp" %>
-    <%@ include file="/views/asideadmin.jsp" %>
+    <%@ include file="/views/common/headeradmin.jsp" %>
+    <%@ include file="/views/common/asideadmin.jsp" %>
 
     <!-- Main content -->
     <main class="main" id="main">
