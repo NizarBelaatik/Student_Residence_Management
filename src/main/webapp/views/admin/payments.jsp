@@ -50,7 +50,6 @@
                                 <table class="table2 table-striped table-hover table-bordered" >
                                     <thead>
                                       <tr>
-                                        <th>Resident Name</th>
                                         <th>Resident Email</th>
                                         <th>Payment ID</th>
                                         <th>Room ID</th>
@@ -59,6 +58,7 @@
                                         <th>Due Date</th>
                                         <th>Payment Date</th>
                                         <th>Status</th>
+                                        <th>action</th>
                                       </tr>
                                     </thead>
                                     <tbody>
@@ -73,6 +73,7 @@
                                               <td><%= data.getDueDate() %></td>
                                               <td><%= data.getPaymentDate() %></td>
                                               <td><%= data.getStatus() %></td>
+                                              <td><button>Send Reminder</button></td>
                                             </tr>
                                         <% } %>
                                     </tbody>
