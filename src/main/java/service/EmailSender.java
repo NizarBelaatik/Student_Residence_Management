@@ -2,10 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package utils;
+package service;
 
 import jakarta.mail.*;
 import jakarta.mail.internet.*;
+
+import java.sql.Timestamp;
 import java.util.Properties;
 
 /**
@@ -13,6 +15,14 @@ import java.util.Properties;
  * @author night
  */
 public class EmailSender {
+    public static void sendReminderEmail(String email, String residentName, float amountDue, Timestamp dueDate){
+        String emailSubject = "Payment Reminder: Please Pay Your Due Fees" ;
+        String emailBody = "Dear " + residentName + ",\n\n" +
+                "This is a reminder that your payment of " + amountDue + " is due on " + dueDate + ".\n\n" +
+                "Please make sure to pay by the due date to avoid any late fees.";
+        sendEmail( email,  emailSubject,  emailBody);
+    }
+
     public static void sendEmail(String toEmail, String subject, String body) {
         // SMTP server configuration
         String host = "smtp.gmail.com";  // Change to your SMTP server

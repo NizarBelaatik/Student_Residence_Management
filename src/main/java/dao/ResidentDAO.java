@@ -5,7 +5,7 @@ import utils.GenerateRandomString;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import utils.DatabaseConnection;
+import service.DatabaseConnection;
 
 public class ResidentDAO {
 

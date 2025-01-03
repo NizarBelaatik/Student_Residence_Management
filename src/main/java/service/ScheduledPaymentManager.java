@@ -1,13 +1,11 @@
-package utils;
+package service;
 
 import java.util.concurrent.*;
 import java.time.*;
 import java.time.temporal.ChronoUnit;
 import java.sql.*;
 
-import utils.DatabaseConnection;
 import dao.PaymentDAO;
-import model.Payment;
 
 public class ScheduledPaymentManager {
     private ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);

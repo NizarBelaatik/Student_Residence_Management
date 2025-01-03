@@ -5,9 +5,8 @@ import utils.GenerateRandomString;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
-import utils.DatabaseConnection;
+import service.DatabaseConnection;
 
 public class PaymentDAO {
 
@@ -42,7 +41,7 @@ public class PaymentDAO {
             stmt.setString(2, payment.getEmail());
             stmt.setString(3, payment.getRoomId());
             stmt.setFloat(4, payment.getAmountDue());
-            stmt.setString(5, payment.getDueDate());
+            stmt.setTimestamp(5, payment.getDueDate());
             stmt.setFloat(6, payment.getAmountPaid());
             stmt.setString(7, payment.getStatus());
             stmt.executeUpdate();
@@ -77,8 +76,8 @@ public class PaymentDAO {
                         rs.getString("roomId"),
                         rs.getFloat("amount_due"),
                         rs.getFloat("amount_paid"),
-                        rs.getString("due_date"),
-                        rs.getString("payment_date"),
+                        rs.getTimestamp("due_date"),
+                        rs.getTimestamp("payment_date"),
                         rs.getString("status"));
                 payments.add(payment);
             }

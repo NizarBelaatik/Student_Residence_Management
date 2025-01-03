@@ -1,7 +1,7 @@
 package dao;
 
 import model.Room;
-import utils.DatabaseConnection;
+import service.DatabaseConnection;
 
 import java.sql.*;
 import java.util.ArrayList;

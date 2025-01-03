@@ -9,12 +9,10 @@ import jakarta.servlet.annotation.*;
 import java.io.*;
 import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.util.*;
-import java.security.SecureRandom;
 
 import model.EmailVerification;
 import utils.GenerateRandomString;
-import utils.EmailSender;
+import service.EmailSender;
 
 @WebServlet(name = "forgot-password", urlPatterns = {"/forgot-password"})
 public class forgotPassword extends HttpServlet {

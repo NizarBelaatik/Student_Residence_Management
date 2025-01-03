@@ -1,4 +1,6 @@
 package model;
+import java.sql.Timestamp;
+
 
 public class Payment {
     private String paymentId;
@@ -6,11 +8,11 @@ public class Payment {
     private String roomId;
     private float amountDue;
     private float amountPaid;
-    private String dueDate;
-    private String paymentDate;
+    private Timestamp dueDate;
+    private Timestamp paymentDate;
     private String status;
 
-    public Payment(String paymentId,String email,String roomId,float amountDue,float amountPaid,String dueDate, String paymentDate,String status ){
+    public Payment(String paymentId,String email,String roomId,float amountDue,float amountPaid,Timestamp dueDate, Timestamp paymentDate,String status ){
         this.paymentId = paymentId;
         this.email = email;
         this.roomId = roomId;
@@ -60,17 +62,17 @@ public class Payment {
         this.amountPaid = amountPaid;
     }
 
-    public String getDueDate() {
+    public Timestamp getDueDate() {
         return dueDate;
     }
-    public void setDuetDate(String dueDate) {
+    public void setDuetDate(Timestamp dueDate) {
         this.dueDate = dueDate;
     }
 
-    public String getPaymentDate() {
+    public Timestamp getPaymentDate() {
         return paymentDate;
     }
-    public void setPaymentDate(String paymentDate) {
+    public void setPaymentDate(Timestamp paymentDate) {
         this.paymentDate = paymentDate;
     }
 

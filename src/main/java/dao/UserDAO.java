@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.mindrot.jbcrypt.BCrypt;
 
-import utils.DatabaseConnection;
+import service.DatabaseConnection;
 
 
 public class UserDAO {

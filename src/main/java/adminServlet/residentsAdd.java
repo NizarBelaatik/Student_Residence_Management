@@ -25,7 +25,7 @@ import dao.UserDAO;
 
 import utils.PasswordHasher;
 import utils.GenerateRandomString;
-import utils.EmailSender;
+import service.EmailSender;
 //import static utils.EmailSender.sendEmail;
 /**
  *

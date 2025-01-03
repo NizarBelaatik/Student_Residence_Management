@@ -37,61 +37,9 @@
           </div>
         <section>
 
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="card_1">
-                        <div class="card_1-body">
-                            <h5 class="card_1-title">Payments for this month</h5>
-                            <div class="card_1-header" style="display: flex;">
+            <div class="row justify-content-center">
 
-                                <input class="form-control" type="text" id="filterInput" placeholder="Search..." style="width:45%;min-width:150px;">
-                            </div>
-                            <div class="table-wrap">
-
-                                <table class="table2 table-striped table-hover table-bordered" >
-                                    <thead>
-                                      <tr>
-                                        <th>Email</th>
-                                        <th>First name</th>
-                                        <th>Last name</th>
-                                        <th>Gender</th>
-                                        <th>Phone</th>
-                                        <th>Room Id</th>
-                                        <th>Contract Start Date</th>
-                                        <th>Contract End Date</th>
-                                      </tr>
-                                    </thead>
-                                    <tbody>
-
-
-                                        <% List<Resident> residentList = (List<Resident>) request.getAttribute("residentList");
-                                            for (Resident data : residentList) {%>
-
-                                            <tr>
-                                              <th scope="row"><%= data.getEmail() %></th>
-                                              <td><%= data.getFirstname() %></td>
-                                              <td><%= data.getLastname() %></td>
-                                              <td><%= data.getGender() %></td>
-                                              <td><%= data.getPhone() %></td>
-                                              <td><%= data.getRoomId() %></td>
-                                              <td><%= data.getCStartDate() %></td>
-                                              <td><%= data.getCEndDate() %></td>
-
-
-                                            </tr>
-
-                                        <% } %>
-
-
-
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-6">
+                <div class="col-md-10">
                     <div class="card_1">
                         <div class="card_1-body">
                             <h5 class="card_1-title">Overdue</h5>
@@ -102,7 +50,8 @@
                                 <table class="table2 table-striped table-hover table-bordered" >
                                     <thead>
                                       <tr>
-                                        <th>Email</th>
+                                        <th>Resident Name</th>
+                                        <th>Resident Email</th>
                                         <th>Payment ID</th>
                                         <th>Room ID</th>
                                         <th>Amount Due</th>
@@ -133,7 +82,7 @@
                     </div>
                 </div>
 
-                <div class="col-lg-6">
+                <div class="col-md-10">
                     <div class="card_1">
                         <div class="card_1-body">
                             <h5 class="card_1-title">Paid</h5>
@@ -176,7 +125,7 @@
                 </div>
 
 
-                <div class="col-lg-6">
+                <div class="col-md-10">
                     <div class="card_1">
                         <div class="card_1-body">
                             <h5 class="card_1-title">Pending</h5>

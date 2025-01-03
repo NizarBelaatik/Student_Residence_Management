@@ -1,10 +1,11 @@
-package utils;
+package service;
 
 import java.time.*;
 import java.sql.*;
 import java.util.List;
 
 import dao.PaymentDAO;
+import model.Notification;
 import model.Payment;
 
 import model.Resident;
@@ -13,54 +14,61 @@ import dao.ResidentDAO;
 import model.Room;
 import dao.RoomDAO;
 
-import utils.EmailSender;
+import model.Notification;
+import dao.NotificationDAO;
+
+import utils.GetDate;
 
 public class PaymentManager {
     private PaymentDAO paymentDAO= new PaymentDAO();
     private ResidentDAO residentDAO= new ResidentDAO();
     private RoomDAO roomDAO= new RoomDAO();
+    private NotificationDAO notificationDAO= new NotificationDAO();
 
+
+    public void sendReminder(Resident Res){
+        try{
+            Room room = roomDAO.getRoomById(Res.getRoomId());
+            Timestamp dueDate= GetDate.getLDayOfMonth();
+
+            generatePayementByResident(Res,room,dueDate);
+            String residentName = Res.getFirstname() +" "+ Res.getLastname();  // Example: replace with actual resident name
+            float amountDue = room.getPrice();         // Example: replace with actual amount due
+
+            EmailSender.sendReminderEmail(Res.getEmail(), residentName, amountDue, dueDate);
+
+            String subject = "Payment Due: " + amountDue;
+            String msg = "Reminder: Pay your due fees of " + amountDue + " before " + dueDate + ". Check your email for more details.";
+            Notification notif = new Notification(1,"ADMIN",Res.getEmail(),subject,msg,false,null,null);
+            notificationDAO.add(notif);
+
+        }catch (SQLException e){e.printStackTrace();}
+    }
 
     public boolean generatePayment(){
         //return number of resident that received Payment
 
         try {
             if(!isPaymentsGeneratedForCurrentMonth()){
-
                 try {
 
                     List<Resident> residents = residentDAO.getAllResidentsForPaymentGeneration();
                     residents.forEach(Res->{
                         try{
                             Room room = roomDAO.getRoomById(Res.getRoomId());
-                            String dueDate= GetDate.getLDayOfMonthStr();
+                            Timestamp dueDate= GetDate.getLDayOfMonth();
 
                             generatePayementByResident(Res,room,dueDate);
                             String residentName = Res.getFirstname() +" "+ Res.getLastname();  // Example: replace with actual resident name
                             float amountDue = room.getPrice();         // Example: replace with actual amount due
-                            String paymentLink = Res.getEmail();  // Example: replace with actual payment link
 
-                            String emailSubject = "Rent Payment Reminder - Due " + dueDate;
-
-                            String emailBody = "Dear " + residentName + ",\n\n" +
-                                    "This is a reminder that your rent payment of " + amountDue + " is due on " + dueDate + ".\n\n" +
-                                    "Please ensure that the payment is made by the due date to avoid any late fees. "+
-                                    "If you have already made the payment, please disregard this message.\n\n" +
-                                    "Thank you!!";
-
-
-                            EmailSender.sendEmail( Res.getEmail(),  emailSubject,  emailBody);
-
+                            EmailSender.sendReminderEmail(Res.getEmail(), residentName, amountDue, dueDate);
 
                         }catch (SQLException e){e.printStackTrace();}
-
-
 
                     });
 
                     markPaymentsAsGeneratedForCurrentMonth();
-
-
                 }catch (SQLException e){
                     e.printStackTrace();
                     return false;
@@ -79,7 +87,7 @@ public class PaymentManager {
     }
 
 
-    private boolean generatePayementByResident(Resident Res,Room room ,String dueDate){
+    private boolean generatePayementByResident(Resident Res,Room room ,Timestamp dueDate){
         try {
             Payment payment= new Payment(null,Res.getEmail(),Res.getRoomId(),room.getPrice(),0.0f,dueDate,null,"overdue");
             paymentDAO.createPayment(payment);

@@ -18,7 +18,7 @@ import dao.ResidentDAO;
 
 import model.Payment;
 import dao.PaymentDAO;
-import utils.PaymentManager;
+import service.PaymentManager;
 
 @WebServlet(name = "payments", urlPatterns = {"/admin/payments"})
 public class payments extends HttpServlet  {
