@@ -104,7 +104,7 @@
 
                         <!-- Other notifications go here -->
                         <li class="notification-divider"></li>
-                        <li><a href="#all-notifications" class="show-all-notifications">Show All Notifications</a></li>
+                        <li style="display:none;"><a href="#all-notifications" class="show-all-notifications">Show All Notifications</a></li>
                     </ul>
                 </div>
             </div>
@@ -119,7 +119,7 @@
                         <li class="dropdown-divider"></li>
                         <li><a href="#profile" class="dropdown-item">Profile</a></li>
                         <li><a href="#settings" class="dropdown-item">Settings</a></li>
-                        <li><a href="#logout" class="dropdown-item" onclick="logout()">Logout</a></li>
+                        <li><a href="${pageContext.request.contextPath}/logout" class="dropdown-item" >Logout</a></li>
                     </ul>
                 </div>
             </div>
