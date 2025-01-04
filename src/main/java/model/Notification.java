@@ -8,17 +8,19 @@ public class Notification {
     private String subject;
     private String msg;
     private boolean status;
+    private String type; //reminder danger
     private Timestamp sendDate;
     private Timestamp checkedDate;
 
 
-    public Notification(int id, String sender, String receiver, String subject, String msg, boolean status, Timestamp sendDate, Timestamp checkedDate) {
+    public Notification(int id, String sender, String receiver, String subject, String msg, boolean status, String type, Timestamp sendDate, Timestamp checkedDate) {
         this.id = id;
         this.sender = sender;
         this.receiver = receiver;
         this.subject = subject;
         this.msg = msg;
         this.status = status;
+        this.type = type;
         this.sendDate = sendDate;
         this.checkedDate = checkedDate;
     }
@@ -64,12 +66,19 @@ public class Notification {
         this.msg = msg;
     }
 
-    public boolean isStatus() {
+    public boolean getStatus() {
         return status;
     }
-
     public void setStatus(boolean status) {
         this.status = status;
+    }
+
+
+    public String getType() {
+        return type;
+    }
+    public void setType(String type) {
+        this.type = type;
     }
 
     public Timestamp getSendDate() {

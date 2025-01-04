@@ -9,11 +9,11 @@
 <head>
     <title>Add Room</title>
     
-    <%@ include file="/views/common/head.jsp" %>
+    <%@ include file="/views/common/headadminlinks.jsp" %>
 </head>
 <body>
-    <%@ include file="/views/header.jsp" %>
-    <%@ include file="/views/asideadmin.jsp" %>
+    <%@ include file="/views/common/headeradmin.jsp" %>
+    <%@ include file="/views/common/asideadmin.jsp" %>
 
     <!-- Main content -->
     <main class="main" id="main">
@@ -28,8 +28,8 @@
             </nav>
         </div>
         <section>
-            <div class="row">
-                <div class="col-12">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
                     <div class="card_1">
                         <div class="card_1-body">
                             <div class="card_1-header">
@@ -74,7 +74,9 @@
                                     </select>
                                   </div>
                                 </div>
-                                
+
+
+
                                 <div class="text-center">
                                   <button type="submit" class="btn1 submit_btn">Submit</button>
                                   <button type="reset" class="btn1 cancle_btn">Reset</button>

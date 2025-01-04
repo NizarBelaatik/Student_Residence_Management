@@ -96,7 +96,7 @@ header {
     display: grid;
     justify-content: center;
     align-items: center;
-    
+
     max-width : 230px;
     overflow:hidden;
     display:inline-block;
@@ -129,7 +129,7 @@ header {
 }
 
  .badge-number {
-    background-color:red; 
+    background-color:red;
     color: white;
     position: absolute;
     inset: 0px 0px auto auto;
@@ -137,22 +137,19 @@ header {
     font-size: 12px;
     font-style: normal;
     padding: 3px 6px;
-  
+
 }
 
 
 
 
-
-
-
-
-
+/* Profile Dropdown*/
 
 
 /* Dropdown menu content renamed to dropdown-profile and adjusted to open right to left */
 .dropdown-profile {
-    display: none;
+    visibility: hidden; /* Initially hidden */
+    opacity: 0; /* Initially invisible */
     position: absolute;
     right: 0; /* Align dropdown to the right side of the button */
     background-color: white;
@@ -163,12 +160,18 @@ header {
     list-style: none;
     padding: 10px;
     margin-top: -8px;
+    transform: translateY(-10px); /* Start slightly above */
+    transition: opacity 0.5s ease, transform 0.5s ease, visibility 0s 0.5s; /* Smooth transition */
 }
 
-/* Keep dropdown visible when hovering over both button and dropdown */
-.dropdown:hover .dropdown-profile {
-    display: block;
+/* Show the dropdown with animation */
+.dropdown.active .dropdown-profile {
+    visibility: visible; /* Make the dropdown visible */
+    opacity: 1; /* Make it visible */
+    transform: translateY(0); /* Bring it to its normal position */
+    transition: opacity 0.3s ease, transform 0.3s ease; /* Transition properties for smooth animation */
 }
+
 
 .dropdown-header {
     font-weight: bold;
@@ -209,21 +212,16 @@ header {
     text-overflow: ellipsis; /* Add ellipsis (...) if the text overflows */
 }
 
-/* For mobile responsiveness */
-@media screen and (max-width: 600px) {
-    .dropdown-btn {
-        width: 100%;
-        font-size: 18px;
-    }
-}
 
 
 
-/* Notifications Dropdown */
+
+/* Dropdown notifications */
 .dropdown-notifications {
-    display: none;
+    visibility: hidden; /* Initially hidden */
+    opacity: 0; /* Initially invisible */
     position: absolute;
-    right: -150px; /* Align dropdown to the right side of the button */
+    right: -150px; /* Start from the right off-screen */
     background-color: white;
     min-width: 230px; /* Match width with profile dropdown */
     box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
@@ -233,12 +231,19 @@ header {
     padding: 10px;
     margin-top: -8px; /* Align it with the other dropdown */
     width: 270px;
+    transform: translateY(-10px); /* Start slightly above */
+    transition: opacity 0.5s ease, transform 0.5s ease, visibility 0s 0.5s; /* Smooth transition */
+    }
+
+/* Show dropdown-notifications with animation */
+.dropdown.active .dropdown-notifications {
+    visibility: visible; /* Make the dropdown visible */
+    opacity: 1; /* Make it visible */
+    transform: translateY(0); /* Bring it to its normal position */
+    transition: opacity 0.3s ease, transform 0.3s ease; /* Transition properties for smooth animation */
 }
 
-/* Keep notifications dropdown visible when hovering over both button and dropdown */
-.dropdown:hover .dropdown-notifications {
-    display: block;
-}
+
 
 /* Styling for notification items */
 .notification-item {
@@ -246,19 +251,33 @@ header {
     align-items: center;
     padding: 8px 15px;
 }
+.notification-item.unchecked {background-color: rgba(0, 0, 0, 0.2);}
 
 .notification-icon {
-    width: 30px;
-    height: 30px;
-    margin-right: 10px;
-    border-radius: 50%;
+
+        border-radius: 50%; /* Fully round the icon */
+        height: 40px; /* Set height of the circle */
+        width: 40px; /* Set width of the circle */
+        display: flex; /* Use flexbox to center the icon inside the circle */
+        align-items: center; /* Vertically center the icon */
+        justify-content: center; /* Horizontally center the icon */
+        font-size: 24px; /* Set a proper size for the icon */
+}
+
+.notification-item .icon-reminder{
+    color:black;
+    background-color: #ffc107; /* Yellow background */
+}
+.notification-item .icon-danger{
+    color:black;
+    background-color: red; /* Yellow background */
 }
 
 .notification-content {
     flex-grow: 1;
     max-width: 180px; /* Adjust the width to fit your design */
     overflow: hidden; /* Hide any overflowing content */
-    
+    padding-left:10px
 }
 
 .notification-content strong {
@@ -276,7 +295,7 @@ header {
     -webkit-line-clamp: 2; /* Limit the content to 2 lines */
     -webkit-box-orient: vertical; /* Ensure the content is vertically oriented */
     line-height: 1.4em; /* Adjust line height for readability */
-   
+
 }
 
 /* Divider line for notifications */
@@ -304,7 +323,7 @@ header {
     background-color: #ddd;
 }
 .badge-number {
-    background-color:red; 
+    background-color:red;
     color: white;
     position: absolute;
     inset: -2px -8px auto auto;
@@ -312,10 +331,20 @@ header {
     font-size: 12px;
     font-style: normal;
     padding: 3px 6px;
-  
+
 }
 
 .menu-items {display: none;}
+
+
+/* For mobile responsiveness */
+@media screen and (max-width: 600px) {
+    .dropdown-btn {
+        width: 100%;
+    }
+}
+
+
 /* Responsive Design (Mobile and Tablet) */
 @media screen and (max-width: 600px) {
     /* Stack navigation vertically */
@@ -335,16 +364,9 @@ header {
         text-align: left;
     }
 
-    
 
-    /* Increase icon and button size for better touch targets */
-    .notification-button {
-        font-size: 30px;
-    }
 
-    .dropdown-btn {
-        font-size: 18px;
-    }
+
 
     .dropdown-profile {
         min-width: 100%;

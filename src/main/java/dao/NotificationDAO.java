@@ -10,8 +10,8 @@ public class NotificationDAO {
 
     // Method to save a new notification
     public void add(Notification notification) {
-        String query = "INSERT INTO notification (sender, receiver, subject, msg ) " +
-                "VALUES ( ?, ?, ?, ?)";
+        String query = "INSERT INTO notifications (sender, receiver, subject, msg,type ) " +
+                "VALUES ( ?, ?, ?, ?,?)";
 
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {
@@ -20,6 +20,7 @@ public class NotificationDAO {
             stmt.setString(2, notification.getReceiver());
             stmt.setString(3, notification.getSubject());
             stmt.setString(4, notification.getMsg());
+            stmt.setString(5, notification.getType());
 
             stmt.executeUpdate();
         } catch (SQLException e) {
@@ -27,35 +28,23 @@ public class NotificationDAO {
         }
     }
 
-    // Method to find a notification by its ID
-    public Notification findById(int id) {
-        String query = "SELECT * FROM notification WHERE id = ?";
-        try (Connection conn = DatabaseConnection.getConnection();
-             PreparedStatement preparedStatement = conn.prepareStatement(query)) {
 
-            preparedStatement.setInt(1, id);
-            ResultSet resultSet = preparedStatement.executeQuery();
 
-            if (resultSet.next()) {
-                return mapResultSetToNotification(resultSet);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    // Method to get all notifications
-    public List<Notification> findAll() {
+    public List<Notification> getNotifByEmail(String email) {
         List<Notification> notifications = new ArrayList<>();
-        String query = "SELECT * FROM notification";
+        String query = "SELECT * FROM notifications WHERE receiver = ? ORDER BY sendDate DESC";
 
         try (Connection conn = DatabaseConnection.getConnection();
-             Statement statement = conn.createStatement();
-             ResultSet resultSet = statement.executeQuery(query)) {
+             PreparedStatement statement = conn.prepareStatement(query)) {
 
-            while (resultSet.next()) {
-                notifications.add(mapResultSetToNotification(resultSet));
+            // Set the email parameter in the query
+            statement.setString(1, email);
+
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    // Assuming you have a method to map the result set to a Notification object
+                    notifications.add(mapResultSetToNotification(resultSet));
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -63,42 +52,22 @@ public class NotificationDAO {
         return notifications;
     }
 
-    // Method to update an existing notification
-    public void update(Notification notification) {
-        String query = "UPDATE notification SET sender = ?, receiver = ?, subject = ?, msg = ?, status = ?, " +
-                "sendDate = ?, checkedDate = ? WHERE id = ?";
 
-        try (Connection conn = DatabaseConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(query)) {
-
-            stmt.setString(1, notification.getSender());
-            stmt.setString(2, notification.getReceiver());
-            stmt.setString(3, notification.getSubject());
-            stmt.setString(4, notification.getMsg());
-            stmt.setBoolean(5, notification.isStatus());
-            stmt.setTimestamp(6, notification.getSendDate());
-            stmt.setTimestamp(7, notification.getCheckedDate());
-            stmt.setInt(8, notification.getId());
-
-            stmt.executeUpdate();
+    public boolean updateNotificationStatus(String email) {
+        // Example update logic (adjust according to your actual DB logic)
+        try (Connection conn = DatabaseConnection.getConnection()) {
+            String query = "UPDATE notifications SET status = true WHERE receiver = ?";
+            try (PreparedStatement stmt = conn.prepareStatement(query)) {
+                stmt.setString(1, email);
+                int rowsAffected = stmt.executeUpdate();
+                return rowsAffected > 0;  // Return true if the update was successful
+            }
         } catch (SQLException e) {
             e.printStackTrace();
+            return false;  // Return false in case of error
         }
     }
 
-    // Method to delete a notification by its ID
-    public void delete(int id) {
-        String query = "DELETE FROM notification WHERE id = ?";
-
-        try (Connection conn = DatabaseConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(query)) {
-
-            stmt.setInt(1, id);
-            stmt.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
 
     // Helper method to map a ResultSet to a Notification object
     private Notification mapResultSetToNotification(ResultSet resultSet) throws SQLException {
@@ -108,9 +77,10 @@ public class NotificationDAO {
         String subject = resultSet.getString("subject");
         String msg = resultSet.getString("msg");
         boolean status = resultSet.getBoolean("status");
+        String type = resultSet.getString("type");
         Timestamp sendDate = resultSet.getTimestamp("sendDate");
         Timestamp checkedDate = resultSet.getTimestamp("checkedDate");
 
-        return new Notification(id, sender, receiver, subject, msg, status, sendDate, checkedDate);
+        return new Notification(id, sender, receiver, subject, msg, status,type, sendDate, checkedDate);
     }
 }

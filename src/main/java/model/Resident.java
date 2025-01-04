@@ -64,7 +64,9 @@ public class Resident {
     public void setLastname(String lastName) {
         this.lastname = lastName;
     }
-    
+
+    public String getFullname() { return  firstname + " "+ lastname; }
+
     public String getGender() {
         return gender;
     }

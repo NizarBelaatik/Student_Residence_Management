@@ -288,7 +288,7 @@ header .profile .dropdown-content a:hover {
 
 .card_1-title {
   padding: 20px 0 15px 0;
-  font-size: 18px;
+  font-size: 24px;
   font-weight: 500;
   color: #012970;
   font-family: "Poppins", sans-serif;
@@ -320,10 +320,8 @@ header .profile .dropdown-content a:hover {
   width: 100%;
   -webkit-box-shadow: 0px 5px 12px -12px rgba(0, 0, 0, 0.29);
   -moz-box-shadow: 0px 5px 12px -12px rgba(0, 0, 0, 0.29);
-  box-shadow: 0px 5px 12px -12px rgba(0, 0, 0, 0.29); 
+  box-shadow: 0px 5px 12px -12px rgba(0, 0, 0, 0.29);
 }
-
-
 .table thead th {
   border: none;
   padding: 30px;
@@ -343,6 +341,34 @@ header .profile .dropdown-content a:hover {
 .table tbody td .close span {
   font-size: 12px;
   color: #dc3545; }
+
+
+
+.table2 {
+  width: 100%;
+  -webkit-box-shadow: 0px 5px 12px -12px rgba(0, 0, 0, 0.29);
+  -moz-box-shadow: 0px 5px 12px -12px rgba(0, 0, 0, 0.29);
+  box-shadow: 0px 5px 12px -12px rgba(0, 0, 0, 0.29);
+}
+.table2 thead th {
+    padding: 10px 15px;
+      font-size: 13px;
+      color: #000;
+      font-weight: 400;
+      text-transform: uppercase; }
+.table2 thead tr {
+  background: #fff; }
+.table2 tbody tr {
+  background: #fff; }
+.table2 tbody th, .table2 tbody td {
+  padding: 10px 15px;
+  font-size: 14px;
+  vertical-align: middle; }
+.table2 tbody td .close span {
+  font-size: 12px;
+  color: #dc3545; }
+
+
 
 .StatusSpan{
     border: 3px solid;
@@ -537,3 +563,73 @@ form .cancle_btn:active {
 .actions_button_red:hover,.actions_button_red:focus{color:rgba(255,0,0,0.5);}
 .actions_button_orange:hover,.actions_button_orange:focus{color:rgba(255,127,39,0.5);}
 
+
+
+
+
+
+
+
+
+/*--------------------------------------------------------------
+# Admin Dashboard
+--------------------------------------------------------------*/
+
+/* Info Cards */
+.dashboard .info-card {
+  padding-bottom: 10px;
+  margin:10px 0;
+}
+
+.dashboard .info-card .card-title {
+  padding: 0 0 15px 0;
+  font-size: 24px;
+  font-weight: 500;
+  color: #012970;
+  font-family: "Poppins", sans-serif;
+}
+.dashboard .info-card .card-title span{font-size: 20px;}
+
+
+
+.dashboard .info-card h6 {
+  font-size: 28px;
+  color: #012970;
+  font-weight: 700;
+  margin: 0;
+  padding: 0;
+}
+
+.dashboard .card-icon {
+  font-size: 32px;
+  line-height: 0;
+  width: 64px;
+  height: 64px;
+  flex-shrink: 0;
+  flex-grow: 0;
+}
+
+
+.dashboard .sales-card .card-icon {
+  color: #4154f1;
+  background: #f6f6fe;
+}
+
+.dashboard .overdue-card .card-icon {
+  color: red;
+  background: rgba(255,0,0,0.3);
+}
+
+.dashboard .paid-card .card-icon {
+  color: #2eca6a;
+  background: #e0f8e9;
+}
+
+.dashboard .pending-card .card-icon {
+  color: #ff771d;
+  background: #ffecdf;
+}
+.dashboard .maintenance-requests-card .card-icon {
+    color: #4154f1;
+    background: #f6f6fe;
+}

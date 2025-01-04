@@ -5,8 +5,10 @@
 --%>
 
 <%@ page session="true" %>
+<%@ page import="model.Notification" %>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+<%@ page import="jakarta.servlet.*,jakarta.servlet.http.*,java.io.*,java.util.*,java.sql.*"%><!DOCTYPE html>
 <html>
     <head>
         <title>Start Page</title>
@@ -67,15 +69,39 @@
 
             <div class="notification">
                 <div class="dropdown">
-                    <a class="dropdown-btn notification-button"><i class="bi bi-bell"> <span class="badge badge-number">4</span></i></a>
+                    <a class="dropdown-btn notification-button">
+                        <i class="bi bi-bell">
+                            <span class="badge badge-number"
+                                  <% Integer unreadCount = (Integer) request.getAttribute("unreadCount");
+                                    if (unreadCount == 0) { %>
+                                      style="display: none;" <%
+                                  } %> >
+                                <%= unreadCount > 0 ? unreadCount : "" %>
+                            </span>
+                        </i>
+                    </a>
                     <ul class="dropdown-notifications">
-                        <li class="notification-item">
-                            <img src="https://via.placeholder.com/30" alt="Icon" class="notification-icon">
-                            <div class="notification-content">
-                                <strong>New Message</strong>
-                                <p>You have a new message from Jane.</p>
-                            </div>
-                        </li>
+                        <%
+                            List<Notification> notifications = (List<Notification>) request.getAttribute("notifications");
+                            for (Notification notif : notifications) {
+                        %>
+                            <li class="notification-item <%= notif.getStatus() ?  "" : "unchecked" %>">
+                                <% if ("reminder".equals(notif.getType())) { %>
+                                    <!-- Reminder icon -->
+                                    <i class="notification-icon icon-reminder bi bi-exclamation-triangle-fill"></i>
+                                <% } else if ("danger".equals(notif.getType())) { %>
+                                    <!-- Danger icon -->
+                                    <i class="notification-icon icon-danger bi bi-exclamation-octagon"></i>
+                                <% } %>
+                                <div class="notification-content">
+                                    <strong><%= notif.getSubject() %></strong>
+                                    <p><%= notif.getMsg() %></p>
+                                </div>
+                            </li>
+                        <%
+                            }
+                        %>
+
                         <!-- Other notifications go here -->
                         <li class="notification-divider"></li>
                         <li><a href="#all-notifications" class="show-all-notifications">Show All Notifications</a></li>
@@ -113,9 +139,9 @@
 
 
     <div class="" id="home">
-        
 
-       
+
+
     </div>
 
     <script src="js/tools/jquery-3.3.1.min.js"></script>
@@ -127,13 +153,83 @@
     <script src="js/tools/bootstrap.min.js"></script>
     <!-- https://getbootstrap.com/ -->
     <script src="js/tools/tooplate-scripts.js"></script>
-    
+
     <script>
         function toggleMenu() {
             const menuItems = document.querySelector('.menu-items');
             menuItems.classList.toggle('active');
         }
+
     </script>
+
+<script>
+// Function to toggle dropdown visibility with animation and remove the notification count
+function toggleDropdown(event) {
+    const dropdown = event.currentTarget; // Get the clicked dropdown element
+    const dropdownContent = dropdown.querySelector('.dropdown-notifications'); // Find the dropdown content inside
+
+    // Find the badge element inside the dropdown
+    const badge = dropdown.querySelector('.badge');
+
+    // Check if the badge is visible (i.e., unread notifications are present)
+    if (badge && badge.offsetHeight > 0 && badge.offsetWidth > 0) {
+        sendNotificationStatusUpdate('${resident.getEmail()}');
+    }
+
+    // Remove the notification badge (span) when the dropdown is clicked
+    if (badge) {
+        badge.remove(); // Remove the badge when clicking the dropdown
+    }
+
+    // Close other dropdowns if open
+    const allDropdowns = document.querySelectorAll('.dropdown');
+    allDropdowns.forEach((d) => {
+        if (d !== dropdown) {
+            d.classList.remove('active'); // Remove active class from other dropdowns
+        }
+    });
+
+    // Toggle the active class to trigger the animation
+    dropdown.classList.toggle('active');
+}
+
+// Function that performs some other task, like making an API call
+    var contextPath = "${pageContext.request.contextPath}";
+    function sendNotificationStatusUpdate(email) {
+        $.ajax({
+            url: contextPath+'/updateNotificationStatus',  // Correct URL to the servlet
+            type: 'POST',                      // Use POST for sending data
+            data: {
+                email: email                  // Send email as a parameter
+            },
+            success: function(response) {
+                console.log('Success:', response);  // Handle success response
+            },
+            error: function(xhr, status, error) {
+                console.error('Error:', error);  // Handle error response
+            }
+        });
+    }
+
+// Event listener for the dropdown
+document.querySelectorAll('.dropdown').forEach((dropdown) => {
+    dropdown.addEventListener('click', toggleDropdown);
+});
+
+// Close dropdowns when clicking outside
+document.addEventListener('click', function (event) {
+    const dropdowns = document.querySelectorAll('.dropdown');
+    dropdowns.forEach((dropdown) => {
+        const dropdownContent = dropdown.querySelector('.dropdown-notifications');
+        if (!dropdown.contains(event.target) && !event.target.closest('.dropdown')) {
+            dropdown.classList.remove('active'); // Remove active class when clicked outside
+        }
+    });
+});
+
+</script>
+
+
 
 </body>
 

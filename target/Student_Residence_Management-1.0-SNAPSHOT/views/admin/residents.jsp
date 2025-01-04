@@ -13,14 +13,14 @@
     <head>
         
         <title>Manage Rooms</title>
-        <%@ include file="/views/common/head.jsp" %>
+        <%@ include file="/views/common/headadminlinks.jsp" %>
         
         
     </head>
     </head>
     <body>
-        <%@ include file="/views/header.jsp" %>
-        <%@ include file="/views/asideadmin.jsp" %>
+        <%@ include file="/views/common/headeradmin.jsp" %>
+        <%@ include file="/views/common/asideadmin.jsp" %>
 
     <!-- Main content -->
     <main class="main" id="main">
@@ -57,6 +57,8 @@
                                         <th>Phone</th>
                                         <th>Address</th>
                                         <th>Room Id</th>
+                                        <th>Contract Start Date</th>
+                                        <th>Contract End Date</th>
                                         <th></th>
                                       </tr>
                                     </thead>
@@ -74,11 +76,11 @@
                                               <td><%= data.getPhone() %></td>
                                               <td><%= data.getAddress() %></td>
                                               <td><%= data.getRoomId() %></td>
+                                              <td><%= data.getCStartDate() %></td>
+                                              <td><%= data.getCEndDate() %></td>
                                               
                                               <td>
-                                                  <a class="actions_button" href="${pageContext.request.contextPath}/admin/residents/editResident?email=<%= data.getEmail() %>"><i class="bi bi-pencil-square actions_button_orange"></i></a>
-                                                  <a class="actions_button" onclick="deleteResident('<%= data.getEmail() %>')"><i class="bi bi-trash3-fill actions_button_red"></i></a>
-                                              </td>
+                                                  <a class="actions_button" href="${pageContext.request.contextPath}/admin/residents/editResident?email=<%= data.getEmail() %>"><i class="bi bi-pencil-square actions_button_orange"></i></a>                                              </td>
                                             </tr>
                                     
                                         <% } %>
@@ -97,63 +99,7 @@
             </div>
         </section>
         
-        <script>
-            var contextPath = "${pageContext.request.contextPath}";
 
-            function deleteResident(roomId) {
-                // Confirm deletion before proceeding
-                Swal.fire({
-                    title: 'Are you sure?',
-                    text: "This action cannot be undone.",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonText: 'Yes, delete it!',
-                    cancelButtonText: 'No, cancel!',
-                    reverseButtons: true
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        // Perform AJAX request to delete the room
-                        $.ajax({
-                            url: contextPath + '/admin/resident/residentsDelete', // The servlet URL
-                            method: 'GET', // We are using GET for this case
-                            data: { roomId: roomId }, // Send roomId in the data
-                            dataType: 'json', // Expect JSON response
-                            success: function(response) {
-                                // Handle the response
-                                if (response.messageType === "success") {
-                                    Swal.fire({
-                                        icon: 'success',
-                                        title: 'Deleted!',
-                                        text: response.message,
-                                        showConfirmButton: false,
-                                        timer: 3000
-                                    }).then(() => {
-                                        // Optionally, remove the room from the DOM or refresh the page
-                                        location.reload(); // You can also manually remove the element from the DOM
-                                    });
-                                } else if (response.messageType === "error") {
-                                    Swal.fire({
-                                        icon: 'error',
-                                        title: 'Oops...',
-                                        text: response.message,
-                                        confirmButtonText: 'Try Again'
-                                    });
-                                }
-                            },
-                            error: function(xhr, status, error) {
-                                // Handle AJAX errors
-                                Swal.fire({
-                                    icon: 'error',
-                                    title: 'Error',
-                                    text: 'An error occurred while processing your request. Please try again later.',
-                                    confirmButtonText: 'OK'
-                                });
-                            }
-                        });
-                    }
-                });
-            }
-        </script>
 
         <script src="${pageContext.request.contextPath}/component/js/tools/jquery-3.3.1.min.js"></script>
         <script src="${pageContext.request.contextPath}/component/js/script.js"></script>

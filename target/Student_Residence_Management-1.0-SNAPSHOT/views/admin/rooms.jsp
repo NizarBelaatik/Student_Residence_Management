@@ -13,14 +13,14 @@
     <head>
         
         <title>Manage Rooms</title>
-        <%@ include file="/views/common/head.jsp" %>
+        <%@ include file="/views/common/headadminlinks.jsp" %>
         
         
     </head>
     </head>
     <body>
-        <%@ include file="/views/header.jsp" %>
-        <%@ include file="/views/asideadmin.jsp" %>
+        <%@ include file="/views/common/headeradmin.jsp" %>
+        <%@ include file="/views/common/asideadmin.jsp" %>
 
     <!-- Main content -->
     <main class="main" id="main">
@@ -73,8 +73,8 @@
                                               <td><%= data.getEquipment() %></td>
                                               <td><sapn class="StatusSpan" data-badge='<%= data.getState() %>'><%= data.getState() %></sapn></td>
                                               <td>
-                                                  <a class="actions_button" href="${pageContext.request.contextPath}/admin/rooms/editRoom?roomId=<%= data.getRoomId() %>"><i class="bi bi-pencil-square clr_orange"></i></a>
-                                                  <a class="actions_button" onclick="deleteRoom('<%= data.getRoomId() %>')"><i class="bi bi-trash3-fill clr_red"></i></a>
+                                                  <a class="actions_button" href="${pageContext.request.contextPath}/admin/rooms/editRoom?roomId=<%= data.getRoomId() %>"><i class="bi bi-pencil-square actions_button_orange"></i></a>
+                                                  <a class="actions_button" onclick="deleteRoom('<%= data.getRoomId() %>')"><i class="bi bi-trash3-fill actions_button_red"></i></a>
                                               </td>
                                             </tr>
                                     

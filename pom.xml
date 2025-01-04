@@ -66,14 +66,14 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.32</version> <!-- or the latest version -->
         </dependency>
-        
+
         <!-- bcrypt for Hashing Password -->
         <dependency>
             <groupId>org.mindrot</groupId>
             <artifactId>jbcrypt</artifactId>
             <version>0.4</version> <!-- Check for latest version -->
         </dependency>
-        
+
         <!-- JakataMail for sending emails through various mail protocols like SMTP, IMAP, or POP3  -->
         <dependency>
             <groupId>jakarta.mail</groupId>
@@ -84,11 +84,9 @@
         <dependency>
             <groupId>com.sun.mail</groupId>
             <artifactId>jakarta.mail</artifactId>
-        <version>2.0.1</version> <!-- Check for the latest version -->
-        
-        
-    </dependency>
-        
+            <version>2.0.1</version> <!-- Check for the latest version -->
+        </dependency>
+
     </dependencies>
     
     <build>

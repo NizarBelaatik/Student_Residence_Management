@@ -14,14 +14,18 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import model.User;
+import model.Notification;
 
+import dao.NotificationDAO;
+
+import java.util.List;
 /**
  *
  * @author night
  */
 @WebServlet(name = "home", urlPatterns = {"/u/home"})
 public class home extends HttpServlet {
-
+    NotificationDAO notificationDAO = new NotificationDAO();
     public home(){
         super();
         }
@@ -30,13 +34,26 @@ public class home extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // Forward the request to the actual JSP page
         HttpServletRequest req = (HttpServletRequest) request;
-        HttpServletResponse res = (HttpServletResponse) response;
         HttpSession session = req.getSession(false);
         
         RequestDispatcher dispatcher = request.getRequestDispatcher("/views/resident/home.jsp");
         User user = (User) session.getAttribute("user");
-        String username= user.getEmail() ;
-        request.setAttribute("username", username);  // Set active page
+        String email= user.getEmail() ;
+
+
+        List<Notification> notif=  notificationDAO.getNotifByEmail(email);
+
+        int unreadCount = 0;
+        for (Notification notification : notif) {
+            if (!notification.getStatus()) { // status is false, meaning unread
+                unreadCount++; // Increment the unread count
+            }
+        }
+
+
+        request.setAttribute("email", email);
+        request.setAttribute("notifications", notif);
+        request.setAttribute("unreadCount", unreadCount);
         dispatcher.forward(request, response);
     }
 }

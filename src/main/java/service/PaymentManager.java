@@ -39,7 +39,7 @@ public class PaymentManager {
 
             String subject = "Payment Due: " + amountDue;
             String msg = "Reminder: Pay your due fees of " + amountDue + " before " + dueDate + ". Check your email for more details.";
-            Notification notif = new Notification(1,"ADMIN",Res.getEmail(),subject,msg,false,null,null);
+            Notification notif = new Notification(1,"ADMIN",Res.getEmail(),subject,msg,false,"reminder",null,null);
             notificationDAO.add(notif);
 
         }catch (SQLException e){e.printStackTrace();}
@@ -89,7 +89,7 @@ public class PaymentManager {
 
     private boolean generatePayementByResident(Resident Res,Room room ,Timestamp dueDate){
         try {
-            Payment payment= new Payment(null,Res.getEmail(),Res.getRoomId(),room.getPrice(),0.0f,dueDate,null,"overdue");
+            Payment payment= new Payment(null,Res.getFullname(),Res.getEmail(),Res.getRoomId(),room.getPrice(),0.0f,dueDate,null,"overdue");
             paymentDAO.createPayment(payment);
         }catch (SQLException e){
             e.printStackTrace();

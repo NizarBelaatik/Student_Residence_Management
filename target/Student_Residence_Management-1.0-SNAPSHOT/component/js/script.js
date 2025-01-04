@@ -20,29 +20,37 @@ const toggleBtn = document.getElementById('toggleBtn');
         
         
         
+// Add event listener for all filter inputs
+document.querySelectorAll('.card_1-body #filterInput').forEach(function(inputElement) {
+    inputElement.addEventListener('keyup', function() {
+        // Get the value of the search input
+        var filter = this.value.toLowerCase();
 
-document.getElementById('filterInput').addEventListener('keyup', function() {
-    // Get the value of the search input
-    var filter = this.value.toLowerCase();
+        // Find the closest .card_1-body container that contains the input field
+        var tableWrap = this.closest('.card_1-body');
 
-    // Get all rows in the table
-    var rows = document.querySelectorAll('table tbody tr');
+        // Get the table inside this .card_1-body container
+        var table = tableWrap.querySelector('table');
 
-    // Loop through all rows and hide those that don't match the search
-    rows.forEach(function(row) {
-        var cells = row.querySelectorAll('td, th'); // Get all cells (including header cells)
-        var rowText = '';
+        // Get all rows in the table (tbody tr)
+        var rows = table.querySelectorAll('tbody tr');
 
-        // Combine text content of all cells in the row into one string for searching
-        cells.forEach(function(cell) {
-            rowText += cell.textContent.toLowerCase() + ' ';
+        // Loop through all rows and hide those that don't match the search
+        rows.forEach(function(row) {
+            var cells = row.querySelectorAll('td , th'); // Only look at td cells (data cells)
+            var rowText = '';
+
+            // Combine text content of all cells in the row into one string for searching
+            cells.forEach(function(cell) {
+                rowText += cell.textContent.toLowerCase() + ' ';
+            });
+
+            // If the row text contains the search filter, show the row, otherwise hide it
+            if (rowText.indexOf(filter) > -1) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
         });
-
-        // If the row text contains the search filter, show the row, otherwise hide it
-        if (rowText.indexOf(filter) > -1) {
-            row.style.display = '';
-        } else {
-            row.style.display = 'none';
-        }
     });
 });
