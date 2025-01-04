@@ -53,6 +53,13 @@ public class Dashboard extends HttpServlet {
             request.setAttribute("pending", pending);
             request.setAttribute("maintenance_requests", maintenance_requests);
 
+
+            request.setAttribute("total_payments_overdue", paymentDAO.getTotalOverduePayments());
+            request.setAttribute("total_payments_paid", paymentDAO.getTotalPaymentsThisMonthByStatus("paid"));
+            request.setAttribute("total_payments_pending", paymentDAO.getTotalPendingPayments());
+
+
+
             request.setAttribute("user", user);
             RequestDispatcher dispatcher = request.getRequestDispatcher("/views/admin/dashboardAdmin.jsp");
             request.setAttribute("activePage", "dashboard");  // Set active page

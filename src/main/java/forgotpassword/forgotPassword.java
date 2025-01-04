@@ -48,21 +48,28 @@ public class forgotPassword extends HttpServlet {
         // Calculate expires_at by adding 30 minutes to the current time
         long thirtyMinutesInMillis = 5 * 60 * 1000;  // 30 minutes in milliseconds
         Timestamp expiresAt = new Timestamp(createdAt.getTime() + thirtyMinutesInMillis);
-
-        EmailVerification emailVeri = new EmailVerification(email,resetToken,expiresAt);
         try{
-            emailVeriDAO.addEmailVerification(emailVeri);
+            boolean user_check = userDAO.findUserByEmail(email);
+            if (user_check){
+                EmailVerification emailVeri = new EmailVerification(email,resetToken,expiresAt);
+                try{
+                    emailVeriDAO.addEmailVerification(emailVeri);
 
 
-        }catch (SQLException e) {
+                }catch (SQLException e) {
+
+                }
+                // Send email with the reset link (in a real scenario, use a proper email service)
+
+                String subject = "Password Reset Request";
+                String messageText = "Click the link to reset your password: \n" +
+                        "http://localhost:8080"+request.getContextPath() +"/reset-password?email=" + email + "&token=" + resetToken;
+                EmailSender.sendEmail(email,subject,messageText);
+            }
+        } catch (SQLException e) {
 
         }
-        // Send email with the reset link (in a real scenario, use a proper email service)
 
-        String subject = "Password Reset Request";
-        String messageText = "Click the link to reset your password: \n" +
-                "http://localhost:8080"+request.getContextPath() +"/reset-password?email=" + email + "&token=" + resetToken;
-        EmailSender.sendEmail(email,subject,messageText);
 
 
         // Redirect user to a confirmation page

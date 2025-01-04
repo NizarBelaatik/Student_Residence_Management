@@ -104,7 +104,7 @@
 
                         <!-- Other notifications go here -->
                         <li class="notification-divider"></li>
-                        <li><a href="#all-notifications" class="show-all-notifications">Show All Notifications</a></li>
+                        <li style="display:none;"><a href="#all-notifications" class="show-all-notifications">Show All Notifications</a></li>
                     </ul>
                 </div>
             </div>
@@ -119,7 +119,7 @@
                         <li class="dropdown-divider"></li>
                         <li><a href="#profile" class="dropdown-item">Profile</a></li>
                         <li><a href="#settings" class="dropdown-item">Settings</a></li>
-                        <li><a href="#logout" class="dropdown-item" onclick="logout()">Logout</a></li>
+                        <li><a href="${pageContext.request.contextPath}/logout" class="dropdown-item" >Logout</a></li>
                     </ul>
                 </div>
             </div>
@@ -173,8 +173,7 @@ function toggleDropdown(event) {
 
     // Check if the badge is visible (i.e., unread notifications are present)
     if (badge && badge.offsetHeight > 0 && badge.offsetWidth > 0) {
-        // Only call performOtherTask if the badge is visible
-        performOtherTask();
+        sendNotificationStatusUpdate('${resident.getEmail()}');
     }
 
     // Remove the notification badge (span) when the dropdown is clicked
@@ -195,27 +194,22 @@ function toggleDropdown(event) {
 }
 
 // Function that performs some other task, like making an API call
-function performOtherTask() {
-    const email = 'lazariatik@gmail.com';
-
-    // Send the data via Fetch API
-    fetch('/updateNotificationStatus', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',  // Sending form data
-        },
-        // Correct JavaScript code, no EL processing here
-        body: 'email=' + encodeURIComponent(email)  // Send email and action parameters
-    })
-    .then(response => response.json())  // Parse the JSON response
-    .then(data => {
-        // Handle the response data here
-        console.log(data);
-    })
-    .catch(error => {
-        console.error('Error making API call:', error);
-    });
-}
+    var contextPath = "${pageContext.request.contextPath}";
+    function sendNotificationStatusUpdate(email) {
+        $.ajax({
+            url: contextPath+'/updateNotificationStatus',  // Correct URL to the servlet
+            type: 'POST',                      // Use POST for sending data
+            data: {
+                email: email                  // Send email as a parameter
+            },
+            success: function(response) {
+                console.log('Success:', response);  // Handle success response
+            },
+            error: function(xhr, status, error) {
+                console.error('Error:', error);  // Handle error response
+            }
+        });
+    }
 
 // Event listener for the dropdown
 document.querySelectorAll('.dropdown').forEach((dropdown) => {

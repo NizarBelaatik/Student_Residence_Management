@@ -592,13 +592,17 @@ form .cancle_btn:active {
 
 
 
-.dashboard .info-card h6 {
-  font-size: 28px;
+.dashboard .info-card h5 ,
+.dashboard .info-card h6,
+.dashboard .info-card h7{
   color: #012970;
   font-weight: 700;
   margin: 0;
   padding: 0;
 }
+.dashboard .info-card h5{font-size: 28px;}
+.dashboard .info-card h6{font-size: 24px;}
+.dashboard .info-card h7{font-size: 20px;}
 
 .dashboard .card-icon {
   font-size: 32px;
@@ -615,16 +619,19 @@ form .cancle_btn:active {
   background: #f6f6fe;
 }
 
+.dashboard .overdue-card span{color: red;}
 .dashboard .overdue-card .card-icon {
   color: red;
   background: rgba(255,0,0,0.3);
 }
 
+.dashboard .paid-card span{color: #2eca6a;}
 .dashboard .paid-card .card-icon {
   color: #2eca6a;
   background: #e0f8e9;
 }
 
+.dashboard .pending-card span{color:#ff771d;}
 .dashboard .pending-card .card-icon {
   color: #ff771d;
   background: #ffecdf;

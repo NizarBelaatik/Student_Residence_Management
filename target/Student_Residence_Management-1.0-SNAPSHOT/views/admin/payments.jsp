@@ -36,10 +36,30 @@
             </nav>
           </div>
         <section>
+            <div class="row">
+                <div class="col-sm-4 col-md-4">
+                  <div class="card info-card overdue-card">
+                    <div class="card-body">
+                      <h5 class="card-title">Payments</h5>
+                      <div class="d-flex align-items-center">
+                        <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                          <i class="bi bi-hourglass-bottom"></i>
+                        </div>
+                        <div class="ps-3">
+                          <h6>${total_payments}</h6>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+            </div>
+
 
             <div class="row justify-content-center">
 
-                <div class="col-md-10">
+                <div class="col-md-11">
                     <div class="card_1">
                         <div class="card_1-body">
                             <h5 class="card_1-title">Overdue</h5>
@@ -91,7 +111,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-10">
+                <div class="col-md-11">
                     <div class="card_1">
                         <div class="card_1-body">
                             <h5 class="card_1-title">Paid</h5>
@@ -136,7 +156,7 @@
                 </div>
 
 
-                <div class="col-md-10">
+                <div class="col-md-11">
                     <div class="card_1">
                         <div class="card_1-body">
                             <h5 class="card_1-title">Pending</h5>

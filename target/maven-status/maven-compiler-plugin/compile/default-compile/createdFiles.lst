@@ -6,12 +6,12 @@ dao\UserDAO.class
 model\User.class
 model\Notification.class
 forgotpassword\forgotPassword.class
+service\getPaymentGraph.class
 adminServlet\roomsDelete.class
 adminServlet\roomsAdd.class
 adminServlet\residentsDelete.class
 common_pages\dashboard_common.class
 model\Payment.class
-service\updateNotificationStatus.class
 residentServlet\resident.class
 forgotpassword\resetlinksent.class
 utils\PasswordHasher.class
@@ -25,6 +25,7 @@ adminServlet\residentsEdit.class
 filter\AuthFilter.class
 service\DatabaseConnection.class
 service\EmailSender.class
+service\getPaymentGraph$PaymentStats.class
 service\EmailSender$1.class
 utils\GetDate.class
 service\ScheduledPaymentManager.class
@@ -39,6 +40,7 @@ adminServlet\payments.class
 adminServlet\rooms.class
 adminServlet\roomsEdit.class
 model\Room.class
+residentServlet\updateNotificationStatus.class
 dao\PaymentDAO.class
 dao\RoomDAO.class
 adminServlet\residentsAdd.class

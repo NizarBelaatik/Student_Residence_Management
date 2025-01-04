@@ -105,6 +105,22 @@ public class UserDAO {
         return null;
     }
 
+    // Find User by Email
+    public boolean findUserByEmail(String email) throws SQLException {
+        String sql = "SELECT COUNT(*) FROM users WHERE email = ?";
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, email);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    int count = rs.getInt(1);  // The COUNT(*) value will be in the first column
+                    return count > 0;  // If count > 0, user exists
+                }
+            }
+        }
+        return false;  // If no result is found, return false
+    }
     // Get all Users
     public List<User> getAllUsers() throws SQLException {
         String sql = "SELECT id, email, password_hash, role, active, created_at, updated_at FROM users";
