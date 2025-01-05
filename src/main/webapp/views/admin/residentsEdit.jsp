@@ -11,7 +11,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Edit Resident : ${Res.getFirstname()} ${Res.getFirstname()}</title>
+    <title>Edit Resident : ${Res.getFullname()}</title>
     
     <%@ include file="/views/common/headadminlinks.jsp" %>
 </head>
@@ -37,17 +37,13 @@
                     <div class="card_1">
                         <div class="card_1-body">
                             <div class="card_1-header">
-                                <h5>Edit Residents</h5>
+                                <h5>Edit Residents | ${Res.getEmail()}</h5>
                             </div>
 
                             <form id="editResidentForm" method="post" action="${pageContext.request.contextPath}/admin/Residents/editResident">
-                                <div class="row mb-3">
-                                  <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
-                                  <div class="col-sm-10">
-                                    <input type="email" class="form-control" name="inputemail" value="${Res.getEmail()}" required>
-                                  </div>
-                                </div>
-                                
+
+                                <input type="hidden" class="form-control" name="inputemail" value="${Res.getEmail()}" required>
+
                                 <div class="row mb-3">
                                   <label for="inputEmail3" class="col-sm-2 col-form-label">First name</label>
                                   <div class="col-sm-10">
@@ -129,7 +125,8 @@
                                         <input type="date" class="form-control" name="inputEndDate" value="${Res.getCEndDate()}">
                                     </div>
                                 </div>
-                                
+
+
                                 <div class="text-center">
                                   <button type="submit" class="btn1 submit_btn">Submit</button>
                                   <button type="reset" class="btn1 cancle_btn">Reset</button>

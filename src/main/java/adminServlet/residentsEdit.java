@@ -45,6 +45,7 @@ public class residentsEdit extends HttpServlet {
         try{
             ReData = residentDAO.getResidentByEmail(email);
             request.setAttribute("Res", ReData);
+
             roomList = roomDAO.getAllRoomsAvailable();
             request.setAttribute("roomList", roomList);
         }catch(SQLException e){

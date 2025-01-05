@@ -1,4 +1,4 @@
-package service;
+package api;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;

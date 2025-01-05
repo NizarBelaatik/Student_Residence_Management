@@ -132,20 +132,19 @@ public class ResidentDAO {
 
     // Update Resident
     public boolean updateResident(Resident resident) throws SQLException {
-        String sql = "UPDATE residents SET email = ?, firstname = ?, lastname = ?, gender = ?, phone = ?, address = ?, roomId = ?, c_start_date = ?, c_end_date = ? WHERE email = ?";
+        String sql = "UPDATE residents SET  firstname = ?, lastname = ?, gender = ?, phone = ?, address = ?, roomId = ?, c_start_date = ?, c_end_date = ? WHERE email = ?";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
 
-            ps.setString(1, resident.getEmail());
-            ps.setString(2, resident.getFirstname());
-            ps.setString(3, resident.getLastname());
-            ps.setString(4, resident.getGender());
-            ps.setString(5, resident.getPhone());
-            ps.setString(6, resident.getAddress());
-            ps.setString(7, resident.getRoomId());
-            ps.setString(8, resident.getCStartDate());
-            ps.setString(9, resident.getCEndDate());
-            ps.setString(10, resident.getEmail());
+            ps.setString(1, resident.getFirstname());
+            ps.setString(2, resident.getLastname());
+            ps.setString(3, resident.getGender());
+            ps.setString(4, resident.getPhone());
+            ps.setString(5, resident.getAddress());
+            ps.setString(6, resident.getRoomId());
+            ps.setString(7, resident.getCStartDate());
+            ps.setString(8, resident.getCEndDate());
+            ps.setString(9, resident.getEmail());
 
             return ps.executeUpdate() > 0; // Returns true if update was successful
         }

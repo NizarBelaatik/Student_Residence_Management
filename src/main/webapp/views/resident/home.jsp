@@ -92,6 +92,9 @@
                                 <% } else if ("danger".equals(notif.getType())) { %>
                                     <!-- Danger icon -->
                                     <i class="notification-icon icon-danger bi bi-exclamation-octagon"></i>
+                                <% } else if ("success".equals(notif.getType())) { %>
+                                    <!-- Danger icon -->
+                                    <i class="notification-icon icon-success bi bi-check-circle"></i>
                                 <% } %>
                                 <div class="notification-content">
                                     <strong><%= notif.getSubject() %></strong>

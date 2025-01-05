@@ -9,6 +9,7 @@ import jakarta.mail.internet.*;
 
 import java.sql.Timestamp;
 import java.util.Properties;
+import model.Payment;
 
 /**
  *
@@ -23,6 +24,27 @@ public class EmailSender {
         sendEmail( email,  emailSubject,  emailBody);
     }
 
+    public static void sendPaymentPaidEmail(Payment payment){
+        // Create the email content
+        String subject = "Payment Confirmation for Payment ID: " + payment.getPaymentId();
+        String messageText = "Dear " + payment.getFullname() + ",\n\n" +
+                "We are pleased to inform you that your payment has been successfully processed.\n\n" +
+                "Below are the details of your payment:\n\n" +
+                "------------------------------------------\n" +
+                "Payment ID: " + payment.getPaymentId() + "\n" +
+                "Full Name: " + payment.getFullname() + "\n" +
+                "Email: " + payment.getEmail() + "\n" +
+                "Amount Due: $" + payment.getAmountDue() + "\n" +
+                "Amount Paid: $" + payment.getAmountPaid() + "\n" +
+                "Due Date: " + payment.getDueDate() + "\n" +
+                "Payment Date: " + payment.getPaymentDate() + "\n" +
+                "------------------------------------------\n\n" +
+                "Thank you for your payment.\n\n" +
+                "If you have any questions or concerns, feel free to contact us.\n\n" +
+                "Best regards,\nYour Team";
+        sendEmail( payment.getEmail(),  subject,  messageText);
+
+    }
     public static void sendEmail(String toEmail, String subject, String body) {
         // SMTP server configuration
         String host = "smtp.gmail.com";  // Change to your SMTP server

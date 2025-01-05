@@ -373,19 +373,22 @@ header .profile .dropdown-content a:hover {
 .StatusSpan{
     border: 3px solid;
     border-radius: 25px;
-    padding: 0 10px;
+    padding: 2px 10px;
     text-align: center;
     font-weight:bold;
 }
-.StatusSpan[data-badge='Available']{    
+.StatusSpan[data-badge='Available'],
+.StatusSpan[data-badge='paid']{
     color:var(--clr_Available);
     border-color:var(--clr_Available);}
 
-.StatusSpan[data-badge='Occupied']{    
+.StatusSpan[data-badge='Occupied'],
+.StatusSpan[data-badge='overdue']{
     color:var(--clr_Occupied);
     border-color:var(--clr_);}
 
-.StatusSpan[data-badge='Maintenance']{    
+.StatusSpan[data-badge='Maintenance'],
+.StatusSpan[data-badge='pending']{
     color:var(--clr_Maintenance);
     border-color:var(--clr_Maintenance);}
 
@@ -530,6 +533,8 @@ form .submit_btn:active ,
     outline: 0;
     box-shadow: 0 0 0 .2rem rgba(0, 2, 38, .25);
 }
+
+
 
 /*-------*/
 form .cancle_btn:focus {

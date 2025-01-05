@@ -1,6 +1,7 @@
 package dao;
 
 import model.Payment;
+import service.PaymentManager;
 import utils.GenerateRandomString;
 import java.sql.*;
 import java.util.ArrayList;
@@ -29,6 +30,39 @@ public class PaymentDAO {
         return false;
     }
 
+
+    public Payment getPaymentByID(String paymentId) throws SQLException {
+        String query = "SELECT paymentId, fullname, email, roomId, amount_due, amount_paid, due_date, payment_date, status FROM payments WHERE paymentId = ?";
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement stmt = connection.prepareStatement(query)) {
+
+            // Set the payment ID parameter
+            stmt.setString(1, paymentId);
+
+            // Execute the query
+            ResultSet rs = stmt.executeQuery();
+
+            // Check if a result was returned
+            if (rs.next()) {
+                // Return a new Payment object populated with the retrieved data
+                return new Payment(
+                        rs.getString("paymentId"),
+                        rs.getString("fullname"),
+                        rs.getString("email"),
+                        rs.getString("roomId"),
+                        rs.getFloat("amount_due"),
+                        rs.getFloat("amount_paid"),
+                        rs.getTimestamp("due_date"),
+                        rs.getTimestamp("payment_date"),
+                        rs.getString("status")
+                );
+            } else {
+                // Return null or throw an exception if no record is found
+                return null;
+            }
+
+        }
+    }
     public void createPayment(Payment payment) throws SQLException {
         String query = "INSERT INTO payments (paymentId,fullname,email,roomId, amount_due, due_date,amount_paid, status) VALUES (?,?, ?, ?,?, ?,?)";
 
@@ -52,13 +86,45 @@ public class PaymentDAO {
     }
 
 
+    public void PaymentPaid(Payment payment) throws SQLException {
+        String query = "UPDATE payments SET status = 'paid', amount_paid = ?, payment_date = ? WHERE paymentId = ?";
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+
+            // Set the actual amount paid (not the amount due)
+            stmt.setFloat(1, payment.getAmountPaid());
+
+            // Set the current time as the payment date
+            stmt.setTimestamp(2, new Timestamp(System.currentTimeMillis()));
+
+            // Set the payment ID for the record to update
+            stmt.setString(3, payment.getPaymentId());
+
+            int rowsAffected = stmt.executeUpdate();
+
+            // Check if the update was successful
+            if (rowsAffected == 0) {
+                throw new SQLException("No rows updated. The payment ID might not exist.");
+            }
+        }
+    }
+
     public void updatePaymentStatus(String paymentId, String status) throws SQLException {
+        if (paymentId == null || paymentId.isEmpty() || status == null || status.isEmpty()) {
+            throw new IllegalArgumentException("Payment ID and status cannot be null or empty.");
+        }
+
         String query = "UPDATE payments SET status = ? WHERE paymentId = ?";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {
             stmt.setString(1, status);
             stmt.setString(2, paymentId);
-            stmt.executeUpdate();
+
+            int rowsAffected = stmt.executeUpdate();
+            if (rowsAffected == 0) {
+                throw new SQLException("No rows updated. The payment ID might not exist.");
+            }
         }
     }
 
