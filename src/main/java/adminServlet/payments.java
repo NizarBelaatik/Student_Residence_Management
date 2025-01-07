@@ -48,6 +48,7 @@ public class payments extends HttpServlet  {
                 try{
                     List<Payment> p_list = paymentDAO.getPaymentsByStatus(p);
                     request.setAttribute("P_"+p, p_list);
+                    request.setAttribute("isPaymentsGeneratedForCurrentMonth",paymentManager.isPaymentsGeneratedForCurrentMonth());
                 } catch (SQLException e) {e.printStackTrace();}
 
             });

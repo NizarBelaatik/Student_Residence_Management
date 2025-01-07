@@ -200,7 +200,7 @@ function toggleDropdown(event) {
     var contextPath = "${pageContext.request.contextPath}";
     function sendNotificationStatusUpdate(email) {
         $.ajax({
-            url: contextPath+'/updateNotificationStatus',  // Correct URL to the servlet
+            url: contextPath+'/u/updateNotificationStatus',  // Correct URL to the servlet
             type: 'POST',                      // Use POST for sending data
             data: {
                 email: email                  // Send email as a parameter

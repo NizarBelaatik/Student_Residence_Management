@@ -14,7 +14,7 @@ import dao.NotificationDAO;
  *
  * @author night
  */
-@WebServlet(name = "updateNotificationStatus", urlPatterns = {"/updateNotificationStatus"})
+@WebServlet(name = "updateNotificationStatus", urlPatterns = {"/u/updateNotificationStatus"})
 public class updateNotificationStatus extends HttpServlet {
     private NotificationDAO notificationDAO = new NotificationDAO();
 

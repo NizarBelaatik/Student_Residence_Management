@@ -45,7 +45,7 @@ public class PaymentManager {
         }catch (SQLException e){e.printStackTrace();}
     }
 
-    public boolean generatePayment(){
+    public boolean generateMonthlyPayment(){
         //return number of resident that received Payment
 
         try {
@@ -103,7 +103,7 @@ public class PaymentManager {
 
 
     // Check if payments were generated for the current month
-    private boolean isPaymentsGeneratedForCurrentMonth() throws SQLException {
+    public boolean isPaymentsGeneratedForCurrentMonth() throws SQLException {
         LocalDate today = LocalDate.now();
         int currentYear = today.getYear();
         int currentMonth = today.getMonthValue();

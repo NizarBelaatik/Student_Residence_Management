@@ -19,7 +19,7 @@ import service.PaymentManager;
  *
  * @author night
  */
-@WebServlet(name = "SendPaymentReminder", urlPatterns = {"/SendPaymentReminder"})
+@WebServlet(name = "SendPaymentReminder", urlPatterns = {"/admin-api/SendPaymentReminder"})
 public class SendPaymentReminder extends HttpServlet{
     PaymentManager paymentManager= new PaymentManager();
     ResidentDAO residentDAO = new ResidentDAO();

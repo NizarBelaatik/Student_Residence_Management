@@ -34,6 +34,28 @@
         </div>
         <section>
             <div class="row">
+
+
+                <div class="col-sm-4 col-md-4">
+                    <div class="col-lg-12">
+                        <div class="card_1" id="paymentStatusBox" >
+                            <div class="card_1-header text-center">
+                                <h4 class="card_1-title">Payment Status for Current Month</h4>
+                            </div>
+                            <div class="card_1-body">
+                                <!-- Dynamic content for payment status -->
+                                <div id="paymentMessage" class="alert" role="alert">
+                                    <!-- This message will change based on whether payments are generated or not -->
+                                    Payments have been <strong>generated</strong> for this month.
+                                </div>
+
+                                <!-- Button to trigger action (for generating payments if not yet done) -->
+                                <button id="generatePaymentButton" class="btn1 submit_btn w-100" onclick="generatePayment()">Generate Payments</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="col-sm-4 col-md-4">
                     <div class="card info-card overdue-card">
                         <div class="card-body">
@@ -49,6 +71,8 @@
                         </div>
                     </div>
                 </div>
+
+
             </div>
 
             <!-- Overdue Payments -->
@@ -225,7 +249,7 @@
             $(document).on('click', '.sendReminderBtn', function() {
                 var email = $(this).data('email');
                 $.ajax({
-                    url: contextPath + '/SendPaymentReminder',  // Endpoint for sending reminder
+                    url: contextPath + '/admin-api/SendPaymentReminder',  // Endpoint for sending reminder
                     method: 'POST',
                     data: { email: email },
                     dataType: 'json',
@@ -275,7 +299,7 @@
                     if (result.isConfirmed) {
                         // Proceed with the payment if admin confirms
                         $.ajax({
-                            url: contextPath + '/MakePayments',  // Endpoint for making payment
+                            url: contextPath + '/admin-api/MakePayments',  // Endpoint for making payment
                             method: 'POST',
                             data: { paymentID: paymentId },
                             dataType: 'json',
@@ -321,6 +345,54 @@
 
         });
     </script>
+
+    <script>
+        let paymentsGenerated = ${isPaymentsGeneratedForCurrentMonth}; // Change this value dynamically based on your backend logic
+        function checkPaymentStatus() {
+            const paymentMessageElement = document.getElementById('paymentMessage');
+            const generatePaymentButton = document.getElementById('generatePaymentButton');
+
+            if (paymentsGenerated) {
+                // Payments have been generated
+                paymentMessageElement.innerHTML = 'Payments have already <strong>been generated</strong> for this month.';
+                paymentMessageElement.classList.add('alert-success');
+                paymentMessageElement.classList.remove('alert-danger');
+                generatePaymentButton.style.display = 'none'; // Hide the button
+            } else {
+                // Payments have not been generated
+                paymentMessageElement.innerHTML = 'Payments have <strong>not yet been generated</strong> for this month.';
+                paymentMessageElement.classList.add('alert-danger');
+                paymentMessageElement.classList.remove('alert-success');
+                generatePaymentButton.style.display = 'block'; // Show the button
+            }
+        }
+
+        // AJAX call to generate payments
+        function generatePayment() {
+           $.ajax({
+                url: contextPath + '/admin-api/generateMonthlyPayments',  // Endpoint for making payment
+                method: 'POST',
+                data: { paymentID: "paymentId" },
+                dataType: 'json',
+                success: function(response) {
+                    if (response.success) {
+                        paymentsGenerated = true;
+                        checkPaymentStatus();
+                    } else {
+                        alert('An error occurred while generating payments.');
+                    }
+                },
+                error: function(xhr, status, error) {
+
+                    alert('There was an error processing your request. Check the console for details.');
+                }
+            });
+        }
+
+        // Initially check payment status
+        checkPaymentStatus();
+    </script>
+
 </body>
 
 </html>

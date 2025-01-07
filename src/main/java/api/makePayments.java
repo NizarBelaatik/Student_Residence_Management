@@ -12,13 +12,14 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.sql.SQLException;
+import java.sql.Timestamp;
 
 import model.Notification;
 import model.Payment;
 import service.EmailSender;
 import service.PaymentManager;
 
-@WebServlet(name = "MakePayments", urlPatterns = {"/MakePayments"})
+@WebServlet(name = "MakePayments", urlPatterns = {"/admin-api/MakePayments"})
 public class makePayments  extends HttpServlet{
     PaymentManager paymentManager= new PaymentManager();
     ResidentDAO residentDAO = new ResidentDAO();
@@ -43,13 +44,17 @@ public class makePayments  extends HttpServlet{
             //Resident resident = residentDAO.getResidentByEmail(residentEmail);
             //paymentManager.sendReminder(resident);
             Payment payment= paymentDAO.getPaymentByID(paymentID);
-
+            payment.setPaymentDate(new Timestamp(System.currentTimeMillis()));
+            payment.setAmountPaid(payment.getAmountDue());
             paymentDAO.PaymentPaid(payment);
             success = true;
             message = "Payment processed successfully!" ;
-            EmailSender.sendPaymentPaidEmail(payment);
-            //SEND NOTIFICATION
 
+            // send email
+            EmailSender.sendPaymentPaidEmail(payment);
+
+
+            //SEND NOTIFICATION
             String subject = "Payment processed successfully!";
             String notifMSG = "Your payment of " + payment.getAmountDue() + " has been successfully processed. Payment ID: " + payment.getPaymentId() + ". Thank you!";
 

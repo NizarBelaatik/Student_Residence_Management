@@ -275,10 +275,8 @@ public class PaymentDAO {
         return totalAmount;
     }
 
-    public Map<String, Map<String, Integer>> getPaymentGraphData() {
+    public Map<String, Map<String, Integer>> getPaymentGraphData() throws SQLException {
         Map<String, Map<String, Integer>> statusData = new HashMap<>();
-
-        // SQL query to get payment counts for each status over the last 30 days
         String query = "SELECT status, DATE(payment_date) AS date, COUNT(*) AS count " +
                 "FROM payments " +
                 "WHERE payment_date >= CURDATE() - INTERVAL 30 DAY " +
@@ -289,7 +287,6 @@ public class PaymentDAO {
              PreparedStatement stmt = connection.prepareStatement(query);
              ResultSet rs = stmt.executeQuery()) {
 
-            // Iterate through the result set and populate the map with data
             while (rs.next()) {
                 String status = rs.getString("status");
                 String date = rs.getString("date");
@@ -303,11 +300,15 @@ public class PaymentDAO {
                 // Add the count for the respective date
                 statusData.get(status).put(date, count);
             }
-
         } catch (SQLException e) {
-            e.printStackTrace();
+            // Log the exception and rethrow if necessary
+            System.err.println("Error while fetching payment data: " + e.getMessage());
+            throw e;  // Rethrow the SQLException
         }
-
         return statusData;
     }
+
+
+
+
 }

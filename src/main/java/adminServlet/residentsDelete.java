@@ -16,7 +16,7 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author night
  */
-@WebServlet(name = "residentsDelete", urlPatterns = {"/residentsDelete"})
+@WebServlet(name = "residentsDelete", urlPatterns = {"/admin/residentsDelete"})
 public class residentsDelete extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)

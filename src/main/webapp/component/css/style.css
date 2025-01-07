@@ -513,6 +513,11 @@ header .profile .dropdown-content a:hover {
     border-radius: .25rem;
     transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
 }
+.submit_btn{
+     color: #fff;
+     background-color: var(--clr1);
+     border: 1px solid var(--clr1);
+ }
 form .submit_btn, .swal2-actions .swal2-confirm{
     color: #fff;
     background-color: var(--clr1);
@@ -520,6 +525,8 @@ form .submit_btn, .swal2-actions .swal2-confirm{
 }
 form .submit_btn:hover,
 form .submit_btn:active,
+.submit_btn:hover,
+.submit_btn:active,
 .swal2-actions .swal2-confirm:hover,
 .swal2-actions .swal2-confirm:active{
     color:var(--clr1) ;

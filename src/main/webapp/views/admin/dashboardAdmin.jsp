@@ -117,22 +117,30 @@
                     </div>
 
                         <script>
-                            // Fetch data from the Servlet
                             var contextPath = "${pageContext.request.contextPath}";
-                            fetch(contextPath+'/getPaymentGraph')  // URL of the servlet
+                            // Fetch data from the Servlet
+                            fetch(contextPath + '/admin-api/getPaymentGraph')
                                 .then(response => response.json())
                                 .then(data => {
+                                    console.log('Fetched data:', data);  // Log to see what data we receive
+
+                                    // Ensure all the data is present
                                     const dates = data.dates;
                                     const pending = data.pending;
                                     const paid = data.paid;
                                     const overdue = data.overdue;
+
+                                    if (!dates || !pending || !paid || !overdue) {
+                                        console.error('Data is missing some fields!');
+                                        return;
+                                    }
 
                                     // Create the chart using Chart.js
                                     const ctx = document.getElementById('paymentChart').getContext('2d');
                                     const paymentChart = new Chart(ctx, {
                                         type: 'line',
                                         data: {
-                                            labels: dates, // X-axis (dates)
+                                            labels: dates,  // X-axis (dates)
                                             datasets: [
                                                 {
                                                     label: 'Pending Payments',
@@ -174,8 +182,13 @@
                                         }
                                     });
                                 })
-                                .catch(error => console.error('Error fetching data:', error));
+                                .catch(error => {
+                                    console.error('Error fetching data:', error);
+                                });
+
+
                         </script>
+
 
                     </div>
 

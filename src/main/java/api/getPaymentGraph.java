@@ -7,36 +7,46 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.*;
+import java.sql.SQLException; // <-- This line is missing
 
 import dao.PaymentDAO;
 
 
 
-@WebServlet(name = "getPaymentGraph", urlPatterns = {"/getPaymentGraph"})
-public class getPaymentGraph  extends HttpServlet {
+@WebServlet(name = "getPaymentGraph", urlPatterns = {"/admin-api/getPaymentGraph"})
+public class getPaymentGraph extends HttpServlet {
     private PaymentDAO paymentDAO = new PaymentDAO();
 
     public getPaymentGraph() {
         super();
-        // TODO Auto-generated constructor stub
-    }// Handle GET requests to fetch payment stats
-
+    }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Set content type to JSON
-        Map<String, Map<String, Integer>> statusData = paymentDAO.getPaymentGraphData();
+        try {
+            // Database code (database connection and query execution should be inside this try block)
+            Map<String, Map<String, Integer>> statusData = paymentDAO.getPaymentGraphData();
 
-        // Prepare the data for the chart in JSON format
-        String jsonResponse = prepareChartData(statusData);
+            // Log the prepared JSON response for debugging
+            String jsonResponse = prepareChartData(statusData);
 
-        // Set the response content type to JSON
-        response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
-
-        // Write the JSON data to the response
-        response.getWriter().write(jsonResponse);
+            // Send the response back to the frontend
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            response.getWriter().write(jsonResponse);
+        } catch (SQLException e) {
+            // Catch any SQLExceptions during database interaction
+            e.printStackTrace();
+            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            response.getWriter().write("{\"error\": \"Database error: " + e.getMessage() + "\"}");
+        } catch (Exception e) {
+            // Catch any other exceptions
+            e.printStackTrace();
+            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            response.getWriter().write("{\"error\": \"An unexpected error occurred: " + e.getMessage() + "\"}");
+        }
     }
 
     private String prepareChartData(Map<String, Map<String, Integer>> statusData) {
@@ -45,32 +55,38 @@ public class getPaymentGraph  extends HttpServlet {
         StringBuilder paidData = new StringBuilder();
         StringBuilder overdueData = new StringBuilder();
 
-        Set<String> allDates = new TreeSet<>(); // To collect all unique dates
+        // Get the current date
+        LocalDate today = LocalDate.now();
 
-        // Collect all dates from the data
-        for (String status : statusData.keySet()) {
-            Map<String, Integer> dailyData = statusData.get(status);
-            for (String date : dailyData.keySet()) {
-                allDates.add(date);
-            }
+        // Generate the last 30 days
+        Set<String> allDates = new LinkedHashSet<>();
+        for (int i = 0; i < 30; i++) {
+            LocalDate date = today.minusDays(i);
+            allDates.add(date.toString()); // Convert to string format (yyyy-MM-dd)
         }
 
-        // Build the chart data
+        // Build the chart data for each date in the reversed order (oldest first)
         for (String date : allDates) {
-            dates.append("\"").append(date).append("\",");
-            pendingData.append(statusData.getOrDefault("pending", Collections.emptyMap()).getOrDefault(date, 0)).append(",");
-            paidData.append(statusData.getOrDefault("paid", Collections.emptyMap()).getOrDefault(date, 0)).append(",");
-            overdueData.append(statusData.getOrDefault("overdue", Collections.emptyMap()).getOrDefault(date, 0)).append(",");
+            dates.insert(0, "\"" + date + "\","); // Add dates at the start for reverse order
+
+            // Ensure that for each date, if no data exists, we append 0
+            pendingData.insert(0, statusData.getOrDefault("pending", Collections.emptyMap()).getOrDefault(date, 0) + ",");
+            paidData.insert(0, statusData.getOrDefault("paid", Collections.emptyMap()).getOrDefault(date, 0) + ",");
+            overdueData.insert(0, statusData.getOrDefault("overdue", Collections.emptyMap()).getOrDefault(date, 0) + ",");
         }
 
-        // Remove the last comma
-        dates.setLength(dates.length() - 1);
-        pendingData.setLength(pendingData.length() - 1);
-        paidData.setLength(paidData.length() - 1);
-        overdueData.setLength(overdueData.length() - 1);
+        // Remove the last comma to fix the array syntax
+        if (dates.length() > 0) dates.setLength(dates.length() - 1);
+        if (pendingData.length() > 0) pendingData.setLength(pendingData.length() - 1);
+        if (paidData.length() > 0) paidData.setLength(paidData.length() - 1);
+        if (overdueData.length() > 0) overdueData.setLength(overdueData.length() - 1);
 
-        // Prepare JSON response
+        // Prepare JSON response with the corrected data
         return String.format("{\"dates\": [%s], \"pending\": [%s], \"paid\": [%s], \"overdue\": [%s]}",
                 dates.toString(), pendingData.toString(), paidData.toString(), overdueData.toString());
     }
+
+
+
+
 }
