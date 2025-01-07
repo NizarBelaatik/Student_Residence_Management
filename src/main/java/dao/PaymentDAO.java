@@ -64,7 +64,7 @@ public class PaymentDAO {
         }
     }
     public void createPayment(Payment payment) throws SQLException {
-        String query = "INSERT INTO payments (paymentId,fullname,email,roomId, amount_due, due_date,amount_paid, status) VALUES (?,?, ?, ?,?, ?,?)";
+        String query = "INSERT INTO payments (paymentId,fullname,email,roomId, amount_due, due_date,amount_paid, status) VALUES (?,?, ?, ?,?, ?,?,?)";
 
         String Id = GenerateRandomString.generateUniqueId();
         while (paymentIdExists(Id)) {

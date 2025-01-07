@@ -64,20 +64,24 @@ public class PaymentManager {
 
                             EmailSender.sendReminderEmail(Res.getEmail(), residentName, amountDue, dueDate);
 
-                        }catch (SQLException e){e.printStackTrace();}
+                        }catch (SQLException e){e.printStackTrace();System.out.println("====4=======================================");
+                            System.out.println(e);}
 
                     });
 
                     markPaymentsAsGeneratedForCurrentMonth();
                 }catch (SQLException e){
                     e.printStackTrace();
+                    System.out.println("======2=====================================");
+                    System.out.println(e);
                     return false;
                 }
             }
             if(!isPaymentsGeneratedForCurrentMonth()){
                 try{
                     markPaymentsAsGeneratedForCurrentMonth();
-                }catch (SQLException e){e.printStackTrace();}
+                }catch (SQLException e){e.printStackTrace();System.out.println("==========3=================================");
+                    System.out.println(e);}
 
             }
         }catch (SQLException e){e.printStackTrace();return false;}
@@ -89,10 +93,12 @@ public class PaymentManager {
 
     private boolean generatePayementByResident(Resident Res,Room room ,Timestamp dueDate){
         try {
-            Payment payment= new Payment(null,Res.getFullname(),Res.getEmail(),Res.getRoomId(),room.getPrice(),0.0f,dueDate,null,"overdue");
+            Payment payment= new Payment(null,Res.getFullname(),Res.getEmail(),Res.getRoomId(),room.getPrice(),0.0f,dueDate,null,"pending");
             paymentDAO.createPayment(payment);
         }catch (SQLException e){
             e.printStackTrace();
+            System.out.println("===========================================");
+            System.out.println(e);
             return false;
 
         }

@@ -82,7 +82,7 @@
                         <div class="card_1-body">
                             <h5 class="card_1-title">Overdue</h5>
                             <div class="card_1-header" style="display: flex;">
-                                <input class="form-control" type="text" id="filterInputOverdue" placeholder="Search..." style="width:45%;min-width:150px;">
+                                <input class="form-control" type="text" id="filterInput" placeholder="Search..." style="width:45%;min-width:150px;">
                             </div>
                             <div class="table-wrap">
                                 <table class="table2 table-striped table-hover table-bordered">
@@ -113,7 +113,8 @@
                                                         <td><%= data.getAmountPaid() %></td>
                                                         <td><%= data.getDueDate() %></td>
                                                         <td><%= data.getPaymentDate() %></td>
-                                                        <td><%= data.getStatus() %></td>
+                                                        <td><sapn class="StatusSpan" data-badge='<%= data.getStatus() %>'><%= data.getStatus() %></sapn></td>
+
                                                         <td>
                                                             <button class="btn btn-warning sendReminderBtn" data-email="<%= data.getEmail() %>">
                                                                 <i class="fas fa-bell"></i> Send Reminder
@@ -137,7 +138,7 @@
                         <div class="card_1-body">
                             <h5 class="card_1-title">Pending</h5>
                             <div class="card_1-header" style="display: flex;">
-                                <input class="form-control" type="text" id="filterInputPending" placeholder="Search..." style="width:45%;min-width:150px;">
+                                <input class="form-control" type="text" id="filterInput" placeholder="Search..." style="width:45%;min-width:150px;">
                             </div>
                             <div class="table-wrap">
                                 <table class="table2 table-striped table-hover table-bordered">
@@ -168,7 +169,7 @@
                                                         <td><%= data.getAmountPaid() %></td>
                                                         <td><%= data.getDueDate() %></td>
                                                         <td><%= data.getPaymentDate() %></td>
-                                                        <td><%= data.getStatus() %></td>
+                                                        <td><sapn class="StatusSpan" data-badge='<%= data.getStatus() %>'><%= data.getStatus() %></sapn></td>
                                                         <td>
                                                             <button class="btn btn-warning sendReminderBtn" data-email="<%= data.getEmail() %>">
                                                                 <i class="fas fa-bell"></i> Send Reminder
@@ -192,7 +193,7 @@
                         <div class="card_1-body">
                             <h5 class="card_1-title">Paid</h5>
                             <div class="card_1-header" style="display: flex;">
-                                <input class="form-control" type="text" id="filterInputPaid" placeholder="Search..." style="width:45%;min-width:150px;">
+                                <input class="form-control" type="text" id="filterInput" placeholder="Search..." style="width:45%;min-width:150px;">
                             </div>
                             <div class="table-wrap">
                                 <table class="table2 table-striped table-hover table-bordered">
@@ -222,7 +223,7 @@
                                                         <td><%= data.getAmountPaid() %></td>
                                                         <td><%= data.getDueDate() %></td>
                                                         <td><%= data.getPaymentDate() %></td>
-                                                        <td><%= data.getStatus() %></td>
+                                                        <td><sapn class="StatusSpan" data-badge='<%= data.getStatus() %>'><%= data.getStatus() %></sapn></td>
                                                     </tr>
                                         <% } } %>
                                     </tbody>
