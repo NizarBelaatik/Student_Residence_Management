@@ -109,8 +109,9 @@
 
                     <div class="row">
                     <div class="col-lg-12">
-                        <div class="card">
-                            <div class="card-body">
+                        <div class="card_1">
+                            <div class="card_1-body">
+                                <h5 class="card_1-title">Payments for last 30 days</h5>
                                 <canvas id="paymentChart" ></canvas>
                             </div>
                         </div>
