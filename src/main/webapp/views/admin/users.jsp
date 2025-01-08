@@ -64,7 +64,7 @@
                                             <tr>
                                               <th scope="row"><%= data.getEmail() %></th>
                                               <td><%= data.getRole() %></td>
-                                              <td><sapn class="StatusSpan" data-badge='<%= data.isActive() %>'><%= data.isActive() %></sapn></td>
+                                              <td><span class="StatusSpan" data-badge='<%= data.isActive() %>'><%= data.isActive() %></span></td>
                                               <td><%= data.getCreatedAt() %></td>
                                               <td>
                                                   <a class="actions_button" href="${pageContext.request.contextPath}/admin/users/editUser?email=<%= data.getEmail() %>"><i class="bi bi-pencil-square actions_button_orange"></i></a>

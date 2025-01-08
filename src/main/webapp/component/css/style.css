@@ -378,12 +378,14 @@ header .profile .dropdown-content a:hover {
     font-weight:bold;
 }
 .StatusSpan[data-badge='Available'],
-.StatusSpan[data-badge='paid']{
+.StatusSpan[data-badge='paid'],
+.StatusSpan[data-badge='true']{
     color:var(--clr_Available);
     border-color:var(--clr_Available);}
 
 .StatusSpan[data-badge='Occupied'],
-.StatusSpan[data-badge='overdue']{
+.StatusSpan[data-badge='overdue'],
+.StatusSpan[data-badge='false']{
     color:var(--clr_Occupied);
     border-color:var(--clr_);}
 
