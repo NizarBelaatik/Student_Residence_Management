@@ -140,6 +140,31 @@ public class UserDAO {
         return users;
     }
 
+    // Get all Users
+    public List<User> getAllUsersWithoutPW() throws SQLException {
+        String sql = "SELECT id, email, role, active, created_at, updated_at FROM users";
+        List<User> users = new ArrayList<>();
+        try (Connection conn = DatabaseConnection.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+
+            while (rs.next()) {
+
+                User user = new User(
+                        rs.getString("email"),
+                        null,
+                        rs.getString("role")
+                );
+                user.setActive(rs.getBoolean("active"));
+                user.setCreatedAt(rs.getTimestamp("created_at"));
+
+                users.add(user);
+
+            }
+        }
+        return users;
+    }
+
     // Update User information
     public boolean updateUser(User user) throws SQLException {
         String sql = "UPDATE users SET email = ?, password_hash = ?, role = ?, active = ?, updated_at = ? WHERE id = ?";

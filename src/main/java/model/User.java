@@ -22,6 +22,7 @@ public class User {
         this.updatedAt = this.createdAt;
     }
 
+
     // Getters and setters
     public int getId(){
         return id;
