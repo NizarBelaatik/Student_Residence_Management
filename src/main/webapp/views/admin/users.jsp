@@ -53,7 +53,7 @@
                                         <th>Email</th>
                                         <th>Role</th>
                                         <th>Action</th>
-                                        <th>Creation data</th>
+                                        <th>Creation date</th>
                                         <th></th>
                                       </tr>
                                     </thead>
