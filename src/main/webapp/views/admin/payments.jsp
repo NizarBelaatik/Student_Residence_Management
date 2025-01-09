@@ -225,16 +225,11 @@
                                                         <td><%= data.getPaymentDate() %></td>
                                                         <td><sapn class="StatusSpan" data-badge='<%= data.getStatus() %>'><%= data.getStatus() %></sapn></td>
                                                         <td>
-                                                            <button class="btn btn-info generateReceiptBtn" data-paymentid="<%= data.getPaymentId() %>">
-                                                                <i class="bi bi-file-earmark-pdf"></i> Generate Receipt
-                                                            </button>
-                                                            <a href="<%= request.getContextPath() %>/downloadReceipt?paymentId=<%= data.getPaymentId() %>" class="btn btn-success">
-                                                                Download Receipt
+
+                                                            <a class="btn btn-info" href="<%= request.getContextPath() %>/downloadReceipt?paymentId=<%= data.getPaymentId() %>" class="btn btn-success">
+                                                                <i class="bi bi-file-earmark-pdf"></i> Download Receipt
                                                             </a>
 
-                                                            <button class="btn btn-success downloadReceiptBtn" data-paymentid="<%= data.getPaymentId() %>">
-                                                                Download Receipt
-                                                            </button>
 
                                                         </td>
                                                     </tr>
@@ -409,72 +404,7 @@
 
 
 
-    <script>
-        var contextPath = "${pageContext.request.contextPath}";
 
-        $(document).ready(function() {
-            // Handle the "Generate Receipt" button click
-            $(document).on('click', '.generateReceiptBtn', function() {
-                var paymentId = $(this).data('paymentid');
-
-                // Show confirmation dialog before proceeding
-                Swal.fire({
-                    title: 'Are you sure?',
-                    text: "Do you want to generate a receipt for this payment?",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonText: 'Yes, generate receipt',
-                    cancelButtonText: 'No, cancel',
-                    reverseButtons: true
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        // Send AJAX request to generate the receipt
-                        $.ajax({
-                            url: contextPath + '/admin-api/GenerateReceipt',  // Endpoint to generate the receipt
-                            method: 'POST',
-                            data: { paymentId: paymentId },
-                            dataType: 'json',
-                            success: function(response) {
-                                if (response.messageType === "success") {
-                                    Swal.fire({
-                                        icon: 'success',
-                                        title: 'Receipt Generated!',
-                                        text: response.message,
-                                        showConfirmButton: false,
-                                        timer: 3000
-                                    });
-                                } else {
-                                    Swal.fire({
-                                        icon: 'error',
-                                        title: 'Error',
-                                        text: response.message,
-                                        confirmButtonText: 'Try Again'
-                                    });
-                                }
-                            },
-                            error: function() {
-                                Swal.fire({
-                                    icon: 'error',
-                                    title: 'Error',
-                                    text: 'An error occurred. Please try again later.',
-                                    confirmButtonText: 'OK'
-                                });
-                            }
-                        });
-                    } else {
-                        // Handle cancel action (optional)
-                        Swal.fire({
-                            icon: 'info',
-                            title: 'Operation Cancelled',
-                            text: 'The receipt generation has been cancelled.',
-                            showConfirmButton: false,
-                            timer: 2000
-                        });
-                    }
-                });
-            });
-        });
-    </script>
 
     <script>
         $(document).on('click', '.downloadReceiptBtn', function() {
