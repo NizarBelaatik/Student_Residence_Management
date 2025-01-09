@@ -9,4 +9,6 @@
     <a href="#" class="<%= request.getAttribute("currentPage").equals("Maintenance") ? "active_s_btn" : "" %>"><i class="bi bi-house-gear"></i>Maintenance</a>
     <a href="#" class="<%= request.getAttribute("currentPage").equals("Statistics") ? "active_s_btn" : "" %>"><i class="bi bi-graph-up"></i>Statistics</a>
     <a href="#" class="<%= request.getAttribute("currentPage").equals("Statistics") ? "active_s_btn" : "" %>"><i class="bi bi-file-earmark-text-fill"></i>Reports</a>
+    <a href="${pageContext.request.contextPath}/admin/users" class="<%= request.getAttribute("currentPage").equals("users") ? "active_s_btn" : "" %>"><i class="bi bi-person-fill-gear""></i>Users</a>
+
 </aside>

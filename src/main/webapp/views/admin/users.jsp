@@ -1,5 +1,5 @@
 <%
-    String currentPage = "tech";  // or any dynamic value
+    String currentPage = "users";  // or any dynamic value
     request.setAttribute("currentPage", currentPage);
 %>
 
@@ -43,7 +43,7 @@
                             <div class="card_1-header" style="display: flex;">
 
                                 <input class="form-control" type="text" id="filterInput" placeholder="Search..." style="width:45%;min-width:150px;">
-                                <div class="row add_btn_container"><a href="${pageContext.request.contextPath}/admin/rooms/addRoom" class="add_btn btn btn-success">ADD</a></div>
+                                <div class="row add_btn_container"><a href="${pageContext.request.contextPath}/admin/users/userAdd" class="add_btn btn btn-success"><i class="bi bi-person-add fs-3"></i></a></div>
                             </div>
                             <div class="table-wrap">
 
@@ -52,7 +52,7 @@
                                       <tr>
                                         <th>Email</th>
                                         <th>Role</th>
-                                        <th>Action</th>
+                                        <th>Active </th>
                                         <th>Creation date</th>
                                         <th></th>
                                       </tr>

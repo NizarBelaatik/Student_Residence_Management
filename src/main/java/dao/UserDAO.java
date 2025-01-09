@@ -65,25 +65,7 @@ public class UserDAO {
         }
     }
 
-    // Get a User by ID
-    public User getUserById(int userId) throws SQLException {
-        String sql = "SELECT id, email, password_hash, role, active, created_at, updated_at FROM users WHERE id = ?";
-        try (Connection conn = DatabaseConnection.getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
 
-            ps.setInt(1, userId);
-            try (ResultSet rs = ps.executeQuery()) {
-                if (rs.next()) {
-                    return new User(
-                            rs.getString("email"),
-                            rs.getString("password_hash"),
-                            rs.getString("role")
-                    );
-                }
-            }
-        }
-        return null;
-    }
 
     // Get User by Email
     public User getUserByEmail(String email) throws SQLException {
@@ -99,6 +81,31 @@ public class UserDAO {
                             rs.getString("password_hash"),
                             rs.getString("role")
                     );
+                }
+            }
+        }
+        return null;
+    }
+
+    // Get User by Email
+    public User getUserByEmailWithoutPW(String email) throws SQLException {
+        String sql = "SELECT id, email, password_hash, role, active, created_at, updated_at FROM users WHERE email = ?";
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, email);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    User user = new User(
+                            rs.getString("email"),
+                            null,
+                            rs.getString("role")
+                    );
+                    user.setActive(rs.getBoolean("active"));
+                    user.setCreatedAt(rs.getTimestamp("created_at"));
+
+                    return user;
+
                 }
             }
         }
@@ -165,18 +172,42 @@ public class UserDAO {
         return users;
     }
 
+    public List<User> getAdminTechUsersWithoutPW() throws SQLException {
+        String sql = "SELECT id, email, role, active, created_at, updated_at FROM users WHERE role IN ('admin', 'tech')";
+        List<User> users = new ArrayList<>();
+        try (Connection conn = DatabaseConnection.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+
+            while (rs.next()) {
+
+                User user = new User(
+                        rs.getString("email"),
+                        null,
+                        rs.getString("role")
+                );
+                user.setActive(rs.getBoolean("active"));
+                user.setCreatedAt(rs.getTimestamp("created_at"));
+
+                users.add(user);
+
+            }
+        }
+        return users;
+    }
+
     // Update User information
     public boolean updateUser(User user) throws SQLException {
-        String sql = "UPDATE users SET email = ?, password_hash = ?, role = ?, active = ?, updated_at = ? WHERE id = ?";
+        String sql = "UPDATE users SET  role = ?, active = ?, updated_at = ? WHERE email = ?";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
 
-            ps.setString(1, user.getEmail());
-            ps.setString(2, user.getPasswordHash());
-            ps.setString(3, user.getRole());
-            ps.setBoolean(4, user.isActive());
-            ps.setTimestamp(5, new Timestamp(System.currentTimeMillis())); // updated_at to current timestamp
-            ps.setInt(6, user.getId());
+
+            ps.setString(1, user.getRole());
+            ps.setBoolean(2, user.isActive());
+            System.out.println("====================="+user.isActive());
+            ps.setTimestamp(3, new Timestamp(System.currentTimeMillis())); // updated_at to current timestamp
+            ps.setString(4, user.getEmail());
 
             int rowsUpdated = ps.executeUpdate();
             return rowsUpdated > 0;

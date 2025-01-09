@@ -30,7 +30,7 @@ public class users  extends HttpServlet {
 
         List<User> usersList = new ArrayList<>();
         try{
-            usersList = userDAO.getAllUsersWithoutPW();
+            usersList = userDAO.getAdminTechUsersWithoutPW();
         }catch(SQLException e){
 
         }
