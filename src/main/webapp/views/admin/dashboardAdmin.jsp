@@ -74,18 +74,6 @@
 
                     <div class="row">
                         <div class="col-sm-4 col-md-4">
-                          <div class="card info_card overdue-card">
-                            <div class="card-body justify-content-center">
-                              <div class="card_icon d-flex justify-content-center" >
-                                    <i class="bi bi-house-fill red"  style="font-size:32px;"></i>
-                              </div>
-                              <div class="card_title">
-                                    <h5 class="align-center">Occupied</h5>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-sm-4 col-md-4">
                           <div class="card info-card overdue-card">
                             <div class="card-body">
                               <h5 class="card-title">Payments |<span> Overdue</span></h5>
