@@ -36,14 +36,62 @@
         <section class="section dashboard">
             <div class="row">
                 <div class="col-lg-8">
+
                     <div class="row">
+                        <div class=" ">
+                            <div class="row">
+                                <!-- Available Card -->
+                                <div class="col-lg-4 col-md-4">
+                                    <div class="card_container available">
+                                        <i class="bi bi-house card_icon"></i>
+                                        <div class="card_text">Available Room</div>
+                                        <div class="card_number">${available_rooms}</div> <!-- Example number -->
+                                    </div>
+                                </div>
+
+                                <!-- Occupied Card -->
+                                <div class="col-4">
+                                    <div class="card_container occupied">
+                                        <i class="bi bi-house-fill card_icon"></i>
+                                        <div class="card_text">Occupied Room</div>
+                                        <div class="card_number">${occupied_rooms}</div> <!-- Example number -->
+                                    </div>
+                                </div>
+
+                                <!-- Maintenance Card -->
+                                <div class="col-4">
+                                    <div class="card_container maintenance">
+                                        <i class="bi bi-house-gear-fill card_icon"></i>
+                                        <div class="card_text">Room in Maintenance</div>
+                                        <div class="card_number">${maintenance_rooms}</div> <!-- Example number -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="row">
+                        <div class="col-sm-4 col-md-4">
+                          <div class="card info_card overdue-card">
+                            <div class="card-body justify-content-center">
+                              <div class="card_icon d-flex justify-content-center" >
+                                    <i class="bi bi-house-fill red"  style="font-size:32px;"></i>
+                              </div>
+                              <div class="card_title">
+                                    <h5 class="align-center">Occupied</h5>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
                         <div class="col-sm-4 col-md-4">
                           <div class="card info-card overdue-card">
                             <div class="card-body">
                               <h5 class="card-title">Payments |<span> Overdue</span></h5>
                               <div class="d-flex align-items-center">
                                 <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                  <i class="bi bi-hourglass-bottom"></i>
+                                  <i class="bi bi-hourglass-bottom "></i>
                                 </div>
                                 <div class="ps-3">
                                     <h6>${overdue}</h6>

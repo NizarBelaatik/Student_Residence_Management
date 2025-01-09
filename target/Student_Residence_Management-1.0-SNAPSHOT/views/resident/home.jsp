@@ -92,6 +92,9 @@
                                 <% } else if ("danger".equals(notif.getType())) { %>
                                     <!-- Danger icon -->
                                     <i class="notification-icon icon-danger bi bi-exclamation-octagon"></i>
+                                <% } else if ("success".equals(notif.getType())) { %>
+                                    <!-- Danger icon -->
+                                    <i class="notification-icon icon-success bi bi-check-circle"></i>
                                 <% } %>
                                 <div class="notification-content">
                                     <strong><%= notif.getSubject() %></strong>
@@ -197,7 +200,7 @@ function toggleDropdown(event) {
     var contextPath = "${pageContext.request.contextPath}";
     function sendNotificationStatusUpdate(email) {
         $.ajax({
-            url: contextPath+'/updateNotificationStatus',  // Correct URL to the servlet
+            url: contextPath+'/u/updateNotificationStatus',  // Correct URL to the servlet
             type: 'POST',                      // Use POST for sending data
             data: {
                 email: email                  // Send email as a parameter

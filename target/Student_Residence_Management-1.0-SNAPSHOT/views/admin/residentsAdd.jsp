@@ -156,7 +156,7 @@
                                 showConfirmButton: false,
                                 timer: 3000
                             }).then(() => {
-                                $('#addResidentForm')[0].reset(); // Reset the form after success
+                                $('#')[0].reset(); // Reset the form after success
                             });
                         } else if (response.messageType === "error") {
                             Swal.fire({

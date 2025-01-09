@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 
+import dao.RoomDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -24,7 +25,7 @@ import dao.PaymentDAO;
 @WebServlet(name = "Dashboard", urlPatterns = {"/admin/dashboard"})
 public class Dashboard extends HttpServlet {
     private PaymentDAO paymentDAO = new PaymentDAO();
-
+    private RoomDAO roomDAO = new RoomDAO();
     public Dashboard() {
         super();
         // TODO Auto-generated constructor stub
@@ -59,6 +60,22 @@ public class Dashboard extends HttpServlet {
             request.setAttribute("total_payments_pending", paymentDAO.getTotalPendingPayments());
 
 
+
+            try {
+                // Get counts of rooms based on their status
+                int availableRooms = roomDAO.getRoomsByStatusSize("Available");
+                int occupiedRooms = roomDAO.getRoomsByStatusSize("Occupied");
+                int maintenanceRooms = roomDAO.getRoomsByStatusSize("Maintenance");
+
+                // Set these counts as request attributes
+                request.setAttribute("available_rooms", availableRooms);
+                request.setAttribute("occupied_rooms", occupiedRooms);
+                request.setAttribute("maintenance_rooms", maintenanceRooms);
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+                // Handle exceptions as appropriate
+            }
 
             request.setAttribute("user", user);
             RequestDispatcher dispatcher = request.getRequestDispatcher("/views/admin/dashboardAdmin.jsp");

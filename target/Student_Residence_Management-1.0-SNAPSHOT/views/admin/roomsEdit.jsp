@@ -29,7 +29,7 @@
             </nav>
         </div>
         <section>
-            <div class="row ">
+            <div class="row justify-content-center ">
                 <div class="col-lg-8">
                     <div class="card_1">
                         <div class="card_1-body">

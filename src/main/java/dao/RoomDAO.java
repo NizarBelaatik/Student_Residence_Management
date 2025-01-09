@@ -86,6 +86,35 @@ public class RoomDAO {
         return null;
     }
 
+    // Method to count rooms based on their status (Available, Occupied, or Maintenance)
+    public int getRoomsByStatusSize(String status) throws SQLException {
+        String sql = "SELECT COUNT(*) AS roomCount FROM rooms WHERE state = ?";
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, status);  // "Available", "Occupied", or "Maintenance"
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt("roomCount");
+                }
+            }
+        }
+        return 0; // Return 0 if no rooms found with the given status
+    }
+
+    // Optionally, you can also create additional methods to get totals, etc.
+    public int getTotalRoomsByStatus(String status) throws SQLException {
+        String sql = "SELECT COUNT(*) FROM rooms WHERE state = ?";
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, status);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt(1);  // Return the total number of rooms with the given status
+                }
+            }
+        }
+        return 0;
+    }
     // Get all rooms
     public List<Room> getAllRooms() throws SQLException {
         String sql = "SELECT roomId, name, equipment, size, price, state FROM rooms";

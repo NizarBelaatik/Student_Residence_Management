@@ -272,6 +272,10 @@ header {
     color:black;
     background-color: red; /* Yellow background */
 }
+.notification-item .icon-success{
+    color:white;
+    background-color: rgb(0,200,0);
+}
 
 .notification-content {
     flex-grow: 1;

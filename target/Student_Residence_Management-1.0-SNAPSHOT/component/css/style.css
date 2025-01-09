@@ -373,19 +373,24 @@ header .profile .dropdown-content a:hover {
 .StatusSpan{
     border: 3px solid;
     border-radius: 25px;
-    padding: 0 10px;
+    padding: 2px 10px;
     text-align: center;
     font-weight:bold;
 }
-.StatusSpan[data-badge='Available']{    
+.StatusSpan[data-badge='Available'],
+.StatusSpan[data-badge='paid'],
+.StatusSpan[data-badge='true']{
     color:var(--clr_Available);
     border-color:var(--clr_Available);}
 
-.StatusSpan[data-badge='Occupied']{    
+.StatusSpan[data-badge='Occupied'],
+.StatusSpan[data-badge='overdue'],
+.StatusSpan[data-badge='false']{
     color:var(--clr_Occupied);
     border-color:var(--clr_);}
 
-.StatusSpan[data-badge='Maintenance']{    
+.StatusSpan[data-badge='Maintenance'],
+.StatusSpan[data-badge='pending']{
     color:var(--clr_Maintenance);
     border-color:var(--clr_Maintenance);}
 
@@ -510,6 +515,11 @@ header .profile .dropdown-content a:hover {
     border-radius: .25rem;
     transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
 }
+.submit_btn{
+     color: #fff;
+     background-color: var(--clr1);
+     border: 1px solid var(--clr1);
+ }
 form .submit_btn, .swal2-actions .swal2-confirm{
     color: #fff;
     background-color: var(--clr1);
@@ -517,6 +527,8 @@ form .submit_btn, .swal2-actions .swal2-confirm{
 }
 form .submit_btn:hover,
 form .submit_btn:active,
+.submit_btn:hover,
+.submit_btn:active,
 .swal2-actions .swal2-confirm:hover,
 .swal2-actions .swal2-confirm:active{
     color:var(--clr1) ;
@@ -530,6 +542,8 @@ form .submit_btn:active ,
     outline: 0;
     box-shadow: 0 0 0 .2rem rgba(0, 2, 38, .25);
 }
+
+
 
 /*-------*/
 form .cancle_btn:focus {
@@ -570,6 +584,66 @@ form .cancle_btn:active {
 
 
 
+/*- CHECKBOX SLIDER -*/
+.switch {
+   position: relative;
+   display: inline-block;
+   width: 60px;
+   height: 34px;
+ }
+
+ .switch input {
+   opacity: 0;
+   width: 0;
+   height: 0;
+ }
+
+ .slider {
+   position: absolute;
+   cursor: pointer;
+   top: 0;
+   left: 0;
+   right: 0;
+   bottom: 0;
+   background-color: #ccc;
+   -webkit-transition: .4s;
+   transition: .4s;
+ }
+
+ .slider:before {
+   position: absolute;
+   content: "";
+   height: 26px;
+   width: 26px;
+   left: 4px;
+   bottom: 4px;
+   background-color: white;
+   -webkit-transition: .4s;
+   transition: .4s;
+ }
+
+ input:checked + .slider {
+   background-color: green;
+ }
+
+ input:focus + .slider {
+   box-shadow: 0 0 1px #2196F3;
+ }
+
+ input:checked + .slider:before {
+   -webkit-transform: translateX(26px);
+   -ms-transform: translateX(26px);
+   transform: translateX(26px);
+ }
+
+ /* Rounded sliders */
+ .slider.round {
+   border-radius: 34px;
+ }
+
+ .slider.round:before {
+   border-radius: 50%;
+ }
 
 /*--------------------------------------------------------------
 # Admin Dashboard

@@ -14,7 +14,8 @@
         <title>Dashboard</title>
 
         <%@ include file="/views/common/headadminlinks.jsp" %>
-        
+        <!-- Include Chart.js library -->
+            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         
     </head>
     <body>
@@ -107,47 +108,88 @@
                     </div>
 
                     <div class="row">
-
-
-                    <canvas id="paymentChart" width="400" height="200"></canvas>
+                    <div class="col-lg-12">
+                        <div class="card_1">
+                            <div class="card_1-body">
+                                <h5 class="card_1-title">Payments for last 30 days</h5>
+                                <canvas id="paymentChart" ></canvas>
+                            </div>
+                        </div>
+                    </div>
 
                         <script>
-                            // Fetch data from the Servlet
                             var contextPath = "${pageContext.request.contextPath}";
-                            fetch(contextPath+'/PaymentStatsServlet')  // URL of the servlet
+                            // Fetch data from the Servlet
+                            fetch(contextPath + '/admin-api/getPaymentGraph')
                                 .then(response => response.json())
                                 .then(data => {
-                                    // Extract data from the JSON response
-                                    const pending = data.pending;
-                                    const overdue = data.overdue;
-                                    const paid = data.paid;
+                                    console.log('Fetched data:', data);  // Log to see what data we receive
 
-                                    // Set up the chart
+                                    // Ensure all the data is present
+                                    const dates = data.dates;
+                                    const pending = data.pending;
+                                    const paid = data.paid;
+                                    const overdue = data.overdue;
+
+                                    if (!dates || !pending || !paid || !overdue) {
+                                        console.error('Data is missing some fields!');
+                                        return;
+                                    }
+
+                                    // Create the chart using Chart.js
                                     const ctx = document.getElementById('paymentChart').getContext('2d');
-                                    const chart = new Chart(ctx, {
-                                        type: 'bar',  // Bar chart
+                                    const paymentChart = new Chart(ctx, {
+                                        type: 'line',
                                         data: {
-                                            labels: ['Pending', 'Overdue', 'Paid'],  // X-axis labels
-                                            datasets: [{
-                                                label: 'Amount',
-                                                data: [pending, overdue, paid],  // Data points
-                                                backgroundColor: ['#FFDD00', '#FF6347', '#32CD32'],  // Colors for the bars
-                                                borderColor: ['#FFD700', '#FF4500', '#228B22'],
-                                                borderWidth: 1
-                                            }]
+                                            labels: dates,  // X-axis (dates)
+                                            datasets: [
+                                                {
+                                                    label: 'Pending Payments',
+                                                    data: pending, // Y-axis (pending counts)
+                                                    borderColor: '#ff771d',
+                                                    fill: false
+                                                },
+                                                {
+                                                    label: 'Paid Payments',
+                                                    data: paid, // Y-axis (paid counts)
+                                                    borderColor: 'rgb(0, 255, 0)',
+                                                    fill: false
+                                                },
+                                                {
+                                                    label: 'Overdue Payments',
+                                                    data: overdue, // Y-axis (overdue counts)
+                                                    borderColor: 'rgb(255, 0, 0)',
+                                                    fill: false
+                                                }
+                                            ]
                                         },
                                         options: {
                                             responsive: true,
                                             scales: {
+                                                x: {
+                                                    title: {
+                                                        display: true,
+                                                        text: 'Date'
+                                                    }
+                                                },
                                                 y: {
+                                                    title: {
+                                                        display: true,
+                                                        text: 'Number of Payments'
+                                                    },
                                                     beginAtZero: true
                                                 }
                                             }
                                         }
                                     });
                                 })
-                                .catch(error => console.error('Error fetching data: ', error));
+                                .catch(error => {
+                                    console.error('Error fetching data:', error);
+                                });
+
+
                         </script>
+
 
                     </div>
 
