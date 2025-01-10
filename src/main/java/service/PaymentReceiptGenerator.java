@@ -49,13 +49,11 @@ public class PaymentReceiptGenerator {
                 contentStream.endText();
 
             } catch (IOException e) {
-                System.err.println("Error writing content to PDF: " + e.getMessage());
             }
 
             // Save the document to the ByteArrayOutputStream (in memory)
             document.save(byteArrayOutputStream);
         } catch (IOException e) {
-            System.err.println("Error creating PDF document: " + e.getMessage());
         }
     }
 }

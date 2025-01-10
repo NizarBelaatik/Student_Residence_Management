@@ -44,8 +44,9 @@ public class ResidentDAO {
             ps.setString(5, resident.getPhone());
             ps.setString(6, resident.getAddress());
             ps.setString(7, resident.getRoomId());
-            ps.setString(8, resident.getCStartDate());
-            ps.setString(9, resident.getCEndDate());
+            // Convert LocalDate to java.sql.Date
+            ps.setDate(8, java.sql.Date.valueOf(resident.getCStartDate()));  // For c_start_date
+            ps.setDate(9, java.sql.Date.valueOf(resident.getCEndDate()));
 
             return ps.executeUpdate() > 0; // Returns true if insertion was successful
         }
@@ -67,8 +68,8 @@ public class ResidentDAO {
                             rs.getString("phone"),
                             rs.getString("address"),
                             rs.getString("roomId"),
-                            rs.getString("c_start_date"),
-                            rs.getString("c_end_date")
+                            rs.getDate("c_start_date").toLocalDate(),  // Convert java.sql.Date to LocalDate
+                            rs.getDate("c_end_date").toLocalDate()
                     );
                 }
             }
@@ -93,8 +94,8 @@ public class ResidentDAO {
                         rs.getString("phone"),
                         rs.getString("address"),
                         rs.getString("roomId"),
-                        rs.getString("c_start_date"),
-                        rs.getString("c_end_date")
+                        rs.getDate("c_start_date").toLocalDate(),  // Convert java.sql.Date to LocalDate
+                        rs.getDate("c_end_date").toLocalDate()
                 ));
             }
         }
@@ -122,8 +123,8 @@ public class ResidentDAO {
                         rs.getString("phone"),
                         rs.getString("address"),
                         rs.getString("roomId"),
-                        rs.getString("c_start_date"),
-                        rs.getString("c_end_date")
+                        rs.getDate("c_start_date").toLocalDate(),  // Convert java.sql.Date to LocalDate
+                        rs.getDate("c_end_date").toLocalDate()
                 ));
             }
         }
@@ -142,8 +143,9 @@ public class ResidentDAO {
             ps.setString(4, resident.getPhone());
             ps.setString(5, resident.getAddress());
             ps.setString(6, resident.getRoomId());
-            ps.setString(7, resident.getCStartDate());
-            ps.setString(8, resident.getCEndDate());
+            // Convert LocalDate to java.sql.Date
+            ps.setDate(7, java.sql.Date.valueOf(resident.getCStartDate()));  // For c_start_date
+            ps.setDate(8, java.sql.Date.valueOf(resident.getCEndDate()));
             ps.setString(9, resident.getEmail());
 
             return ps.executeUpdate() > 0; // Returns true if update was successful

@@ -18,6 +18,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import utils.DateUtils;
 
 import model.Resident;
 import dao.ResidentDAO;
@@ -75,13 +76,20 @@ public class residentsEdit extends HttpServlet {
             String contractStartDate = request.getParameter("inputStartDate");
             String contractEndDate = request.getParameter("inputEndDate");
 
-            Resident Edit_Resident = new Resident( residentEmail, residentFirstname, residentLastname, residentGender, residentPhone,residentAddress,residentRoomId,contractStartDate,contractEndDate);
+            Resident Edit_Resident = new Resident( residentEmail, residentFirstname, residentLastname, residentGender, residentPhone,residentAddress,residentRoomId,DateUtils.convertToLocalDate(contractStartDate),DateUtils.convertToLocalDate(contractEndDate));
 
             boolean success = false;
             String message = "";
             try {
-                // Add the room via DAO
+                Resident oldResidentData = residentDAO.getResidentByEmail(residentEmail);
+
+                if(!residentRoomId.equals(oldResidentData.getRoomId())){
+                    roomDAO.updateRoomStateById(oldResidentData.getRoomId(),"Available");
+                }
+
                 residentDAO.updateResident(Edit_Resident);
+                roomDAO.updateRoomStateById(residentRoomId,"Occupied");
+
                 success = true;
                 message = "Resident has been successfully Edited!";
             } catch (SQLException e) {

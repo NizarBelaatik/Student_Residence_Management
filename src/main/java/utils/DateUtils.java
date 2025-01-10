@@ -1,11 +1,12 @@
 package utils;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAdjusters;
 
-public class GetDate {
+public class DateUtils {
     public static LocalDate getFDayOfMonth() {
         // Get the current date and adjust it to the first day of the month
         LocalDate today = LocalDate.now();
@@ -45,6 +46,24 @@ public class GetDate {
         // Format the date to "yyyy-MM-dd"
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         return lastDayOfMonth.format(formatter);
+    }
+
+
+    public static Timestamp convertToTimestamp(String dateString) {
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            java.util.Date date = sdf.parse(dateString);
+            return new Timestamp(date.getTime());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    // Method to convert a String to LocalDate
+    public static LocalDate convertToLocalDate(String dateStr) {
+        DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE; // e.g., "2024-08-01"
+        return LocalDate.parse(dateStr, formatter);
     }
 
 }

@@ -6,6 +6,9 @@ import jakarta.persistence.Id;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 
+import java.sql.Timestamp;
+import java.time.LocalDate;
+
 public class Resident {
     private int residentId;
     private String email; // FK to User
@@ -15,13 +18,13 @@ public class Resident {
     private String phone;
     private String address;
     private String roomId;
-    private String c_start_date;
-    private String c_end_date;// FK to Room
+    private LocalDate c_start_date;
+    private LocalDate  c_end_date;// FK to Room
 
     // Constructors
     
 
-    public Resident( String email, String firstName, String lastName, String gender, String phone, String address, String roomId , String c_start_date , String c_end_date) {
+    public Resident( String email, String firstName, String lastName, String gender, String phone, String address, String roomId , LocalDate  c_start_date , LocalDate  c_end_date) {
         this.email = email;
         this.firstname = firstName;
         this.lastname = lastName;
@@ -96,17 +99,17 @@ public class Resident {
         this.roomId = roomId;
 }
 
-    public String getCStartDate() {
+    public LocalDate  getCStartDate() {
         return c_start_date;
     }
-    public void setCStartDate(String c_start_date) {
+    public void setCStartDate(LocalDate  c_start_date) {
         this.c_start_date = c_start_date;
     }
 
-    public String getCEndDate() {
+    public LocalDate  getCEndDate() {
         return c_end_date;
     }
-    public void setCEndDate(String c_end_date) {
+    public void setCEndDate(LocalDate  c_end_date) {
         this.c_end_date = c_end_date;
     }
 }

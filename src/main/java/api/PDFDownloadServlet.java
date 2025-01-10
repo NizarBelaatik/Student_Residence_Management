@@ -62,8 +62,6 @@ public class PDFDownloadServlet extends HttpServlet {
                             outStream.flush();  // Ensure the file is written completely
                         }
 
-                        System.out.println("PDF sent to client successfully.");
-
                     } catch (Exception e) {
                         e.printStackTrace();
                         response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error generating PDF");

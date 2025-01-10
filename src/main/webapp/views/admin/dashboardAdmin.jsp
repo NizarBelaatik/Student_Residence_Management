@@ -38,36 +38,34 @@
                 <div class="col-lg-8">
 
                     <div class="row">
-                        <div class=" ">
-                            <div class="row">
-                                <!-- Available Card -->
-                                <div class="col-lg-4 col-md-4">
-                                    <div class="card_container available">
-                                        <i class="bi bi-house card_icon"></i>
-                                        <div class="card_text">Available Room</div>
-                                        <div class="card_number">${available_rooms}</div> <!-- Example number -->
-                                    </div>
-                                </div>
 
-                                <!-- Occupied Card -->
-                                <div class="col-4">
-                                    <div class="card_container occupied">
-                                        <i class="bi bi-house-fill card_icon"></i>
-                                        <div class="card_text">Occupied Room</div>
-                                        <div class="card_number">${occupied_rooms}</div> <!-- Example number -->
-                                    </div>
-                                </div>
-
-                                <!-- Maintenance Card -->
-                                <div class="col-4">
-                                    <div class="card_container maintenance">
-                                        <i class="bi bi-house-gear-fill card_icon"></i>
-                                        <div class="card_text">Room in Maintenance</div>
-                                        <div class="card_number">${maintenance_rooms}</div> <!-- Example number -->
-                                    </div>
-                                </div>
+                        <!-- Available Card -->
+                        <div class="col-lg-4 col-md-4">
+                            <div class="card_container available">
+                                <i class="bi bi-house card_icon"></i>
+                                <div class="card_text">Available Room</div>
+                                <div class="card_number">${available_rooms}</div>
                             </div>
                         </div>
+
+                        <!-- Occupied Card -->
+                        <div class="col-4">
+                            <div class="card_container occupied">
+                                <i class="bi bi-house-fill card_icon"></i>
+                                <div class="card_text">Occupied Room</div>
+                                <div class="card_number">${occupied_rooms}</div>
+                            </div>
+                        </div>
+
+                        <!-- Maintenance Card -->
+                        <div class="col-4">
+                            <div class="card_container maintenance">
+                                <i class="bi bi-house-gear-fill card_icon"></i>
+                                <div class="card_text">Room in Maintenance</div>
+                                <div class="card_number">${maintenance_rooms}</div>
+                            </div>
+                        </div>
+
                     </div>
 
 
@@ -144,100 +142,26 @@
                     </div>
 
                     <div class="row">
-                    <div class="col-lg-12">
-                        <div class="card_1">
-                            <div class="card_1-body">
-                                <h5 class="card_1-title">Payments for last 30 days</h5>
-                                <canvas id="paymentChart" ></canvas>
+                        <div class="col-lg-12">
+                            <div class="card_1">
+                                <div class="card_1-body">
+                                    <h5 class="card_1-title">Payments for last 30 days</h5>
+                                    <canvas id="paymentChart" ></canvas>
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                        <script>
-                            var contextPath = "${pageContext.request.contextPath}";
-                            // Fetch data from the Servlet
-                            fetch(contextPath + '/admin-api/getPaymentGraph')
-                                .then(response => response.json())
-                                .then(data => {
-                                    console.log('Fetched data:', data);  // Log to see what data we receive
-
-                                    // Ensure all the data is present
-                                    const dates = data.dates;
-                                    const pending = data.pending;
-                                    const paid = data.paid;
-                                    const overdue = data.overdue;
-
-                                    if (!dates || !pending || !paid || !overdue) {
-                                        console.error('Data is missing some fields!');
-                                        return;
-                                    }
-
-                                    // Create the chart using Chart.js
-                                    const ctx = document.getElementById('paymentChart').getContext('2d');
-                                    const paymentChart = new Chart(ctx, {
-                                        type: 'line',
-                                        data: {
-                                            labels: dates,  // X-axis (dates)
-                                            datasets: [
-                                                {
-                                                    label: 'Pending Payments',
-                                                    data: pending, // Y-axis (pending counts)
-                                                    borderColor: '#ff771d',
-                                                    fill: false
-                                                },
-                                                {
-                                                    label: 'Paid Payments',
-                                                    data: paid, // Y-axis (paid counts)
-                                                    borderColor: 'rgb(0, 255, 0)',
-                                                    fill: false
-                                                },
-                                                {
-                                                    label: 'Overdue Payments',
-                                                    data: overdue, // Y-axis (overdue counts)
-                                                    borderColor: 'rgb(255, 0, 0)',
-                                                    fill: false
-                                                }
-                                            ]
-                                        },
-                                        options: {
-                                            responsive: true,
-                                            scales: {
-                                                x: {
-                                                    title: {
-                                                        display: true,
-                                                        text: 'Date'
-                                                    }
-                                                },
-                                                y: {
-                                                    title: {
-                                                        display: true,
-                                                        text: 'Number of Payments'
-                                                    },
-                                                    beginAtZero: true
-                                                }
-                                            }
-                                        }
-                                    });
-                                })
-                                .catch(error => {
-                                    console.error('Error fetching data:', error);
-                                });
-
-
-                        </script>
-
-
-                    </div>
 
                     <h1>Welcome</h1>
-                        <p>This is the main content area.</p>
-                        Total Rooms.
-                        Occupancy Rate.
-                        Pending Payments.
-                        Pending Maintenance Requests.
+                    <p>This is the main content area.</p>
+                    Total Rooms.
+                    Occupancy Rate.
+                    Pending Payments.
+                    Pending Maintenance Requests.
 
-                        Statistics: occupancy rates, overdue payments, pending maintenance requests.
-                Quick links to manage rooms, residents, payments, and maintenance.
+                    Statistics: occupancy rates, overdue payments, pending maintenance requests.
+                    Quick links to manage rooms, residents, payments, and maintenance.
 
                 </div>
                 
@@ -255,7 +179,77 @@
     </main>
 
     
-    
+    <script>
+        var contextPath = "${pageContext.request.contextPath}";
+        // Fetch data from the Servlet
+        fetch(contextPath + '/admin-api/getPaymentGraph')
+            .then(response => response.json())
+            .then(data => {
+                console.log('Fetched data:', data);  // Log to see what data we receive
+
+                // Ensure all the data is present
+                const dates = data.dates;
+                const pending = data.pending;
+                const paid = data.paid;
+                const overdue = data.overdue;
+
+                if (!dates || !pending || !paid || !overdue) {
+                    console.error('Data is missing some fields!');
+                    return;
+                }
+
+                // Create the chart using Chart.js
+                const ctx = document.getElementById('paymentChart').getContext('2d');
+                const paymentChart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: dates,  // X-axis (dates)
+                        datasets: [
+                            {
+                                label: 'Pending Payments',
+                                data: pending, // Y-axis (pending counts)
+                                borderColor: '#ff771d',
+                                fill: false
+                            },
+                            {
+                                label: 'Paid Payments',
+                                data: paid, // Y-axis (paid counts)
+                                borderColor: 'rgb(0, 255, 0)',
+                                fill: false
+                            },
+                            {
+                                label: 'Overdue Payments',
+                                data: overdue, // Y-axis (overdue counts)
+                                borderColor: 'rgb(255, 0, 0)',
+                                fill: false
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            x: {
+                                title: {
+                                    display: true,
+                                    text: 'Date'
+                                }
+                            },
+                            y: {
+                                title: {
+                                    display: true,
+                                    text: 'Number of Payments'
+                                },
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+            });
+    </script>
+
     <script src="${pageContext.request.contextPath}/component/js/tools/jquery-3.3.1.min.js"></script>
     <script src="${pageContext.request.contextPath}/component/js/script.js"></script>
     </body>

@@ -95,7 +95,6 @@
                                             // Retrieve the list of rooms from the request
                                             List<Room> roomList = (List<Room>) request.getAttribute("roomList");
                                         %>
-
                                         <select name="inputroomId" class="form-select" required>
                                             <option value="" disabled selected>Select Room</option>
                                             <%

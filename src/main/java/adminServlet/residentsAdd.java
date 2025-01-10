@@ -23,6 +23,7 @@ import model.User;
 import dao.UserDAO;
 
 
+import utils.DateUtils;
 import utils.PasswordHasher;
 import utils.GenerateRandomString;
 import service.EmailSender;
@@ -73,18 +74,24 @@ public class residentsAdd extends HttpServlet {
             String residentRoomId = request.getParameter("inputroomId");
             String contractStartDate = request.getParameter("inputStartDate");
             String contractEndDate = request.getParameter("inputEndDate");
-  
-            Resident ADD_Resident = new Resident( residentEmail, residentFirstname, residentLastname, residentGender, residentPhone,residentAddress,residentRoomId,contractStartDate,contractEndDate);
+
+
+            Resident ADD_Resident = new Resident( residentEmail, residentFirstname, residentLastname, residentGender, residentPhone,residentAddress,residentRoomId, DateUtils.convertToLocalDate(contractStartDate),DateUtils.convertToLocalDate(contractEndDate));
 
             boolean success = false;
             String message = "";
             try {
+
+
+
                 String password= GenerateRandomString.generatePassword();
                 String passwordHashed=PasswordHasher.hashPassword(password);
                 User user=new User(residentEmail,passwordHashed,"resident");
                 userDAO.addUser(user);
                 // Add the room via DAO
                 residentDAO.addResident(ADD_Resident);
+                roomDAO.updateRoomStateById(residentRoomId,"Occupied");
+
                 success = true;
                 message = "Resident has been successfully added!";
                 

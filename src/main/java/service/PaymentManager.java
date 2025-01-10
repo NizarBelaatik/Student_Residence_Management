@@ -14,10 +14,9 @@ import dao.ResidentDAO;
 import model.Room;
 import dao.RoomDAO;
 
-import model.Notification;
 import dao.NotificationDAO;
 
-import utils.GetDate;
+import utils.DateUtils;
 
 public class PaymentManager {
     private PaymentDAO paymentDAO= new PaymentDAO();
@@ -29,7 +28,7 @@ public class PaymentManager {
     public void sendReminder(Resident Res){
         try{
             Room room = roomDAO.getRoomById(Res.getRoomId());
-            Timestamp dueDate= GetDate.getLDayOfMonth();
+            Timestamp dueDate= DateUtils.getLDayOfMonth();
 
             generatePayementByResident(Res,room,dueDate);
             String residentName = Res.getFirstname() +" "+ Res.getLastname();  // Example: replace with actual resident name
@@ -56,7 +55,7 @@ public class PaymentManager {
                     residents.forEach(Res->{
                         try{
                             Room room = roomDAO.getRoomById(Res.getRoomId());
-                            Timestamp dueDate= GetDate.getLDayOfMonth();
+                            Timestamp dueDate= DateUtils.getLDayOfMonth();
 
                             generatePayementByResident(Res,room,dueDate);
                             String residentName = Res.getFirstname() +" "+ Res.getLastname();  // Example: replace with actual resident name
