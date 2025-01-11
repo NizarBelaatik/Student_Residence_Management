@@ -27,8 +27,8 @@
                 <!-- Dashboard Card -->
                 <div class="card dashboard-card">
                     <div class="card-header text-center">
-                        <h3>Welcome, John Doe</h3>
-                        <p>Resident of Room 101</p>
+                        <h3>Welcome, ${resident.getFullname()}</h3>
+                        <p>Resident of Room ${room.getRoomName()}</p>
                     </div>
                     <div class="card-body">
 

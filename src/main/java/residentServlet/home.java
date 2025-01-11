@@ -5,6 +5,8 @@
 package residentServlet;
 
 import dao.PaymentDAO;
+import dao.ResidentDAO;
+import dao.RoomDAO;
 import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -14,15 +16,16 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import model.Payment;
-import model.User;
-import model.Notification;
+import model.*;
 
 import dao.NotificationDAO;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import static utils.DateUtils.formatTimestampToDate;
+
 /**
  *
  * @author night
@@ -31,7 +34,8 @@ import java.util.List;
 public class home extends HttpServlet {
     NotificationDAO notificationDAO = new NotificationDAO();
     PaymentDAO paymentDAO = new PaymentDAO();
-
+    private ResidentDAO residentDAO = new ResidentDAO();
+    private RoomDAO roomDAO = new RoomDAO();
     public home(){
         super();
         }
@@ -68,9 +72,23 @@ public class home extends HttpServlet {
         }
 
 
+        Resident resident ;
+        Room room;
+
+        try{
+            resident = residentDAO.getResidentByEmail(email);
+            room = roomDAO.getRoomById(resident.getRoomId());
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+
+
         request.setAttribute("email", email);
-        request.setAttribute("notifications", notif);
-        request.setAttribute("unreadCount", unreadCount);
+        request.setAttribute("user_since", formatTimestampToDate(user.getCreatedAt()));
+        request.setAttribute("resident", resident);
+        request.setAttribute("room", room);
+
         dispatcher.forward(request, response);
     }
 }
