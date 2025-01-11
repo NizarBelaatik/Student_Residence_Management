@@ -53,6 +53,17 @@ public class payments extends HttpServlet  {
 
             });
 
+
+            request.setAttribute("overdue", paymentDAO.getPaymentsByStatusSize("overdue"));
+            request.setAttribute("paid", paymentDAO.getPaymentsByStatusSize("paid"));
+            request.setAttribute("pending", paymentDAO.getPaymentsByStatusSize("pending"));
+
+            request.setAttribute("total_payments_overdue", paymentDAO.getTotalOverduePayments());
+            request.setAttribute("total_payments_paid", paymentDAO.getTotalPaymentsThisMonthByStatus("paid"));
+            request.setAttribute("total_payments_pending", paymentDAO.getTotalPendingPayments());
+
+
+
         }catch(SQLException e){e.printStackTrace(); }
 
         //paymentManager.generatePayment();

@@ -9,7 +9,7 @@
 <head>
     <title>Edit Room: ${room.getRoomId()}</title>
 
-    <%@ include file="/views/common/headadminlinks.jsp" %>
+    <%@ include file="/views/common/headeradminlinks.jsp" %>
 
 </head>
 <body>

@@ -13,7 +13,7 @@
 <head>
     <title>Edit Resident : ${Res.getFullname()}</title>
     
-    <%@ include file="/views/common/headadminlinks.jsp" %>
+    <%@ include file="/views/common/headeradminlinks.jsp" %>
 </head>
 <body>
     <%@ include file="/views/common/headeradmin.jsp" %>

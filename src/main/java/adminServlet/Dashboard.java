@@ -45,13 +45,11 @@ public class Dashboard extends HttpServlet {
         String role="admin";
         if(role.equals(user.getRole())){
             // Forward to the dashboard JSP with user and role info
-            int overdue = paymentDAO.getPaymentsByStatusSize("overdue");
-            int paid = paymentDAO.getPaymentsByStatusSize("paid");
-            int pending = paymentDAO.getPaymentsByStatusSize("pending");
+
             int maintenance_requests = 0;
-            request.setAttribute("overdue", overdue);
-            request.setAttribute("paid", paid);
-            request.setAttribute("pending", pending);
+            request.setAttribute("overdue", paymentDAO.getPaymentsByStatusSize("overdue"));
+            request.setAttribute("paid", paymentDAO.getPaymentsByStatusSize("paid"));
+            request.setAttribute("pending", paymentDAO.getPaymentsByStatusSize("pending"));
             request.setAttribute("maintenance_requests", maintenance_requests);
 
 

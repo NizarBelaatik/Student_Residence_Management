@@ -67,4 +67,12 @@ public class EmailVerification {
     public void setVerifiedAt(Timestamp verifiedAt) {
         this.verifiedAt = verifiedAt;
     }
+
+    public boolean isTimeStillValid() {
+        // Get the current time
+        Timestamp currentTime = new Timestamp(System.currentTimeMillis());
+
+        // Compare current time with the expiration time
+        return currentTime.before(getExpiresAt());
+    }
 }

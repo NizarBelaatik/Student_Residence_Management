@@ -33,6 +33,17 @@ public class ResetPassword extends HttpServlet {
             response.sendRedirect(request.getContextPath() + "/invalid-token");
             return;
         }
+        try{
+
+            EmailVerification tokenKeyDATA = emailVeriDAO.getEmailVerificationByToken(token);
+            System.out.println("==========="+tokenKeyDATA.isTimeStillValid());
+            if(!tokenKeyDATA.isTimeStillValid()){
+                response.sendRedirect(request.getContextPath() + "/invalid-token");
+                return;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
 
         // Forward the request to the actual JSP page to allow the user to reset their password
         request.setAttribute("email", email);

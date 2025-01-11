@@ -13,7 +13,7 @@
     <head>
         
         <title>Manage Rooms</title>
-        <%@ include file="/views/common/headadminlinks.jsp" %>
+        <%@ include file="/views/common/headeradminlinks.jsp" %>
         
         
     </head>

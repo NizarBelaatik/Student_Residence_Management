@@ -1,4 +1,5 @@
 adminServlet\residents.class
+api\PDFDownloadServlet.class
 com\mycompany\student_residence_management\JakartaRestConfiguration.class
 com\mycompany\student_residence_management\resources\JakartaEE10Resource.class
 utils\GenerateRandomString.class
@@ -8,6 +9,7 @@ model\User.class
 model\Notification.class
 forgotpassword\forgotPassword.class
 adminServlet\roomsDelete.class
+utils\DateUtils.class
 adminServlet\roomsAdd.class
 adminServlet\residentsDelete.class
 common_pages\dashboard_common.class
@@ -26,16 +28,18 @@ adminServlet\residentsEdit.class
 adminServlet\users.class
 filter\AuthFilter.class
 service\DatabaseConnection.class
+service\PaymentReceiptGenerator.class
 service\EmailSender.class
 service\EmailSender$1.class
-utils\GetDate.class
 api\SendPaymentReminder.class
 adminServlet\usersEdit.class
 service\ScheduledPaymentManager.class
 forgotpassword\invalidtoken.class
+residentServlet\notification.class
 common_pages\logout.class
 adminServlet\Dashboard.class
 model\Resident.class
+residentServlet\profile.class
 common_pages\register.class
 service\PaymentManager.class
 adminServlet\payments.class

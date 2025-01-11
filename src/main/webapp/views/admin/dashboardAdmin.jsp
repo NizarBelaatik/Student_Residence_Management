@@ -13,7 +13,7 @@
     <head>
         <title>Dashboard</title>
 
-        <%@ include file="/views/common/headadminlinks.jsp" %>
+        <%@ include file="/views/common/headeradminlinks.jsp" %>
         <!-- Include Chart.js library -->
             <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         
@@ -49,7 +49,7 @@
                         </div>
 
                         <!-- Occupied Card -->
-                        <div class="col-4">
+                        <div class="col-lg-4 col-md-4">
                             <div class="card_container occupied">
                                 <i class="bi bi-house-fill card_icon"></i>
                                 <div class="card_text">Occupied Room</div>
@@ -58,7 +58,7 @@
                         </div>
 
                         <!-- Maintenance Card -->
-                        <div class="col-4">
+                        <div class="col-lg-4 col-md-4">
                             <div class="card_container maintenance">
                                 <i class="bi bi-house-gear-fill card_icon"></i>
                                 <div class="card_text">Room in Maintenance</div>
@@ -71,74 +71,35 @@
 
 
                     <div class="row">
-                        <div class="col-sm-4 col-md-4">
-                          <div class="card info-card overdue-card">
-                            <div class="card-body">
-                              <h5 class="card-title">Payments |<span> Overdue</span></h5>
-                              <div class="d-flex align-items-center">
-                                <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                  <i class="bi bi-hourglass-bottom "></i>
-                                </div>
-                                <div class="ps-3">
-                                    <h6>${overdue}</h6>
-                                    <h7>${total_payments_overdue}</h7>
-                                </div>
-                              </div>
+                        <div class="col-lg-4 col-md-4">
+                            <div class="card_container overdue">
+                                <i class="bi bi-hourglass-bottom card_icon"></i>
+                                <div class="card_text">Payments |<span> Overdue</span></div>
+                                <div class="card_number">${overdue}</div>
+                                <div class="card_subtext">${total_payments_overdue}</div>
                             </div>
-                          </div>
                         </div>
 
 
-                        <div class="col-sm-4 col-md-4">
-                          <div class="card info-card paid-card">
-                            <div class="card-body">
-                              <h5 class="card-title">Payments |<span> Paid</span></h5>
-                              <div class="d-flex align-items-center">
-                                <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                  <i class="bi bi-currency-dollar"></i>
-                                </div>
-                                <div class="ps-3">
-                                  <h6>${paid}</h6>
-                                  <h7>${total_payments_paid}</h7>
-                                </div>
-                              </div>
+                        <div class="col-lg-4 col-md-4">
+                            <div class="card_container paid">
+                                <i class="bi bi-currency-dollar card_icon"></i>
+                                <div class="card_text">Payments |<span> Paid</span></div>
+                                <div class="card_number">${paid}</div>
+                                <div class="card_subtext">${total_payments_paid}</div>
                             </div>
-                          </div>
                         </div>
 
-                        <div class="col-sm-4 col-md-4">
-                          <div class="card info-card pending-card">
-                            <div class="card-body">
-                              <h5 class="card-title">Payments |<span> Pending</span></h5>
-                              <div class="d-flex align-items-center">
-                                <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                  <i class="bi bi-clock-history"></i>
-                                </div>
-                                <div class="ps-3">
-                                    <h6>${pending}</h6>
-                                    <h7>${total_payments_pending}</h7>
-
-                                </div>
-                              </div>
+                        <div class="col-lg-4 col-md-4">
+                            <div class="card_container pending">
+                                <i class="bi bi-clock-history card_icon"></i>
+                                <div class="card_text">Payments |<span> Pending</span></div>
+                                <div class="card_number">${pending}</div>
+                                <div class="card_subtext">${total_payments_pending}</div>
                             </div>
-                          </div>
                         </div>
 
-                        <div class="col-sm-4 col-md-4">
-                          <div class="card info-card maintenance-requests-card">
-                            <div class="card-body">
-                              <h5 class="card-title">Maintenance Requests</h5>
-                              <div class="d-flex align-items-center">
-                                <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                  <i class="bi bi-tools"></i>
-                                </div>
-                                <div class="ps-3">
-                                  <h6>${maintenance_requests}</h6>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
+
                     </div>
 
                     <div class="row">

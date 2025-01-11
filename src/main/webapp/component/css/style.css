@@ -48,6 +48,7 @@
   scroll-behavior: smooth;
 }
 
+
 body {
   font-family: "Open Sans", sans-serif;
   background: #F5F5F5;
@@ -72,6 +73,9 @@ h6 {
   font-family: "Nunito", sans-serif;
 }
 
+.clr_red{color:red!important;}
+.clr_green{color:rgb(0,200,0)!important;}
+.clr_orange{color:orange!important;}
 /*--------------------------------------------------------------
 # Main
 --------------------------------------------------------------*/
@@ -272,7 +276,7 @@ header .profile .dropdown-content a:hover {
 
 
 .card_1 {
-    margin-bottom: 30px;
+    margin: 30px;
     border: none;
     border-radius: 5px;
     box-shadow: 0px 0 30px rgba(0, 0, 0, 0.2);/*rgba(1, 41, 112, 0.1)*/
@@ -657,7 +661,7 @@ form .cancle_btn:active {
     border-radius: 10px;
     margin: 10px;
     background-color: #fff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        box-shadow: 0px 0 30px rgba(0, 0, 0, 0.2);
 }
 .card_container .card_icon {
     font-size: 50px;
@@ -668,6 +672,11 @@ form .cancle_btn:active {
     font-weight: bold;
     margin-bottom: 5px;
 }
+.card_container .card_subtext {
+     font-size: 1rem;
+     color: #777;
+     font-weight: bold;
+ }
 .card_container .card_number {
     font-size: 20px;
     font-weight: bold;
@@ -676,21 +685,30 @@ form .cancle_btn:active {
 /* Available card */
 .available .card_icon ,
 .available .card_text ,
-.available  .card_number{
+.available  .card_number,
+.paid .card_icon,
+.paid .card_text ,
+.paid .card_number{
     color: rgb(0,200,0);
 }
 
 /* Occupied card */
 .occupied .card_icon ,
 .occupied .card_text ,
-.occupied .card_number{
+.occupied .card_number,
+.overdue .card_icon,
+.overdue .card_text ,
+.overdue .card_number{
     color: red;
 }
 
 /* Maintenance card */
  .maintenance .card_icon ,
  .maintenance .card_text,
-.maintenance .card_number{
+.maintenance .card_number,
+.pending .card_icon,
+.pending .card_text ,
+.pending .card_number{
     color: orange;
 }
 

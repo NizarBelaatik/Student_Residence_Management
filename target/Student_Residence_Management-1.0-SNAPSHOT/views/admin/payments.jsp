@@ -36,7 +36,7 @@
             <div class="row">
 
 
-                <div class="col-sm-4 col-md-4">
+                <div class="col-lg-3 col-md-3">
                     <div class="col-lg-12">
                         <div class="card_1" id="paymentStatusBox" >
                             <div class="card_1-header text-center">
@@ -56,21 +56,35 @@
                     </div>
                 </div>
 
-                <div class="col-sm-4 col-md-4">
-                    <div class="card info-card overdue-card">
-                        <div class="card-body">
-                            <h5 class="card-title">Payments</h5>
-                            <div class="d-flex align-items-center">
-                                <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                    <i class="bi bi-hourglass-bottom"></i>
-                                </div>
-                                <div class="ps-3">
-                                    <h6>${total_payments}</h6>
-                                </div>
-                            </div>
-                        </div>
+                <div class="col-sm-3 col-md-3">
+                    <div class="card_container overdue">
+                        <i class="bi bi-hourglass-bottom card_icon"></i>
+                        <div class="card_text">Payments |<span> Overdue</span></div>
+                        <div class="card_number">${overdue}</div>
+                        <div class="card_subtext">${total_payments_overdue}</div>
                     </div>
                 </div>
+
+
+                <div class="col-sm-3 col-md-3">
+                    <div class="card_container paid">
+                        <i class="bi bi-currency-dollar card_icon"></i>
+                        <div class="card_text">Payments |<span> Paid</span></div>
+                        <div class="card_number">${paid}</div>
+                        <div class="card_subtext">${total_payments_paid}</div>
+                    </div>
+                </div>
+
+                <div class="col-sm-3 col-md-3">
+                    <div class="card_container pending">
+                        <i class="bi bi-clock-history card_icon"></i>
+                        <div class="card_text">Payments |<span> Pending</span></div>
+                        <div class="card_number">${pending}</div>
+                        <div class="card_subtext">${total_payments_pending}</div>
+                    </div>
+                </div>
+
+
 
 
             </div>
@@ -224,6 +238,14 @@
                                                         <td><%= data.getDueDate() %></td>
                                                         <td><%= data.getPaymentDate() %></td>
                                                         <td><sapn class="StatusSpan" data-badge='<%= data.getStatus() %>'><%= data.getStatus() %></sapn></td>
+                                                        <td>
+
+                                                            <a class="btn btn-info" href="<%= request.getContextPath() %>/downloadReceipt?paymentId=<%= data.getPaymentId() %>" class="btn btn-success">
+                                                                <i class="bi bi-file-earmark-pdf"></i> Download Receipt
+                                                            </a>
+
+
+                                                        </td>
                                                     </tr>
                                         <% } } %>
                                     </tbody>
@@ -392,6 +414,19 @@
 
         // Initially check payment status
         checkPaymentStatus();
+    </script>
+
+
+
+
+
+    <script>
+        $(document).on('click', '.downloadReceiptBtn', function() {
+            var paymentId = $(this).data('paymentid');
+            var downloadUrl = '/downloadReceipt?paymentId=' + paymentId;
+
+            window.location.href = downloadUrl; // This will start the download
+        });
     </script>
 
 </body>

@@ -230,9 +230,12 @@ header {
     list-style: none;
     padding: 10px;
     margin-top: -8px; /* Align it with the other dropdown */
-    width: 270px;
+    width: 300px;
     transform: translateY(-10px); /* Start slightly above */
     transition: opacity 0.5s ease, transform 0.5s ease, visibility 0s 0.5s; /* Smooth transition */
+    max-height: 500px;
+    overflow-y: auto;
+    overflow-x: hidden;
     }
 
 /* Show dropdown-notifications with animation */
@@ -250,6 +253,7 @@ header {
     display: flex;
     align-items: center;
     padding: 8px 15px;
+    width:290px;
 }
 .notification-item.unchecked {background-color: rgba(0, 0, 0, 0.2);}
 

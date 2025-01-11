@@ -66,4 +66,11 @@ public class DateUtils {
         return LocalDate.parse(dateStr, formatter);
     }
 
+    // Method to format a Timestamp to a string in "dd MMMM yyyy" format (e.g., "10 January 2024")
+    public static String formatTimestampToDate(Timestamp timestamp) {
+        // Format the Timestamp to "dd MMMM yyyy"
+        SimpleDateFormat sdf = new SimpleDateFormat("dd MMMM yyyy");
+        return sdf.format(timestamp);
+    }
+
 }
