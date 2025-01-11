@@ -40,10 +40,12 @@ public class profile  extends HttpServlet {
 
         HttpServletRequest req = (HttpServletRequest) request;
         HttpSession session = req.getSession(false);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/views/resident/profile.jsp");
-        request.setAttribute("activePage", "profile");  // Set active page
         User user = (User) session.getAttribute("user");
         String email= user.getEmail() ;
+
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/views/resident/profile.jsp");
+        request.setAttribute("activePage", "profile");  // Set active page
+
 
 
         Resident resident ;

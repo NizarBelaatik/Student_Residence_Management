@@ -151,4 +151,22 @@ public class ResidentDAO {
             return ps.executeUpdate() > 0; // Returns true if update was successful
         }
     }
+
+
+    public boolean editResident(String email, String residentFirstname, String residentLastname, String residentGender, String residentPhone,String residentAddress) throws SQLException {
+        String sql = "UPDATE residents SET  firstname = ?, lastname = ?, gender = ?, phone = ?, address = ? WHERE email = ?";
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, residentFirstname);
+            ps.setString(2, residentLastname);
+            ps.setString(3, residentGender);
+            ps.setString(4, residentPhone);
+            ps.setString(5, residentAddress);
+
+            ps.setString(6, email);
+
+            return ps.executeUpdate() > 0; // Returns true if update was successful
+        }
+    }
 }

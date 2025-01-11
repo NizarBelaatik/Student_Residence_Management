@@ -1,5 +1,5 @@
 :root {
-    --clr0: #f8f9fa; /* Light background color */
+    --clr0: #fff; /* #f8f9faLight background color */
     --clr1: #000226; /* Dark primary color */
     --clr2: #6c757d; /* Secondary gray color */
     --clr3: #fff;     /* White color */
@@ -15,7 +15,7 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: var(--clr0);
+    background-color: ghostwhite;
     color: var(--clr1);
 }
 
@@ -24,7 +24,7 @@ header {
     justify-content: space-between;
     align-items: center;
     padding: 10px 20px;
-    background-color: #f8f9fa;
+    background-color:var(--clr0) ;/* #f8f9fa */
     border-bottom: 1px solid #dee2e6;
 }
 /*<img src="profile-image.jpg" alt="Profile Image" class="profile-image">*/
@@ -452,6 +452,7 @@ header {
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin-bottom:50px;
 }
 
 .profile-header {
@@ -477,6 +478,9 @@ header {
     font-size: 0.9rem;
     opacity: 0.8;
 }
+.color_Occupied{color:red; font-weight:bold;}
+.color_Available{color:rgb(0,200,0); font-weight:bold;}
+.color_Maintenance{color:orange; font-weight:bold;}
 
 .card-body {
     background-color: var(--clr0);
@@ -661,6 +665,41 @@ header {
     outline: 0;
     box-shadow: 0 0 0 .2rem rgba(0, 2, 38, .25); /* Custom focus box-shadow */
 }
+
+
+
+/* btn_2 Button */
+.btn_2 {
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    user-select: none;
+    border: 1px solid transparent;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    color: var(--clr-primary); /* Text color changes to primary color */
+    background-color: #fff; /* Background turns white */
+    border: 1px solid #fff; /* Border color is white */
+        text-decoration: none;
+}
+
+/* Submit Button Hover and Active */
+.btn_2:hover,
+.btn_2:active {
+    color: #fff; /* Text color changes to white */
+    background-color: var(--clr-primary); /* Background turns to primary color */
+    border-color: #fff; /* Border remains primary color */
+    outline: 0;
+    box-shadow: 0 0 0 .2rem rgba(0, 2, 38, .25);
+    text-decoration: none;
+}
+
+
 
 /* Reset (Cancel) Button */
 .reset_btn {

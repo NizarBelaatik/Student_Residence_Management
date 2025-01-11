@@ -37,7 +37,7 @@
 
            
             <div class="row justify-content-center">
-                <div class=" ">
+                <div class="col-lg-12 ">
                     <div class="card_1">
                         <div class="card_1-body">
                             <div class="card_1-header" style="display: flex;">
@@ -98,10 +98,12 @@
                 </div>
             </div>
         </section>
-        
+    </main>
+    <%@ include file="/views/common/footer.jsp" %>
 
 
-        <script src="${pageContext.request.contextPath}/component/js/tools/jquery-3.3.1.min.js"></script>
-        <script src="${pageContext.request.contextPath}/component/js/script.js"></script>
+    <script src="${pageContext.request.contextPath}/component/js/tools/jquery-3.3.1.min.js"></script>
+    <script src="${pageContext.request.contextPath}/component/js/script.js"></script>
+
     </body>
 </html>

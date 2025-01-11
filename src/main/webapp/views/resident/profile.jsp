@@ -25,7 +25,7 @@
 
 
 
-    <div class="container mt-5">
+    <div class="container mt-5 u_main">
         <div class="row justify-content-center">
             <div class="col-lg-10">
                 <!-- Profile Card -->
@@ -36,7 +36,7 @@
                         <h3>${resident.getFullname()}</h3>
                         <p>Resident of Room ${room.getRoomName()}</p>
                         <p>Member since:  ${user_since}</p>
-                        <a href="edit_profile.html" class="btn btn-primary btn-sm">Edit Profile</a>
+                        <a href="edit_profile.html" class="btn_2">Edit Profile</a>
                     </div>
                     <div class="card-body">
                         <!-- Personal Information Section -->
@@ -56,54 +56,16 @@
                             <li class="list-group-item"><strong>Room Equipment:</strong> ${room.getEquipment()}</li>
                             <li class="list-group-item"><strong>Contract Start Date:</strong> ${resident.getCStartDate()}</li>
                             <li class="list-group-item"><strong>Contract End Date:</strong> ${resident.getCEndDate()}</li>
-                            <li class="list-group-item"><strong>Status:</strong> ${room.getState()}</li>
+                            <li class="list-group-item"><strong>Status:</strong> <span class="color_${room.getState()}">${room.getState()}</span></li>
                         </ul>
 
-                        <!-- Payment History Section -->
-                        <div class="section-title">Payment History</div>
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>Date</th>
-                                    <th>Amount</th>
-                                    <th>Status</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>2024-01-05</td>
-                                    <td>$500</td>
-                                    <td>Paid</td>
-                                    <td><button class="btn btn-info btn-sm">Download Receipt</button></td>
-                                </tr>
-                                <tr>
-                                    <td>2024-02-05</td>
-                                    <td>$500</td>
-                                    <td>Paid</td>
-                                    <td><button class="btn btn-info btn-sm">Download Receipt</button></td>
-                                </tr>
-                            </tbody>
-                        </table>
 
-                        <!-- Maintenance Request Section -->
-                        <div class="section-title">Maintenance Requests</div>
-                        <ul class="list-group">
-                            <li class="list-group-item"><strong>Issue:</strong> Leaky Faucet</li>
-                            <li class="list-group-item"><strong>Status:</strong> Resolved</li>
-                            <li class="list-group-item"><strong>Issue:</strong> No Hot Water</li>
-                            <li class="list-group-item"><strong>Status:</strong> Pending</li>
-                        </ul>
-
-                        <!-- Edit Button -->
-                        <div class="text-center mt-3">
-                            <a href="edit_profile.html" class="btn edit-button btn-lg">Edit My Information</a>
-                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
 
     <!-- Bootstrap JS and dependencies -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
@@ -138,5 +100,7 @@
     <script src="${pageContext.request.contextPath}/component/js/tools/Chart.min.js"></script>
     <script src="${pageContext.request.contextPath}/component/js/tools/bootstrap.min.js"></script>
     <script src="${pageContext.request.contextPath}/component/js/tools/tooplate-scripts.js"></script>
+
+    <%@ include file="/views/common/footer.jsp" %>
 </body>
 </html>

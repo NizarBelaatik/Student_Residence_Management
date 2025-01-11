@@ -64,8 +64,9 @@
                                     <label for="inputState" class="col-sm-2 col-form-label">Gender</label>
                                     <div class="col-sm-10">
                                     <select name="inputgender" class="form-select" required>
-                                        <option value="Male" ${Res.getGender() == 'Male' ? 'selected' : ''}>Male</option>
-                                        <option value="Female" ${Res.getGender() == 'Female' ? 'selected' : ''}>Female</option>                                    </select>
+                                        <option value="male" ${Res.getGender() == 'male' ? 'selected' : ''}>Male</option>
+                                        <option value="female" ${Res.getGender() == 'female' ? 'selected' : ''}>Female</option>
+                                    </select>
                                   </div>
                                 </div>
 
@@ -136,6 +137,7 @@
                 </div>
             </div>
         </section>
+
     </main>
 
     <script>
@@ -189,5 +191,6 @@
     <script src="${pageContext.request.contextPath}/component/js/tools/jquery-3.3.1.min.js"></script>
     <script src="${pageContext.request.contextPath}/component/js/script.js"></script>
 
+    <%@ include file="/views/common/footer.jsp" %>
 </body>
 </html>

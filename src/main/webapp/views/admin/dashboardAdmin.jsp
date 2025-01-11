@@ -32,114 +32,114 @@
                 <li class="breadcrumb-item active"><a href="${pageContext.request.contextPath}/admin">Dashboard</a></li>
               </ol>
             </nav>
-          </div>
+        </div>
         <section class="section dashboard">
-            <div class="row">
-                <div class="col-lg-8">
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-lg-8">
 
-                    <div class="row">
+                        <div class="row">
 
-                        <!-- Available Card -->
-                        <div class="col-lg-4 col-md-4">
-                            <div class="card_container available">
-                                <i class="bi bi-house card_icon"></i>
-                                <div class="card_text">Available Room</div>
-                                <div class="card_number">${available_rooms}</div>
+                            <!-- Available Card -->
+                            <div class="col-lg-4 col-md-4">
+                                <div class="card_container available">
+                                    <i class="bi bi-house card_icon"></i>
+                                    <div class="card_text">Available Room</div>
+                                    <div class="card_number">${available_rooms}</div>
+                                </div>
                             </div>
-                        </div>
 
-                        <!-- Occupied Card -->
-                        <div class="col-lg-4 col-md-4">
-                            <div class="card_container occupied">
-                                <i class="bi bi-house-fill card_icon"></i>
-                                <div class="card_text">Occupied Room</div>
-                                <div class="card_number">${occupied_rooms}</div>
+                            <!-- Occupied Card -->
+                            <div class="col-lg-4 col-md-4">
+                                <div class="card_container occupied">
+                                    <i class="bi bi-house-fill card_icon"></i>
+                                    <div class="card_text">Occupied Room</div>
+                                    <div class="card_number">${occupied_rooms}</div>
+                                </div>
                             </div>
-                        </div>
 
-                        <!-- Maintenance Card -->
-                        <div class="col-lg-4 col-md-4">
-                            <div class="card_container maintenance">
-                                <i class="bi bi-house-gear-fill card_icon"></i>
-                                <div class="card_text">Room in Maintenance</div>
-                                <div class="card_number">${maintenance_rooms}</div>
+                            <!-- Maintenance Card -->
+                            <div class="col-lg-4 col-md-4">
+                                <div class="card_container maintenance">
+                                    <i class="bi bi-house-gear-fill card_icon"></i>
+                                    <div class="card_text">Room in Maintenance</div>
+                                    <div class="card_number">${maintenance_rooms}</div>
+                                </div>
                             </div>
-                        </div>
 
-                    </div>
-
-
-
-                    <div class="row">
-                        <div class="col-lg-4 col-md-4">
-                            <div class="card_container overdue">
-                                <i class="bi bi-hourglass-bottom card_icon"></i>
-                                <div class="card_text">Payments |<span> Overdue</span></div>
-                                <div class="card_number">${overdue}</div>
-                                <div class="card_subtext">${total_payments_overdue}</div>
-                            </div>
                         </div>
 
 
-                        <div class="col-lg-4 col-md-4">
-                            <div class="card_container paid">
-                                <i class="bi bi-currency-dollar card_icon"></i>
-                                <div class="card_text">Payments |<span> Paid</span></div>
-                                <div class="card_number">${paid}</div>
-                                <div class="card_subtext">${total_payments_paid}</div>
+
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4">
+                                <div class="card_container overdue">
+                                    <i class="bi bi-hourglass-bottom card_icon"></i>
+                                    <div class="card_text">Payments |<span> Overdue</span></div>
+                                    <div class="card_number">${overdue}</div>
+                                    <div class="card_subtext">${total_payments_overdue}</div>
+                                </div>
                             </div>
+
+
+                            <div class="col-lg-4 col-md-4">
+                                <div class="card_container paid">
+                                    <i class="bi bi-currency-dollar card_icon"></i>
+                                    <div class="card_text">Payments |<span> Paid</span></div>
+                                    <div class="card_number">${paid}</div>
+                                    <div class="card_subtext">${total_payments_paid}</div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4 col-md-4">
+                                <div class="card_container pending">
+                                    <i class="bi bi-clock-history card_icon"></i>
+                                    <div class="card_text">Payments |<span> Pending</span></div>
+                                    <div class="card_number">${pending}</div>
+                                    <div class="card_subtext">${total_payments_pending}</div>
+                                </div>
+                            </div>
+
+
                         </div>
 
-                        <div class="col-lg-4 col-md-4">
-                            <div class="card_container pending">
-                                <i class="bi bi-clock-history card_icon"></i>
-                                <div class="card_text">Payments |<span> Pending</span></div>
-                                <div class="card_number">${pending}</div>
-                                <div class="card_subtext">${total_payments_pending}</div>
-                            </div>
-                        </div>
-
-
-                    </div>
-
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="card_1">
-                                <div class="card_1-body">
-                                    <h5 class="card_1-title">Payments for last 30 days</h5>
-                                    <canvas id="paymentChart" ></canvas>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="card_1">
+                                    <div class="card_1-body">
+                                        <h5 class="card_1-title">Payments for last 30 days</h5>
+                                        <canvas id="paymentChart" ></canvas>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+
+
+                        <h1>Welcome</h1>
+                        <p>This is the main content area.</p>
+                        Total Rooms.
+                        Occupancy Rate.
+                        Pending Payments.
+                        Pending Maintenance Requests.
+
+                        Statistics: occupancy rates, overdue payments, pending maintenance requests.
+                        Quick links to manage rooms, residents, payments, and maintenance.
+
                     </div>
 
 
-                    <h1>Welcome</h1>
-                    <p>This is the main content area.</p>
-                    Total Rooms.
-                    Occupancy Rate.
-                    Pending Payments.
-                    Pending Maintenance Requests.
-
-                    Statistics: occupancy rates, overdue payments, pending maintenance requests.
-                    Quick links to manage rooms, residents, payments, and maintenance.
+                    <div class="col-lg-4">
+                        recent activity
+                    </div>
 
                 </div>
-                
-                
-                <div class="col-lg-4">
-                    recent activity
-                </div>
-                
             </div>
-            
         </section>
-        
-        
         
     </main>
 
-    
+    <%@ include file="/views/common/footer.jsp" %>
+
     <script>
         var contextPath = "${pageContext.request.contextPath}";
         // Fetch data from the Servlet
@@ -213,5 +213,6 @@
 
     <script src="${pageContext.request.contextPath}/component/js/tools/jquery-3.3.1.min.js"></script>
     <script src="${pageContext.request.contextPath}/component/js/script.js"></script>
+
     </body>
 </html>

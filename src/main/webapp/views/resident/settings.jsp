@@ -27,7 +27,7 @@
 
 
 
-    <div class="container mt-5">
+    <div class="container mt-5 u_main">
         <div class="row justify-content-center">
             <div class="col-lg-10">
                 <div class="edit-profile-card">
@@ -40,43 +40,42 @@
 
                     <!-- Profile Edit Form -->
                     <div class="card-body">
-                        <form action="/update-profile" method="POST">
+                        <form action="${pageContext.request.contextPath}/u/settings" method="POST" id="settingsForm">
                             <div class="section-title">Personal Information</div>
                             <div class="form-group mb-3">
                                 <label for="firstname">First Name</label>
-                                <input type="text" class="form-control" id="firstname" name="firstname" value="John" required>
+                                <input type="text" class="form-control" id="firstname" name="firstname" value="${Res.getFirstname()}" required>
                             </div>
 
                             <div class="form-group mb-3">
                                 <label for="lastname">Last Name</label>
-                                <input type="text" class="form-control" id="lastname" name="lastname" value="Doe" required>
+                                <input type="text" class="form-control" id="lastname" name="lastname" value="${Res.getLastname()}" required>
                             </div>
 
 
                             <div class="form-group mb-3">
                                 <label for="phone">Phone</label>
-                                <input type="text" class="form-control" id="phone" name="phone" value="+1234567890" required>
+                                <input type="text" class="form-control" id="phone" name="phone" value="${Res.getPhone()}" required>
                             </div>
                             <div class="form-group mb-3">
                                 <label for="gender">Gender</label>
                                 <select class="form-control col-3" id="gender" name="gender" required>
-                                    <option value="male" >Male</option>
-                                    <option value="female">Female</option>
-
+                                    <option value="male" ${Res.getGender() == 'male' ? 'selected' : ''}>Male</option>
+                                    <option value="female" ${Res.getGender() == 'female' ? 'selected' : ''}>Female</option>
                                 </select>
                             </div>
 
                             <div class="form-group mb-3">
                                 <label for="address">Address</label>
-                                <input type="text" class="form-control" id="address" name="address" value="123 Main Street, City" required>
+                                <input type="text" class="form-control" id="address" name="address" value="${Res.getAddress()}" required>
                             </div>
 
-                            <div class="form-group mb-3">
+                            <!--<div class="form-group mb-3">
                                 <label for="notifications" class="form-label">Enable Notifications</label>
                                 <div class="form-check form-switch">
                                     <input class="form-check-input custom-checkbox" type="checkbox" id="notifications" name="notifications" checked>
                                 </div>
-                            </div>
+                            </div>-->
                             <div class="text-center">
                               <button type="submit" class="submit_btn">Submit</button>
                                   <button type="reset" class="reset_btn">Reset</button>
@@ -90,6 +89,53 @@
         </div>
     </div>
 
+        <script>
+            var contextPath = "${pageContext.request.contextPath}";
+            $(document).ready(function() {
+                // Handle form submission
+                $('#settingsForm').submit(function(e) {
+                    e.preventDefault(); // Prevent default form submission
+
+                    // Perform AJAX request
+                    $.ajax({
+                        url: contextPath+'/u/settings', // The servlet URL
+                        method: 'POST',
+                        data: $(this).serialize(), // Serialize the form data
+                        dataType: 'json', // Expect a JSON response
+                        success: function(response) {
+                            // Handle successful form submission (response will contain messageType and message)
+                            if (response.messageType === "success") {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Success!',
+                                    text: response.message,
+                                    showConfirmButton: false,
+                                    timer: 3000
+                                }).then(() => {
+                                    $('#addRoomForm')[0].reset(); // Reset the form after success
+                                });
+                            } else if (response.messageType === "error") {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Oops...',
+                                    text: response.message,
+                                    confirmButtonText: 'Try Again'
+                                });
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            // Handle AJAX errors
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error',
+                                text: 'An error occurred while processing your request. Please try again later.',
+                                confirmButtonText: 'OK'
+                            });
+                        }
+                    });
+                });
+            });
+        </script>
 
 
     <!-- Bootstrap JS and dependencies -->
@@ -131,5 +177,6 @@
     <script src="${pageContext.request.contextPath}/component/js/tools/Chart.min.js"></script>
     <script src="${pageContext.request.contextPath}/component/js/tools/bootstrap.min.js"></script>
     <script src="${pageContext.request.contextPath}/component/js/tools/tooplate-scripts.js"></script>
+    <%@ include file="/views/common/footer.jsp" %>
 </body>
 </html>

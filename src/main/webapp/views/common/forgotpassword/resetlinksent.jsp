@@ -16,5 +16,7 @@
             <button onclick="window.location.href='${pageContext.request.contextPath}/login'">Go to Login</button>
         </div>
     </div>
+
+    <%@ include file="/views/common/footer.jsp" %>
 </body>
 </html>

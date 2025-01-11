@@ -15,5 +15,7 @@
             <p>If you didn't request a password reset or are having trouble, please contact support.</p>
             <button onclick="window.location.href='forgot-password-email.html'">Back to Forgot Password</button>
         </div>
-    </div></body>
+    </div>
+    <%@ include file="/views/common/footer.jsp" %>
+</body>
 </html>

@@ -18,9 +18,8 @@
     <%@ include file="/views/common/headerresident.jsp" %>
 
 
-    <div class="" id="home">
 
-    <div class="container mt-5">
+    <div class="container mt-5 u_main">
         <div class="row justify-content-center">
             <div class="col-md-10">
 
@@ -85,10 +84,6 @@
                             </li>
                         </ul>
 
-                        <!-- Edit Profile Button -->
-                        <div class="text-center mt-4">
-                            <a href="edit_profile.html" class="btn btn-primary btn-lg">Edit Profile</a>
-                        </div>
                     </div>
                 </div>
 
@@ -100,7 +95,6 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
 
-    </div>
 
 
     <script src="js/tools/jquery-3.3.1.min.js"></script>
@@ -127,5 +121,7 @@
     <script src="${pageContext.request.contextPath}/component/js/tools/Chart.min.js"></script>
     <script src="${pageContext.request.contextPath}/component/js/tools/bootstrap.min.js"></script>
     <script src="${pageContext.request.contextPath}/component/js/tools/tooplate-scripts.js"></script>
+
+    <%@ include file="/views/common/footer.jsp" %>
 </body>
 </html>

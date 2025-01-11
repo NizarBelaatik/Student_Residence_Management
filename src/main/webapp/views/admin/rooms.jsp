@@ -37,63 +37,63 @@
 
            
             <div class="row justify-content-center">
-                <div class=" ">
-                    <div class="card_1">
-                        <div class="card_1-body">
-                            <div class="card_1-header" style="display: flex;">
-                                
-                                <input class="form-control" type="text" id="filterInput" placeholder="Search..." style="width:45%;min-width:150px;">
-                                <div class="row add_btn_container"><a href="${pageContext.request.contextPath}/admin/rooms/addRoom" class="add_btn btn btn-success">ADD</a></div>
-                            </div>
-                            <div class="table-wrap">
+                <div class="card_1">
+                    <div class="card_1-body">
+                        <div class="card_1-header" style="display: flex;">
 
-                                <table class="table table-striped table-hover">
-                                    <thead>
-                                      <tr>
-                                        <th>ID</th>
-                                        <th>Name</th>
-                                        <th>Size</th>
-                                        <th>Price</th>
-                                        <th>Equipments</th>
-                                        <th>Status</th>
-                                        <th></th>
-                                      </tr>
-                                    </thead>
-                                    <tbody>
-                                      
-                                      
-                                        <% List<Room> roomList = (List<Room>) request.getAttribute("roomList");
-                                            for (Room data : roomList) {%>
-                                            
-                                            <tr>
-                                              <th scope="row"><%= data.getRoomId() %></th>
-                                              <td><%= data.getRoomName() %></td>
-                                              <td><%= data.getSize() %></td>
-                                              <td><%= data.getPrice() %></td>
-                                              <td><%= data.getEquipment() %></td>
-                                              <td><span class="StatusSpan" data-badge='<%= data.getState() %>'><%= data.getState() %></span></td>
-                                              <td>
-                                                  <a class="actions_button" href="${pageContext.request.contextPath}/admin/rooms/editRoom?roomId=<%= data.getRoomId() %>"><i class="bi bi-pencil-square actions_button_orange"></i></a>
-                                                  <a class="actions_button" onclick="deleteRoom('<%= data.getRoomId() %>')"><i class="bi bi-trash3-fill actions_button_red"></i></a>
-                                              </td>
-                                            </tr>
-                                    
-                                        <% } %>
-                                     
-
-
-                                    </tbody>
-                                </table>
-                            </div>
+                            <input class="form-control" type="text" id="filterInput" placeholder="Search..." style="width:45%;min-width:150px;">
+                            <div class="row add_btn_container"><a href="${pageContext.request.contextPath}/admin/rooms/addRoom" class="add_btn btn btn-success">ADD</a></div>
                         </div>
-                        
-                        
+                        <div class="table-wrap">
+
+                            <table class="table table-striped table-hover">
+                                <thead>
+                                  <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Size</th>
+                                    <th>Price</th>
+                                    <th>Equipments</th>
+                                    <th>Status</th>
+                                    <th></th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+
+
+                                    <% List<Room> roomList = (List<Room>) request.getAttribute("roomList");
+                                        for (Room data : roomList) {%>
+
+                                        <tr>
+                                          <th scope="row"><%= data.getRoomId() %></th>
+                                          <td><%= data.getRoomName() %></td>
+                                          <td><%= data.getSize() %></td>
+                                          <td><%= data.getPrice() %></td>
+                                          <td><%= data.getEquipment() %></td>
+                                          <td><span class="StatusSpan" data-badge='<%= data.getState() %>'><%= data.getState() %></span></td>
+                                          <td>
+                                              <a class="actions_button" href="${pageContext.request.contextPath}/admin/rooms/editRoom?roomId=<%= data.getRoomId() %>"><i class="bi bi-pencil-square actions_button_orange"></i></a>
+                                              <a class="actions_button" onclick="deleteRoom('<%= data.getRoomId() %>')"><i class="bi bi-trash3-fill actions_button_red"></i></a>
+                                          </td>
+                                        </tr>
+
+                                    <% } %>
+
+
+
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                    
+                        
+                        
+
                 </div>
             </div>
         </section>
-        
+
+    </main>
+    <%@ include file="/views/common/footer.jsp" %>
         <script>
             var contextPath = "${pageContext.request.contextPath}";
 

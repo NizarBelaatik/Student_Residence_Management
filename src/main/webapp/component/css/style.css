@@ -51,7 +51,7 @@
 
 body {
   font-family: "Open Sans", sans-serif;
-  background: #F5F5F5;
+  background: #f6f9ff;
 }
 
 a {
@@ -76,18 +76,23 @@ h6 {
 .clr_red{color:red!important;}
 .clr_green{color:rgb(0,200,0)!important;}
 .clr_orange{color:orange!important;}
+
+.row {
+    margin-right: 0!important;
+    margin-left: 0!important;
+}
 /*--------------------------------------------------------------
 # Main
 --------------------------------------------------------------*/
 #main {
   margin-top: 60px;
-  padding: 20px 30px;
+  padding-top: 20px ;
   transition: all 0.3s;
 }
 
 @media (max-width: 1199px) {
   #main {
-    padding: 20px;
+    padding-top: 20px;
   }
 }
 
@@ -204,7 +209,7 @@ header .profile .dropdown-content a:hover {
 /* Main content styles */
 .main {
     margin-top: 60px;
-    padding: 20px;
+  padding-top: 20px ;
     flex: 1;
     transition: margin-left 0.3s ease;
 }
@@ -235,7 +240,7 @@ header .profile .dropdown-content a:hover {
 # Page Title
 --------------------------------------------------------------*/
 .pagetitle {
-  margin-bottom: 10px;
+  margin: 10px 30px;
 }
 
 .pagetitle h1 {
@@ -649,9 +654,12 @@ form .cancle_btn:active {
    border-radius: 50%;
  }
 
+
+
 /*--------------------------------------------------------------
 # Admin Dashboard
 --------------------------------------------------------------*/
+
 
  /* Custom CSS for card styling */
 .card_container  {
@@ -715,6 +723,7 @@ form .cancle_btn:active {
 
 
 /* Info Cards */
+
 .dashboard .info-card {
   padding-bottom: 10px;
   margin:10px 0;
