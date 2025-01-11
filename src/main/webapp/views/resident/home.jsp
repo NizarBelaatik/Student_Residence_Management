@@ -8,6 +8,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="jakarta.servlet.*,jakarta.servlet.http.*,java.io.*,java.util.*,java.sql.*"%><!DOCTYPE html>
+<%@ page import="model.Payment" %>
 <html>
 <head>
     <title>Home</title>
@@ -19,9 +20,9 @@
 
 
 
-    <div class="container mt-5 u_main">
+    <main class=" mt-5 u_main">
         <div class="row justify-content-center">
-            <div class="col-md-10">
+            <div class="col-lg-12">
 
                 <!-- Dashboard Card -->
                 <div class="card dashboard-card">
@@ -46,30 +47,61 @@
 
                         <!-- Payment History Section -->
                         <div class="section-title">Payment History</div>
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>Date</th>
-                                    <th>Amount</th>
-                                    <th>Status</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>2024-01-05</td>
-                                    <td>$500</td>
-                                    <td>Paid</td>
-                                    <td><button class="btn btn-info btn-sm">Download Receipt</button></td>
-                                </tr>
-                                <tr>
-                                    <td>2024-02-05</td>
-                                    <td>$500</td>
-                                    <td>Paid</td>
-                                    <td><button class="btn btn-info btn-sm">Download Receipt</button></td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <div class="table_container">
+                            <table class="table table-striped" style="overflow-x: auto; width: 100%; max-width: 100%;">
+                                <thead>
+                                    <tr>
+                                        <th>Payment ID</th>
+                                        <th>Room ID</th>
+                                        <th>Amount Due</th>
+                                        <th>Amount Paid</th>
+                                        <th>Due Date</th>
+                                        <th>Payment Date</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% List<Payment> P = (List<Payment>) request.getAttribute("P_overdue");
+                                        if (P != null) {
+                                            for (Payment data : P) { %>
+                                                <tr>
+                                                    <td><%= data.getPaymentId() %></td>
+                                                    <td><%= data.getRoomId() %></td>
+                                                    <td><%= data.getAmountDue() %></td>
+                                                    <td><%= data.getAmountPaid() %></td>
+                                                    <td><%= data.getDueDate() %></td>
+                                                    <td><%= data.getPaymentDate() %></td>
+                                                    <td><sapn class="StatusSpan" data-badge='<%= data.getStatus() %>'><%= data.getStatus() %></sapn></td>
+
+                                                </tr>
+                                    <% } } %>
+
+                                    <% List<Payment> P_pending = (List<Payment>) request.getAttribute("P_pending");
+                                        if (P_pending != null) {
+                                            for (Payment data : P_pending) { %>
+                                                <tr>
+                                                    <td><%= data.getPaymentId() %></td>
+                                                    <td><%= data.getRoomId() %></td>
+                                                    <td><%= data.getAmountDue() %></td>
+                                                    <td><%= data.getAmountPaid() %></td>
+                                                    <td><%= data.getDueDate() %></td>
+                                                    <td><%= data.getPaymentDate() %></td>
+                                                    <td><sapn class="StatusSpan" data-badge='<%= data.getStatus() %>'><%= data.getStatus() %></sapn></td>
+
+                                                </tr>
+                                    <% } } %>
+                                </tbody>
+
+
+                            </table>
+                             <!-- Show More Button -->
+                                <div class="text-center">
+                                    <a id="show-more-btn" class="btn_1" href="${pageContext.request.contextPath}/u/payment_history">Show More</a>
+                                </div>
+                        </div>
+
+
+
 
                         <!-- Maintenance Request Section -->
                         <div class="section-title">Maintenance Requests</div>
@@ -89,7 +121,7 @@
 
             </div>
         </div>
-    </div>
+    </main>
 
     <!-- Bootstrap JS and dependencies -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>

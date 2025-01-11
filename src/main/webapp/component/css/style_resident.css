@@ -8,6 +8,10 @@
     --clr-info: #17a2b8; /* Info color (light blue) */
     --clr-danger: #dc3545; /* Danger color (red) */
     --clr-warning: #ffc107; /* Warning yellow color */
+
+    --clr_Available:rgb(0,200,0);
+    --clr_Occupied:red;
+    --clr_Maintenance:orange;
 }
 
 
@@ -43,7 +47,7 @@ header {
 }
 
 .tab-button:hover {
-    background-color: #0056b3;
+    background-color:var(--clr0);
 }
 
 .right-header {
@@ -492,7 +496,7 @@ header {
 }
 
 .btn-primary:hover {
-    background-color: #0056b3;
+    background-color: var(--clr0);
 }
 
 .btn-info {
@@ -504,10 +508,49 @@ header {
     background-color: #117a8b;
 }
 
+
+.table_container{
+    overflow-x: auto;
+    width: 100%;
+    max-width: 100%;
+    overflow-y: auto;
+    height: 100%;
+    max-height: 800px;
+}
+
 .table th,
 .table td {
     vertical-align: middle;
 }
+
+
+.StatusSpan{
+    border: 3px solid;
+    border-radius: 25px;
+    padding: 2px 10px;
+    text-align: center;
+    font-weight:bold;
+}
+.StatusSpan[data-badge='Available'],
+.StatusSpan[data-badge='paid'],
+.StatusSpan[data-badge='true']{
+    color:var(--clr_Available);
+    border-color:var(--clr_Available);}
+
+.StatusSpan[data-badge='Occupied'],
+.StatusSpan[data-badge='overdue'],
+.StatusSpan[data-badge='false']{
+    color:var(--clr_Occupied);
+    border-color:var(--clr_);}
+
+.StatusSpan[data-badge='Maintenance'],
+.StatusSpan[data-badge='pending']{
+    color:var(--clr_Maintenance);
+    border-color:var(--clr_Maintenance);}
+
+
+
+
 
 .section-title {
     font-size: 1.6rem;
@@ -668,6 +711,39 @@ header {
 
 
 
+/* btn_1 Button */
+.btn_1 {
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    user-select: none;
+    border: 1px solid transparent;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    color: #fff;
+    background-color: var(--clr-primary); /* Use primary color */
+    border: 1px solid var(--clr-primary); /* Border color matches primary color */
+    text-decoration: none;
+}
+
+/* Submit Button Hover and Active */
+.btn_1:hover,
+.btn_1:active {
+    color: var(--clr-primary); /* Text color changes on hover/active */
+    background-color: #fff; /* Background turns white */
+    border-color: var(--clr-primary); /* Border remains primary color */
+    text-decoration: none;
+}
+
+.btn_1:active {
+    outline: 0;
+    box-shadow: 0 0 0 .2rem rgba(0, 2, 38, .25); /* Custom focus box-shadow */
+}
 /* btn_2 Button */
 .btn_2 {
     display: inline-block;
@@ -781,7 +857,7 @@ header {
 }
 
 .btn-primary:hover {
-    background-color: #0056b3;
+    background-color: var(--clr0);
 }
 
 .status-badge {

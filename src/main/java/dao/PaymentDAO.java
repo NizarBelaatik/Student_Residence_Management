@@ -155,6 +155,48 @@ public class PaymentDAO {
         return payments;
     }
 
+
+    public List<Payment> getAllPaymentsByResident(String email,String status, int limit) throws SQLException {
+        // Construct the base query
+        String query = "SELECT * FROM payments WHERE email = ?  and status = ?" +
+                "ORDER BY due_date DESC";
+
+        // If limit is greater than 0, add the LIMIT clause
+        if (limit > 0) {
+            query += " LIMIT ?";
+        }
+
+        List<Payment> payments = new ArrayList<>();
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+
+            // Set the email parameter
+            stmt.setString(1, email);
+            stmt.setString(2, status);
+
+            // If there's a limit, set the limit value in the query
+            if (limit > 0) {
+                stmt.setInt(3, limit);  // Set the limit value
+            }
+
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                Payment payment = new Payment(
+                        rs.getString("paymentId"),
+                        rs.getString("fullname"),
+                        rs.getString("email"),
+                        rs.getString("roomId"),
+                        rs.getFloat("amount_due"),
+                        rs.getFloat("amount_paid"),
+                        rs.getTimestamp("due_date"),
+                        rs.getTimestamp("payment_date"),
+                        rs.getString("status"));
+                payments.add(payment);
+            }
+        }
+        return payments;
+    }
+
     public int getPaymentsByStatusSize(String status) {
         String query = "SELECT COUNT(*) FROM payments WHERE status = ?";
         try (Connection connection = DatabaseConnection.getConnection();

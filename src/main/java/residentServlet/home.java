@@ -4,6 +4,7 @@
  */
 package residentServlet;
 
+import dao.PaymentDAO;
 import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -13,11 +14,14 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import model.Payment;
 import model.User;
 import model.Notification;
 
 import dao.NotificationDAO;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 /**
  *
@@ -26,6 +30,8 @@ import java.util.List;
 @WebServlet(name = "home", urlPatterns = {"/u/home"})
 public class home extends HttpServlet {
     NotificationDAO notificationDAO = new NotificationDAO();
+    PaymentDAO paymentDAO = new PaymentDAO();
+
     public home(){
         super();
         }
@@ -48,6 +54,17 @@ public class home extends HttpServlet {
             if (!notification.getStatus()) { // status is false, meaning unread
                 unreadCount++; // Increment the unread count
             }
+        }
+
+        int limit = 5;  // For example, to get the most recent 5 payments
+        //List<Payment> payments = new ArrayList<>();
+        try {
+
+            request.setAttribute("P_overdue", paymentDAO.getAllPaymentsByResident(email,"overdue",limit));
+            request.setAttribute("P_paid", paymentDAO.getAllPaymentsByResident(email,"paid",limit));
+            request.setAttribute("P_pending", paymentDAO.getAllPaymentsByResident(email,"pending",limit));
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
 
 

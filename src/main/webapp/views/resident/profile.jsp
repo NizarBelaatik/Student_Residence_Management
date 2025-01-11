@@ -36,7 +36,7 @@
                         <h3>${resident.getFullname()}</h3>
                         <p>Resident of Room ${room.getRoomName()}</p>
                         <p>Member since:  ${user_since}</p>
-                        <a href="edit_profile.html" class="btn_2">Edit Profile</a>
+                        <a href="${pageContext.request.contextPath}/u/settings" class="btn_2">Edit Profile</a>
                     </div>
                     <div class="card-body">
                         <!-- Personal Information Section -->

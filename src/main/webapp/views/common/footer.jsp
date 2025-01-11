@@ -14,7 +14,37 @@ html, body {
 .u_main{
     flex: 1;
     margin-top:3rem!important;
-    margin-bottom:3rem!important;}
+    margin-bottom:3rem!important;
+
+    }
+
+.u_main {
+    width: 100%; /* Ensure the main content spans the full width */
+    margin: 0 auto; /* Center the content horizontally */
+    padding: 20px; /* Add padding for spacing inside */
+    color: #333; /* Text color */
+    line-height: 1.6; /* Improved line spacing for readability */
+
+}
+
+/* For larger screens, give some space between header and main */
+@media (min-width: 768px) {
+    .u_main {
+        max-width: 1200px; /* Limit the width on larger screens */
+        margin-top: 30px; /* Add space from the header */
+    }
+}
+/* Responsive design for smaller screens (mobile first) */
+@media (max-width: 480px) {
+    .u_main {
+        padding: 5px; /* Reduce padding even further */
+    }
+
+    .u_main > section,
+    .u_main > article {
+        padding: 10px; /* Less padding for mobile screens */
+    }
+}
 
 /* Footer Styling */
 .footer {
@@ -90,7 +120,7 @@ position: relative;
 <!-- Footer -->
 <footer class="footer">
     <div class="container text-center">
-        <p class="footer-text">&copy; 2025 Student Housing Management. All Rights Reserved.</p>
+        <p class="footer-text">&copy; 2025 Student Residence Management. All Rights Reserved.</p>
         <div class="footer-links">
             <a href="#" class="footer-link">Privacy Policy</a>
             <a href="#" class="footer-link">Terms of Service</a>
