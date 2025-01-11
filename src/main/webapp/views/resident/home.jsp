@@ -27,7 +27,7 @@
                 <!-- Dashboard Card -->
                 <div class="card dashboard-card">
                     <div class="card-header text-center">
-                        <h3>Welcome, ${resident.getFullname()}</h3>
+                        <h1>Welcome, ${resident.getFullname()}</h1>
                         <p>Resident of Room ${room.getRoomName()}</p>
                     </div>
                     <div class="card-body">
@@ -36,12 +36,12 @@
                         <div class="section-title">Room Status</div>
                         <div class="row">
                             <div class="col-md-6">
-                                <h5>Room Type: Large</h5>
-                                <p>Contract Start: <strong>2024-01-01</strong></p>
-                                <p>Contract End: <strong>2025-01-01</strong></p>
+                                <h5>Room Size: ${room.getSize()}</h5>
+                                <p>Contract Start: <strong>${resident.getCStartDate()}</strong></p>
+                                <p>Contract End: <strong>${resident.getCEndDate()}</strong></p>
                             </div>
                             <div class="col-md-6 text-end">
-                                <h5>Status: <span class="status-badge status-occupied">Occupied</span></h5>
+                                <h5>Status: <sapn class="StatusSpanReverse" data-badge='${room.getState()}'> ${room.getState()} </sapn></h5>
                             </div>
                         </div>
 
