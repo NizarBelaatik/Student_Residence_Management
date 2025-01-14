@@ -12,7 +12,7 @@
 <head>
     <title>Add Room</title>
 
-    <%@ include file="/views/common/headadminlinks.jsp" %>
+    <%@ include file="/views/common/headeradminlinks.jsp" %>
 </head>
 <body>
     <%@ include file="/views/common/headeradmin.jsp" %>
@@ -41,6 +41,24 @@
 
                             <form id="addUserForm" method="post" action="${pageContext.request.contextPath}/admin/users/userAdd">
                                 <div class="row mb-3">
+                                  <label for="firstname" class="col-sm-2 col-form-label">First Name</label>
+                                  <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="firstname" required>
+                                  </div>
+                                </div>
+                                <div class="row mb-3">
+                                  <label for="lastname" class="col-sm-2 col-form-label">Last Name</label>
+                                  <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="lastname" required>
+                                  </div>
+                                </div>
+                                <div class="row mb-3">
+                                  <label for="phone" class="col-sm-2 col-form-label">Phone</label>
+                                  <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="phone" required>
+                                  </div>
+                                </div>
+                                <div class="row mb-3">
                                   <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
                                   <div class="col-sm-10">
                                     <input type="email" class="form-control" name="inputemail" required>
@@ -68,6 +86,7 @@
                 </div>
             </div>
         </section>
+
     </main>
 
     <script>
@@ -121,5 +140,6 @@
     <script src="${pageContext.request.contextPath}/component/js/tools/jquery-3.3.1.min.js"></script>
     <script src="${pageContext.request.contextPath}/component/js/script.js"></script>
 
+    <%@ include file="/views/common/footer.jsp" %>
 </body>
 </html>

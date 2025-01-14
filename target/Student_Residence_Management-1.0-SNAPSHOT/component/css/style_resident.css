@@ -1,0 +1,887 @@
+:root {
+    --clr0: #fff; /* #f8f9faLight background color */
+    --clr1: #000226; /* Dark primary color */
+    --clr2: #6c757d; /* Secondary gray color */
+    --clr3: #fff;     /* White color */
+    --clr-primary: #000226; /* Primary blue color */
+    --clr-success: #28a745; /* Success green color */
+    --clr-info: #17a2b8; /* Info color (light blue) */
+    --clr-danger: #dc3545; /* Danger color (red) */
+    --clr-warning: #ffc107; /* Warning yellow color */
+
+    --clr_Available:rgb(0,200,0);
+    --clr_Occupied:red;
+    --clr_Maintenance:orange;
+}
+
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: ghostwhite;
+    color: var(--clr1);
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color:var(--clr0) ;/* #f8f9fa */
+    border-bottom: 1px solid #dee2e6;
+}
+/*<img src="profile-image.jpg" alt="Profile Image" class="profile-image">*/
+.left-tabs {
+    display: flex;
+}
+
+.tab-button {
+    margin-right: 15px;
+    padding: 10px 15px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.tab-button:hover {
+    background-color:var(--clr0);
+}
+
+.right-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+    position: relative;
+    margin-right: 20px;
+}
+
+.profile-image {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.username {
+    margin-right: 10px;
+}
+
+.dropdown {
+    position: relative;
+}
+
+.dropbtn {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 9999;
+    right: 0;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+
+.dropdown_header{
+    display: grid;
+    justify-content: center;
+    align-items: center;
+
+    max-width : 230px;
+    overflow:hidden;
+    display:inline-block;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.notification {
+    position: relative;
+}
+
+.notification-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 24px;
+}
+
+.notification-dropdown {
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.notification:hover .notification-dropdown {
+    display: block;
+}
+
+ .badge-number {
+    background-color:red;
+    color: white;
+    position: absolute;
+    inset: 0px 0px auto auto;
+    font-weight: normal;
+    font-size: 12px;
+    font-style: normal;
+    padding: 3px 6px;
+
+}
+
+
+
+
+/* Profile Dropdown*/
+
+
+/* Dropdown menu content renamed to dropdown-profile and adjusted to open right to left */
+.dropdown-profile {
+    visibility: hidden; /* Initially hidden */
+    opacity: 0; /* Initially invisible */
+    position: absolute;
+    right: 0; /* Align dropdown to the right side of the button */
+    background-color: white;
+    min-width: 200px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    border-radius: 5px;
+    list-style: none;
+    padding: 10px;
+    margin-top: -8px;
+    transform: translateY(-10px); /* Start slightly above */
+    transition: opacity 0.5s ease, transform 0.5s ease, visibility 0s 0.5s; /* Smooth transition */
+}
+
+/* Show the dropdown with animation */
+.dropdown.active .dropdown-profile {
+    visibility: visible; /* Make the dropdown visible */
+    opacity: 1; /* Make it visible */
+    transform: translateY(0); /* Bring it to its normal position */
+    transition: opacity 0.3s ease, transform 0.3s ease; /* Transition properties for smooth animation */
+}
+
+
+.dropdown-header {
+    font-weight: bold;
+    margin-bottom: 0;
+    color: #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dropdown-divider {
+    border-top: 1px solid #ccc;
+    margin: 10px 0;
+}
+
+.dropdown-item {
+    display: block;
+    padding: 8px 15px;
+    text-decoration: none;
+    color: #333;
+    width: 100%;
+}
+
+.dropdown-item:hover {
+    background-color: #f1f1f1;
+    border-radius: 5px;
+}
+
+.dropdown-item:active {
+    background-color: #ddd;
+}
+
+/* Email text styling with ellipsis */
+.dropdown-profile li {
+    max-width: 230px;        /* Set the max width of the list item */
+    overflow: hidden;        /* Hide any content that overflows the max width */
+    white-space: nowrap;     /* Prevent the text from wrapping onto multiple lines */
+    text-overflow: ellipsis; /* Add ellipsis (...) if the text overflows */
+}
+
+
+
+
+
+/* Dropdown notifications */
+.dropdown-notifications {
+    visibility: hidden; /* Initially hidden */
+    opacity: 0; /* Initially invisible */
+    position: absolute;
+    right: -150px; /* Start from the right off-screen */
+    background-color: white;
+    min-width: 230px; /* Match width with profile dropdown */
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    border-radius: 5px;
+    list-style: none;
+    padding: 10px;
+    margin-top: -8px; /* Align it with the other dropdown */
+    width: 300px;
+    transform: translateY(-10px); /* Start slightly above */
+    transition: opacity 0.5s ease, transform 0.5s ease, visibility 0s 0.5s; /* Smooth transition */
+    max-height: 500px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    }
+
+/* Show dropdown-notifications with animation */
+.dropdown.active .dropdown-notifications {
+    visibility: visible; /* Make the dropdown visible */
+    opacity: 1; /* Make it visible */
+    transform: translateY(0); /* Bring it to its normal position */
+    transition: opacity 0.3s ease, transform 0.3s ease; /* Transition properties for smooth animation */
+}
+
+
+
+/* Styling for notification items */
+.notification-item {
+    display: flex;
+    align-items: center;
+    padding: 8px 15px;
+    width:290px;
+}
+.notification-item.unchecked {background-color: rgba(0, 0, 0, 0.2);}
+
+.notification-icon {
+
+        border-radius: 50%; /* Fully round the icon */
+        height: 40px; /* Set height of the circle */
+        width: 40px; /* Set width of the circle */
+        display: flex; /* Use flexbox to center the icon inside the circle */
+        align-items: center; /* Vertically center the icon */
+        justify-content: center; /* Horizontally center the icon */
+        font-size: 24px; /* Set a proper size for the icon */
+}
+
+.notification-item .icon-reminder{
+    color:black;
+    background-color: #ffc107; /* Yellow background */
+}
+.notification-item .icon-danger{
+    color:black;
+    background-color: red; /* Yellow background */
+}
+.notification-item .icon-success{
+    color:white;
+    background-color: rgb(0,200,0);
+}
+
+.notification-content {
+    flex-grow: 1;
+    max-width: 180px; /* Adjust the width to fit your design */
+    overflow: hidden; /* Hide any overflowing content */
+    padding-left:10px
+}
+
+.notification-content strong {
+    display: block;
+    color: #333;
+    font-weight: bold;
+}
+
+.notification-content p {
+    margin: 0;
+    color: #777;
+    white-space: normal; /* Allow text to wrap normally */
+    text-overflow: ellipsis; /* Add ellipsis if content overflows */
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Limit the content to 2 lines */
+    -webkit-box-orient: vertical; /* Ensure the content is vertically oriented */
+    line-height: 1.4em; /* Adjust line height for readability */
+
+}
+
+/* Divider line for notifications */
+.notification-divider {
+    border-top: 1px solid #ccc;
+    margin: 10px 0;
+}
+
+/* "Show All Notifications" button at the bottom */
+.show-all-notifications {
+    display: block;
+    padding: 8px 15px;
+    text-decoration: none;
+    color: #333;
+    width: 100%;
+    text-align: center;
+}
+
+.show-all-notifications:hover {
+    background-color: #f1f1f1;
+    border-radius: 5px;
+}
+
+.show-all-notifications:active {
+    background-color: #ddd;
+}
+.badge-number {
+    background-color:red;
+    color: white;
+    position: absolute;
+    inset: -2px -8px auto auto;
+    font-weight: normal;
+    font-size: 12px;
+    font-style: normal;
+    padding: 3px 6px;
+
+}
+
+.menu-items {display: none;}
+
+
+/* For mobile responsiveness */
+@media screen and (max-width: 600px) {
+    .dropdown-btn {
+        width: 100%;
+    }
+}
+
+
+/* Responsive Design (Mobile and Tablet) */
+@media screen and (max-width: 600px) {
+    /* Stack navigation vertically */
+    header {
+        display: flex;
+    }
+
+    .left-tabs {
+        flex-direction: column;
+        margin-bottom: 15px;
+    }
+
+    .tab-button {
+        margin-right: 0;
+        margin-bottom: 10px;
+        width: 100%;
+        text-align: left;
+    }
+
+
+
+
+
+    .dropdown-profile {
+        min-width: 100%;
+    }
+
+    .dropdown-item {
+        padding: 12px 20px;
+        font-size: 16px;
+    }
+
+    /* Add Hamburger Menu for smaller screens */
+    .hamburger-menu {
+        display: block;
+        cursor: pointer;
+        font-size: 30px;
+        background-color: transparent;
+        border: none;
+    }
+
+    /* Show/hide navigation links */
+    .left-tabs{display: none;}
+    .menu-items {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .menu-items.active {
+        display: flex;
+    }
+
+    .menu-items a {
+        padding: 10px;
+        text-decoration: none;
+        color: #333;
+        border-bottom: 1px solid #ddd;
+        width: 100%;
+        text-align: left;
+    }
+
+    .menu-items a:hover {
+        background-color: #f1f1f1;
+    }
+}
+
+/* Styling for desktop */
+@media screen and (min-width: 601px) {
+    .hamburger-menu {
+        display: none;
+    }
+}
+
+
+
+/* ----------------------------------------
+------------- Profile Card Styling ---------
+----------------------------------------*/
+
+.profile-card {
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin-bottom:50px;
+}
+
+.profile-header {
+    background-color: var(--clr-primary);
+    color: var(--clr3);
+    padding: 20px;
+    text-align: center;
+}
+
+.profile-header .profile-img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 4px solid var(--clr3);
+    margin-top: 10px;
+}
+
+.profile-header h3 {
+    font-size: 2.2rem;
+    margin-top: 10px;
+}
+
+.profile-header p {
+    font-size: 1rem;
+    opacity: 0.8;
+}
+.color_Occupied{color:red; font-weight:bold;}
+.color_Available{color:rgb(0,200,0); font-weight:bold;}
+.color_Maintenance{color:orange; font-weight:bold;}
+
+.card-body {
+    background-color: var(--clr0);
+}
+
+.btn-primary {
+    background-color: var(--clr-primary);
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: var(--clr0);
+}
+
+.btn-info {
+    background-color: var(--clr-info);
+    border: none;
+}
+
+.btn-info:hover {
+    background-color: #117a8b;
+}
+
+
+.table_container{
+    overflow-x: auto;
+    width: 100%;
+    max-width: 100%;
+    overflow-y: auto;
+    height: 100%;
+    max-height: 800px;
+}
+
+.table th,
+.table td {
+    vertical-align: middle;
+}
+
+
+.StatusSpan{
+    border: 3px solid;
+    border-radius: 25px;
+    padding: 2px 10px;
+    text-align: center;
+    font-weight:bold;
+}
+.StatusSpan[data-badge='Available'],
+.StatusSpan[data-badge='paid'],
+.StatusSpan[data-badge='true']{
+    color:var(--clr_Available);
+    border-color:var(--clr_Available);}
+
+.StatusSpan[data-badge='Occupied'],
+.StatusSpan[data-badge='overdue'],
+.StatusSpan[data-badge='false']{
+    color:var(--clr_Occupied);
+    border-color:var(--clr_);}
+
+.StatusSpan[data-badge='Maintenance'],
+.StatusSpan[data-badge='pending']{
+    color:var(--clr_Maintenance);
+    border-color:var(--clr_Maintenance);}
+
+
+
+.StatusSpanReverse{
+    border: 3px solid;
+    border-radius: 25px;
+    padding: 2px 10px;
+    text-align: center;
+    font-weight:bold;
+}
+.StatusSpanReverse[data-badge='Available']{
+    color:var(--clr_Occupied);
+    border-color:var(--clr_Occupied);}
+
+.StatusSpanReverse[data-badge='Occupied']{
+    color:var(--clr_Available);
+    border-color:var(--clr_Available);}
+
+.StatusSpanReverse[data-badge='Maintenance']{
+    color:var(--clr_Maintenance);
+    border-color:var(--clr_Maintenance);}
+
+
+
+.section-title {
+    font-size: 1.6rem;
+    color: var(--clr-primary);
+    margin: 20px 0;
+}
+
+.edit-button {
+    background-color: var(--clr-success);
+    color: var(--clr3);
+    border: none;
+}
+
+.edit-button:hover {
+    background-color: #218838;
+}
+
+
+
+/* ----------------------------------------
+------------- Edit Profile Card ---------
+----------------------------------------*/
+.edit-profile-card {
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+
+
+
+
+.form-group label {
+    font-weight: bold;
+}
+
+.form-control {
+    border-radius: 5px;
+    padding: 10px;
+}
+
+/* Custom Checkbox Slider */
+.custom-checkbox {
+    width: 50px;
+    height: 30px;
+    background-color: var(--clr2); /* Default gray color for the slider */
+    border-radius: 50px;
+    position: relative;
+    transition: background-color 0.3s ease;
+    appearance: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.custom-checkbox:checked {
+    background-color: var(--clr-success); /* Green when checked */
+}
+
+.custom-checkbox:before {
+    content: "";
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 24px;
+    height: 24px;
+    background-color: var(--clr3); /* White knob */
+    border-radius: 50%;
+    transition: left 0.3s ease;
+}
+
+.custom-checkbox:checked:before {
+    left: calc(100% - 27px); /* Moves the knob to the right when checked */
+}
+
+.form-check-label {
+    font-size: 1rem;
+    color: var(--clr1); /* Primary text color */
+    margin-left: 10px;
+}
+
+.btn-save {
+    background-color: var(--clr-success);
+    color: var(--clr3);
+    border: none;
+}
+
+.btn-save:hover {
+    background-color: #218838;
+}
+
+.btn-back {
+    background-color: var(--clr-info);
+    color: var(--clr3);
+    border: none;
+}
+
+.btn-back:hover {
+    background-color: #117a8b;
+}
+
+/* Customize the focus style for form-control elements */
+.form-control:focus {
+    color: #495057; /* Text color when input is focused */
+    background-color: #fff; /* Background color remains white */
+    border-color: var(--clr-primary); /* Custom border color for focus */
+    outline: 0; /* Remove the default outline */
+    box-shadow: 0 0 0 .2rem rgba(0, 2, 38, .25); /* Custom box-shadow color */
+}
+/* Submit Button */
+.submit_btn {
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    user-select: none;
+    border: 1px solid transparent;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    color: #fff;
+    background-color: var(--clr-primary); /* Use primary color */
+    border: 1px solid var(--clr-primary); /* Border color matches primary color */
+}
+
+/* Submit Button Hover and Active */
+.submit_btn:hover,
+.submit_btn:active {
+    color: var(--clr-primary); /* Text color changes on hover/active */
+    background-color: #fff; /* Background turns white */
+    border-color: var(--clr-primary); /* Border remains primary color */
+}
+
+.submit_btn:active {
+    outline: 0;
+    box-shadow: 0 0 0 .2rem rgba(0, 2, 38, .25); /* Custom focus box-shadow */
+}
+
+
+
+/* btn_1 Button */
+.btn_1 {
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    user-select: none;
+    border: 1px solid transparent;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    color: #fff;
+    background-color: var(--clr-primary); /* Use primary color */
+    border: 1px solid var(--clr-primary); /* Border color matches primary color */
+    text-decoration: none;
+}
+
+/* Submit Button Hover and Active */
+.btn_1:hover,
+.btn_1:active {
+    color: var(--clr-primary); /* Text color changes on hover/active */
+    background-color: #fff; /* Background turns white */
+    border-color: var(--clr-primary); /* Border remains primary color */
+    text-decoration: none;
+}
+
+.btn_1:active {
+    outline: 0;
+    box-shadow: 0 0 0 .2rem rgba(0, 2, 38, .25); /* Custom focus box-shadow */
+}
+/* btn_2 Button */
+.btn_2 {
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    user-select: none;
+    border: 1px solid transparent;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    color: var(--clr-primary); /* Text color changes to primary color */
+    background-color: #fff; /* Background turns white */
+    border: 1px solid #fff; /* Border color is white */
+        text-decoration: none;
+}
+
+/* Submit Button Hover and Active */
+.btn_2:hover,
+.btn_2:active {
+    color: #fff; /* Text color changes to white */
+    background-color: var(--clr-primary); /* Background turns to primary color */
+    border-color: #fff; /* Border remains primary color */
+    outline: 0;
+    box-shadow: 0 0 0 .2rem rgba(0, 2, 38, .25);
+    text-decoration: none;
+}
+
+
+
+/* Reset (Cancel) Button */
+.reset_btn {
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    user-select: none;
+    border: 1px solid transparent;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    color: red; /* Text color is red */
+    background-color: unset;
+    border: 1px solid red; /* Border color is red */
+}
+
+/* Reset Button Hover and Active */
+.reset_btn:hover,
+.reset_btn:active {
+    color: #fff; /* Text turns white on hover/active */
+    background-color: red; /* Background turns red */
+}
+
+.reset_btn:active {
+    outline: 0;
+    box-shadow: 0 0 0 .2rem rgba(255, 0, 0, .25); /* Custom focus box-shadow */
+}
+
+/* Focus styling for both buttons */
+.submit_btn:focus,
+.reset_btn:focus {
+    outline: 0;
+    box-shadow: 0 0 0 .2rem rgba(0, 2, 38, .25); /* Custom focus box-shadow */
+}
+
+
+
+
+/* ----------------------------------------
+------------- Dashboard Styling ---------
+----------------------------------------*/
+.dashboard-card {
+    border-radius: 10px;
+    box-shadow: 0px 0 30px rgba(0, 0, 0, 0.2);/*0 4px 12px rgba(0, 0, 0, 0.1)*/
+}
+
+.card-header {
+    background-color: var(--clr-primary);
+    color: var(--clr3);
+    padding: 20px;
+    border-radius:10px 10px 0 0!important;
+}
+
+.dashboard-card .card-body {
+    background-color: var(--clr0);
+    border-radius:0 0 10px 10px !important;
+}
+
+.card-body h5 {
+    margin-top: 10px;
+}
+
+.btn-info {
+    background-color: var(--clr-warning);
+    border: none;
+}
+
+.btn-info:hover {
+    background-color: #117a8b;
+}
+
+
+
+.btn-primary {
+    background-color: var(--clr-primary);
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: var(--clr0);
+}
+
+.status-badge {
+    font-size: 0.9rem;
+    border-radius: 20px;
+    padding: 5px 10px;
+    color: var(--clr3);
+}
+
+.status-occupied {
+    background-color: var(--clr-success);
+}
+
+.status-available {
+    background-color: var(--clr-warning);
+}
+
+.status-maintenance {
+    background-color: var(--clr-danger);
+}
+
+
+

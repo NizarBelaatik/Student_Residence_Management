@@ -99,7 +99,7 @@
                 </div>
             </div>
         </section>
-        <%@ include file="/views/common/footer.jsp" %>
+
     </main>
 
     <script>
@@ -149,7 +149,7 @@
             });
         });
     </script>
-
+    <%@ include file="/views/common/footer.jsp" %>
     <script src="${pageContext.request.contextPath}/component/js/tools/jquery-3.3.1.min.js"></script>
     <script src="${pageContext.request.contextPath}/component/js/script.js"></script>
 

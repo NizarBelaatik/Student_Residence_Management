@@ -14,7 +14,7 @@
 
 <head>
     <title>Manage Payments</title>
-    <%@ include file="/views/common/headadminlinks.jsp" %>
+    <%@ include file="/views/common/headeradminlinks.jsp" %>
 </head>
 
 <body>
@@ -33,30 +33,8 @@
             </nav>
         </div>
         <section>
-            <div class="row">
-
-
-                <div class="col-lg-3 col-md-3">
-                    <div class="col-lg-12">
-                        <div class="card_1" id="paymentStatusBox" >
-                            <div class="card_1-header text-center">
-                                <h4 class="card_1-title">Payment Status for Current Month</h4>
-                            </div>
-                            <div class="card_1-body">
-                                <!-- Dynamic content for payment status -->
-                                <div id="paymentMessage" class="alert" role="alert">
-                                    <!-- This message will change based on whether payments are generated or not -->
-                                    Payments have been <strong>generated</strong> for this month.
-                                </div>
-
-                                <!-- Button to trigger action (for generating payments if not yet done) -->
-                                <button id="generatePaymentButton" class="btn1 submit_btn w-100" onclick="generatePayment()">Generate Payments</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-sm-3 col-md-3">
+            <div class="row justify-content-center">
+                <div class="col-sm-4 col-md-4">
                     <div class="card_container overdue">
                         <i class="bi bi-hourglass-bottom card_icon"></i>
                         <div class="card_text">Payments |<span> Overdue</span></div>
@@ -66,7 +44,7 @@
                 </div>
 
 
-                <div class="col-sm-3 col-md-3">
+                <div class="col-sm-4 col-md-4">
                     <div class="card_container paid">
                         <i class="bi bi-currency-dollar card_icon"></i>
                         <div class="card_text">Payments |<span> Paid</span></div>
@@ -75,7 +53,7 @@
                     </div>
                 </div>
 
-                <div class="col-sm-3 col-md-3">
+                <div class="col-sm-4 col-md-4">
                     <div class="card_container pending">
                         <i class="bi bi-clock-history card_icon"></i>
                         <div class="card_text">Payments |<span> Pending</span></div>
@@ -84,17 +62,33 @@
                     </div>
                 </div>
 
+                <div class="col-lg-7 col-md-7">
+                    <div class="card_container " id="paymentStatusBox" >
+                        <div class="card_1-header text-center">
+                            <h4 class="card_1-title">Payment Status for Current Month</h4>
+                        </div>
+                        <div class="card_1-body">
+                            <!-- Dynamic content for payment status -->
+                            <div id="paymentMessage" class="alert" role="alert">
+                                <!-- This message will change based on whether payments are generated or not -->
+                                Payments have been <strong>generated</strong> for this month.
+                            </div>
 
+                            <!-- Button to trigger action (for generating payments if not yet done) -->
+                            <button id="generatePaymentButton" class="btn1 submit_btn w-100" onclick="generatePayment()">Generate Payments</button>
+                        </div>
+                    </div>
+                </div>
 
 
             </div>
 
             <!-- Overdue Payments -->
             <div class="row justify-content-center">
-                <div class="col-lg-11">
+                <div class="col-lg-12">
                     <div class="card_1">
                         <div class="card_1-body">
-                            <h5 class="card_1-title">Overdue</h5>
+                            <h5 class="card_1-title clr_red">Overdue</h5>
                             <div class="card_1-header" style="display: flex;">
                                 <input class="form-control" type="text" id="filterInput" placeholder="Search..." style="width:45%;min-width:150px;">
                             </div>
@@ -147,10 +141,10 @@
                 </div>
 
                 <!-- Pending Payments -->
-                <div class="col-md-11">
+                <div class="col-md-12">
                     <div class="card_1">
                         <div class="card_1-body">
-                            <h5 class="card_1-title">Pending</h5>
+                            <h5 class="card_1-title clr_orange">Pending</h5>
                             <div class="card_1-header" style="display: flex;">
                                 <input class="form-control" type="text" id="filterInput" placeholder="Search..." style="width:45%;min-width:150px;">
                             </div>
@@ -202,10 +196,10 @@
                 </div>
 
                 <!-- Paid Payments -->
-                <div class="col-md-11">
+                <div class="col-md-12">
                     <div class="card_1">
                         <div class="card_1-body">
-                            <h5 class="card_1-title">Paid</h5>
+                            <h5 class="card_1-title clr_green">Paid</h5>
                             <div class="card_1-header" style="display: flex;">
                                 <input class="form-control" type="text" id="filterInput" placeholder="Search..." style="width:45%;min-width:150px;">
                             </div>
@@ -258,6 +252,7 @@
 
         </section>
     </main>
+    <%@ include file="/views/common/footer.jsp" %>
 
     <script src="${pageContext.request.contextPath}/component/js/tools/jquery-3.3.1.min.js"></script>
     <script src="${pageContext.request.contextPath}/component/js/script.js"></script>
@@ -428,6 +423,7 @@
             window.location.href = downloadUrl; // This will start the download
         });
     </script>
+
 
 </body>
 

@@ -11,7 +11,7 @@
 <head>
     <title>Edit User</title>
 
-    <%@ include file="/views/common/headadminlinks.jsp" %>
+    <%@ include file="/views/common/headeradminlinks.jsp" %>
 </head>
 <body>
     <%@ include file="/views/common/headeradmin.jsp" %>
@@ -39,6 +39,25 @@
                             </div>
 
                             <form id="addUserForm" method="post" action="${pageContext.request.contextPath}/admin/users/addUser">
+                                <div class="row mb-3">
+                                  <label for="firstname" class="col-sm-2 col-form-label">First Name</label>
+                                  <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="firstname" value="${user_info.getFirstname()}" required>
+                                  </div>
+                                </div>
+                                <div class="row mb-3">
+                                  <label for="lastname" class="col-sm-2 col-form-label">Last Name</label>
+                                  <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="lastname" value="${user_info.getLastname()}" required>
+                                  </div>
+                                </div>
+                                <div class="row mb-3">
+                                  <label for="phone" class="col-sm-2 col-form-label">Phone</label>
+                                  <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="phone" value="${user_info.getPhone()}" required>
+                                  </div>
+                                </div>
+
                                 <div class="row mb-3">
                                   <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
                                   <div class="col-sm-10">
@@ -80,6 +99,7 @@
                 </div>
             </div>
         </section>
+        <%@ include file="/views/common/footer.jsp" %>
     </main>
 
     <script>

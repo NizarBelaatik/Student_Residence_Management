@@ -16,5 +16,6 @@
             <button onclick="window.location.href='${pageContext.request.contextPath}/login'">Go to Login</button>
         </div>
     </div>
+
 </body>
 </html>

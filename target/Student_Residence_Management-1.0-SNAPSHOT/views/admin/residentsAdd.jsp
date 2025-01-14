@@ -12,7 +12,7 @@
 <head>
     <title>Add Room</title>
     
-    <%@ include file="/views/common/headadminlinks.jsp" %>
+    <%@ include file="/views/common/headeradminlinks.jsp" %>
 </head>
 <body>
     <%@ include file="/views/common/headeradmin.jsp" %>
@@ -67,8 +67,8 @@
                                     <label for="inputState" class="col-sm-2 col-form-label">Gender</label>
                                     <div class="col-sm-10">
                                     <select name="inputgender" class="form-select" required>
-                                      <option value="Male">Male</option>
-                                      <option value="Female">Female</option>
+                                      <option value="male">Male</option>
+                                      <option value="female">Female</option>
                                     </select>
                                   </div>
                                 </div>
@@ -131,6 +131,7 @@
                 </div>
             </div>
         </section>
+
     </main>
 
     <script>
@@ -184,5 +185,6 @@
     <script src="${pageContext.request.contextPath}/component/js/tools/jquery-3.3.1.min.js"></script>
     <script src="${pageContext.request.contextPath}/component/js/script.js"></script>
 
+    <%@ include file="/views/common/footer.jsp" %>
 </body>
 </html>

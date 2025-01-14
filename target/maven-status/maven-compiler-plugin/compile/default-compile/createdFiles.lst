@@ -1,6 +1,8 @@
 adminServlet\residents.class
 api\PDFDownloadServlet.class
 com\mycompany\student_residence_management\JakartaRestConfiguration.class
+model\UserAdminTInfo.class
+dao\MaintenanceRequestsDAO.class
 com\mycompany\student_residence_management\resources\JakartaEE10Resource.class
 utils\GenerateRandomString.class
 adminServlet\usersAdd.class
@@ -8,11 +10,11 @@ dao\UserDAO.class
 model\User.class
 model\Notification.class
 forgotpassword\forgotPassword.class
+common_pages\main.class
 adminServlet\roomsDelete.class
 utils\DateUtils.class
 adminServlet\roomsAdd.class
 adminServlet\residentsDelete.class
-common_pages\dashboard_common.class
 model\Payment.class
 residentServlet\resident.class
 forgotpassword\resetlinksent.class
@@ -22,6 +24,7 @@ filter\UserAuthFilter.class
 dao\NotificationDAO.class
 api\generateMonthlyPayments.class
 common_pages\regiserVerification.class
+residentServlet\settings.class
 common_pages\login.class
 model\EmailVerification.class
 adminServlet\residentsEdit.class
@@ -30,6 +33,8 @@ filter\AuthFilter.class
 service\DatabaseConnection.class
 service\PaymentReceiptGenerator.class
 service\EmailSender.class
+dao\UserAdminTInfoDAO.class
+model\MaintenanceRequests.class
 service\EmailSender$1.class
 api\SendPaymentReminder.class
 adminServlet\usersEdit.class
@@ -38,7 +43,9 @@ forgotpassword\invalidtoken.class
 residentServlet\notification.class
 common_pages\logout.class
 adminServlet\Dashboard.class
+common_pages\error.class
 model\Resident.class
+api\getMaintenanceGraph.class
 residentServlet\profile.class
 common_pages\register.class
 service\PaymentManager.class
@@ -46,6 +53,7 @@ adminServlet\payments.class
 adminServlet\rooms.class
 adminServlet\roomsEdit.class
 model\Room.class
+forgotpassword\changePassword.class
 residentServlet\updateNotificationStatus.class
 dao\PaymentDAO.class
 dao\RoomDAO.class

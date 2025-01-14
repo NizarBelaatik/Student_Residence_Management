@@ -9,7 +9,7 @@
 <head>
     <title>Edit Room: ${room.getRoomId()}</title>
 
-    <%@ include file="/views/common/headadminlinks.jsp" %>
+    <%@ include file="/views/common/headeradminlinks.jsp" %>
 
 </head>
 <body>
@@ -90,6 +90,7 @@
                 </div>
             </div>
         </section>
+
     </main>
 
     <script>
@@ -142,5 +143,6 @@
     
     <script src="${pageContext.request.contextPath}/component/js/tools/jquery-3.3.1.min.js"></script>
     <script src="${pageContext.request.contextPath}/component/js/script.js"></script>
+    <%@ include file="/views/common/footer.jsp" %>
 </body>
 </html>

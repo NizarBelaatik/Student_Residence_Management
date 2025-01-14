@@ -13,7 +13,7 @@
     <head>
 
         <title>Manage Rooms</title>
-        <%@ include file="/views/common/headadminlinks.jsp" %>
+        <%@ include file="/views/common/headeradminlinks.jsp" %>
 
 
     </head>
@@ -88,9 +88,10 @@
             </div>
         </section>
 
+    </main>
 
-
+<%@ include file="/views/common/footer.jsp" %>
         <script src="${pageContext.request.contextPath}/component/js/tools/jquery-3.3.1.min.js"></script>
         <script src="${pageContext.request.contextPath}/component/js/script.js"></script>
-    </body>
+</body>
 </html>

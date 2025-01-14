@@ -114,6 +114,7 @@ header {
     justify-content: space-between;
     padding: 0 20px;
     z-index: 1000;
+    box-shadow:-3px 0 5px 4px rgba(69, 92, 113, 0.6);
 }
 
 header .logo {
