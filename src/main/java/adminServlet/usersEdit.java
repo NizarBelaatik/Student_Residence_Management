@@ -59,10 +59,17 @@ public class usersEdit extends HttpServlet {
 
 
         String inputemail = request.getParameter("inputemail");
+        String firstname = request.getParameter("firstname");
+        String lastname = request.getParameter("lastname");
+        String phone = request.getParameter("phone");
+
+
         String inputRole = request.getParameter("inputRole");
         String inputisactive = request.getParameter("inputisactive");
 
         User  user_data = new User(inputemail,null,inputRole);
+        UserAdminTInfo add_user_info = new UserAdminTInfo(inputemail , firstname, lastname,phone);
+
         boolean isactive =false;
         if (inputisactive != null && inputisactive.equals("on")) {
             // Checkbox is checked
@@ -70,11 +77,13 @@ public class usersEdit extends HttpServlet {
         }
         user_data.setActive(isactive);
 
+
         boolean success = false;
         String message = "";
         try {
             // Add the room via DAO
             userDAO.updateUser(user_data);
+            useradmintinfoDAO.updateUserAdminTInfo(add_user_info);
             success = true;
             message = "User "+inputemail+" has been successfully Updated!";
         } catch (SQLException e) {
