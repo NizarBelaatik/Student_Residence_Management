@@ -40,6 +40,25 @@
 
                             <form id="addUserForm" method="post" action="${pageContext.request.contextPath}/admin/users/addUser">
                                 <div class="row mb-3">
+                                  <label for="firstname" class="col-sm-2 col-form-label">First Name</label>
+                                  <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="firstname" value="${user_info.getFirstname()}" required>
+                                  </div>
+                                </div>
+                                <div class="row mb-3">
+                                  <label for="lastname" class="col-sm-2 col-form-label">Last Name</label>
+                                  <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="lastname" value="${user_info.getLastname()}" required>
+                                  </div>
+                                </div>
+                                <div class="row mb-3">
+                                  <label for="phone" class="col-sm-2 col-form-label">Phone</label>
+                                  <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="phone" value="${user_info.getPhone()}" required>
+                                  </div>
+                                </div>
+
+                                <div class="row mb-3">
                                   <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
                                   <div class="col-sm-10">
                                     <input type="email" class="form-control" name="inputemail" value="${user.getEmail()}" required>

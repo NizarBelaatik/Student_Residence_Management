@@ -16,6 +16,5 @@
             <button onclick="window.location.href='forgot-password-email.html'">Back to Forgot Password</button>
         </div>
     </div>
-    <%@ include file="/views/common/footer.jsp" %>
 </body>
 </html>

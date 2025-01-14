@@ -9,6 +9,8 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import model.User;
 import dao.UserDAO;
+import model.UserAdminTInfo;
+import dao.UserAdminTInfoDAO;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -17,6 +19,7 @@ import java.sql.SQLException;
 @WebServlet(name = "editUser", urlPatterns = {"/admin/users/editUser"})
 public class usersEdit extends HttpServlet {
     private UserDAO userDAO = new UserDAO();
+    private UserAdminTInfoDAO useradmintinfoDAO = new UserAdminTInfoDAO();
 
     public usersEdit(){
         super();
@@ -27,9 +30,11 @@ public class usersEdit extends HttpServlet {
         // Forward the request to the actual JSP page
         String inputemail = request.getParameter("email");
         User userData ;
+        UserAdminTInfo user_info;
         try{
             userData = userDAO.getUserByEmailWithoutPW(inputemail);
-
+            user_info = useradmintinfoDAO.getUserAdminTInfoByEmail(inputemail);
+            request.setAttribute("user_info", user_info);
             request.setAttribute("user", userData);
         }catch(SQLException e){
         }

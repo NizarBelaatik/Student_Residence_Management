@@ -46,11 +46,11 @@ public class home extends HttpServlet {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpSession session = req.getSession(false);
         
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/views/resident/home.jsp");
+
         User user = (User) session.getAttribute("user");
         String email= user.getEmail() ;
 
-
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/views/resident/home.jsp");
         List<Notification> notif=  notificationDAO.getNotifByEmail(email);
 
         int unreadCount = 0;

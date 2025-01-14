@@ -36,7 +36,6 @@ public class ResetPassword extends HttpServlet {
         try{
 
             EmailVerification tokenKeyDATA = emailVeriDAO.getEmailVerificationByToken(token);
-            System.out.println("==========="+tokenKeyDATA.isTimeStillValid());
             if(!tokenKeyDATA.isTimeStillValid()){
                 response.sendRedirect(request.getContextPath() + "/invalid-token");
                 return;

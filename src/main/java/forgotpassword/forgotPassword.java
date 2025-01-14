@@ -41,7 +41,7 @@ public class forgotPassword extends HttpServlet {
         }
 
         // Generate a reset token (simple random string for demonstration)
-        String resetToken = GenerateRandomString.generateToken(20);
+        String resetToken = GenerateRandomString.generateToken(50);
 
         // Store the token with the email in memory (or store it in DB with expiration time)
         Timestamp createdAt = new Timestamp(System.currentTimeMillis());  // Current time as Timestamp

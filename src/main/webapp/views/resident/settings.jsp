@@ -38,6 +38,15 @@
                         <p>Update your information below</p>
                     </div>
 
+                    <!-- Change Password Form -->
+                    <div class="card-body">
+                        <form id="change-password-form" method="post">
+                            <button class="btn_1" type="submit">Change Password</button>
+                        </form>
+                        <!-- Notification Box -->
+                        <div id="notificationPW" style="display: none; padding: 10px; margin-top: 20px;"></div>
+                    </div>
+
                     <!-- Profile Edit Form -->
                     <div class="card-body">
                         <form action="${pageContext.request.contextPath}/u/settings" method="POST" id="settingsForm">
@@ -136,6 +145,42 @@
                 });
             });
         </script>
+
+
+        <script>
+        $(document).ready(function() {
+            // Handle the form submission
+            $('#change-password-form').submit(function(event) {
+                event.preventDefault(); // Prevent default form submission
+                var contextPath = "${pageContext.request.contextPath}";
+                // AJAX request (email is already in the session, so no need to send it)
+                $.ajax({
+                    url: contextPath+'/change-password',  // Servlet URL
+                    type: 'POST',
+                    dataType: 'json',  // Expecting a JSON response
+                    success: function(response) {
+                        // Display notification based on the response
+                        var notificationBox = $('#notificationPW');
+                        notificationBox.text(response.message);
+                        if (response.messageType === "success") {
+                            notificationBox.css('background-color', 'green').css('color', 'white');
+                        } else {
+                            notificationBox.css('background-color', 'red').css('color', 'white');
+                        }
+                        notificationBox.show();  // Show the notification box
+                    },
+                    error: function(xhr, status, error) {
+                        // Handle errors
+                        var notificationBox = $('#notificationPW');
+                        notificationBox.text("An error occurred. Please try again.");
+                        notificationBox.css('background-color', 'red').css('color', 'white');
+                        notificationBox.show();
+                    }
+                });
+            });
+        });
+        </script>
+
 
 
     <!-- Bootstrap JS and dependencies -->

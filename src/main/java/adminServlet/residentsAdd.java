@@ -49,7 +49,7 @@ public class residentsAdd extends HttpServlet {
             roomList = roomDAO.getAllRoomsAvailable();
             request.setAttribute("roomList", roomList);
         }catch(SQLException e){
-            System.out.println(e);
+            //e.printStackTrace();
         }
         RequestDispatcher dispatcher = request.getRequestDispatcher("/views/admin/residentsAdd.jsp");
         request.setAttribute("activePage", "residents");  // Set active page

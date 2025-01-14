@@ -28,12 +28,10 @@ public class PasswordHasher {
         
         // Hash the password
         String hashedPassword = hashPassword(plainPassword);
-        System.out.println("Hashed Password: " + hashedPassword);
 
         // Now you can store the hashed password in your database
         
         // Verify the password during login (for example)
         boolean isCorrect = checkPassword("mySecurePassword123", hashedPassword);
-        System.out.println("Password is correct: " + isCorrect);
     }
 }

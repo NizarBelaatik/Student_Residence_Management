@@ -18,7 +18,6 @@ public class ScheduledPaymentManager {
 
         // Schedule to run on the 1st day of the next month
         scheduler.schedule(() -> generatePayments(), delay, TimeUnit.DAYS);
-        System.out.println("Scheduled payment generation for: " + firstDayOfNextMonth);
     }
 
     private void generatePayments() {
@@ -31,9 +30,6 @@ public class ScheduledPaymentManager {
 
                 // Mark as generated in the database
                 markPaymentsAsGeneratedForCurrentMonth();
-                System.out.println("Payments generated for the current month.");
-            } else {
-                System.out.println("Payments have already been generated for this month.");
             }
         } catch (SQLException e) {
             e.printStackTrace();

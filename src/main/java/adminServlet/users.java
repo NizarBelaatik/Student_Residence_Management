@@ -1,6 +1,7 @@
 package adminServlet;
 
 
+import dao.UserAdminTInfoDAO;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -19,6 +20,7 @@ import java.util.List;
 @WebServlet(name = "users", urlPatterns = {"/admin/users"})
 public class users  extends HttpServlet {
     private UserDAO userDAO = new UserDAO();
+    private UserAdminTInfoDAO useradmintinfoDAO = new UserAdminTInfoDAO();
     public users(){
         super();
     }

@@ -44,15 +44,16 @@ public class register extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // Forward the request to the actual JSP page
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/views/common/register.jsp");
-        request.setAttribute("activePage", "dashboard");  // Set active page
-        dispatcher.forward(request, response);
+        response.sendRedirect(request.getContextPath()+"/error");
+        //RequestDispatcher dispatcher = request.getRequestDispatcher("/views/common/register.jsp");
+        //request.setAttribute("activePage", "dashboard");  // Set active page
+        //dispatcher.forward(request, response);
     }
     
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // Forward the request to the actual JSP page
-        
+        response.sendRedirect(request.getContextPath()+"/error");
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
 

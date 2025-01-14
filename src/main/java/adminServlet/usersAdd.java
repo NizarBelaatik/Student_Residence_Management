@@ -19,7 +19,8 @@ import dao.UserDAO;
 import service.EmailSender;
 import utils.GenerateRandomString;
 import utils.PasswordHasher;
-
+import model.UserAdminTInfo;
+import dao.UserAdminTInfoDAO;
 
 import java.sql.*;
 
@@ -28,6 +29,7 @@ import java.sql.*;
 //@WebServlet("/admin/rooms/add")
 public class usersAdd extends HttpServlet {
     private UserDAO userDAO = new UserDAO();
+    private UserAdminTInfoDAO useradmintinfoDAO = new UserAdminTInfoDAO();
 
     public usersAdd(){
         super();
@@ -50,18 +52,24 @@ public class usersAdd extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
 
         String inputemail = request.getParameter("inputemail");
+        String firstname = request.getParameter("firstname");
+        String lastname = request.getParameter("lastname");
+        String phone = request.getParameter("phone");
+
         String inputRole = request.getParameter("inputRole");
+
 
         String password= GenerateRandomString.generatePassword();
         String passwordHashed= PasswordHasher.hashPassword(password);
 
         User add_user = new User(inputemail,passwordHashed,inputRole);
-
+        UserAdminTInfo add_user_info = new UserAdminTInfo(inputemail , firstname, lastname,phone);
         boolean success = false;
         String message = "";
         try {
             // Add the room via DAO
             userDAO.addUser(add_user);
+            useradmintinfoDAO.addUserAdminTInfo(add_user_info);
             success = true;
             message = "User has been successfully added!";
 

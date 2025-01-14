@@ -48,8 +48,8 @@ public class EmailSender {
     public static void sendEmail(String toEmail, String subject, String body) {
         // SMTP server configuration
         String host = "smtp.gmail.com";  // Change to your SMTP server
-        final String fromEmail = "codenight03@gmail.com";  // Your email
-        final String password = "qcqy lqrx olql cauv";  // Your email password
+        final String fromEmail = "codenight03@gmail.com";// System.getenv("MAIL_USERNAME"); export MAIL_USERNAME="your_email@example.com" // Your email
+        final String password = "qcqy lqrx olql cauv"; //System.getenv("MAIL_PASSWORD"); export MAIL_PASSWORD="your_password_token"//"qcqy lqrx olql cauv";  // Your email password
         // Set properties for the mail session
         Properties properties = new Properties();
         properties.put("mail.smtp.host", host);
@@ -126,7 +126,6 @@ public class EmailSender {
 
             // Send the email
             Transport.send(message);
-            System.out.println("Email sent successfully with attachment!");
         } catch (Exception e) {
             e.printStackTrace();
         }

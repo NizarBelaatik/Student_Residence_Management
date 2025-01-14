@@ -205,7 +205,6 @@ public class UserDAO {
 
             ps.setString(1, user.getRole());
             ps.setBoolean(2, user.isActive());
-            System.out.println("====================="+user.isActive());
             ps.setTimestamp(3, new Timestamp(System.currentTimeMillis())); // updated_at to current timestamp
             ps.setString(4, user.getEmail());
 
