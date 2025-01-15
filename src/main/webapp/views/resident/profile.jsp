@@ -56,9 +56,15 @@
                             <li class="list-group-item"><strong>Room Equipment:</strong> ${room.getEquipment()}</li>
                             <li class="list-group-item"><strong>Contract Start Date:</strong> ${resident.getCStartDate()}</li>
                             <li class="list-group-item"><strong>Contract End Date:</strong> ${resident.getCEndDate()}</li>
-                            <li class="list-group-item"><strong>Status:</strong> <span class="color_${room.getState()}">${room.getState()}</span></li>
+                            <li class="list-group-item"><strong>Status:</strong>
+                                <span class="StatusSpanIcon" data-badge='${room.getState()}'>
+                                  <i class="
+                                    ${room.getState() == 'Occupied' ? 'bi bi-check-circle color_green' :
+                                      room.getState() == 'Available' ? 'bi bi-ban color_red' :
+                                      room.getState() == 'Maintenance' ? 'bi bi-tools color_orange' : ''}">
+                                  </i>
+                                </span>
                         </ul>
-
 
                     </div>
                 </div>
@@ -70,18 +76,6 @@
     <!-- Bootstrap JS and dependencies -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
-
-
-    <script src="js/tools/jquery-3.3.1.min.js"></script>
-    <!-- https://jquery.com/download/ -->
-    <script src="js/tools/moment.min.js"></script>
-    <!-- https://momentjs.com/ -->
-    <script src="js/tools/Chart.min.js"></script>
-    <!-- http://www.chartjs.org/docs/latest/ -->
-    <script src="js/tools/bootstrap.min.js"></script>
-    <!-- https://getbootstrap.com/ -->
-    <script src="js/tools/tooplate-scripts.js"></script>
-
 
 
 

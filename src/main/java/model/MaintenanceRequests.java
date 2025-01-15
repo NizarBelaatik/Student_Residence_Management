@@ -20,12 +20,12 @@ public class MaintenanceRequests {
     private LocalDateTime updatedAt;
 
     // Constructor
-    public MaintenanceRequests(String residentEmail, String roomId, String issueType, String issueDescription) {
+    public MaintenanceRequests(String residentEmail, String roomId, String issueType, String issueDescription,String status) {
         this.residentEmail = residentEmail;
         this.roomId = roomId;
         this.issueType = issueType;
         this.issueDescription = issueDescription;
-        this.status = "pending";  // Default status is "pending"
+        this.status = status; // Default status is "pending"
     }
 
     // Getters and Setters

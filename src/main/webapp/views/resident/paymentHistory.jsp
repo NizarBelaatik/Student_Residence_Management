@@ -155,17 +155,6 @@
 
 
 
-    <script src="js/tools/jquery-3.3.1.min.js"></script>
-    <!-- https://jquery.com/download/ -->
-    <script src="js/tools/moment.min.js"></script>
-    <!-- https://momentjs.com/ -->
-    <script src="js/tools/Chart.min.js"></script>
-    <!-- http://www.chartjs.org/docs/latest/ -->
-    <script src="js/tools/bootstrap.min.js"></script>
-    <!-- https://getbootstrap.com/ -->
-    <script src="js/tools/tooplate-scripts.js"></script>
-
-
 
     <script src="${pageContext.request.contextPath}/component/js/script.js"></script>
     <script src="${pageContext.request.contextPath}/component/js/tooplate-scripts.js"></script>

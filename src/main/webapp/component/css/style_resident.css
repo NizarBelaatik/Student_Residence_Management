@@ -14,7 +14,9 @@
     --clr_Maintenance:orange;
 }
 
-
+.color_green{color:rgb(0,200,0)}
+.color_red{color:red}
+.color_orange{color:orange}
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -649,7 +651,7 @@ header {
     color:var(--clr_Maintenance);
     border-color:var(--clr_Maintenance);}
 
-
+.StatusSpanIcon{font-size:2rem;}
 
 .section-title {
     font-size: 1.6rem;

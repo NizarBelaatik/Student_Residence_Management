@@ -48,69 +48,74 @@
                         <!-- Payment History Section -->
                         <div class="section-title">Payment History</div>
                         <div class="table_container">
-                            <table class="table table-striped table-hover" style="overflow-x: auto; width: 100%; max-width: 100%;">
-                                <thead>
-                                    <tr>
-                                        <th>Payment ID</th>
-                                        <th>Room ID</th>
-                                        <th>Amount Due</th>
-                                        <th>Amount Paid</th>
-                                        <th>Due Date</th>
-                                        <th>Status</th>
-                                        <th></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <% List<Payment> P = (List<Payment>) request.getAttribute("P_overdue");
-                                        if (P != null) {
-                                            for (Payment data : P) { %>
-                                                <tr>
-                                                    <td><%= data.getPaymentId() %></td>
-                                                    <td><%= data.getRoomId() %></td>
-                                                    <td><%= data.getAmountDue() %></td>
-                                                    <td><%= data.getAmountPaid() %></td>
-                                                    <td><%= data.getDueDate() %></td>
-                                                    <td><span class="StatusSpan" data-badge='<%= data.getStatus() %>'><%= data.getStatus() %></span></td>
-                                                    <td>
-                                                        <button class="btn btn-success makePaymentBtn" data-paymentid="<%= data.getPaymentId() %>">
-                                                            <i class="bi bi-currency-dollar"></i> Make Payment
-                                                        </button>
-                                                    </td>
-                                                </tr>
-                                    <% } } %>
+                        <%   List<Payment> P_overdue = (List<Payment>) request.getAttribute("P_overdue");
+                            List<Payment> P_pending = (List<Payment>) request.getAttribute("P_pending");
+                            if (P_overdue != null) { %>
 
-                                    <% List<Payment> P_pending = (List<Payment>) request.getAttribute("P_pending");
-                                        if (P_pending != null) {
-                                            for (Payment data : P_pending) { %>
-                                                <tr>
-                                                    <td><%= data.getPaymentId() %></td>
-                                                    <td><%= data.getRoomId() %></td>
-                                                    <td><%= data.getAmountDue() %></td>
-                                                    <td><%= data.getAmountPaid() %></td>
-                                                    <td><%= data.getDueDate() %></td>
-                                                    <td><span class="StatusSpan" data-badge='<%= data.getStatus() %>'><%= data.getStatus() %></span></td>
-                                                    <td>
-                                                        <button class="btn btn-success makePaymentBtn" data-paymentid="<%= data.getPaymentId() %>">
-                                                            <i class="bi bi-currency-dollar"></i> Make Payment
-                                                        </button>
-                                                    </td>
-                                                </tr>
-                                    <% } } %>
-                                </tbody>
+                                <table class="table table-striped table-hover" style="overflow-x: auto; width: 100%; max-width: 100%;">
+                                    <thead>
+                                        <tr>
+                                            <th>Payment ID</th>
+                                            <th>Room ID</th>
+                                            <th>Amount Due</th>
+                                            <th>Amount Paid</th>
+                                            <th>Due Date</th>
+                                            <th>Status</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% if (P_overdue != null) {
+                                                for (Payment data : P_overdue) { %>
+                                                    <tr>
+                                                        <td><%= data.getPaymentId() %></td>
+                                                        <td><%= data.getRoomId() %></td>
+                                                        <td><%= data.getAmountDue() %></td>
+                                                        <td><%= data.getAmountPaid() %></td>
+                                                        <td><%= data.getDueDate() %></td>
+                                                        <td><span class="StatusSpan" data-badge='<%= data.getStatus() %>'><%= data.getStatus() %></span></td>
+                                                        <td>
+                                                            <button class="btn btn-success makePaymentBtn" data-paymentid="<%= data.getPaymentId() %>">
+                                                                <i class="bi bi-currency-dollar"></i> Make Payment
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                        <% } } %>
 
+                                        <% if (P_pending != null) {
+                                                for (Payment data : P_pending) { %>
+                                                    <tr>
+                                                        <td><%= data.getPaymentId() %></td>
+                                                        <td><%= data.getRoomId() %></td>
+                                                        <td><%= data.getAmountDue() %></td>
+                                                        <td><%= data.getAmountPaid() %></td>
+                                                        <td><%= data.getDueDate() %></td>
+                                                        <td><span class="StatusSpan" data-badge='<%= data.getStatus() %>'><%= data.getStatus() %></span></td>
+                                                        <td>
+                                                            <button class="btn btn-success makePaymentBtn" data-paymentid="<%= data.getPaymentId() %>">
+                                                                <i class="bi bi-currency-dollar"></i> Make Payment
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                        <% } } %>
+                                    </tbody>
+                                </table>
 
-                            </table>
-                             <!-- Show More Button -->
-                                <div class="text-center">
-                                    <a id="show-more-btn" class="btn_1" href="${pageContext.request.contextPath}/u/payment_history">Show More</a>
-                                </div>
+                              <%  } %>
+
+                            <!-- Show More Button -->
+                            <div class="text-center">
+                                <a id="show-more-btn" class="btn_1" href="${pageContext.request.contextPath}/u/payment_history">Show History</a>
+                            </div>
                         </div>
 
 
 
 
                         <!-- Maintenance Request Section -->
-                        <div class="section-title">Maintenance Requests</div>
+                        <div class="section-title">Maintenance Requests
+                            <a id="show-more-btn" class="btn_1" href="${pageContext.request.contextPath}/u/make_request?roomId=${room.getRoomId()}">Make Request</a>
+                        </div>
                         <ul class="list-group">
                             <li class="list-group-item">
                                 <strong>Issue:</strong> Leaky Faucet
@@ -134,16 +139,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
 
 
-
-    <script src="js/tools/jquery-3.3.1.min.js"></script>
-    <!-- https://jquery.com/download/ -->
-    <script src="js/tools/moment.min.js"></script>
-    <!-- https://momentjs.com/ -->
-    <script src="js/tools/Chart.min.js"></script>
-    <!-- http://www.chartjs.org/docs/latest/ -->
-    <script src="js/tools/bootstrap.min.js"></script>
-    <!-- https://getbootstrap.com/ -->
-    <script src="js/tools/tooplate-scripts.js"></script>
 
 
 

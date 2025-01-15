@@ -14,6 +14,7 @@ public class MaintenanceRequestsDAO {
     public boolean addMaintenanceRequest(MaintenanceRequests maintenanceRequest) throws SQLException {
         String sql = "INSERT INTO maintenance_requests (resident_email, roomId, issue_type, issue_description, status) " +
                 "VALUES (?, ?, ?, ?, ?)";
+
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
 
@@ -94,7 +95,8 @@ public class MaintenanceRequestsDAO {
                 rs.getString("resident_email"),
                 rs.getString("roomId"),
                 rs.getString("issue_type"),
-                rs.getString("issue_description")
+                rs.getString("issue_description"),
+                rs.getString("status")
         );
         request.setId(rs.getInt("id"));
         request.setStatus(rs.getString("status"));
@@ -146,5 +148,38 @@ public class MaintenanceRequestsDAO {
 
         return result;
     }
+    public Map<String, Map<String, Integer>> getMaintenanceRequestsGraphData() throws SQLException {
+        Map<String, Map<String, Integer>> statusData = new HashMap<>();
+        String query = "SELECT status, DATE(created_at) AS date, COUNT(*) AS count " +
+                "FROM maintenance_requests " +
+                "WHERE created_at >= CURDATE() - INTERVAL 30 DAY " +
+                "GROUP BY status, DATE(created_at) " +
+                "ORDER BY DATE(created_at)";
+
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement stmt = connection.prepareStatement(query);
+             ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                String status = rs.getString("status");
+                String date = rs.getString("date");
+                int count = rs.getInt("count");
+
+                // Initialize the map for each status if not already present
+                if (!statusData.containsKey(status)) {
+                    statusData.put(status, new HashMap<>());
+                }
+
+                // Add the count for the respective date
+                statusData.get(status).put(date, count);
+            }
+        } catch (SQLException e) {
+            System.err.println("Error while fetching maintenance request data: " + e.getMessage());
+            throw e;  // Rethrow the SQLException
+        }
+        return statusData;
+    }
+
+
 
 }
