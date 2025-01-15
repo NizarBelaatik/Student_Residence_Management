@@ -41,14 +41,14 @@
                                 <p>Contract End: <strong>${resident.getCEndDate()}</strong></p>
                             </div>
                             <div class="col-md-6 text-end">
-                                <h5>Status: <sapn class="StatusSpanReverse" data-badge='${room.getState()}'> ${room.getState()} </sapn></h5>
+                                <h5>Status: <span class="StatusSpanReverse" data-badge='${room.getState()}'> ${room.getState()} </span></h5>
                             </div>
                         </div>
 
                         <!-- Payment History Section -->
                         <div class="section-title">Payment History</div>
                         <div class="table_container">
-                            <table class="table table-striped" style="overflow-x: auto; width: 100%; max-width: 100%;">
+                            <table class="table table-striped table-hover" style="overflow-x: auto; width: 100%; max-width: 100%;">
                                 <thead>
                                     <tr>
                                         <th>Payment ID</th>
@@ -56,7 +56,6 @@
                                         <th>Amount Due</th>
                                         <th>Amount Paid</th>
                                         <th>Due Date</th>
-                                        <th>Payment Date</th>
                                         <th>Status</th>
                                     </tr>
                                 </thead>
@@ -70,8 +69,7 @@
                                                     <td><%= data.getAmountDue() %></td>
                                                     <td><%= data.getAmountPaid() %></td>
                                                     <td><%= data.getDueDate() %></td>
-                                                    <td><%= data.getPaymentDate() %></td>
-                                                    <td><sapn class="StatusSpan" data-badge='<%= data.getStatus() %>'><%= data.getStatus() %></sapn></td>
+                                                    <td><span class="StatusSpan" data-badge='<%= data.getStatus() %>'><%= data.getStatus() %></span></td>
 
                                                 </tr>
                                     <% } } %>
@@ -85,8 +83,7 @@
                                                     <td><%= data.getAmountDue() %></td>
                                                     <td><%= data.getAmountPaid() %></td>
                                                     <td><%= data.getDueDate() %></td>
-                                                    <td><%= data.getPaymentDate() %></td>
-                                                    <td><sapn class="StatusSpan" data-badge='<%= data.getStatus() %>'><%= data.getStatus() %></sapn></td>
+                                                    <td><span class="StatusSpan" data-badge='<%= data.getStatus() %>'><%= data.getStatus() %></span></td>
 
                                                 </tr>
                                     <% } } %>

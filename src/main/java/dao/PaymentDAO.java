@@ -155,6 +155,33 @@ public class PaymentDAO {
         return payments;
     }
 
+    public List<Payment> getPaymentRByStatus(String status,String residentEmail) throws SQLException {
+        String query = "SELECT * FROM payments WHERE status = ? AND email = ?" +
+                "ORDER BY CASE WHEN payment_date IS NULL THEN due_date ELSE payment_date END";
+        List<Payment> payments = new ArrayList<>();
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+
+            stmt.setString(1, status);
+            stmt.setString(2, residentEmail);
+
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                Payment payment = new Payment(
+                        rs.getString("paymentId"),
+                        rs.getString("fullname"),
+                        rs.getString("email"),
+                        rs.getString("roomId"),
+                        rs.getFloat("amount_due"),
+                        rs.getFloat("amount_paid"),
+                        rs.getTimestamp("due_date"),
+                        rs.getTimestamp("payment_date"),
+                        rs.getString("status"));
+                payments.add(payment);
+            }
+        }
+        return payments;
+    }
 
     public List<Payment> getAllPaymentsByResident(String email,String status, int limit) throws SQLException {
         // Construct the base query

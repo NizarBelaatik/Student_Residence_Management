@@ -121,7 +121,7 @@
                                                         <td><%= data.getAmountPaid() %></td>
                                                         <td><%= data.getDueDate() %></td>
                                                         <td><%= data.getPaymentDate() %></td>
-                                                        <td><sapn class="StatusSpan" data-badge='<%= data.getStatus() %>'><%= data.getStatus() %></sapn></td>
+                                                        <td><span class="StatusSpan" data-badge='<%= data.getStatus() %>'><%= data.getStatus() %></span></td>
 
                                                         <td>
                                                             <button class="btn btn-warning sendReminderBtn" data-email="<%= data.getEmail() %>">
@@ -177,7 +177,7 @@
                                                         <td><%= data.getAmountPaid() %></td>
                                                         <td><%= data.getDueDate() %></td>
                                                         <td><%= data.getPaymentDate() %></td>
-                                                        <td><sapn class="StatusSpan" data-badge='<%= data.getStatus() %>'><%= data.getStatus() %></sapn></td>
+                                                        <td><span class="StatusSpan" data-badge='<%= data.getStatus() %>'><%= data.getStatus() %></span></td>
                                                         <td>
                                                             <button class="btn btn-warning sendReminderBtn" data-email="<%= data.getEmail() %>">
                                                                 <i class="fas fa-bell"></i> Send Reminder
@@ -231,7 +231,7 @@
                                                         <td><%= data.getAmountPaid() %></td>
                                                         <td><%= data.getDueDate() %></td>
                                                         <td><%= data.getPaymentDate() %></td>
-                                                        <td><sapn class="StatusSpan" data-badge='<%= data.getStatus() %>'><%= data.getStatus() %></sapn></td>
+                                                        <td><span class="StatusSpan" data-badge='<%= data.getStatus() %>'><%= data.getStatus() %></span></td>
                                                         <td>
 
                                                             <a class="btn btn-info" href="<%= request.getContextPath() %>/downloadReceipt?paymentId=<%= data.getPaymentId() %>" class="btn btn-success">

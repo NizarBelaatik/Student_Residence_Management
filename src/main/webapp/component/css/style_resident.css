@@ -5,7 +5,7 @@
     --clr3: #fff;     /* White color */
     --clr-primary: #000226; /* Primary blue color */
     --clr-success: #28a745; /* Success green color */
-    --clr-info: #17a2b8; /* Info color (light blue) */
+    --clr-info: #25cff2; /* Info color (light blue) */
     --clr-danger: #dc3545; /* Danger color (red) */
     --clr-warning: #ffc107; /* Warning yellow color */
 
@@ -487,6 +487,47 @@ header {
 .color_Available{color:rgb(0,200,0); font-weight:bold;}
 .color_Maintenance{color:orange; font-weight:bold;}
 
+/* ----------------------------------------------
+------------ CARD -------------------------------
+------------------------------------------------*/
+.card_1 {
+    margin: 30px;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0px 0 30px rgba(0, 0, 0, 0.2);/*rgba(1, 41, 112, 0.1)*/
+    background-color: #fff;
+
+}
+.card_1-header,
+.card_1-footer {
+  border-bottom: 1px solid #ebeef4;
+
+  color: #798eb3;
+  padding: 15px;
+}
+
+.card_1-title {
+  padding: 20px 0 15px 0;
+  font-size: 24px;
+  font-weight: 500;
+  color: #012970;
+  font-family: "Poppins", sans-serif;
+}
+
+.card_1-title span {
+  color: #899bbd;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.card_1-body {
+  padding: 20px;
+}
+.card_1 .card_1-body form{
+    margin-top: 20px;
+}
+
+
 .card-body {
     background-color: var(--clr0);
 }
@@ -508,7 +549,13 @@ header {
 .btn-info:hover {
     background-color: #117a8b;
 }
-
+.btn_eye{
+    color: #343a40;
+    background-color:none ;
+}
+.btn_eye:hover{
+    color: gray;
+}
 
 .table_container{
     overflow-x: auto;
@@ -519,11 +566,42 @@ header {
     max-height: 800px;
 }
 
+
 .table th,
 .table td {
     vertical-align: middle;
 }
 
+
+
+/* ----------------------------------------------
+------------ TABLE-------------------------------
+------------------------------------------------*/
+.table2 {
+  width: 100%;
+  -webkit-box-shadow: 0px 5px 12px -12px rgba(0, 0, 0, 0.29);
+  -moz-box-shadow: 0px 5px 12px -12px rgba(0, 0, 0, 0.29);
+  box-shadow: 0px 5px 12px -12px rgba(0, 0, 0, 0.29);
+  overflow:auto;
+  position:relative;
+}
+.table2 thead th {
+    padding: 10px 15px;
+      font-size: 13px;
+      color: #000;
+      font-weight: 400;
+      text-transform: uppercase; }
+.table2 thead tr {
+  background: #fff; }
+.table2 tbody tr {
+  background: #fff; }
+.table2 tbody th, .table2 tbody td {
+  padding: 10px 15px;
+  font-size: 14px;
+  vertical-align: middle; }
+.table2 tbody td .close span {
+  font-size: 12px;
+  color: #dc3545; }
 
 .StatusSpan{
     border: 3px solid;
@@ -844,14 +922,7 @@ header {
     margin-top: 10px;
 }
 
-.btn-info {
-    background-color: var(--clr-warning);
-    border: none;
-}
 
-.btn-info:hover {
-    background-color: #117a8b;
-}
 
 
 
