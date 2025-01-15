@@ -24,6 +24,14 @@ public class EmailSender {
         sendEmail( email,  emailSubject,  emailBody);
     }
 
+    public static void sendPaymentConfirmationEmail(String email, String residentName, float amountPaid, Timestamp paymentDate) {
+        String emailSubject = "Payment Confirmation: Your Payment Has Been Received";
+        String emailBody = "Dear " + residentName + ",\n\n" +
+                "We are pleased to inform you that your payment of " + amountPaid + " has been successfully processed on " + paymentDate + ".\n\n" +
+                "Thank you for your timely payment. If you have any questions, feel free to contact us.";
+        sendEmail(email, emailSubject, emailBody);
+    }
+
     public static void sendPaymentPaidEmail(Payment payment){
         // Create the email content
         String subject = "Payment Confirmation for Payment ID: " + payment.getPaymentId();

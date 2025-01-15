@@ -11,7 +11,7 @@
 <%@ page import="model.Payment" %>
 <html>
 <head>
-    <title>Home</title>
+    <title>Payment History</title>
     <%@ include file="/views/common/headerresidentlinks.jsp" %>
 </head>
 <body>
@@ -179,6 +179,13 @@
     <script src="${pageContext.request.contextPath}/component/js/tools/Chart.min.js"></script>
     <script src="${pageContext.request.contextPath}/component/js/tools/bootstrap.min.js"></script>
     <script src="${pageContext.request.contextPath}/component/js/tools/tooplate-scripts.js"></script>
+
+    <script>
+        $(document).on('click', '.makePaymentBtn', function() {
+            var paymentId = $(this).data('paymentid');
+            location.href = "<%= request.getContextPath() %>/u/make_payment?paymentId="+paymentId;
+        });
+    </script>
 
     <%@ include file="/views/common/footer.jsp" %>
 </body>

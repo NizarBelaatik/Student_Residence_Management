@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 public class DatabaseConnection {
     // Database connection details from configuration (can be moved to an external file like properties)
-    private static final String URL = "jdbc:mysql://localhost:3306/test";
+    private static final String URL = "jdbc:mysql://localhost:3306/SRM_DB";
     private static final String USER = "root";
     private static final String PASSWORD = "";
 

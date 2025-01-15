@@ -57,6 +57,7 @@
                                         <th>Amount Paid</th>
                                         <th>Due Date</th>
                                         <th>Status</th>
+                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -70,7 +71,11 @@
                                                     <td><%= data.getAmountPaid() %></td>
                                                     <td><%= data.getDueDate() %></td>
                                                     <td><span class="StatusSpan" data-badge='<%= data.getStatus() %>'><%= data.getStatus() %></span></td>
-
+                                                    <td>
+                                                        <button class="btn btn-success makePaymentBtn" data-paymentid="<%= data.getPaymentId() %>">
+                                                            <i class="bi bi-currency-dollar"></i> Make Payment
+                                                        </button>
+                                                    </td>
                                                 </tr>
                                     <% } } %>
 
@@ -84,7 +89,11 @@
                                                     <td><%= data.getAmountPaid() %></td>
                                                     <td><%= data.getDueDate() %></td>
                                                     <td><span class="StatusSpan" data-badge='<%= data.getStatus() %>'><%= data.getStatus() %></span></td>
-
+                                                    <td>
+                                                        <button class="btn btn-success makePaymentBtn" data-paymentid="<%= data.getPaymentId() %>">
+                                                            <i class="bi bi-currency-dollar"></i> Make Payment
+                                                        </button>
+                                                    </td>
                                                 </tr>
                                     <% } } %>
                                 </tbody>
@@ -151,6 +160,12 @@
     <script src="${pageContext.request.contextPath}/component/js/tools/bootstrap.min.js"></script>
     <script src="${pageContext.request.contextPath}/component/js/tools/tooplate-scripts.js"></script>
 
+    <script>
+        $(document).on('click', '.makePaymentBtn', function() {
+            var paymentId = $(this).data('paymentid');
+            location.href = "<%= request.getContextPath() %>/u/make_payment?paymentId="+paymentId;
+        });
+    </script>
     <%@ include file="/views/common/footer.jsp" %>
 </body>
 </html>
