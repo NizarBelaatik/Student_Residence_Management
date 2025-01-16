@@ -2,6 +2,7 @@ package dao;
 
 import model.MaintenanceRequests;
 import service.DatabaseConnection;
+import utils.GenerateRandomString;
 
 import java.sql.*;
 import java.sql.Date;
@@ -10,31 +11,49 @@ import java.util.*;
 
 public class MaintenanceRequestsDAO {
 
+    private static boolean maintenanceIdExists(String Id) {
+        String query = "SELECT COUNT(*) FROM maintenance_requests WHERE id = ?";
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setString(1, Id);
+            ResultSet resultSet = stmt.executeQuery();
+            if (resultSet.next()) {
+                return resultSet.getInt(1) > 0;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
     // Add a new MaintenanceRequest
     public boolean addMaintenanceRequest(MaintenanceRequests maintenanceRequest) throws SQLException {
-        String sql = "INSERT INTO maintenance_requests (resident_email, roomId, issue_type, issue_description, status) " +
-                "VALUES (?, ?, ?, ?, ?)";
-
+        String sql = "INSERT INTO maintenance_requests (id,resident_email, roomId, issue_type, issue_description, status) " +
+                "VALUES (?,?, ?, ?, ?, ?)";
+        String Id = GenerateRandomString.generateUniqueId();
+        while (maintenanceIdExists(Id)) {
+            Id = GenerateRandomString.generateUniqueId(); // Generate a new ID if it exists
+        }
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
-
-            ps.setString(1, maintenanceRequest.getResidentEmail());
-            ps.setString(2, maintenanceRequest.getRoomId());
-            ps.setString(3, maintenanceRequest.getIssueType());
-            ps.setString(4, maintenanceRequest.getIssueDescription());
-            ps.setString(5, maintenanceRequest.getStatus());
+            ps.setString(1, Id);
+            ps.setString(2, maintenanceRequest.getResidentEmail());
+            ps.setString(3, maintenanceRequest.getRoomId());
+            ps.setString(4, maintenanceRequest.getIssueType());
+            ps.setString(5, maintenanceRequest.getIssueDescription());
+            ps.setString(6, maintenanceRequest.getStatus());
 
             return ps.executeUpdate() > 0; // Returns true if insertion was successful
         }
     }
 
     // Get a MaintenanceRequest by ID
-    public MaintenanceRequests getMaintenanceRequestById(int id) throws SQLException {
+    public MaintenanceRequests getMaintenanceRequestById(String id) throws SQLException {
         String sql = "SELECT * FROM maintenance_requests WHERE id = ?";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
 
-            ps.setInt(1, id);
+            ps.setString(1, id);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
                     return mapResultSetToMaintenanceRequest(rs);
@@ -60,7 +79,7 @@ public class MaintenanceRequestsDAO {
     }
 
     // Update the status of a MaintenanceRequest by ID
-    public boolean updateMaintenanceRequestStatus(int id, String status, String technicianName) throws SQLException {
+    public boolean updateMaintenanceRequestStatus(String id, String status, String technicianName) throws SQLException {
         String sql = "UPDATE maintenance_requests SET status = ?, technician_name = ?, resolved_date = ? WHERE id = ?";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -72,19 +91,19 @@ public class MaintenanceRequestsDAO {
             } else {
                 ps.setNull(3, Types.DATE);
             }
-            ps.setInt(4, id);
+            ps.setString(4, id);
 
             return ps.executeUpdate() > 0;
         }
     }
 
     // Delete a MaintenanceRequest by ID
-    public boolean deleteMaintenanceRequest(int id) throws SQLException {
+    public boolean deleteMaintenanceRequest(String id) throws SQLException {
         String sql = "DELETE FROM maintenance_requests WHERE id = ?";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
 
-            ps.setInt(1, id);
+            ps.setString(1, id);
             return ps.executeUpdate() > 0; // Returns true if deletion was successful
         }
     }
@@ -98,7 +117,7 @@ public class MaintenanceRequestsDAO {
                 rs.getString("issue_description"),
                 rs.getString("status")
         );
-        request.setId(rs.getInt("id"));
+        request.setId(rs.getString("id"));
         request.setStatus(rs.getString("status"));
         request.setTechnicianName(rs.getString("technician_name"));
         request.setResolvedDate(rs.getDate("resolved_date") != null ? rs.getDate("resolved_date").toLocalDate() : null);

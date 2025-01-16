@@ -89,7 +89,7 @@ public class UserDAO {
 
     // Get User by Email
     public User getUserByEmailWithoutPW(String email) throws SQLException {
-        String sql = "SELECT id, email, password_hash, role, active, created_at, updated_at FROM users WHERE email = ?";
+        String sql = "SELECT id, email, role, active, created_at, updated_at FROM users WHERE email = ?";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
 
@@ -111,6 +111,8 @@ public class UserDAO {
         }
         return null;
     }
+
+
 
     // Find User by Email
     public boolean findUserByEmail(String email) throws SQLException {
@@ -148,29 +150,34 @@ public class UserDAO {
     }
 
     // Get all Users
-    public List<User> getAllUsersWithoutPW() throws SQLException {
-        String sql = "SELECT id, email, role, active, created_at, updated_at FROM users";
+    public List<User> getAllUsersWithoutPW(String role) throws SQLException {
+        String sql = "SELECT id, email, role, active, created_at, updated_at FROM users WHERE role = ?";
         List<User> users = new ArrayList<>();
+
         try (Connection conn = DatabaseConnection.getConnection();
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery(sql)) {
+             PreparedStatement ps = conn.prepareStatement(sql)) {
 
-            while (rs.next()) {
+            ps.setString(1, role);
 
-                User user = new User(
-                        rs.getString("email"),
-                        null,
-                        rs.getString("role")
-                );
-                user.setActive(rs.getBoolean("active"));
-                user.setCreatedAt(rs.getTimestamp("created_at"));
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    User user = new User(
+                            rs.getString("email"),
+                            null,  // Assuming password is not needed
+                            rs.getString("role")
+                    );
+                    user.setActive(rs.getBoolean("active"));
+                    user.setCreatedAt(rs.getTimestamp("created_at"));
+                    user.setUpdatedAt(rs.getTimestamp("updated_at"));
 
-                users.add(user);
-
+                    users.add(user);
+                }
             }
         }
+
         return users;
     }
+
 
     public List<User> getAdminTechUsersWithoutPW() throws SQLException {
         String sql = "SELECT id, email, role, active, created_at, updated_at FROM users WHERE role IN ('admin', 'tech')";
