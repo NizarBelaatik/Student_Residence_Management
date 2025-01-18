@@ -66,7 +66,7 @@ $(document).ready(function() {
         var combinedData = formData1 + '&' + formData2;
         // Perform AJAX request
         $.ajax({
-            url: contextPath+'/regiserV', // The servlet URL
+            url: contextPath+'/registerV', // The servlet URL
             method: 'POST',
             data: combinedData, // Serialize the form data
             dataType: 'json', // Expect a JSON response

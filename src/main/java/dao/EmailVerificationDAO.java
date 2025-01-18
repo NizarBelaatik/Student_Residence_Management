@@ -1,6 +1,7 @@
 package dao;
 
 import model.EmailVerification;
+import service.DatabaseConnection;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -13,20 +14,11 @@ public class EmailVerificationDAO {
     private static final String USER = "root";
     private static final String PASSWORD = "";
 
-    public static Connection getConnection() throws SQLException {
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            return DriverManager.getConnection(URL, USER, PASSWORD);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-            throw new SQLException("MySQL JDBC Driver not found.");
-        }
-    }
 
     // Add Email Verification
     public boolean addEmailVerification(EmailVerification emailVerification) throws SQLException {
         String sql = "INSERT INTO email_verification (email, verification_token, created_at, expires_at) VALUES (?, ?, ?, ?)";
-        try (Connection conn = getConnection();
+        try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
 
             ps.setString(1, emailVerification.getEmail());
@@ -42,7 +34,7 @@ public class EmailVerificationDAO {
     // Get Email Verification by Token
     public EmailVerification getEmailVerificationByToken(String token) throws SQLException {
         String sql = "SELECT verification_id, email, verification_token, created_at, expires_at, verified_at FROM email_verification WHERE verification_token = ?";
-        try (Connection conn = getConnection();
+        try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
 
             ps.setString(1, token);
@@ -63,7 +55,7 @@ public class EmailVerificationDAO {
     public List<EmailVerification> getAllEmailVerifications() throws SQLException {
         String sql = "SELECT verification_id, email, verification_token, created_at, expires_at, verified_at FROM email_verification";
         List<EmailVerification> verifications = new ArrayList<>();
-        try (Connection conn = getConnection();
+        try (Connection conn = DatabaseConnection.getConnection();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
 
@@ -81,7 +73,7 @@ public class EmailVerificationDAO {
     // Update Email Verification as Verified
     public boolean verifyEmail(String email, String token) throws SQLException {
         String sql = "UPDATE email_verification SET verified_at = CURRENT_TIMESTAMP WHERE email = ? AND verification_token = ?";
-        try (Connection conn = getConnection();
+        try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
 
             ps.setString(1, email);
@@ -94,7 +86,7 @@ public class EmailVerificationDAO {
     // Delete Email Verification (e.g., after it expires or is no longer needed)
     public boolean deleteEmailVerification(String token) throws SQLException {
         String sql = "DELETE FROM email_verification WHERE verification_token = ?";
-        try (Connection conn = getConnection();
+        try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
 
             ps.setString(1, token);
