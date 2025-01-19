@@ -33,6 +33,14 @@ header {
     background-color:var(--clr0) ;/* #f8f9fa */
     border-bottom: 1px solid #dee2e6;
 }
+
+.tech_home_btn {
+    display: block;
+    cursor: pointer;
+    font-size: 30px;
+    background-color: transparent;
+    border: none;
+}
 /*<img src="profile-image.jpg" alt="Profile Image" class="profile-image">*/
 .left-tabs {
     display: flex;
@@ -360,7 +368,7 @@ header {
     font-size: 12px;
     font-style: normal;
     padding: 3px 6px;
-
+    display:none;
 }
 
 .menu-items {display: none;}
@@ -414,6 +422,8 @@ header {
         background-color: transparent;
         border: none;
     }
+
+
 
     /* Show/hide navigation links */
     .left-tabs{display: none;}
@@ -856,6 +866,36 @@ header {
     outline: 0;
     box-shadow: 0 0 0 .2rem rgba(0, 2, 38, .25);
     text-decoration: none;
+}
+
+.dashboard_btn_T {
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    user-select: none;
+    border: 1px solid var(--clr-primary)!important;
+    padding: .375rem .75rem;
+    font-size: 1.2rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    color: var(--clr-primary); /* Text color changes to primary color */
+    background-color: #fff; /* Background turns white */
+    border: 1px solid #fff; /* Border color is white */
+    text-decoration: none;
+    cursor:pointer;
+}
+
+/* Submit Button Hover and Active */
+.dashboard_btn_T:hover,
+.dashboard_btn_T:active {
+    color: #fff!important; /* Text color changes to white */
+    background-color: var(--clr-primary); /* Background turns to primary color */
+    border-color: #fff; /* Border remains primary color */
+    text-decoration: none;
+
 }
 
 

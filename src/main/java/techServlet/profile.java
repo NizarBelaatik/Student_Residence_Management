@@ -1,5 +1,6 @@
 package techServlet;
 
+
 import dao.UserAdminTInfoDAO;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -8,7 +9,6 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import model.Resident;
 import model.Room;
 import model.User;
 import model.UserAdminTInfo;
@@ -16,8 +16,10 @@ import model.UserAdminTInfo;
 import java.io.IOException;
 import java.sql.SQLException;
 
-@WebServlet(urlPatterns = {"/t/dashboard"})
-public class dashboard extends HttpServlet {
+import static utils.DateUtils.formatTimestampToDate;
+
+@WebServlet(urlPatterns = {"/t/profile"})
+public class profile  extends HttpServlet {
     private UserAdminTInfoDAO userTechDAO= new UserAdminTInfoDAO();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -35,8 +37,11 @@ public class dashboard extends HttpServlet {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        request.setAttribute("tech", tech);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/views/tech/dashboardTech.jsp");
+
+        request.setAttribute("user_since", formatTimestampToDate(user.getCreatedAt()));
+        request.setAttribute("techD", tech);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/views/tech/profile.jsp");
         dispatcher.forward(request, response);
     }
+
 }

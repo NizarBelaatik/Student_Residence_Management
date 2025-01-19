@@ -1,11 +1,7 @@
 <%@ page import="model.Notification" %>
     <header>
-        <div class="left-tabs " >
-            <a class="tab-button" href="${pageContext.request.contextPath}/u/home">Home</a>
-            <a class="tab-button">Profile</a>
-            <a class="tab-button">Messages</a>
-        </div>
-        <button class="hamburger-menu" onclick="toggleMenu()">&#9776;</button>
+
+        <a class="dashboard_btn_T" href="${pageContext.request.contextPath}/t">Dashboard</a>
         <div class="right-header">
             <!-- Hamburger Menu -->
 
@@ -27,13 +23,13 @@
             <div class="profile">
                 <div class="dropdown">
                     <i class="bi bi-person-fill" style="font-size:28px;"></i>
-                    <a class="dropbtn"><span class="username">${resident.getFirstname()} ${resident.getLastname()}</span><i class="bi bi-caret-down-fill"></i></a>
+                    <a class="dropbtn"><span class="username">${tech.getFirstname()} ${tech.getLastname()}</span><i class="bi bi-caret-down-fill"></i></a>
                     <ul class="dropdown-profile">
-                        <li class="dropdown-header">${resident.getFirstname()} ${resident.getLastname()}</li>
-                        <li class="dropdown-header">${resident.getEmail()}</li>
+                        <li class="dropdown-header">${tech.getFirstname()} ${tech.getLastname()}</li>
+                        <li class="dropdown-header">${tech.getEmail()}</li>
                         <li class="dropdown-divider"></li>
-                        <li><a href="${pageContext.request.contextPath}/u/profile" class="dropdown-item"><i class="bi bi-person-circle"></i>Profile</a></li>
-                        <li><a href="${pageContext.request.contextPath}/u/settings" class="dropdown-item"><i class="bi bi-person-fill-gear"></i>Profile</a>Settings</a></li>
+                        <li><a href="${pageContext.request.contextPath}/t/profile" class="dropdown-item">Profile</a></li>
+                        <li><a href="${pageContext.request.contextPath}/t/settings" class="dropdown-item">Settings</a></li>
                         <li><a href="${pageContext.request.contextPath}/logout" class="dropdown-item" >Logout</a></li>
                     </ul>
                 </div>

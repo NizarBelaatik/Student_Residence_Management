@@ -12,7 +12,7 @@
 <html>
 <head>
     <title>Make Payment</title>
-    <%@ include file="/views/common/headerresidentlinks.jsp" %>
+    <%@ include file="/views/common/headerlinks.jsp" %>
 </head>
 <body>
 
