@@ -1,4 +1,4 @@
-package residentServlet;
+package api;
 
 
 import java.io.IOException;
@@ -10,11 +10,14 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import dao.NotificationDAO;
+import jakarta.servlet.http.HttpSession;
+import model.User;
+
 /**
  *
  * @author night
  */
-@WebServlet(name = "updateNotificationStatus", urlPatterns = {"/u/updateNotificationStatus"})
+@WebServlet(name = "updateNotificationStatus", urlPatterns = {"/api/updateNotificationStatus"})
 public class updateNotificationStatus extends HttpServlet {
     private NotificationDAO notificationDAO = new NotificationDAO();
 
@@ -23,14 +26,17 @@ public class updateNotificationStatus extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // Read email and action from request
-        String email = request.getParameter("email");
+        //String email = request.getParameter("email");
 
+        HttpServletRequest req = (HttpServletRequest) request;
+        HttpSession session = req.getSession(false);
+        User user = (User) session.getAttribute("user");
+        String email= user.getEmail() ;
         // Assuming NotificationDAO is properly implemented
 
 
         // Update the notification status in the database
         boolean isUpdated = notificationDAO.updateNotificationStatus(email);
-
 
         // Prepare the response based on the update
         String status = isUpdated ? "success" : "error";

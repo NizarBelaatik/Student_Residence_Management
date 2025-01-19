@@ -8,8 +8,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import model.Resident;
-import model.Room;
+
 import model.User;
 import model.UserAdminTInfo;
 
@@ -27,15 +26,7 @@ public class dashboard extends HttpServlet {
         User user = (User) session.getAttribute("user");
         String email= user.getEmail() ;
 
-        UserAdminTInfo tech ;
-        Room room;
 
-        try{
-            tech = userTechDAO.getUserAdminTInfoByEmail(email);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        request.setAttribute("tech", tech);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/views/tech/dashboardTech.jsp");
         dispatcher.forward(request, response);
     }

@@ -242,8 +242,11 @@ header {
 }
 
 
+.dropdown-item .icon{
+    font-size:24px;
+    padding-right:5px;}
 
-
+.power_off_btn:hover{background-color:rgba(255,0,0,0.2)!important;}
 
 /* Dropdown notifications */
 .dropdown-notifications {

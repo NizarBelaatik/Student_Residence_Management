@@ -1,6 +1,4 @@
-package techServlet;
-
-
+package adminServlet;
 
 import dao.UserAdminTInfoDAO;
 import jakarta.servlet.RequestDispatcher;
@@ -18,7 +16,7 @@ import java.sql.SQLException;
 
 
 
-@WebServlet( urlPatterns = {"/t/settings"})
+@WebServlet( urlPatterns = {"/admin/settings"})
 public class settings  extends HttpServlet {
     private UserAdminTInfoDAO userTechDAO= new UserAdminTInfoDAO();
 
@@ -36,7 +34,7 @@ public class settings  extends HttpServlet {
         String email= user.getEmail() ;
 
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/views/tech/settings.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/views/admin/settings.jsp");
         request.setAttribute("activePage", "settings");  // Set active page
         dispatcher.forward(request, response);
     }

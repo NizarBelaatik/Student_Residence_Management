@@ -1,7 +1,6 @@
-package residentServlet;
+package api;
 
 import dao.NotificationDAO;
-import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -16,10 +15,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.google.gson.Gson;
 import com.fasterxml.jackson.databind.ObjectMapper; // Add the Jackson dependency for JSON mapping
 
-@WebServlet( urlPatterns = {"/u/notification"})
+@WebServlet( urlPatterns = {"/api/notification"})
 public class notification extends HttpServlet {
 
     NotificationDAO notificationDAO = new NotificationDAO();
@@ -54,7 +52,6 @@ public class notification extends HttpServlet {
                 unreadCount++;
             }
         }
-
         // Create a response object
         Map<String, Object> responseData = new HashMap<>();
         responseData.put("email", email);

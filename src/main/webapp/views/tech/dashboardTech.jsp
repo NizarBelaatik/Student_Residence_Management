@@ -19,7 +19,7 @@
                 <!-- Dashboard Card -->
                 <div class="card dashboard-card">
                     <div class="card-header text-center">
-                        <h1>Welcome, ${technician.getFullname()}</h1>
+                        <h1>Welcome, ${tech.getFullname()}</h1>
                     </div>
                     <div class="card-body">
 

@@ -28,9 +28,9 @@
                         <li class="dropdown-header">${tech.getFirstname()} ${tech.getLastname()}</li>
                         <li class="dropdown-header">${tech.getEmail()}</li>
                         <li class="dropdown-divider"></li>
-                        <li><a href="${pageContext.request.contextPath}/t/profile" class="dropdown-item">Profile</a></li>
-                        <li><a href="${pageContext.request.contextPath}/t/settings" class="dropdown-item">Settings</a></li>
-                        <li><a href="${pageContext.request.contextPath}/logout" class="dropdown-item" >Logout</a></li>
+                        <li><a href="${pageContext.request.contextPath}/t/profile" class="dropdown-item"><i class="bi bi-person icon"></i> Profile</a></li>
+                        <li><a href="${pageContext.request.contextPath}/t/settings" class="dropdown-item"><i class="bi bi-gear icon"></i> Settings</a></li>
+                        <li><a href="${pageContext.request.contextPath}/logout" class="dropdown-item power_off_btn" ><i class="bi bi-power icon "></i> Logout</a></li>
                     </ul>
                 </div>
             </div>
@@ -39,13 +39,6 @@
 
     </header>
 
-    <!-- Menu Items (Hidden by Default) -->
-    <div class="menu-items">
-        <a href="${pageContext.request.contextPath}/u/home">Home</a>
-        <a href="#">Profile</a>
-        <a href="#">Messages</a>
-        <a href="#">Settings</a>
-    </div>
 
 <!-- Include jQuery -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -58,7 +51,7 @@
     // Function to fetch notifications
     function fetchNotifications() {
         $.ajax({
-            url: contextPath + '/u/notification',  // Send the GET request to the servlet
+            url: contextPath + '/api/notification',  // Send the GET request to the servlet
             method: 'GET',
             dataType: 'json',
             success: function(data) {
@@ -163,7 +156,7 @@
         var contextPath = "${pageContext.request.contextPath}";
         function sendNotificationStatusUpdate(email) {
             $.ajax({
-                url: contextPath+'/u/updateNotificationStatus',  // Correct URL to the servlet
+                url: contextPath+'/api/updateNotificationStatus',  // Correct URL to the servlet
                 type: 'POST',                      // Use POST for sending data
                 data: {
                     email: email                  // Send email as a parameter

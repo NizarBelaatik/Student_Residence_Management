@@ -56,9 +56,10 @@ public class NotificationDAO {
     public boolean updateNotificationStatus(String email) {
         // Example update logic (adjust according to your actual DB logic)
         try (Connection conn = DatabaseConnection.getConnection()) {
-            String query = "UPDATE notifications SET status = true WHERE receiver = ?";
+            String query = "UPDATE notifications SET status = true , checkedDate = ? WHERE receiver = ?";
             try (PreparedStatement stmt = conn.prepareStatement(query)) {
-                stmt.setString(1, email);
+                stmt.setTimestamp(1, new Timestamp(System.currentTimeMillis()));
+                stmt.setString(2, email);
                 int rowsAffected = stmt.executeUpdate();
                 return rowsAffected > 0;  // Return true if the update was successful
             }

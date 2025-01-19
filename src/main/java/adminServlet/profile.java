@@ -1,4 +1,4 @@
-package techServlet;
+package adminServlet;
 
 
 import dao.UserAdminTInfoDAO;
@@ -18,7 +18,7 @@ import java.sql.SQLException;
 
 import static utils.DateUtils.formatTimestampToDate;
 
-@WebServlet(urlPatterns = {"/t/profile"})
+@WebServlet(urlPatterns = {"/admin/profile"})
 public class profile  extends HttpServlet {
     private UserAdminTInfoDAO userTechDAO= new UserAdminTInfoDAO();
     @Override
@@ -35,7 +35,7 @@ public class profile  extends HttpServlet {
 
 
         request.setAttribute("user_since", formatTimestampToDate(user.getCreatedAt()));
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/views/tech/profile.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/views/admin/profile.jsp");
         dispatcher.forward(request, response);
     }
 

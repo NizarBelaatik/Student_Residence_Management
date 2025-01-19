@@ -1,26 +1,23 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package filter;
 
-import model.User;
-
+import dao.UserAdminTInfoDAO;
 import jakarta.servlet.*;
-import jakarta.servlet.annotation.*;
-import jakarta.servlet.http.*;
-import java.io.IOException;
+import jakarta.servlet.annotation.WebFilter;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import model.User;
+import model.UserAdminTInfo;
 
-/**
- *
- * @author night
- */
-@WebFilter("/admin/*")
-public class AuthFilter implements Filter {
-    
+import java.io.IOException;
+import java.sql.SQLException;
+
+@WebFilter("/api/*")  // Filter for URLs starting with /user/
+public class APIAuthFilter implements Filter {
+    private UserAdminTInfoDAO userATDAO = new UserAdminTInfoDAO();
     @Override
     public void init(FilterConfig fConfig) throws ServletException {
-        // No initialization needed in this case
+        // No initialization needed
     }
 
     @Override
@@ -39,20 +36,18 @@ public class AuthFilter implements Filter {
 
         // Get the user object from the session
         User user = (User) session.getAttribute("user");
-        
-        // Check if the user has the required role (admin in this case)
-        String role = "admin"; // For example, "admin" role check
-        if (role.equals(user.getRole())) {
-            // User has the right role, continue with the request
+
+        // Check if the user has the required role (user in this case)
+        if ("tech".equals(user.getRole()) || "resident".equals(user.getRole())) {
             chain.doFilter(request, response);
         } else {
-            // User does not have the right role, redirect to error page
+            // User does not have the correct role, redirect to error page
             res.sendRedirect(req.getContextPath() + "/error");  // Redirect to error page
         }
     }
 
     @Override
     public void destroy() {
-        // No cleanup needed in this case
+        // No cleanup needed
     }
 }

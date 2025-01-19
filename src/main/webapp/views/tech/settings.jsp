@@ -38,18 +38,18 @@
                             <div class="section-title">Personal Information</div>
                             <div class="form-group mb-3">
                                 <label for="firstname">First Name</label>
-                                <input type="text" class="form-control" id="firstname" name="firstname" value="${Tech.getFirstname()}" required>
+                                <input type="text" class="form-control" id="firstname" name="firstname" value="${tech.getFirstname()}" required>
                             </div>
 
                             <div class="form-group mb-3">
                                 <label for="lastname">Last Name</label>
-                                <input type="text" class="form-control" id="lastname" name="lastname" value="${Tech.getLastname()}" required>
+                                <input type="text" class="form-control" id="lastname" name="lastname" value="${tech.getLastname()}" required>
                             </div>
 
 
                             <div class="form-group mb-3">
                                 <label for="phone">Phone</label>
-                                <input type="text" class="form-control" id="phone" name="phone" value="${Tech.getPhone()}" required>
+                                <input type="text" class="form-control" id="phone" name="phone" value="${tech.getPhone()}" required>
                             </div>
 
 

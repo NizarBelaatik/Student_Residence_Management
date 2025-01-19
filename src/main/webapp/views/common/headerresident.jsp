@@ -32,9 +32,9 @@
                         <li class="dropdown-header">${resident.getFirstname()} ${resident.getLastname()}</li>
                         <li class="dropdown-header">${resident.getEmail()}</li>
                         <li class="dropdown-divider"></li>
-                        <li><a href="${pageContext.request.contextPath}/u/profile" class="dropdown-item"><i class="bi bi-person-circle"></i>Profile</a></li>
-                        <li><a href="${pageContext.request.contextPath}/u/settings" class="dropdown-item"><i class="bi bi-person-fill-gear"></i>Profile</a>Settings</a></li>
-                        <li><a href="${pageContext.request.contextPath}/logout" class="dropdown-item" >Logout</a></li>
+                        <li><a href="${pageContext.request.contextPath}/u/profile" class="dropdown-item"><i class="bi bi-person icon"></i> Profile</a></li>
+                        <li><a href="${pageContext.request.contextPath}/u/settings" class="dropdown-item"><i class="bi bi-gear icon"></i> Settings</a></li>
+                        <li><a href="${pageContext.request.contextPath}/logout" class="dropdown-item power_off_btn" ><i class="bi bi-power icon "></i> Logout</a></li>
                     </ul>
                 </div>
             </div>
@@ -62,7 +62,7 @@
     // Function to fetch notifications
     function fetchNotifications() {
         $.ajax({
-            url: contextPath + '/u/notification',  // Send the GET request to the servlet
+            url: contextPath + '/api/notification',  // Send the GET request to the servlet
             method: 'GET',
             dataType: 'json',
             success: function(data) {
@@ -167,7 +167,7 @@
         var contextPath = "${pageContext.request.contextPath}";
         function sendNotificationStatusUpdate(email) {
             $.ajax({
-                url: contextPath+'/u/updateNotificationStatus',  // Correct URL to the servlet
+                url: contextPath+'/api/updateNotificationStatus',  // Correct URL to the servlet
                 type: 'POST',                      // Use POST for sending data
                 data: {
                     email: email                  // Send email as a parameter
