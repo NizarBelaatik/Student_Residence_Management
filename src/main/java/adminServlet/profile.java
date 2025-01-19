@@ -29,10 +29,6 @@ public class profile  extends HttpServlet {
         User user = (User) session.getAttribute("user");
         String email= user.getEmail() ;
 
-        UserAdminTInfo tech ;
-        Room room;
-
-
 
         request.setAttribute("user_since", formatTimestampToDate(user.getCreatedAt()));
         RequestDispatcher dispatcher = request.getRequestDispatcher("/views/admin/profile.jsp");

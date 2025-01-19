@@ -566,7 +566,7 @@ header {
 }
 .btn_eye{
     color: #343a40;
-    background-color:none ;
+    background-color:transparent ;
 }
 .btn_eye:hover{
     color: gray;

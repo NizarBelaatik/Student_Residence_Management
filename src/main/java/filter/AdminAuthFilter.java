@@ -20,7 +20,7 @@ import java.sql.SQLException;
  * @author night
  */
 @WebFilter("/admin/*")
-public class AuthFilter implements Filter {
+public class AdminAuthFilter implements Filter {
     private UserAdminTInfoDAO userATDAO = new UserAdminTInfoDAO();
 
     @Override
