@@ -1,5 +1,6 @@
 package techServlet;
 
+import dao.MaintenanceRequestsDAO;
 import dao.UserAdminTInfoDAO;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -17,6 +18,8 @@ import java.sql.SQLException;
 
 @WebServlet(urlPatterns = {"/t/dashboard"})
 public class dashboard extends HttpServlet {
+    private MaintenanceRequestsDAO maintRequestDao = new MaintenanceRequestsDAO();
+
     private UserAdminTInfoDAO userTechDAO= new UserAdminTInfoDAO();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -26,7 +29,12 @@ public class dashboard extends HttpServlet {
         User user = (User) session.getAttribute("user");
         String email= user.getEmail() ;
 
+        try {
 
+            request.setAttribute("maintenanceDATA", maintRequestDao.getAllMaintenanceRequestsByRT(email,"tech"));
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         RequestDispatcher dispatcher = request.getRequestDispatcher("/views/tech/dashboardTech.jsp");
         dispatcher.forward(request, response);
     }

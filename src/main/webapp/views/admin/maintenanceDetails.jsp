@@ -42,7 +42,7 @@
                                 <h5>Edit Maintenance Request | ${M_data.getId()}</h5>
                             </div>
 
-                            <form id="editMaintenanceRequestForm" method="post" action="${pageContext.request.contextPath}/admin/maintenance/editRequest">
+                            <form id="editMaintenanceRequestForm" method="post" action="${pageContext.request.contextPath}/admin/maintenance/maintenanceDetails">
                                 <input type="hidden" class="form-control" name="inputRequestId" value="${M_data.getId()}">
 
                                 <div class="row mb-3">
@@ -111,6 +111,54 @@
         </section>
 
     </main>
+
+    <script>
+            var contextPath = "${pageContext.request.contextPath}";
+            $(document).ready(function() {
+                // Handle form submission
+                $('#editMaintenanceRequestForm').submit(function(e) {
+                    e.preventDefault(); // Prevent default form submission
+
+                    // Perform AJAX request
+                    $.ajax({
+                        url: contextPath+'/admin/maintenance/maintenanceDetails', // The servlet URL
+                        method: 'POST',
+                        data: $(this).serialize(), // Serialize the form data
+                        dataType: 'json', // Expect a JSON response
+                        success: function(response) {
+                            // Handle successful form submission (response will contain messageType and message)
+                            if (response.messageType === "success") {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Success!',
+                                    text: response.message,
+                                    showConfirmButton: false,
+                                    timer: 3000
+                                }).then(() => {
+                                    $('#addRoomForm')[0].reset(); // Reset the form after success
+                                });
+                            } else if (response.messageType === "error") {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Oops...',
+                                    text: response.message,
+                                    confirmButtonText: 'Try Again'
+                                });
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            // Handle AJAX errors
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error',
+                                text: 'An error occurred while processing your request. Please try again later.',
+                                confirmButtonText: 'OK'
+                            });
+                        }
+                    });
+                });
+            });
+        </script>
     <%@ include file="/views/common/footer.jsp" %>
 
     <script src="${pageContext.request.contextPath}/component/js/tools/jquery-3.3.1.min.js"></script>

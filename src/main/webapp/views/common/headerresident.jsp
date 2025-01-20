@@ -1,9 +1,8 @@
 <%@ page import="model.Notification" %>
     <header>
         <div class="left-tabs " >
-            <a class="tab-button" href="${pageContext.request.contextPath}/u/home">Home</a>
-            <a class="tab-button">Profile</a>
-            <a class="tab-button">Messages</a>
+            <a class="dashboard_btn_T" href="${pageContext.request.contextPath}/u/home">Home</a>
+
         </div>
         <button class="hamburger-menu" onclick="toggleMenu()">&#9776;</button>
         <div class="right-header">

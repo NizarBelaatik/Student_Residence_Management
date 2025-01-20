@@ -78,6 +78,31 @@ public class MaintenanceRequestsDAO {
         return maintenanceRequests;
     }
 
+
+    public List<MaintenanceRequests> getAllMaintenanceRequestsByRT(String email , String by) throws SQLException {
+        String sql;
+        if("tech".equals(by)){
+            sql = "SELECT * FROM maintenance_requests WHERE technician_name = ?";
+        }else{
+            sql = "SELECT * FROM maintenance_requests WHERE resident_email = ?";
+        }
+
+        List<MaintenanceRequests> maintenanceRequests = new ArrayList<>();
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            // Set the resident_email parameter
+            stmt.setString(1, email);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    maintenanceRequests.add(mapResultSetToMaintenanceRequest(rs));
+                }
+            }
+        }
+        return maintenanceRequests;
+    }
+
     public List<MaintenanceRequests> getRecentMaintenanceRequests(int N) throws SQLException {
         // SQL query to fetch all records if N <= 1, else fetch N most recent
         String sql;
@@ -149,6 +174,21 @@ public class MaintenanceRequestsDAO {
             }
             ps.setString(4, id);
 
+            return ps.executeUpdate() > 0;
+        }
+    }
+
+    public boolean updateMaintenanceRequestStatusT(String id, String status ) throws SQLException {
+        String sql = "UPDATE maintenance_requests SET status = ?,  resolved_date = ? WHERE id = ?";
+        try (Connection conn = DatabaseConnection.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, status);
+            if ("resolved".equals(status)) {
+                ps.setDate(2, Date.valueOf(java.time.LocalDate.now()));
+            } else {
+                ps.setNull(2, Types.DATE);
+            }
+            ps.setString(3, id);
             return ps.executeUpdate() > 0;
         }
     }

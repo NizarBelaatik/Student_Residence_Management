@@ -195,6 +195,7 @@
                                                             <th>Issue Description</th>
                                                             <th>Status</th>
                                                             <th>Technician Name</th>
+                                                            <th></th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -207,7 +208,12 @@
                                                                        <td><%= requestData.getIssueDescription() %></td>
                                                                        <td><span class="StatusSpan" data-badge='<%= requestData.getStatus() %>'><%= requestData.getStatus() %></span></td>
                                                                        <td><%= requestData.getTechnicianName() != null ? requestData.getTechnicianName() : "N/A" %></td>
-                                                                   </tr>
+                                                                      <td>
+                                                                           <a class="btn btn_eye " href="${pageContext.request.contextPath}/admin/maintenance/maintenanceDetails?requestId=<%= requestData.getId() %>">
+                                                                              <i class="bi bi-eye-fill fa-2x"></i>
+                                                                          </a>
+                                                                      </td>
+                                                                  </tr>
                                                         <% } } %>
                                                     </tbody>
                                                 </table>
@@ -251,21 +257,9 @@
                         labels: dates,  // X-axis (dates)
                         datasets: [
                             {
-                                label: 'Pending Payments',
-                                data: pending, // Y-axis (pending counts)
-                                borderColor: '#ff771d',
-                                fill: false
-                            },
-                            {
                                 label: 'Paid Payments',
                                 data: paid, // Y-axis (paid counts)
                                 borderColor: 'rgb(0, 255, 0)',
-                                fill: false
-                            },
-                            {
-                                label: 'Overdue Payments',
-                                data: overdue, // Y-axis (overdue counts)
-                                borderColor: 'rgb(255, 0, 0)',
                                 fill: false
                             }
                         ]

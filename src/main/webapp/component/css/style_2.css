@@ -666,6 +666,16 @@ header {
 
 .StatusSpanIcon{font-size:2rem;}
 
+
+.wide_line{
+    position: relative;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    width: 80%;
+    margin: 40px 0 20px 0;
+    padding:0px 15%;
+
+}
+
 .section-title {
     font-size: 1.6rem;
     color: var(--clr-primary);
@@ -697,6 +707,77 @@ header {
 
 
 
+.form-select {
+  display: block;
+  width: 100%;
+  padding: 0.5rem 2.5rem 0.5rem 1rem; /* Replace with actual padding values */
+  font-family: "YourFontFamily"; /* Replace with actual font family */
+  font-size: 1rem; /* Replace with actual font-size */
+  font-weight: 400; /* Replace with actual font-weight */
+  line-height: 1.5; /* Replace with actual line-height */
+  color: #333; /* Replace with actual color */
+  appearance: none;
+  background-color: white; /* Replace with actual background color */
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center; /* Replace with actual background position */
+  background-size: auto; /* Replace with actual background size */
+  border: 1px solid #ccc; /* Replace with actual border values */
+  border-radius: 0.25rem;
+  box-shadow: 0 0 0 rgba(0, 0, 0, 0.2); /* Replace with actual box shadow */
+  transition: all 0.2s ease-in-out; /* Replace with actual transition */
+}
+
+.form-select:focus {
+    border-color: rgba(108,117,125,.25); /* Replace with actual focus border color */
+    outline: 0;
+    box-shadow: 0 0 5px rgba(0, 2, 38, 0.5); /* Replace with actual focus box-shadow */
+
+}
+
+.form-select[multiple],
+.form-select[size]:not([size="1"]) {
+  padding-right: 1rem; /* Replace with actual padding */
+  background-image: none;
+}
+
+.form-select:disabled {
+  color: #6c757d; /* Replace with actual disabled color */
+  background-color: #e9ecef; /* Replace with actual disabled background color */
+  border-color: #ced4da; /* Replace with actual disabled border color */
+}
+
+.form-select:-moz-focusring {
+  color: transparent;
+  text-shadow: 0 0 0 #333; /* Replace with actual color */
+}
+
+.form-select-sm {
+  padding-top: 0.375rem; /* Replace with actual padding */
+  padding-bottom: 0.375rem; /* Replace with actual padding */
+  padding-left: 0.75rem; /* Replace with actual padding */
+  font-size: 0.875rem; /* Replace with actual font-size */
+  border-radius: 0.2rem; /* Replace with actual border-radius */
+}
+
+.form-select-lg {
+  padding-top: 0.75rem; /* Replace with actual padding */
+  padding-bottom: 0.75rem; /* Replace with actual padding */
+  padding-left: 1rem; /* Replace with actual padding */
+  font-size: 1.25rem; /* Replace with actual font-size */
+  border-radius: 0.3rem; /* Replace with actual border-radius */
+}
+
+@media (prefers-color-scheme: dark) {
+  .form-select {
+    --form-select-bg-img: url('data:image/svg+xml,...'); /* Replace with actual escaped SVG for dark mode */
+  }
+}
+
+.form-select option{font-size:large;}
+.form-select option[value="Available"]{color:var(--clr_Available);}
+.form-select option[value="Occupied"]{color:var(--clr_Occupied);}
+.form-select option[value="Maintenance"]{color:var(--clr_Maintenance);}
+
 .form-group label {
     font-weight: bold;
 }
@@ -704,6 +785,22 @@ header {
 .form-control {
     border-radius: 5px;
     padding: 10px;
+}
+
+
+.cancle_btn{
+    color:red;
+    background-color: unset;
+    border:1px solid red;
+}
+ .cancle_btn:hover,
+ .cancle_btn:active{
+    color:#fff;
+    background-color: red;
+}
+ .cancle_btn:active {
+    outline: 0;
+    box-shadow: 0 0 0 .2rem rgba(255, 0, 0, .25);
 }
 
 /* Custom Checkbox Slider */

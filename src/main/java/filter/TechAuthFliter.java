@@ -2,6 +2,7 @@
 package filter;
 
 
+import model.Resident;
 import model.User;
 
 import jakarta.servlet.*;
@@ -52,6 +53,7 @@ public class TechAuthFliter implements Filter {
             // User does not have the correct role, redirect to error page
             res.sendRedirect(req.getContextPath() + "/error");  // Redirect to error page
         }
+
     }
 
     @Override

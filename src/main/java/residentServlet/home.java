@@ -4,9 +4,7 @@
  */
 package residentServlet;
 
-import dao.PaymentDAO;
-import dao.ResidentDAO;
-import dao.RoomDAO;
+import dao.*;
 import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -17,8 +15,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import model.*;
-
-import dao.NotificationDAO;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -32,10 +28,11 @@ import static utils.DateUtils.formatTimestampToDate;
  */
 @WebServlet(name = "home", urlPatterns = {"/u/home"})
 public class home extends HttpServlet {
-    NotificationDAO notificationDAO = new NotificationDAO();
-    PaymentDAO paymentDAO = new PaymentDAO();
+    private NotificationDAO notificationDAO = new NotificationDAO();
+    private PaymentDAO paymentDAO = new PaymentDAO();
     private ResidentDAO residentDAO = new ResidentDAO();
     private RoomDAO roomDAO = new RoomDAO();
+    private MaintenanceRequestsDAO maintRequestDao = new MaintenanceRequestsDAO();
     public home(){
         super();
         }
@@ -67,6 +64,13 @@ public class home extends HttpServlet {
             request.setAttribute("P_overdue", paymentDAO.getAllPaymentsByResident(email,"overdue",limit));
             request.setAttribute("P_paid", paymentDAO.getAllPaymentsByResident(email,"paid",limit));
             request.setAttribute("P_pending", paymentDAO.getAllPaymentsByResident(email,"pending",limit));
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        try {
+
+            request.setAttribute("maintenanceDATA", maintRequestDao.getAllMaintenanceRequestsByRT(email,"resident"));
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

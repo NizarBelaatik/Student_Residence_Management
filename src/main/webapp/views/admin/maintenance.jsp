@@ -39,7 +39,7 @@
                         <div class="card_1-body">
                             <h5 class="card_1-title clr_orange">Pending Requests</h5>
                             <div class="card_1-header" style="display: flex;">
-                                <input class="form-control" type="text" id="filterInputPending" placeholder="Search..." style="width:45%;min-width:150px;">
+                                <input class="form-control" type="text" id="filterInput" placeholder="Search..." style="width:45%;min-width:150px;">
                             </div>
                             <div class="table-wrap">
                                 <table class="table2 table-striped table-hover table-bordered">
@@ -70,7 +70,7 @@
                                                        <td><%= requestData.getTechnicianName() != null ? requestData.getTechnicianName() : "N/A" %></td>
                                                        <td><%= requestData.getCreatedAt() %></td>
                                                        <td>
-                                                            <a class="btn btn_eye " href="${pageContext.request.contextPath}/admin/maintenanceDetails?requestId=<%= requestData.getId() %>">
+                                                            <a class="btn btn_eye " href="${pageContext.request.contextPath}/admin/maintenance/maintenanceDetails?requestId=<%= requestData.getId() %>">
                                                                 <i class="bi bi-eye-fill fa-2x"></i>
                                                             </a>
                                                        </td>
@@ -89,7 +89,7 @@
                         <div class="card_1-body">
                             <h5 class="card_1-title clr_blue">In Progress Requests</h5>
                             <div class="card_1-header" style="display: flex;">
-                                <input class="form-control" type="text" id="filterInputInProgress" placeholder="Search..." style="width:45%;min-width:150px;">
+                                <input class="form-control" type="text" id="filterInput" placeholder="Search..." style="width:45%;min-width:150px;">
                             </div>
                             <div class="table-wrap">
                                 <table class="table2 table-striped table-hover table-bordered">
@@ -120,7 +120,7 @@
                                                        <td><%= requestData.getTechnicianName() != null ? requestData.getTechnicianName() : "N/A" %></td>
                                                        <td><%= requestData.getCreatedAt() %></td>
                                                        <td>
-                                                            <a class="btn btn_eye " href="${pageContext.request.contextPath}/admin/maintenanceDetails?requestId='<%= requestData.getId() %>'">
+                                                            <a class="btn btn_eye " href="${pageContext.request.contextPath}/admin/maintenance/maintenanceDetails?requestId=<%= requestData.getId() %>">
                                                                <i class="bi bi-eye-fill fa-2x"></i>
                                                            </a>
                                                        </td>
@@ -139,7 +139,7 @@
                         <div class="card_1-body">
                             <h5 class="card_1-title clr_green">Resolved Requests</h5>
                             <div class="card_1-header" style="display: flex;">
-                                <input class="form-control" type="text" id="filterInputResolved" placeholder="Search..." style="width:45%;min-width:150px;">
+                                <input class="form-control" type="text" id="filterInput" placeholder="Search..." style="width:45%;min-width:150px;">
                             </div>
                             <div class="table-wrap">
                                 <table class="table2 table-striped table-hover table-bordered">
@@ -174,7 +174,7 @@
                                                        <td><%= requestData.getCreatedAt() %></td>
                                                        <td><%= requestData.getResolvedDate() %></td>
                                                        <td>
-                                                           <a class="btn btn_eye " href="${pageContext.request.contextPath}/admin/maintenanceDetails?requestId=<%= requestData.getId() %>">
+                                                           <a class="btn btn_eye " href="${pageContext.request.contextPath}/admin/maintenance/maintenanceDetails?requestId=<%= requestData.getId() %>">
                                                                <i class="bi bi-eye-fill fa-2x"></i>
                                                            </a>
                                                        </td>

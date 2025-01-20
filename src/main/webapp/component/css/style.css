@@ -284,6 +284,79 @@ header .profile .dropdown-content a:hover {
 }
 
 
+.dropdown-profile {
+    visibility: hidden; /* Initially hidden */
+    opacity: 0; /* Initially invisible */
+    position: absolute;
+    right: 0; /* Align dropdown to the right side of the button */
+    background-color: white;
+    min-width: 200px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    border-radius: 5px;
+    list-style: none;
+    padding: 10px;
+    margin-top: -8px;
+    transform: translateY(-10px); /* Start slightly above */
+    transition: opacity 0.5s ease, transform 0.5s ease, visibility 0s 0.5s; /* Smooth transition */
+}
+
+/* Show the dropdown with animation */
+.dropdown.active .dropdown-profile {
+    visibility: visible; /* Make the dropdown visible */
+    opacity: 1; /* Make it visible */
+    transform: translateY(0); /* Bring it to its normal position */
+    transition: opacity 0.3s ease, transform 0.3s ease; /* Transition properties for smooth animation */
+}
+
+
+.dropdown-header {
+    font-weight: bold;
+    margin-bottom: 0;
+    color: #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dropdown-divider {
+    border-top: 1px solid #ccc;
+    margin: 10px 0;
+}
+
+.dropdown-item {
+    display: block;
+    padding: 8px 15px;
+    text-decoration: none;
+    color: #333;
+    width: 100%;
+}
+
+.dropdown-item:hover {
+    background-color: #f1f1f1;
+    border-radius: 5px;
+}
+
+.dropdown-item:active {
+    background-color: #ddd;
+}
+
+/* Email text styling with ellipsis */
+.dropdown-profile li {
+    max-width: 230px;        /* Set the max width of the list item */
+    overflow: hidden;        /* Hide any content that overflows the max width */
+    white-space: nowrap;     /* Prevent the text from wrapping onto multiple lines */
+    text-overflow: ellipsis; /* Add ellipsis (...) if the text overflows */
+}
+
+
+.dropdown-item .icon{
+    font-size:24px;
+    padding-right:5px;}
+
+.power_off_btn:hover{background-color:rgba(255,0,0,0.2)!important;}
+
+
 
 /* Sidebar styles */
 .sidebar {
@@ -572,8 +645,8 @@ header .profile .dropdown-content a:hover {
 .StatusSpan[data-badge='paid'],
 .StatusSpan[data-badge='true'],
 .StatusSpan[data-badge='resolved']{
-    color:var(--clr_Available);
-    border-color:var(--clr_Available);}
+    color:rgb(0,200,0);
+    border-color:rgb(0,200,0);}
 
 .StatusSpan[data-badge='Occupied'],
 .StatusSpan[data-badge='overdue'],

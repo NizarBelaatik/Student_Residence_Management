@@ -9,6 +9,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="jakarta.servlet.*,jakarta.servlet.http.*,java.io.*,java.util.*,java.sql.*"%><!DOCTYPE html>
 <%@ page import="model.Payment" %>
+<%@ page import="model.MaintenanceRequests" %>
 <html>
 <head>
     <title>Home</title>
@@ -46,6 +47,8 @@
                         </div>
 
                         <!-- Payment History Section -->
+                        <div class="row justify-content-center"><div class="wide_line"></div></div>
+
                         <div class="section-title">Payment History</div>
                         <div class="table_container">
                         <%   List<Payment> P_overdue = (List<Payment>) request.getAttribute("P_overdue");
@@ -113,19 +116,47 @@
 
 
                         <!-- Maintenance Request Section -->
+                        <div class="row justify-content-center"><div class="wide_line"></div></div>
                         <div class="section-title">Maintenance Requests
                             <a id="show-more-btn" class="btn_1" href="${pageContext.request.contextPath}/u/make_request?roomId=${room.getRoomId()}">Make Request</a>
                         </div>
-                        <ul class="list-group">
-                            <li class="list-group-item">
-                                <strong>Issue:</strong> Leaky Faucet
-                                <span class="badge badge-pill status-badge status-maintenance float-end">Resolved</span>
-                            </li>
-                            <li class="list-group-item">
-                                <strong>Issue:</strong> No Hot Water
-                                <span class="badge badge-pill status-badge status-maintenance float-end">Pending</span>
-                            </li>
-                        </ul>
+
+                        <div class="card_1-header" style="display: flex;">
+                            <input class="form-control" type="text" id="filterInput" placeholder="Search..." style="width:45%;min-width:150px;">
+                        </div>
+                        <div class="table-wrap" style="overflow: auto; width: 100%; max-width: 100%;height:100%; max-height:900px; ">
+                            <table class="table2 table-striped table-hover table-bordered" >
+                                <thead>
+                                    <tr>
+                                        <th>Requests ID</th>
+                                        <th>Resident Email</th>
+                                        <th>Room ID</th>
+                                        <th>Issue Type</th>
+                                        <th>Issue Description</th>
+                                        <th>Status</th>
+                                        <th>Technician Name</th>
+                                        <th>Created Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% List<MaintenanceRequests> maintenanceDATA = (List<MaintenanceRequests>) request.getAttribute("maintenanceDATA");
+                                       if (maintenanceDATA != null) {
+                                           for (MaintenanceRequests requestData : maintenanceDATA) { %>
+                                               <tr>
+                                                    <td><%= requestData.getId() %></td>
+                                                   <td><%= requestData.getResidentEmail() %></td>
+                                                   <td><%= requestData.getRoomId() %></td>
+                                                   <td><%= requestData.getIssueType() %></td>
+                                                   <td><%= requestData.getIssueDescription() %></td>
+                                                   <td><span class="StatusSpan" data-badge='<%= requestData.getStatus() %>'><%= requestData.getStatus() %></span></td>
+                                                   <td><%= requestData.getTechnicianName() != null ? requestData.getTechnicianName() : "N/A" %></td>
+                                                   <td><%= requestData.getCreatedAt() %></td>
+                                               </tr>
+                                    <% } } %>
+                                </tbody>
+                            </table>
+                        </div>
+
 
                     </div>
                 </div>
@@ -142,12 +173,9 @@
 
 
 
-    <script src="${pageContext.request.contextPath}/component/js/script.js"></script>
     <script src="${pageContext.request.contextPath}/component/js/tooplate-scripts.js"></script>
 
-    <script src="${pageContext.request.contextPath}/component/js/script.js"></script>
-    <script src="${pageContext.request.contextPath}/component/js/script.js"></script>
-    <script src="${pageContext.request.contextPath}/component/js/script.js"></script>
+
 
     <script src="${pageContext.request.contextPath}/component/js/tools/jquery-3.3.1.min.js"></script>
     <script src="${pageContext.request.contextPath}/component/js/tools/moment.min.js"></script>
@@ -160,7 +188,44 @@
             var paymentId = $(this).data('paymentid');
             location.href = "<%= request.getContextPath() %>/u/make_payment?paymentId="+paymentId;
         });
+
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get the filter input element
+            var filterInput = document.getElementById('filterInput');
+
+            // Add event listener for the filter input
+            filterInput.addEventListener('keyup', function() {
+                // Get the value of the search input, convert to lowercase
+                var filter = this.value.toLowerCase();
+
+                // Get the table rows
+                var rows = document.querySelectorAll('.table2 tbody tr');
+
+                // Loop through all rows and hide those that don't match the search
+                rows.forEach(function(row) {
+                    var cells = row.querySelectorAll('td'); // Only look at td cells (data cells)
+                    var rowText = '';
+
+                    // Combine text content of all cells in the row into one string for searching
+                    cells.forEach(function(cell) {
+                        rowText += cell.textContent.toLowerCase() + ' ';
+                    });
+
+                    // If the row text contains the search filter, show the row, otherwise hide it
+                    if (rowText.indexOf(filter) > -1) {
+                        row.style.display = '';
+                    } else {
+                        row.style.display = 'none';
+                    }
+                });
+            });
+        });
+
     </script>
+
+
+    <script src="${pageContext.request.contextPath}/component/js/script.js"></script>
     <%@ include file="/views/common/footer.jsp" %>
 </body>
 </html>

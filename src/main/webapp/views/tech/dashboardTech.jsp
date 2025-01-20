@@ -2,6 +2,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="jakarta.servlet.*,jakarta.servlet.http.*,java.io.*,java.util.*,java.sql.*"%><!DOCTYPE html>
+<%@ page import="model.MaintenanceRequests" %>
 <html>
 <head>
     <title>Dashboard</title>
@@ -35,19 +36,47 @@
 
                         <!-- Requests Section -->
                         <div class="section-title">Requests</div>
-                        <table class="table table-striped table-hover">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Description</th>
-                                    <th>Status</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-
-                                %>
-                            </tbody>
-                        </table>
+                        <div class="card_1-header" style="display: flex;">
+                            <input class="form-control" type="text" id="filterInput" placeholder="Search..." style="width:45%;min-width:150px;">
+                        </div>
+                        <div class="table-wrap" style="overflow: auto; width: 100%; max-width: 100%;height:100%; max-height:900px; ">
+                            <table class="table2 table-striped table-hover table-bordered" >
+                                <thead>
+                                    <tr>
+                                        <th>Requests ID</th>
+                                        <th>Resident Email</th>
+                                        <th>Room ID</th>
+                                        <th>Issue Type</th>
+                                        <th>Issue Description</th>
+                                        <th>Status</th>
+                                        <th>Technician Name</th>
+                                        <th>Created Date</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% List<MaintenanceRequests> maintenanceDATA = (List<MaintenanceRequests>) request.getAttribute("maintenanceDATA");
+                                       if (maintenanceDATA != null) {
+                                           for (MaintenanceRequests requestData : maintenanceDATA) { %>
+                                               <tr>
+                                                    <td><%= requestData.getId() %></td>
+                                                   <td><%= requestData.getResidentEmail() %></td>
+                                                   <td><%= requestData.getRoomId() %></td>
+                                                   <td><%= requestData.getIssueType() %></td>
+                                                   <td><%= requestData.getIssueDescription() %></td>
+                                                   <td><span class="StatusSpan" data-badge='<%= requestData.getStatus() %>'><%= requestData.getStatus() %></span></td>
+                                                   <td><%= requestData.getTechnicianName() != null ? requestData.getTechnicianName() : "N/A" %></td>
+                                                   <td><%= requestData.getCreatedAt() %></td>
+                                                   <td>
+                                                        <a class="btn btn_eye " href="${pageContext.request.contextPath}/t/maintenance/maintenanceDetails?requestId=<%= requestData.getId() %>">
+                                                           <i class="bi bi-eye-fill fa-2x"></i>
+                                                       </a>
+                                                   </td>
+                                               </tr>
+                                    <% } } %>
+                                </tbody>
+                            </table>
+                        </div>
 
                     </div>
                 </div>
