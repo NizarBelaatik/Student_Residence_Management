@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 
+import dao.MaintenanceRequestsDAO;
 import dao.RoomDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -26,6 +27,7 @@ import dao.PaymentDAO;
 public class Dashboard extends HttpServlet {
     private PaymentDAO paymentDAO = new PaymentDAO();
     private RoomDAO roomDAO = new RoomDAO();
+    private MaintenanceRequestsDAO maintenanceDAO = new MaintenanceRequestsDAO();
     public Dashboard() {
         super();
         // TODO Auto-generated constructor stub
@@ -47,15 +49,17 @@ public class Dashboard extends HttpServlet {
             // Forward to the dashboard JSP with user and role info
 
             int maintenance_requests = 0;
-            request.setAttribute("overdue", paymentDAO.getPaymentsByStatusSize("overdue"));
-            request.setAttribute("paid", paymentDAO.getPaymentsByStatusSize("paid"));
-            request.setAttribute("pending", paymentDAO.getPaymentsByStatusSize("pending"));
-            request.setAttribute("maintenance_requests", maintenance_requests);
+            request.setAttribute("overdue", paymentDAO.getPaymentsByStatusINT("overdue"));
+            request.setAttribute("paid", paymentDAO.getPaymentsByStatusINT("paid"));
+            request.setAttribute("pending", paymentDAO.getPaymentsByStatusINT("pending"));
 
 
-            request.setAttribute("total_payments_overdue", paymentDAO.getTotalOverduePayments());
-            request.setAttribute("total_payments_paid", paymentDAO.getTotalPaymentsThisMonthByStatus("paid"));
-            request.setAttribute("total_payments_pending", paymentDAO.getTotalPendingPayments());
+
+
+
+            request.setAttribute("total_payments_overdue", paymentDAO.getTotalPaymentsByStatus("overdue"));
+            request.setAttribute("total_payments_paid", paymentDAO.getTotalPaymentsByStatus("paid"));
+            request.setAttribute("total_payments_pending", paymentDAO.getTotalPaymentsByStatus("pending"));
 
 
 
@@ -69,6 +73,10 @@ public class Dashboard extends HttpServlet {
                 request.setAttribute("available_rooms", availableRooms);
                 request.setAttribute("occupied_rooms", occupiedRooms);
                 request.setAttribute("maintenance_rooms", maintenanceRooms);
+
+
+                request.setAttribute("paymentsN", paymentDAO.getPaymentsN(5) );
+                request.setAttribute("maintenance_requestsN", maintenanceDAO.getRecentMaintenanceRequests(5));
 
             } catch (SQLException e) {
                 e.printStackTrace();

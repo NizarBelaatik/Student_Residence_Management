@@ -128,6 +128,36 @@ public class PaymentDAO {
         }
     }
 
+    public List<Payment> getPaymentsN(int n) throws SQLException {
+        String query = "SELECT * FROM payments " +
+                "ORDER BY CASE WHEN payment_date IS NULL THEN due_date ELSE payment_date END DESC " + // Order by latest date
+                "LIMIT ?"; // Limit the number of results to N
+
+        List<Payment> payments = new ArrayList<>();
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+
+            stmt.setInt(1, n); // Set the parameter for LIMIT
+
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                Payment payment = new Payment(
+                        rs.getString("paymentId"),
+                        rs.getString("fullname"),
+                        rs.getString("email"),
+                        rs.getString("roomId"),
+                        rs.getFloat("amount_due"),
+                        rs.getFloat("amount_paid"),
+                        rs.getTimestamp("due_date"),
+                        rs.getTimestamp("payment_date"),
+                        rs.getString("status"));
+                payments.add(payment);
+            }
+        }
+        return payments;
+    }
+
+
     public List<Payment> getPaymentsByStatus(String status) throws SQLException {
         String query = "SELECT * FROM payments WHERE status = ? " +
                 "ORDER BY CASE WHEN payment_date IS NULL THEN due_date ELSE payment_date END";
@@ -241,6 +271,33 @@ public class PaymentDAO {
         return 0;
     }
 
+    public int getPaymentsByStatusINT(String status) {
+        String query = "";
+
+        // Define the query based on the status parameter
+        if ("paid".equalsIgnoreCase(status)) {
+            query = "SELECT COUNT(*) AS count FROM payments WHERE payment_date IS NOT NULL";
+        } else if ("overdue".equalsIgnoreCase(status)) {
+            query = "SELECT COUNT(*) AS count FROM payments WHERE payment_date IS NULL AND due_date < CURDATE()";
+        } else if ("pending".equalsIgnoreCase(status)) {
+            query = "SELECT COUNT(*) AS count FROM payments WHERE payment_date IS NULL AND due_date >= CURDATE()";
+        } else {
+            throw new IllegalArgumentException("Invalid status: " + status);
+        }
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query);
+             ResultSet rs = stmt.executeQuery()) {
+
+            if (rs.next()) {
+                return rs.getInt("count");
+            }
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
     public float getTotalPaymentsThisMonthByStatus(String status) {
         String query = "SELECT SUM(amount_paid) FROM payments WHERE status = ? AND MONTH(payment_date) = MONTH(CURRENT_DATE) AND YEAR(payment_date) = YEAR(CURRENT_DATE)";
         float totalAmount = 0.0f;
@@ -320,37 +377,59 @@ public class PaymentDAO {
         return totalAmount;
     }
 
+
     public float getTotalPaymentsByStatus(String status) {
         String query = "";
-        if ("pending".equalsIgnoreCase(status)) {
-            query = "SELECT SUM(amount_due) FROM payments WHERE status = 'pending' AND MONTH(due_date) = MONTH(CURRENT_DATE) AND YEAR(due_date) = YEAR(CURRENT_DATE)";
+
+        // Determine the query based on the provided status
+        if ("paid".equalsIgnoreCase(status)) {
+            // Total paid payments for the current month
+            query = "SELECT SUM(amount_due) FROM payments WHERE payment_date IS NOT NULL " +
+                    "AND MONTH(payment_date) = MONTH(CURRENT_DATE) AND YEAR(payment_date) = YEAR(CURRENT_DATE)";
         } else if ("overdue".equalsIgnoreCase(status)) {
-            query = "SELECT SUM(amount_due) FROM payments WHERE status = 'overdue' AND due_date < CURRENT_DATE";
-        } else if ("paid".equalsIgnoreCase(status)) {
-            query = "SELECT SUM(amount_paid) FROM payments WHERE status = 'paid' AND MONTH(payment_date) = MONTH(CURRENT_DATE) AND YEAR(payment_date) = YEAR(CURRENT_DATE)";
+            // Total overdue payments (payment_date is NULL and due_date is past)
+            query = "SELECT SUM(amount_due) FROM payments WHERE payment_date IS NULL AND due_date < CURRENT_DATE";
+        } else if ("pending".equalsIgnoreCase(status)) {
+            // Total pending payments (payment_date is NULL and due_date is future)
+            query = "SELECT SUM(amount_due) FROM payments WHERE payment_date IS NULL AND due_date >= CURRENT_DATE";
+        } else {
+            throw new IllegalArgumentException("Invalid status: " + status); // Invalid status
         }
 
         float totalAmount = 0.0f;
+
         try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement stmt = connection.prepareStatement(query)) {
 
-            ResultSet resultSet = stmt.executeQuery();
-            if (resultSet.next()) {
-                totalAmount = resultSet.getFloat(1);
+            try (ResultSet resultSet = stmt.executeQuery()) {
+                if (resultSet.next()) {
+                    totalAmount = resultSet.getFloat(1); // Retrieve the total amount for the status
+                }
             }
+
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.err.println("SQL error while fetching total payments for status '" + status + "': " + e.getMessage());
+            e.printStackTrace(); // Print stack trace for debugging
         }
+
         return totalAmount;
     }
 
+
     public Map<String, Map<String, Integer>> getPaymentGraphData() throws SQLException {
         Map<String, Map<String, Integer>> statusData = new HashMap<>();
-        String query = "SELECT status, DATE(payment_date) AS date, COUNT(*) AS count " +
-                "FROM payments " +
-                "WHERE payment_date >= CURDATE() - INTERVAL 30 DAY " +
-                "GROUP BY status, DATE(payment_date) " +
-                "ORDER BY DATE(payment_date)";
+        String query = "SELECT \n" +
+                "    CASE \n" +
+                "        WHEN payment_date IS NOT NULL THEN 'paid'\n" +
+                "        WHEN payment_date IS NULL AND due_date < CURDATE() THEN 'overdue'\n" +
+                "        ELSE 'pending' \n" +
+                "    END AS status,\n" +
+                "    DATE(CASE WHEN payment_date IS NULL THEN due_date ELSE payment_date END) AS date, \n" +
+                "    COUNT(*) AS count\n" +
+                "FROM payments\n" +
+                "WHERE (payment_date >= CURDATE() - INTERVAL 30 DAY OR due_date >= CURDATE() - INTERVAL 30 DAY)\n" +
+                "GROUP BY status, DATE(CASE WHEN payment_date IS NULL THEN due_date ELSE payment_date END)\n" +
+                "ORDER BY DATE(CASE WHEN payment_date IS NULL THEN due_date ELSE payment_date END);";
 
         try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement stmt = connection.prepareStatement(query);
@@ -376,6 +455,7 @@ public class PaymentDAO {
         }
         return statusData;
     }
+
 
 
 

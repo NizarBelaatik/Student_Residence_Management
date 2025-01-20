@@ -1,7 +1,7 @@
 
 
 <header>
-        <div class="logo"> <a class="toggle-btn" id="toggleBtn"><i class="fas fa-bars"></i></a> Logo</div>
+        <div class="logo"> <a class="toggle-btn" id="toggleBtn"><i class="fas fa-bars"></i></a> <a class="header_home_btn"href="${pageContext.request.contextPath}/admin/dashboard">Student Residence Management</a></div>
         <div class="profile">
             <div class="dropdown">
                 Profile

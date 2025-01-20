@@ -3,11 +3,17 @@
     Created on : Dec 11, 2024, 4:27:26 PM
     Author     : night
 --%>
+<%@ page import="model.Payment" %>
+<%@ page import="model.MaintenanceRequests" %>
+<%@ page import="java.util.List" %>
+<%@ page import="jakarta.servlet.*, jakarta.servlet.http.*, java.io.*, java.util.*, java.sql.*" %>
+
 <%
     String currentPage = "dashboard";  // or any dynamic value
     request.setAttribute("currentPage", currentPage);
 %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -36,7 +42,7 @@
         <section class="section dashboard">
             <div class="col-12">
                 <div class="row">
-                    <div class="col-lg-8">
+                    <div class="col-lg-12">
 
                         <div class="row">
 
@@ -103,8 +109,16 @@
 
                         </div>
 
+                    </div>
+
+
+
+
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
                         <div class="row">
-                            <div class="col-lg-12">
+                            <div class="col-lg-6">
                                 <div class="card_1">
                                     <div class="card_1-body">
                                         <h5 class="card_1-title">Payments for last 30 days</h5>
@@ -112,10 +126,50 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="col-lg-6">
+                                <div class="card_1">
+                                    <div class="card_1-body">
+                                        <div class="card_1-header" style="display: flex;    justify-content: space-between;">
+                                            <h5 class="card_1-title">Recent Payments</h5>
+                                            <a class="btn_1 " href="${pageContext.request.contextPath}/admin/payments" style="margin-top:auto;margin-bottom:auto;">Show More</a>
+                                        </div>
+                                        <div class="table-wrap">
+                                            <table class="table2 table-striped table-hover table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Resident Full name</th>
+                                                        <th>Payment ID</th>
+                                                        <th>Due Date</th>
+                                                        <th>Payment Date</th>
+                                                        <th>Status</th>
+
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <% List<Payment> paymentsN = (List<Payment>) request.getAttribute("paymentsN");
+                                                        if (paymentsN != null) {
+                                                            for (Payment data : paymentsN) { %>
+                                                                <tr>
+                                                                    <td><%= data.getFullname() %></td>
+                                                                    <td><%= data.getPaymentId() %></td>
+                                                                    <td><%= data.getDueDate() %></td>
+                                                                    <td><%= data.getPaymentDate() != null ? data.getPaymentDate() : "" %></td>
+
+                                                                    <td><span class="StatusSpan" data-badge='<%= data.getStatus() %>'><%= data.getStatus() %></span></td>
+
+                                                                </tr>
+                                                    <% } } %>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
                         <div class="row">
-                            <div class="col-lg-12">
+                            <div class="col-lg-6">
                                 <div class="card_1">
                                     <div class="card_1-body">
                                         <h5 class="card_1-title">Maintenance Requests Status - Last 30 Days</h5>
@@ -123,26 +177,46 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="col-lg-6">
+                                <div class="card_1">
+                                        <div class="card_1-body">
+                                            <div class="card_1-header" style="display: flex;    justify-content: space-between;">
+                                                <h5 class="card_1-title">Recent Maintenance Requests</h5>
+                                                <a class="btn_1 " href="${pageContext.request.contextPath}/admin/maintenance" style="margin-top:auto;margin-bottom:auto;">Show More</a>
+                                            </div>
+                                            <div class="table-wrap">
+                                                <table class="table2 table-striped table-hover table-bordered">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Requests ID</th>
+
+                                                            <th>Issue Type</th>
+                                                            <th>Issue Description</th>
+                                                            <th>Status</th>
+                                                            <th>Technician Name</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <% List<MaintenanceRequests> maintenance_requestsN = (List<MaintenanceRequests>) request.getAttribute("maintenance_requestsN");
+                                                           if (maintenance_requestsN != null) {
+                                                               for (MaintenanceRequests requestData : maintenance_requestsN) { %>
+                                                                   <tr>
+                                                                        <td><%= requestData.getId() %></td>
+                                                                       <td><%= requestData.getIssueType() %></td>
+                                                                       <td><%= requestData.getIssueDescription() %></td>
+                                                                       <td><span class="StatusSpan" data-badge='<%= requestData.getStatus() %>'><%= requestData.getStatus() %></span></td>
+                                                                       <td><%= requestData.getTechnicianName() != null ? requestData.getTechnicianName() : "N/A" %></td>
+                                                                   </tr>
+                                                        <% } } %>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                            </div>
                         </div>
-
-
-                        <h1>Welcome</h1>
-                        <p>This is the main content area.</p>
-                        Total Rooms.
-                        Occupancy Rate.
-                        Pending Payments.
-                        Pending Maintenance Requests.
-
-                        Statistics: occupancy rates, overdue payments, pending maintenance requests.
-                        Quick links to manage rooms, residents, payments, and maintenance.
-
                     </div>
-
-
-                    <div class="col-lg-4">
-                        recent activity
-                    </div>
-
                 </div>
             </div>
         </section>

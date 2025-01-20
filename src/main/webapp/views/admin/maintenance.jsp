@@ -4,7 +4,7 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8" %>
 
 <%
-    String currentPage = "payments";  // or any dynamic value
+    String currentPage = "maintenance";  // or any dynamic value
     request.setAttribute("currentPage", currentPage);
 %>
 
@@ -12,7 +12,7 @@
 <html lang="en">
 
 <head>
-    <title>Manage Payments</title>
+    <title>Manage Maintenance Requests</title>
     <%@ include file="/views/common/headeradminlinks.jsp" %>
 </head>
 
@@ -23,11 +23,11 @@
     <!-- Main content -->
     <main class="main" id="main">
         <div class="pagetitle">
-            <h1>Manage Payments</h1>
+            <h1>Manage Maintenance Requests</h1>
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="${pageContext.request.contextPath}/admin">Dashboard</a></li>
-                    <li class="breadcrumb-item active">Payments</li>
+                    <li class="breadcrumb-item active">Manage Maintenance Requests</li>
                 </ol>
             </nav>
         </div>
@@ -45,13 +45,14 @@
                                 <table class="table2 table-striped table-hover table-bordered">
                                     <thead>
                                         <tr>
+                                            <th>Requests ID</th>
                                             <th>Resident Email</th>
                                             <th>Room ID</th>
                                             <th>Issue Type</th>
                                             <th>Issue Description</th>
                                             <th>Status</th>
                                             <th>Technician Name</th>
-                                            <th>Created At</th>
+                                            <th>Created Date</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -60,6 +61,7 @@
                                            if (M_pending != null) {
                                                for (MaintenanceRequests requestData : M_pending) { %>
                                                    <tr>
+                                                        <td><%= requestData.getId() %></td>
                                                        <td><%= requestData.getResidentEmail() %></td>
                                                        <td><%= requestData.getRoomId() %></td>
                                                        <td><%= requestData.getIssueType() %></td>
@@ -85,7 +87,7 @@
                 <div class="col-lg-12">
                     <div class="card_1">
                         <div class="card_1-body">
-                            <h5 class="card_1-title clr_yellow">In Progress Requests</h5>
+                            <h5 class="card_1-title clr_blue">In Progress Requests</h5>
                             <div class="card_1-header" style="display: flex;">
                                 <input class="form-control" type="text" id="filterInputInProgress" placeholder="Search..." style="width:45%;min-width:150px;">
                             </div>
@@ -93,13 +95,14 @@
                                 <table class="table2 table-striped table-hover table-bordered">
                                     <thead>
                                         <tr>
+                                            <th>Requests ID</th>
                                             <th>Resident Email</th>
                                             <th>Room ID</th>
                                             <th>Issue Type</th>
                                             <th>Issue Description</th>
                                             <th>Status</th>
                                             <th>Technician Name</th>
-                                            <th>Created At</th>
+                                            <th>Created Date</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -108,6 +111,7 @@
                                            if (M_in_progress != null) {
                                                for (MaintenanceRequests requestData : M_in_progress) { %>
                                                    <tr>
+                                                        <td><%= requestData.getId() %></td>
                                                        <td><%= requestData.getResidentEmail() %></td>
                                                        <td><%= requestData.getRoomId() %></td>
                                                        <td><%= requestData.getIssueType() %></td>
@@ -141,6 +145,7 @@
                                 <table class="table2 table-striped table-hover table-bordered">
                                     <thead>
                                         <tr>
+                                            <th>Requests ID</th>
                                             <th>Resident Email</th>
                                             <th>Room ID</th>
                                             <th>Issue Type</th>
@@ -148,7 +153,8 @@
                                             <th>Status</th>
                                             <th>Technician Name</th>
                                             <th>Resolved Date</th>
-                                            <th>Created At</th>
+                                            <th>Created Date</th>
+                                            <th>Resolved Date</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -157,6 +163,7 @@
                                            if (M_resolved != null) {
                                                for (MaintenanceRequests requestData : M_resolved) { %>
                                                    <tr>
+                                                        <td><%= requestData.getId() %></td>
                                                        <td><%= requestData.getResidentEmail() %></td>
                                                        <td><%= requestData.getRoomId() %></td>
                                                        <td><%= requestData.getIssueType() %></td>
@@ -165,6 +172,7 @@
                                                        <td><%= requestData.getTechnicianName() != null ? requestData.getTechnicianName() : "N/A" %></td>
                                                        <td><%= requestData.getResolvedDate() != null ? requestData.getResolvedDate() : "N/A" %></td>
                                                        <td><%= requestData.getCreatedAt() %></td>
+                                                       <td><%= requestData.getResolvedDate() %></td>
                                                        <td>
                                                            <a class="btn btn_eye " href="${pageContext.request.contextPath}/admin/maintenanceDetails?requestId=<%= requestData.getId() %>">
                                                                <i class="bi bi-eye-fill fa-2x"></i>

@@ -85,8 +85,4 @@ public class getPaymentGraph extends HttpServlet {
         return String.format("{\"dates\": [%s], \"pending\": [%s], \"paid\": [%s], \"overdue\": [%s]}",
                 dates.toString(), pendingData.toString(), paidData.toString(), overdueData.toString());
     }
-
-
-
-
 }

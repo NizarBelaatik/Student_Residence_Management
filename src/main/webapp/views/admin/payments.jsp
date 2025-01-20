@@ -207,8 +207,8 @@
                                 <table class="table2 table-striped table-hover table-bordered">
                                     <thead>
                                         <tr>
-                                            <th>Full name</th>
-                                            <th>Email</th>
+                                            <th>Resident Full name</th>
+                                            <th>Resident Email</th>
                                             <th>Payment ID</th>
                                             <th>Room ID</th>
                                             <th>Amount Due</th>
@@ -216,6 +216,7 @@
                                             <th>Due Date</th>
                                             <th>Payment Date</th>
                                             <th>Status</th>
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>

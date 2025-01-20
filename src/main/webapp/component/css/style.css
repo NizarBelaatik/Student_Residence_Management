@@ -76,6 +76,7 @@ h6 {
 .clr_red{color:red!important;}
 .clr_green{color:rgb(0,200,0)!important;}
 .clr_orange{color:orange!important;}
+.clr_blue{color:rgb(0, 100 ,255)!important;}
 
 .row {
     margin-right: 0!important;
@@ -238,6 +239,11 @@ header {
 header .logo {
     font-size: 1.5rem;
     font-weight: bold;
+}
+header .header_home_btn{
+    text-decoration: none;
+    color:#fff;
+    cursor:pointer;
 }
 
 header .profile {
@@ -564,7 +570,8 @@ header .profile .dropdown-content a:hover {
 }
 .StatusSpan[data-badge='Available'],
 .StatusSpan[data-badge='paid'],
-.StatusSpan[data-badge='true']{
+.StatusSpan[data-badge='true'],
+.StatusSpan[data-badge='resolved']{
     color:var(--clr_Available);
     border-color:var(--clr_Available);}
 

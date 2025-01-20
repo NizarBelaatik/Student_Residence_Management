@@ -78,6 +78,41 @@ public class MaintenanceRequestsDAO {
         return maintenanceRequests;
     }
 
+    public List<MaintenanceRequests> getRecentMaintenanceRequests(int N) throws SQLException {
+        // SQL query to fetch all records if N <= 1, else fetch N most recent
+        String sql;
+        if (N <= 1) {
+            sql = "SELECT * FROM maintenance_requests " +
+                    "ORDER BY GREATEST(COALESCE(resolved_date, '1900-01-01'), COALESCE(created_at, '1900-01-01'), COALESCE(updated_at, '1900-01-01')) DESC";
+        } else {
+            sql = "SELECT * FROM maintenance_requests " +
+                    "ORDER BY GREATEST(COALESCE(resolved_date, '1900-01-01'), COALESCE(created_at, '1900-01-01'), COALESCE(updated_at, '1900-01-01')) DESC LIMIT ?";
+        }
+
+        List<MaintenanceRequests> maintenanceRequests = new ArrayList<>();
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            // If N > 1, set the limit for the query
+            if (N > 1) {
+                stmt.setInt(1, N);
+            }
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    maintenanceRequests.add(mapResultSetToMaintenanceRequest(rs));
+                }
+            }
+        } catch (SQLException e) {
+            System.err.println("Error while fetching recent maintenance requests: " + e.getMessage());
+            e.printStackTrace(); // Print stack trace for debugging
+        }
+
+        return maintenanceRequests;
+    }
+
+
     public List<MaintenanceRequests> getAllMaintenanceRequestsByStatus(String status)
             throws SQLException {
         String sql = "SELECT * FROM maintenance_requests WHERE status = ?";
