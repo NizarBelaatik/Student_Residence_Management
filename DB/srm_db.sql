@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 20, 2025 at 08:58 PM
+-- Generation Time: Jan 21, 2025 at 12:06 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -20,6 +20,9 @@ SET time_zone = "+00:00";
 --
 -- Database: `srm_db`
 --
+
+CREATE Database srm_db;
+use srm_db;
 
 -- --------------------------------------------------------
 
@@ -75,9 +78,9 @@ INSERT INTO `maintenance_requests` (`id`, `resident_email`, `roomId`, `issue_typ
 (1, 'lazariatik@gmail.com', '13d54', 'Water', 'water leakage', 'pending', 'n@gmail.com', NULL, '2025-01-01 15:47:21', '2025-01-15 20:09:03'),
 (2, 'lazariatik@gmail.com', '13d54', 'Elec', 'elec problem', 'resolved', 'n@gmail.com', '2025-01-15', '2025-01-13 15:59:48', '2025-01-15 20:10:22'),
 (3, 'lazariatik@gmail.com', '823k8f', 'Water Leak', 'sdf', 'in_progress', NULL, NULL, '2025-01-15 09:02:00', '2025-01-15 20:37:19'),
-(4, 'lazariatik@gmail.com', '823k8f', 'Electrical Issue', 'asdf', 'pending', NULL, NULL, '2025-01-15 20:02:45', '2025-01-15 20:02:45'),
+(4, 'lazariatik@gmail.com', '823k8f', 'Electrical Issue', 'asdf', 'resolved', 'belaatiknizar@gmail.com', '2025-01-20', '2025-01-15 20:02:45', '2025-01-20 22:55:58'),
 (5, 'lazariatik@gmail.com', '823k8f', 'Water Leak', 'sadf', 'pending', NULL, NULL, '2025-01-15 20:03:29', '2025-01-15 20:03:29'),
-(6, 'lazariatik@gmail.com', '823k8f', 'Water Leak', 'water leaking', 'pending', NULL, NULL, '2025-01-15 20:06:40', '2025-01-15 20:06:40');
+(6, 'lazariatik@gmail.com', '823k8f', 'Water Leak', 'water leaking', 'in_progress', 'belaatiknizar@gmail.com', NULL, '2025-01-15 20:06:40', '2025-01-20 20:39:53');
 
 -- --------------------------------------------------------
 
