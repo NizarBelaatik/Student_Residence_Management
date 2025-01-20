@@ -241,9 +241,17 @@ header .logo {
     font-weight: bold;
 }
 header .header_home_btn{
+
     text-decoration: none;
     color:#fff;
     cursor:pointer;
+}
+header .header_home_btn:after{content:'Student Residence Management';
+    }
+@media(max-width: 620px) {
+    header .header_home_btn:after{
+        content:'SRM';
+    }
 }
 
 header .profile {
