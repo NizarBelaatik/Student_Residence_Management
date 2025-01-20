@@ -35,6 +35,15 @@ public class dashboard extends HttpServlet {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+
+        try {
+
+            request.setAttribute("M_pending", maintRequestDao.getAllMaintenanceRequestsByStatusT("pending",email));
+            request.setAttribute("M_in_progress", maintRequestDao.getAllMaintenanceRequestsByStatusT("in_progress",email));
+            request.setAttribute("M_resolved", maintRequestDao.getAllMaintenanceRequestsByStatusT("resolved",email));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         RequestDispatcher dispatcher = request.getRequestDispatcher("/views/tech/dashboardTech.jsp");
         dispatcher.forward(request, response);
     }

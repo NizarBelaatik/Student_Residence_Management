@@ -30,7 +30,6 @@ public class maintenance  extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // Forward the request to the actual JSP page
         //roomDAO RoomDAO = new roomDAO();
-        List<MaintenanceRequests> maintenanceList = new ArrayList<>();
 
         try {
 

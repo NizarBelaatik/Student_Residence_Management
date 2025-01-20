@@ -158,6 +158,26 @@ public class MaintenanceRequestsDAO {
         return maintenanceRequests;
     }
 
+    public List<MaintenanceRequests> getAllMaintenanceRequestsByStatusT(String status,String techEmail)
+            throws SQLException {
+        String sql = "SELECT * FROM maintenance_requests WHERE status = ? and technician_name = ?";
+        List<MaintenanceRequests> maintenanceRequests = new ArrayList<>();
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, status); // Set the status parameter
+            ps.setString(2, techEmail);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    maintenanceRequests.add(mapResultSetToMaintenanceRequest(rs));
+                }
+            }
+        }
+
+        return maintenanceRequests;
+    }
+
 
     // Update the status of a MaintenanceRequest by ID
     public boolean updateMaintenanceRequestStatus(String id, String status, String technicianName) throws SQLException {

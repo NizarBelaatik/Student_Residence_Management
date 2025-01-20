@@ -17,6 +17,12 @@
 .color_green{color:rgb(0,200,0)}
 .color_red{color:red}
 .color_orange{color:orange}
+
+.clr_red{color:red!important;}
+.clr_green{color:rgb(0,200,0)!important;}
+.clr_orange{color:orange!important;}
+.clr_blue{color:rgb(0, 100 ,255)!important;}
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -593,6 +599,12 @@ header {
 /* ----------------------------------------------
 ------------ TABLE-------------------------------
 ------------------------------------------------*/
+.table-wrap {
+  overflow: auto;
+  width: 100%;
+  max-width: 100%;
+}
+
 .table2 {
   width: 100%;
   -webkit-box-shadow: 0px 5px 12px -12px rgba(0, 0, 0, 0.29);
@@ -626,11 +638,20 @@ header {
     text-align: center;
     font-weight:bold;
 }
+
+.StatusSpan{
+    border: 3px solid;
+    border-radius: 25px;
+    padding: 2px 10px;
+    text-align: center;
+    font-weight:bold;
+}
 .StatusSpan[data-badge='Available'],
 .StatusSpan[data-badge='paid'],
-.StatusSpan[data-badge='true']{
-    color:var(--clr_Available);
-    border-color:var(--clr_Available);}
+.StatusSpan[data-badge='true'],
+.StatusSpan[data-badge='resolved']{
+    color:rgb(0,200,0);
+    border-color:rgb(0,200,0);}
 
 .StatusSpan[data-badge='Occupied'],
 .StatusSpan[data-badge='overdue'],
@@ -642,6 +663,8 @@ header {
 .StatusSpan[data-badge='pending']{
     color:var(--clr_Maintenance);
     border-color:var(--clr_Maintenance);}
+
+
 
 
 
@@ -788,17 +811,37 @@ header {
 }
 
 
-.cancle_btn{
+
+.btn1{
+        display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border: 1px solid transparent;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+
+form .cancel_btn{
     color:red;
     background-color: unset;
     border:1px solid red;
 }
- .cancle_btn:hover,
- .cancle_btn:active{
+form .cancel_btn:hover,
+form .cancel_btn:active{
     color:#fff;
     background-color: red;
 }
- .cancle_btn:active {
+form.cancel_btn:active {
     outline: 0;
     box-shadow: 0 0 0 .2rem rgba(255, 0, 0, .25);
 }
