@@ -1,9 +1,6 @@
 package adminServlet;
 
-import dao.MaintenanceRequestsDAO;
-import dao.NotificationDAO;
-import dao.UserAdminTInfoDAO;
-import dao.UserDAO;
+import dao.*;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -25,7 +22,7 @@ public class maintenanceDetails  extends HttpServlet {
     private UserDAO userDAO = new UserDAO();
     private UserAdminTInfoDAO useratinfoDAO = new UserAdminTInfoDAO();
     private NotificationDAO notificationDAO = new NotificationDAO();
-
+    private RoomDAO roomDAO = new RoomDAO();
 
     public maintenanceDetails() {
         super();
@@ -103,6 +100,10 @@ public class maintenanceDetails  extends HttpServlet {
 
             Notification notifTech = new Notification(1, "ADMIN", inputTechnician, subjectTech, notifMSGTech, false, inputStatus, null, null);
             notificationDAO.add(notifTech);
+
+            String roomId =  mainreDAO.getMaintenanceRequestGetRoomId(inputRequestId);
+            if("resolved".equals(inputStatus)){roomDAO.updateRoomStatus(roomId, "Available");
+            }else{roomDAO.updateRoomStatus(roomId, "Maintenance");}
 
         } catch (SQLException e) {
             // Handle SQL exceptions and set error message

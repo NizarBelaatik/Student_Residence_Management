@@ -32,7 +32,6 @@
                 <div class="card profile-card">
                     <div class="card-header profile-header text-center">
                         <!-- Profile Image -->
-                        <img src="https://via.placeholder.com/100" alt="Resident Photo" class="profile-img">
                         <h3>${resident.getFullname()}</h3>
                         <p>Resident of Room ${room.getRoomName()}</p>
                         <p>Member since:  ${user_since}</p>

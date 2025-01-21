@@ -1,6 +1,7 @@
 package residentServlet;
 
 import dao.NotificationDAO;
+import dao.RoomDAO;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -20,7 +21,7 @@ import com.google.gson.JsonParser;
 public class makeRequest extends HttpServlet {
     private MaintenanceRequestsDAO maintenanceRDAO = new MaintenanceRequestsDAO();
     private NotificationDAO notificationDAO = new NotificationDAO();
-
+    private RoomDAO roomDAO = new RoomDAO();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -72,6 +73,8 @@ public class makeRequest extends HttpServlet {
 
             Notification notifAdmin = new Notification(1, email, "ADMIN", subjectAdmin, notifMSGAdmin, false, "pending", null, null);
             notificationDAO.add(notifAdmin);
+            roomDAO.updateRoomStatus(roomId, "Maintenance");
+
 
         } catch (SQLException e) {
             // Handle SQL exception and send error response

@@ -172,6 +172,18 @@ public class RoomDAO {
         }
     }
 
+    public boolean updateRoomStatus(String roomid, String status) throws SQLException {
+        String sql = "UPDATE rooms SET  state = ? WHERE roomId = ?";
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, status);
+            ps.setString(2, roomid);
+
+            int rowsUpdated = ps.executeUpdate();
+            return rowsUpdated > 0;  // Return true if at least one row is updated.
+        }
+    }
+
     public boolean updateRoomStateById(String id, String state) throws SQLException {
         String sql = "UPDATE rooms SET  state = ? WHERE roomId = ?";
         try (Connection conn = DatabaseConnection.getConnection();

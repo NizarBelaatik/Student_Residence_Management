@@ -62,6 +62,21 @@ public class MaintenanceRequestsDAO {
         return null;
     }
 
+    public String getMaintenanceRequestGetRoomId(String id) throws SQLException {
+        String sql = "SELECT roomId FROM maintenance_requests WHERE id = ?";
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, id);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getString(1);
+                }
+            }
+        }
+        return null;
+    }
+
     // Get all MaintenanceRequests
     public List<MaintenanceRequests> getAllMaintenanceRequests() throws SQLException {
         String sql = "SELECT * FROM maintenance_requests";
