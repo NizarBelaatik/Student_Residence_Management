@@ -49,7 +49,10 @@ INSERT INTO `email_verification` (`verification_id`, `email`, `verification_toke
 (3, 'lazariatik@gmail.com', 't3ks47gf5n3ihmhgr7it', '2025-01-14 12:14:41', '2025-01-14 12:19:41', NULL),
 (4, 'lazariatik@gmail.com', 'fmo42pcbqkol8i8aeehu', '2025-01-14 12:17:11', '2025-01-14 12:22:11', NULL),
 (5, 'belaatiknizar@gmail.com', 'b91648kil9nk340c06audsto03e40b', '2025-01-18 19:25:34', '2025-01-18 19:30:34', '2025-01-18 19:25:50'),
-(6, 'belaatiknizar@gmail.com', 'ij87m3htlttfrk02o550piil9ql6t9q9ajnisa0131iuja64d3', '2025-01-19 20:14:10', '2025-01-19 20:19:10', NULL);
+(6, 'belaatiknizar@gmail.com', 'ij87m3htlttfrk02o550piil9ql6t9q9ajnisa0131iuja64d3', '2025-01-19 20:14:10', '2025-01-19 20:19:10', NULL),
+(7, 'night@gmail.com', '6rj5k4pfoq1fjlmg2a1kppt6iev4pf2pis6ao4ijvdlm4egl9i', '2025-01-21 18:25:04', '2025-01-21 18:30:04', NULL),
+(8, 'night@gmail.com', 'ajkvu1o8ep4mnt953spnd6364jc6tm2kl86iis4e2dt90jrki1', '2025-01-21 18:25:36', '2025-01-21 18:30:36', NULL),
+(9, 'lazariatik@gmail.com', 'kuaadaurqaqora169h10navvicakgkae0drjqhsktgbqc4i49b', '2025-01-21 18:27:55', '2025-01-21 18:32:55', '2025-01-21 18:28:19');
 
 -- --------------------------------------------------------
 
@@ -75,8 +78,8 @@ CREATE TABLE `maintenance_requests` (
 --
 
 INSERT INTO `maintenance_requests` (`id`, `resident_email`, `roomId`, `issue_type`, `issue_description`, `status`, `technician_name`, `resolved_date`, `created_at`, `updated_at`) VALUES
-(1, 'lazariatik@gmail.com', '13d54', 'Water', 'water leakage', 'pending', 'n@gmail.com', NULL, '2025-01-01 15:47:21', '2025-01-15 20:09:03'),
-(2, 'lazariatik@gmail.com', '13d54', 'Elec', 'elec problem', 'resolved', 'n@gmail.com', '2025-01-15', '2025-01-13 15:59:48', '2025-01-15 20:10:22'),
+(1, 'lazariatik@gmail.com', '13d54', 'Water', 'water leakage', 'in_progress', 'n@gmail.com', NULL, '2025-01-01 15:47:21', '2025-01-21 18:23:24'),
+(2, 'lazariatik@gmail.com', '13d54', 'Elec', 'elec problem', 'pending', 'belaatiknizar@gmail.com', NULL, '2025-01-13 15:59:48', '2025-01-21 21:10:18'),
 (3, 'lazariatik@gmail.com', '823k8f', 'Water Leak', 'sdf', 'in_progress', NULL, NULL, '2025-01-15 09:02:00', '2025-01-15 20:37:19'),
 (4, 'lazariatik@gmail.com', '823k8f', 'Electrical Issue', 'asdf', 'resolved', 'belaatiknizar@gmail.com', '2025-01-20', '2025-01-15 20:02:45', '2025-01-20 22:55:58'),
 (5, 'lazariatik@gmail.com', '823k8f', 'Water Leak', 'sadf', 'pending', NULL, NULL, '2025-01-15 20:03:29', '2025-01-15 20:03:29'),
@@ -105,21 +108,29 @@ CREATE TABLE `notifications` (
 --
 
 INSERT INTO `notifications` (`id`, `sender`, `receiver`, `subject`, `msg`, `status`, `type`, `sendDate`, `checkedDate`) VALUES
-(1, 'ADMIN', 'lazariatik@gmail.com', 'Payment Due: 500.0', 'Reminder: Pay your due fees of 500.0 before 2025-01-31 00:00:00.0. Check your email for more details.', 1, 'reminder', '2025-01-04 11:18:56', NULL),
-(2, 'ADMIN', 'lazariatik@gmail.com', 'Payment Due: 500.0', 'Reminder: Pay your due fees of 500.0 before 2025-01-31 00:00:00.0. Check your email for more details.', 1, 'reminder', '2025-01-04 11:23:16', NULL),
-(3, 'ADMIN', 'lazariatik@gmail.com', 'Payment Due: 500.0', 'Reminder: Pay your due fees of 500.0 before 2025-01-31 00:00:00.0. Check your email for more details.', 1, 'reminder', '2025-01-04 20:16:11', NULL),
-(4, 'ADMIN', 'lazariatik@gmail.com', 'Payment Due: 500.0', 'Reminder: Pay your due fees of 500.0 before 2025-01-31 00:00:00.0. Check your email for more details.', 1, 'reminder', '2025-01-05 12:33:52', NULL),
-(5, 'ADMIN', 'lazariatik@gmail.com', 'Payment Due: 500.0', 'Reminder: Pay your due fees of 500.0 before 2025-01-31 00:00:00.0. Check your email for more details.', 1, 'reminder', '2025-01-05 15:54:40', NULL),
-(6, 'ADMIN', 'lazariatik@gmail.com', 'Payment Due: 500.0', 'Reminder: Pay your due fees of 500.0 before 2025-01-31 00:00:00.0. Check your email for more details.', 1, 'reminder', '2025-01-05 15:55:04', NULL),
-(7, 'ADMIN', 'lazariatik@gmail.com', 'Payment Due: 500.0', 'Reminder: Pay your due fees of 500.0 before 2025-01-31 00:00:00.0. Check your email for more details.', 1, 'reminder', '2025-01-05 16:00:20', NULL),
-(8, 'ADMIN', 'lazariatik@gmail.com', 'Payment Due: 500.0', 'Reminder: Pay your due fees of 500.0 before 2025-01-31 00:00:00.0. Check your email for more details.', 1, 'reminder', '2025-01-05 16:13:27', NULL),
-(9, 'ADMIN', 'lazariatik@gmail.com', 'Payment Due: 500.0', 'Reminder: Pay your due fees of 500.0 before 2025-01-31 00:00:00.0. Check your email for more details.', 1, 'reminder', '2025-01-05 21:03:00', NULL),
-(10, 'ADMIN', 'lazariatik@gmail.com', 'Payment processed successfully!', 'Your payment of 0.0 has been successfully processed. Payment ID: 9NPSKB34KD2. Thank you!', 1, 'success', '2025-01-05 21:35:04', NULL),
-(11, 'ADMIN', 'lazariatik@gmail.com', 'Payment processed successfully!', 'Your payment of 0.0 has been successfully processed. Payment ID: AJOB4W32QZ. Thank you!', 1, 'success', '2025-01-05 21:37:21', NULL),
-(12, 'ADMIN', 'lazariatik@gmail.com', 'Payment Due: 500.0', 'Reminder: Pay your due fees of 500.0 before 2025-01-31 00:00:00.0. Check your email for more details.', 1, 'reminder', '2025-01-07 14:17:01', NULL),
-(13, 'ADMIN', 'lazariatik@gmail.com', 'Payment processed successfully!', 'Your payment of 500.0 has been successfully processed. Payment ID: IKYM2ZYD1E. Thank you!', 1, 'success', '2025-01-07 14:19:10', NULL),
-(14, 'ADMIN', 'lazariatik@gmail.com', 'Payment processed successfully!', 'Your payment of 500.0 has been successfully processed. Payment ID: AJOB4W32QZ. Thank you!', 1, 'success', '2025-01-07 16:26:36', '2025-01-19 19:42:26'),
-(15, 'ADMIN', 'lazariatik@gmail.com', 'Payment processed successfully!', 'Your payment of 500.0 has been successfully processed. Payment ID: AJOB4W32QZ. Thank you!', 0, 'success', '2025-01-15 18:33:41', NULL);
+(1, 'ADMIN', 'lazariatik@gmail.com', 'Payment Due: 500.0', 'Reminder: Pay your due fees of 500.0 before 2025-01-31 00:00:00.0. Check your email for more details.', 1, 'reminder', '2025-01-04 11:18:56', '2025-01-21 21:04:29'),
+(2, 'ADMIN', 'lazariatik@gmail.com', 'Payment Due: 500.0', 'Reminder: Pay your due fees of 500.0 before 2025-01-31 00:00:00.0. Check your email for more details.', 1, 'reminder', '2025-01-04 11:23:16', '2025-01-21 21:04:29'),
+(3, 'ADMIN', 'lazariatik@gmail.com', 'Payment Due: 500.0', 'Reminder: Pay your due fees of 500.0 before 2025-01-31 00:00:00.0. Check your email for more details.', 1, 'reminder', '2025-01-04 20:16:11', '2025-01-21 21:04:29'),
+(4, 'ADMIN', 'lazariatik@gmail.com', 'Payment Due: 500.0', 'Reminder: Pay your due fees of 500.0 before 2025-01-31 00:00:00.0. Check your email for more details.', 1, 'reminder', '2025-01-05 12:33:52', '2025-01-21 21:04:29'),
+(5, 'ADMIN', 'lazariatik@gmail.com', 'Payment Due: 500.0', 'Reminder: Pay your due fees of 500.0 before 2025-01-31 00:00:00.0. Check your email for more details.', 1, 'reminder', '2025-01-05 15:54:40', '2025-01-21 21:04:29'),
+(6, 'ADMIN', 'lazariatik@gmail.com', 'Payment Due: 500.0', 'Reminder: Pay your due fees of 500.0 before 2025-01-31 00:00:00.0. Check your email for more details.', 1, 'reminder', '2025-01-05 15:55:04', '2025-01-21 21:04:29'),
+(7, 'ADMIN', 'lazariatik@gmail.com', 'Payment Due: 500.0', 'Reminder: Pay your due fees of 500.0 before 2025-01-31 00:00:00.0. Check your email for more details.', 1, 'reminder', '2025-01-05 16:00:20', '2025-01-21 21:04:29'),
+(8, 'ADMIN', 'lazariatik@gmail.com', 'Payment Due: 500.0', 'Reminder: Pay your due fees of 500.0 before 2025-01-31 00:00:00.0. Check your email for more details.', 1, 'reminder', '2025-01-05 16:13:27', '2025-01-21 21:04:29'),
+(9, 'ADMIN', 'lazariatik@gmail.com', 'Payment Due: 500.0', 'Reminder: Pay your due fees of 500.0 before 2025-01-31 00:00:00.0. Check your email for more details.', 1, 'reminder', '2025-01-05 21:03:00', '2025-01-21 21:04:29'),
+(10, 'ADMIN', 'lazariatik@gmail.com', 'Payment processed successfully!', 'Your payment of 0.0 has been successfully processed. Payment ID: 9NPSKB34KD2. Thank you!', 1, 'success', '2025-01-05 21:35:04', '2025-01-21 21:04:29'),
+(11, 'ADMIN', 'lazariatik@gmail.com', 'Payment processed successfully!', 'Your payment of 0.0 has been successfully processed. Payment ID: AJOB4W32QZ. Thank you!', 1, 'success', '2025-01-05 21:37:21', '2025-01-21 21:04:29'),
+(12, 'ADMIN', 'lazariatik@gmail.com', 'Payment Due: 500.0', 'Reminder: Pay your due fees of 500.0 before 2025-01-31 00:00:00.0. Check your email for more details.', 1, 'reminder', '2025-01-07 14:17:01', '2025-01-21 21:04:29'),
+(13, 'ADMIN', 'lazariatik@gmail.com', 'Payment processed successfully!', 'Your payment of 500.0 has been successfully processed. Payment ID: IKYM2ZYD1E. Thank you!', 1, 'success', '2025-01-07 14:19:10', '2025-01-21 21:04:29'),
+(14, 'ADMIN', 'lazariatik@gmail.com', 'Payment processed successfully!', 'Your payment of 500.0 has been successfully processed. Payment ID: AJOB4W32QZ. Thank you!', 1, 'success', '2025-01-07 16:26:36', '2025-01-21 21:04:29'),
+(15, 'ADMIN', 'lazariatik@gmail.com', 'Payment processed successfully!', 'Your payment of 500.0 has been successfully processed. Payment ID: AJOB4W32QZ. Thank you!', 1, 'success', '2025-01-15 18:33:41', '2025-01-21 21:04:29'),
+(16, 'ADMIN', 'belaatiknizar@gmail.com', 'New Maintenance Request Assigned', 'You have been assigned to a new maintenance request. Please review the request details and proceed to fix the issue. Maintenance Request ID: 2. Thank you!', 1, 'resolved', '2025-01-21 06:59:06', '2025-01-21 07:08:06'),
+(17, 'ADMIN', 'belaatiknizar@gmail.com', 'New Maintenance Request Assigned', 'You have been assigned to a new maintenance request. Please review the request details and proceed to fix the issue. Maintenance Request ID: 2. Thank you!', 1, 'pending', '2025-01-21 07:03:23', '2025-01-21 07:08:06'),
+(18, 'ADMIN', 'belaatiknizar@gmail.com', 'New Maintenance Request Assigned', 'You have been assigned to a new maintenance request. Please review the request details and proceed to fix the issue. Maintenance Request ID: 2. Thank you!', 1, 'in_progress', '2025-01-21 07:08:02', '2025-01-21 07:08:06'),
+(19, 'ADMIN', 'lazariatik@gmail.com', 'Payment Due: 500.0', 'Reminder: Pay your due fees of 500.0 before 2025-01-31 00:00:00.0. Check your email for more details.', 1, 'reminder', '2025-01-21 18:15:22', '2025-01-21 21:04:29'),
+(20, 'ADMIN', 'lazariatik@gmail.com', 'Payment processed successfully!', 'Your payment of 500.0 has been successfully processed. Payment ID: VZWR2RQAKE. Thank you!', 1, 'success', '2025-01-21 18:22:44', '2025-01-21 21:04:29'),
+(21, 'ADMIN', 'n@gmail.com', 'New Maintenance Request Assigned', 'You have been assigned to a new maintenance request. Please review the request details and proceed to fix the issue. Maintenance Request ID: 1. Thank you!', 0, 'in_progress', '2025-01-21 18:23:24', NULL),
+(22, 'ADMIN', 'lazariatik@gmail.com', 'Payment processed successfully!', 'Your payment of 500.0 has been successfully processed. Payment ID: IKYM2ZYD1E. Thank you!', NULL, 'success', '2025-01-21 18:26:31', '2025-01-21 21:04:29'),
+(23, 'TECH', 'lazariatik@gmail.com', 'Maintenance Request Fixed', 'Your maintenance request has been successfully fixed. Maintenance Request ID: 2. Thank you for your patience!', NULL, 'resolved', '2025-01-21 18:29:19', '2025-01-21 21:04:29');
 
 -- --------------------------------------------------------
 
@@ -151,7 +162,8 @@ INSERT INTO `payments` (`paymentId`, `fullname`, `email`, `roomId`, `amount_due`
 ('9NPSKB34KD2', 'Night Code', 'lazariatik@gmail.com', '823k8f', 500.00, 0.00, '2024-12-31 23:00:00', NULL, 'overdue'),
 ('AJOB4W32QZ', 'Night Code', 'lazariatik@gmail.com', '823k8f', 500.00, 500.00, '2025-01-15 18:33:41', '2025-01-15 18:33:41', 'paid'),
 ('HQPUR7X8KL', 'Night Code', 'lazariatik@gmail.com', '13d54', 200.00, 0.00, '2025-01-30 23:00:00', NULL, 'pending'),
-('IKYM2ZYD1E', 'Night Code', 'lazariatik@gmail.com', '823k8f', 500.00, 0.00, '2024-12-30 23:00:00', NULL, 'pending');
+('IKYM2ZYD1E', 'Night Code', 'lazariatik@gmail.com', '823k8f', 500.00, 500.00, '2025-01-21 18:26:31', '2025-01-21 18:26:31', 'paid'),
+('VZWR2RQAKE', 'Night code', 'lazariatik@gmail.com', '823k8f', 500.00, 500.00, '2025-01-21 18:22:42', '2025-01-21 18:22:42', 'paid');
 
 -- --------------------------------------------------------
 
@@ -175,7 +187,8 @@ CREATE TABLE `payment_data` (
 --
 
 INSERT INTO `payment_data` (`id`, `email`, `payment_id`, `cardholder_name`, `card_number`, `expiry_date`, `cvc`, `payed_at`) VALUES
-(4, 'lazariatik@gmail.com', 'AJOB4W32QZ', 'night', '234', '234', '234', '2025-01-15 18:33:41');
+(4, 'lazariatik@gmail.com', 'AJOB4W32QZ', 'night', '234', '234', '234', '2025-01-15 18:33:41'),
+(5, 'lazariatik@gmail.com', 'IKYM2ZYD1E', 'nighht', '0101010', '01/28', '123', '2025-01-21 18:26:31');
 
 -- --------------------------------------------------------
 
@@ -222,7 +235,8 @@ CREATE TABLE `residents` (
 --
 
 INSERT INTO `residents` (`id`, `email`, `firstname`, `lastname`, `gender`, `phone`, `address`, `roomId`, `c_start_date`, `c_end_date`) VALUES
-(1, 'lazariatik@gmail.com', 'Night', 'code', 'male', '9234 2345jfg fdgsdg', 'asdfa asdf45345 asdff', '823k8f', '2024-04-01', '2025-06-30');
+(1, 'lazariatik@gmail.com', 'Night', 'code', 'male', '92340202003030303', 'adress 123 123', '823k8f', '2024-04-01', '2025-06-30'),
+(2, 'resident2@resident2.com', 'resident2FristN', 'resident2LastN', 'female', '01010101', 'resident2 address ', 'GOOE3FU5S1', '2025-01-01', '2025-04-30');
 
 -- --------------------------------------------------------
 
@@ -244,9 +258,10 @@ CREATE TABLE `rooms` (
 --
 
 INSERT INTO `rooms` (`roomId`, `name`, `size`, `equipment`, `price`, `state`) VALUES
-('13d54', '2', 'Medium', 'Suite', 200.00, 'Occupied'),
+('13d54', '2', 'Medium', 'Suite', 900.00, 'Occupied'),
 ('13df4', '4', 'Small', 'Ocean View', 100.00, 'Available'),
-('823k8f', '10', 'Large', NULL, 500.00, 'Occupied');
+('823k8f', '10', 'Large', NULL, 500.00, 'Occupied'),
+('GOOE3FU5S1', '222', 'Large', 'Ocean View', 2000.00, 'Occupied');
 
 -- --------------------------------------------------------
 
@@ -269,11 +284,12 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `email`, `password_hash`, `role`, `active`, `created_at`, `updated_at`) VALUES
-(1, 'night@gmail.com', '$2a$12$wFdji4M7qo1ldyTwl0QqT.OvcRO99lfr43D17/TpP/q1.n2bXqrtq', 'admin', 1, '2025-01-09 19:26:54', '2025-01-19 12:51:07'),
+(1, 'night@gmail.com', '$2a$12$wFdji4M7qo1ldyTwl0QqT.OvcRO99lfr43D17/TpP/q1.n2bXqrtq', 'admin', 1, '2025-01-09 19:26:54', '2025-01-21 18:24:22'),
 (2, 'resident@example.com', 'hashedPasswordHere', 'resident', 1, '2025-01-09 19:26:54', '2025-01-09 19:26:54'),
-(3, 'lazariatik@gmail.com', '$2a$12$Bs.g4KmN0Z8cG6qUU69ZGuIhZYJGwuMMhyNXbEi4o90BjzfDwaH0a', 'resident', 1, '2025-01-09 20:29:59', '2025-01-11 12:06:29'),
+(3, 'lazariatik@gmail.com', '$2a$12$MOgezPDlJ3Gi7SaZoO1jFuBD8ZKUYZoTvD2HEV1j.sfWvovsB8wpK', 'resident', 1, '2025-01-09 20:29:59', '2025-01-21 18:28:19'),
 (4, 'belaatiknizar@gmail.com', '$2a$12$Ow8utRHWdCENNCKwtVE3cOh4bxfoAW036FRqnVl.C0uOsKMXUArUq', 'tech', 1, '2025-01-10 12:18:53', '2025-01-18 19:25:50'),
-(5, 'n@gmail.com', '$2a$12$4xaAXHMqSXrrTWCL.CPypuoDxHq3kh06kw.wTMVXQ.I2rjL0xpJ2a', 'tech', 1, '2025-01-14 14:59:41', '2025-01-14 15:00:01');
+(5, 'n@gmail.com', '$2a$12$4xaAXHMqSXrrTWCL.CPypuoDxHq3kh06kw.wTMVXQ.I2rjL0xpJ2a', 'tech', 1, '2025-01-14 14:59:41', '2025-01-14 15:00:01'),
+(6, 'resident2@resident2.com', '$2a$12$wY1.pnWJriGAI76LwPZTGe66NaQH2ypwEqQIpuJjdso92Y7E52J6.', 'resident', 1, '2025-01-21 18:12:35', '2025-01-21 18:12:35');
 
 -- --------------------------------------------------------
 
@@ -294,7 +310,7 @@ CREATE TABLE `user_admin_tech_info` (
 --
 
 INSERT INTO `user_admin_tech_info` (`id`, `email`, `firstname`, `lastname`, `phone`) VALUES
-(1, 'night@gmail.com', 'Night12', 'Code1', '101010101010'),
+(1, 'night@gmail.com', 'NizarA', 'BelaatikA', '00000001110'),
 (2, 'belaatiknizar@gmail.com', 'NIZ', 'BE', '123455'),
 (3, 'n@gmail.com', 'Nii', 'Bee', '0123');
 
@@ -377,7 +393,7 @@ ALTER TABLE `user_admin_tech_info`
 -- AUTO_INCREMENT for table `email_verification`
 --
 ALTER TABLE `email_verification`
-  MODIFY `verification_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `verification_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `maintenance_requests`
@@ -389,13 +405,13 @@ ALTER TABLE `maintenance_requests`
 -- AUTO_INCREMENT for table `notifications`
 --
 ALTER TABLE `notifications`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `payment_data`
 --
 ALTER TABLE `payment_data`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `payment_generation_status`
@@ -407,13 +423,13 @@ ALTER TABLE `payment_generation_status`
 -- AUTO_INCREMENT for table `residents`
 --
 ALTER TABLE `residents`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `user_admin_tech_info`
