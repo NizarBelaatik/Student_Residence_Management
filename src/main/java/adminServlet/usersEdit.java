@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+import jakarta.servlet.http.HttpSession;
 import model.User;
 import dao.UserDAO;
 import model.UserAdminTInfo;
@@ -28,6 +29,10 @@ public class usersEdit extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // Forward the request to the actual JSP page
+
+
+
+
         String inputemail = request.getParameter("email");
         User userData ;
         UserAdminTInfo user_info;

@@ -91,6 +91,7 @@
 
     <script>
         var contextPath = "${pageContext.request.contextPath}";
+        var csrfToken = $("meta[name='csrf-token']").attr("content");
         $(document).ready(function() {
             // Handle form submission
             $('#addUserForm').submit(function(e) {
@@ -101,6 +102,7 @@
                     url: contextPath+'/admin/users/userAdd', // The servlet URL
                     method: 'POST',
                     data: $(this).serialize(), // Serialize the form data
+                    headers: {'X-CSRF-Token': csrfToken},
                     dataType: 'json', // Expect a JSON response
                     success: function(response) {
                         // Handle successful form submission (response will contain messageType and message)

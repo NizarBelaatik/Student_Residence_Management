@@ -13,6 +13,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import dao.RoomDAO;
+import jakarta.servlet.http.HttpSession;
+
 import java.sql.SQLException;
 
 /**
@@ -33,6 +35,14 @@ public class roomsDelete extends HttpServlet {
 
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
+
+        HttpSession session = request.getSession(false);
+        String csrfTokenFromSession = (String) session.getAttribute("csrfToken");
+        String csrfTokenFromRequest = request.getHeader("X-CSRF-Token");
+        if (csrfTokenFromRequest == null || !csrfTokenFromRequest.equals(csrfTokenFromSession)) {
+            response.sendError(HttpServletResponse.SC_FORBIDDEN, "CSRF token validation failed");
+            return;
+        }
 
         String roomIdParam  = request.getParameter("roomId");
 

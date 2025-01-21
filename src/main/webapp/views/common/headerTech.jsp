@@ -47,12 +47,13 @@
 <script>
     // Get the context path (you can use this for the server URL)
     var contextPath = "${pageContext.request.contextPath}";
-
+    var csrfToken = $("meta[name='csrf-token']").attr("content");
     // Function to fetch notifications
     function fetchNotifications() {
         $.ajax({
             url: contextPath + '/api/notification',  // Send the GET request to the servlet
             method: 'GET',
+            headers: {'X-CSRF-Token': csrfToken},
             dataType: 'json',
             success: function(data) {
                 const notifications = data.notifications;
@@ -157,6 +158,7 @@
 
     // Function that performs some other task, like making an API call
         var contextPath = "${pageContext.request.contextPath}";
+        var csrfToken = $("meta[name='csrf-token']").attr("content");
         function sendNotificationStatusUpdate(email) {
             $.ajax({
                 url: contextPath+'/api/updateNotificationStatus',  // Correct URL to the servlet
@@ -164,6 +166,8 @@
                 data: {
                     email: email                  // Send email as a parameter
                 },
+                headers: {'X-CSRF-Token': csrfToken},
+                dataType: 'json',
                 success: function(response) {
                     console.log('Success:', response);  // Handle success response
                 },

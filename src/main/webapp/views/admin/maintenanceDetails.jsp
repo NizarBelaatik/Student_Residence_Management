@@ -76,17 +76,30 @@
                                 <div class="row mb-3">
                                     <label for="inputTechnician" class="col-sm-2 col-form-label">Technician</label>
                                     <div class="col-sm-10">
+                                        <%
+                                            // Retrieve the technician list and selected technician name from the request
+                                            List<UserAdminTInfo> technicians = (List<UserAdminTInfo>) request.getAttribute("technician");
+                                            String selectedTechnicianEmail = (String) request.getAttribute("getTechnicianName");
+                                        %>
+
                                         <select name="inputTechnician" class="form-select" required>
                                             <option value="" disabled selected>Select Technician</option>
-                                            <% List<UserAdminTInfo> technicians = (List<UserAdminTInfo>) request.getAttribute("technician");
-                                               for (UserAdminTInfo T : technicians) { %>
-                                                <option value="<%= T.getEmail() %>" ${M_data.getTechnicianName() != null && M_data.getTechnicianName().equals(T.getEmail()) ? 'selected' : ''}>
-                                                    <%= T.getFullname() %> (<%= T.getEmail() %>)
+                                            <%
+                                                // Iterate over the technicians list and create the option tags
+                                                for (UserAdminTInfo technician : technicians) {
+                                            %>
+                                                <option value="<%= technician.getEmail() %>" <%= (technician.getEmail().equals(selectedTechnicianEmail)) ? "selected" : "" %> >
+                                                    <%= technician.getFullname() %> (<%= technician.getEmail() %>)
                                                 </option>
-                                            <% } %>
+                                            <%
+                                                }
+                                            %>
                                         </select>
+
                                     </div>
                                 </div>
+
+
 
                                 <div class="row mb-3">
                                     <label for="inputStatus" class="col-sm-2 col-form-label">Status</label>
@@ -114,6 +127,7 @@
 
     <script>
             var contextPath = "${pageContext.request.contextPath}";
+            var csrfToken = $("meta[name='csrf-token']").attr("content");
             $(document).ready(function() {
                 // Handle form submission
                 $('#editMaintenanceRequestForm').submit(function(e) {
@@ -124,6 +138,8 @@
                         url: contextPath+'/admin/maintenance/maintenanceDetails', // The servlet URL
                         method: 'POST',
                         data: $(this).serialize(), // Serialize the form data
+                        headers: {'X-CSRF-Token': csrfToken},
+
                         dataType: 'json', // Expect a JSON response
                         success: function(response) {
                             // Handle successful form submission (response will contain messageType and message)

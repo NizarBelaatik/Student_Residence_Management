@@ -5,6 +5,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import service.PaymentManager;
 import java.io.IOException;
 
@@ -16,6 +17,13 @@ public class generateMonthlyPayments  extends HttpServlet  {//
         // TODO Auto-generated constructor stub
     }
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession(false);
+        String csrfTokenFromSession = (String) session.getAttribute("csrfToken");
+        String csrfTokenFromRequest = request.getHeader("X-CSRF-Token");
+        if (csrfTokenFromRequest == null || !csrfTokenFromRequest.equals(csrfTokenFromSession)) {
+            response.sendError(HttpServletResponse.SC_FORBIDDEN, "CSRF token validation failed");
+            return;
+        }
         try {
             // Call your method to generate payments here
             boolean paymentsGenerated = paymentManager.generateMonthlyPayment();  // Your existing generatePayment method

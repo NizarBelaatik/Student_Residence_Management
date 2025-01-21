@@ -18,6 +18,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.servlet.http.HttpSession;
 import utils.DateUtils;
 
 import model.Resident;
@@ -48,6 +49,7 @@ public class residentsEdit extends HttpServlet {
             request.setAttribute("Res", ReData);
 
             roomList = roomDAO.getAllRoomsAvailable();
+            roomList.add(roomDAO.getRoomById(ReData.getRoomId()));
             request.setAttribute("roomList", roomList);
         }catch(SQLException e){
         }
@@ -63,49 +65,56 @@ public class residentsEdit extends HttpServlet {
             throws ServletException, IOException {
         
                     // Set response type to JSON
-            response.setContentType("application/json");
-            response.setCharacterEncoding("UTF-8");
-            
-            String residentEmail = request.getParameter("inputemail");
-            String residentFirstname = request.getParameter("inputfirstname");
-            String residentLastname = request.getParameter("inputlastname");   
-            String residentGender = request.getParameter("inputgender");
-            String residentPhone = request.getParameter("inputphone");
-            String residentAddress = request.getParameter("inputaddress");            
-            String residentRoomId = request.getParameter("inputroomId");
-            String contractStartDate = request.getParameter("inputStartDate");
-            String contractEndDate = request.getParameter("inputEndDate");
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        HttpSession session = request.getSession(false);
+        String csrfTokenFromSession = (String) session.getAttribute("csrfToken");
+        String csrfTokenFromRequest = request.getHeader("X-CSRF-Token");
+        if (csrfTokenFromRequest == null || !csrfTokenFromRequest.equals(csrfTokenFromSession)) {
+            response.sendError(HttpServletResponse.SC_FORBIDDEN, "CSRF token validation failed");
+            return;
+        }
 
-            Resident Edit_Resident = new Resident( residentEmail, residentFirstname, residentLastname, residentGender, residentPhone,residentAddress,residentRoomId,DateUtils.convertToLocalDate(contractStartDate),DateUtils.convertToLocalDate(contractEndDate));
+        String residentEmail = request.getParameter("inputemail");
+        String residentFirstname = request.getParameter("inputfirstname");
+        String residentLastname = request.getParameter("inputlastname");
+        String residentGender = request.getParameter("inputgender");
+        String residentPhone = request.getParameter("inputphone");
+        String residentAddress = request.getParameter("inputaddress");
+        String residentRoomId = request.getParameter("inputroomId");
+        String contractStartDate = request.getParameter("inputStartDate");
+        String contractEndDate = request.getParameter("inputEndDate");
 
-            boolean success = false;
-            String message = "";
-            try {
-                Resident oldResidentData = residentDAO.getResidentByEmail(residentEmail);
+        Resident Edit_Resident = new Resident( residentEmail, residentFirstname, residentLastname, residentGender, residentPhone,residentAddress,residentRoomId,DateUtils.convertToLocalDate(contractStartDate),DateUtils.convertToLocalDate(contractEndDate));
 
-                if(!residentRoomId.equals(oldResidentData.getRoomId())){
-                    roomDAO.updateRoomStateById(oldResidentData.getRoomId(),"Available");
-                }
+        boolean success = false;
+        String message = "";
+        try {
+            Resident oldResidentData = residentDAO.getResidentByEmail(residentEmail);
 
-                residentDAO.updateResident(Edit_Resident);
-                roomDAO.updateRoomStateById(residentRoomId,"Occupied");
-
-                success = true;
-                message = "Resident has been successfully Edited!";
-            } catch (SQLException e) {
-                // Handle SQL exceptions and set error message
-                success = false;
-                message = "Something went wrong. Please try again."+e;
+            if(!residentRoomId.equals(oldResidentData.getRoomId())){
+                roomDAO.updateRoomStateById(oldResidentData.getRoomId(),"Available");
             }
 
-            // Send the response as JSON
-            if (success) {
-                String jsonResponse = "{\"messageType\":\"success\", \"message\":\"" + message + "\"}";
-                response.getWriter().write(jsonResponse);
-            } else {
-                String jsonResponse = "{\"messageType\":\"error\", \"message\":\"" + message + "\"}";
-                response.getWriter().write(jsonResponse);
-            }
+            residentDAO.updateResident(Edit_Resident);
+            roomDAO.updateRoomStateById(residentRoomId,"Occupied");
+
+            success = true;
+            message = "Resident has been successfully Edited!";
+        } catch (SQLException e) {
+            // Handle SQL exceptions and set error message
+            success = false;
+            message = "Something went wrong. Please try again."+e;
+        }
+
+        // Send the response as JSON
+        if (success) {
+            String jsonResponse = "{\"messageType\":\"success\", \"message\":\"" + message + "\"}";
+            response.getWriter().write(jsonResponse);
+        } else {
+            String jsonResponse = "{\"messageType\":\"error\", \"message\":\"" + message + "\"}";
+            response.getWriter().write(jsonResponse);
+        }
                
 
                    

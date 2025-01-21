@@ -10,6 +10,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+import jakarta.servlet.http.HttpSession;
 import model.Room;
 import dao.RoomDAO;
 
@@ -42,6 +43,14 @@ public class roomsAdd extends HttpServlet {
         // Set response type to JSON
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
+
+        HttpSession session = request.getSession(false);
+        String csrfTokenFromSession = (String) session.getAttribute("csrfToken");
+        String csrfTokenFromRequest = request.getHeader("X-CSRF-Token");
+        if (csrfTokenFromRequest == null || !csrfTokenFromRequest.equals(csrfTokenFromSession)) {
+            response.sendError(HttpServletResponse.SC_FORBIDDEN, "CSRF token validation failed");
+            return;
+        }
 
         String roomSize = request.getParameter("inputSize");
         String roomName = request.getParameter("inputName");

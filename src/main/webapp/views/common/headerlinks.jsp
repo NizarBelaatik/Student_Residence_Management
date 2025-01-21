@@ -1,5 +1,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<%
+    String csrfToken = (String) session.getAttribute("csrfToken");
+    if (csrfToken == null) {
+        csrfToken = ""; // You can either set an empty string or handle it as needed
+    }
+%>
+<meta name="csrf-token" content="<%= csrfToken %>">
+
 <link rel="stylesheet" href="${pageContext.request.contextPath}/component/css/style_2.css">
 
 <link href="https://fonts.gstatic.com" rel="preconnect">
@@ -20,9 +29,6 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 
-    <script src="${pageContext.request.contextPath}/component/js/tools/jquery-3.3.1.min.js"></script>
-    <script src="${pageContext.request.contextPath}/component/js/script.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/component/css/style_2.css">
 

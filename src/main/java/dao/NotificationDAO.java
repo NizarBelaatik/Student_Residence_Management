@@ -1,7 +1,7 @@
 package dao;
 
 import model.Notification;
-import service.DatabaseConnection;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;

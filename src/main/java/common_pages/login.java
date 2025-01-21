@@ -16,6 +16,7 @@ import jakarta.servlet.http.HttpSession;
 import jakarta.servlet.RequestDispatcher;
 
 import java.sql.SQLException;
+import java.util.UUID;
 
 import dao.ResidentDAO;
 import dao.UserDAO;
@@ -55,7 +56,8 @@ public class login extends HttpServlet {
                 }else if("tech".equals(user.getRole())){
                     response.sendRedirect(request.getContextPath()+"/t");
                 }
-                
+                String csrfToken = UUID.randomUUID().toString();  // Generate a unique token
+                session.setAttribute("csrfToken", csrfToken);
             } else {
                 // Invalid login or inactive user
                 request.setAttribute("error", "Invalid email or password.");

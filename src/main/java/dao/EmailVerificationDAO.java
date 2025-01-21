@@ -1,7 +1,6 @@
 package dao;
 
 import model.EmailVerification;
-import service.DatabaseConnection;
 
 import java.sql.*;
 import java.util.ArrayList;

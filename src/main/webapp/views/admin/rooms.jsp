@@ -96,6 +96,7 @@
     <%@ include file="/views/common/footer.jsp" %>
         <script>
             var contextPath = "${pageContext.request.contextPath}";
+            var csrfToken = $("meta[name='csrf-token']").attr("content");
 
             function deleteRoom(roomId) {
                 // Confirm deletion before proceeding
@@ -114,6 +115,8 @@
                             url: contextPath + '/admin/rooms/roomsDelete', // The servlet URL
                             method: 'GET', // We are using GET for this case
                             data: { roomId: roomId }, // Send roomId in the data
+                            headers: {'X-CSRF-Token': csrfToken},
+
                             dataType: 'json', // Expect JSON response
                             success: function(response) {
                                 // Handle the response

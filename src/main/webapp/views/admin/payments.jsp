@@ -261,7 +261,7 @@
 
     <script>
         var contextPath = "${pageContext.request.contextPath}";
-
+        var csrfToken = $("meta[name='csrf-token']").attr("content");
         $(document).ready(function() {
 
             // Function to handle Send Reminder request
@@ -271,6 +271,7 @@
                     url: contextPath + '/admin-api/SendPaymentReminder',  // Endpoint for sending reminder
                     method: 'POST',
                     data: { email: email },
+
                     dataType: 'json',
                     success: function(response) {
                         if (response.messageType === "success") {

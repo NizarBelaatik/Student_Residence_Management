@@ -1,7 +1,6 @@
 package dao;
 
 import model.MakePaymentData; // Import your MakePaymentData model
-import service.DatabaseConnection;
 
 import java.sql.*;
 import java.util.ArrayList;

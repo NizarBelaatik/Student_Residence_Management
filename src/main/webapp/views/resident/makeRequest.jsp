@@ -95,6 +95,7 @@
     <script>
         var contextPath = "${pageContext.request.contextPath}"; // Get the context path
         var roomId = "${roomId}"; // Get the room ID from the JSP context
+        var csrfToken = $("meta[name='csrf-token']").attr("content");
         console.log(roomId);
         $('#maintenanceRequestForm').on('submit', function(event) {
             event.preventDefault(); // Prevent the default form submission
@@ -117,6 +118,7 @@
                 method: 'POST',
                 contentType: 'application/json', // Set content type to JSON
                 data: JSON.stringify(jsonData), // Convert the JSON object to a string
+                headers: {'X-CSRF-Token': csrfToken},
                 dataType: 'json', // Expect JSON response
                 success: function(response) {
                     if (response.status === "success") {

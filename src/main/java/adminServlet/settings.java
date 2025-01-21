@@ -47,10 +47,19 @@ public class settings  extends HttpServlet {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
 
+
         HttpServletRequest req = (HttpServletRequest) request;
         HttpSession session = req.getSession(false);
         User user = (User) session.getAttribute("user");
         String email= user.getEmail() ;
+
+
+        String csrfTokenFromSession = (String) session.getAttribute("csrfToken");
+        String csrfTokenFromRequest = request.getHeader("X-CSRF-Token");
+        if (csrfTokenFromRequest == null || !csrfTokenFromRequest.equals(csrfTokenFromSession)) {
+            response.sendError(HttpServletResponse.SC_FORBIDDEN, "CSRF token validation failed");
+            return;
+        }
 
         String residentFirstname = request.getParameter("firstname");
         String residentLastname = request.getParameter("lastname");

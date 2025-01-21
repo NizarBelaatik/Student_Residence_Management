@@ -12,8 +12,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 
-
-
+import jakarta.servlet.http.HttpSession;
 import model.User;
 import dao.UserDAO;
 import service.EmailSender;
@@ -50,6 +49,16 @@ public class usersAdd extends HttpServlet {
         // Set response type to JSON
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
+
+
+        HttpSession session = request.getSession(false);
+        String csrfTokenFromSession = (String) session.getAttribute("csrfToken");
+        String csrfTokenFromRequest = request.getHeader("X-CSRF-Token");
+        if (csrfTokenFromRequest == null || !csrfTokenFromRequest.equals(csrfTokenFromSession)) {
+            response.sendError(HttpServletResponse.SC_FORBIDDEN, "CSRF token validation failed");
+            return;
+        }
+
 
         String inputemail = request.getParameter("inputemail");
         String firstname = request.getParameter("firstname");

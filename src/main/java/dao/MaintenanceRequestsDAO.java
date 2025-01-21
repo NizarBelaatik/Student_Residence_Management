@@ -1,7 +1,6 @@
 package dao;
 
 import model.MaintenanceRequests;
-import service.DatabaseConnection;
 import utils.GenerateRandomString;
 
 import java.sql.*;

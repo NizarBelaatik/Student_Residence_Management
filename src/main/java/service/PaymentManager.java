@@ -4,17 +4,13 @@ import java.time.*;
 import java.sql.*;
 import java.util.List;
 
-import dao.PaymentDAO;
+import dao.*;
 import model.Notification;
 import model.Payment;
 
 import model.Resident;
-import dao.ResidentDAO;
 
 import model.Room;
-import dao.RoomDAO;
-
-import dao.NotificationDAO;
 
 import utils.DateUtils;
 

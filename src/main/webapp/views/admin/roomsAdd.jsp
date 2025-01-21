@@ -38,27 +38,27 @@
 
                             <form id="addRoomForm" method="post" action="${pageContext.request.contextPath}/admin/rooms/addRoom">
                                 <div class="row mb-3">
-                                  <label for="inputEmail3" class="col-sm-2 col-form-label">Size</label>
+                                  <label for="inputSize" class="col-sm-2 col-form-label">Size</label>
                                   <div class="col-sm-10">
                                     <input type="text" class="form-control" name="inputSize" required>
                                   </div>
                                 </div>
                                 <div class="row mb-3">
-                                  <label for="inputEmail3" class="col-sm-2 col-form-label">Room Name</label>
+                                  <label for="inputName" class="col-sm-2 col-form-label">Room Name</label>
                                   <div class="col-sm-10">
                                     <input type="text" class="form-control" name="inputName" required>
                                   </div>
                                 </div>
                                 
                                 <div class="row mb-3">
-                                  <label for="inputEmail3" class="col-sm-2 col-form-label">Equipments</label>
+                                  <label for="inputEquipment" class="col-sm-2 col-form-label">Equipments</label>
                                   <div class="col-sm-10">
                                     <input type="text" class="form-control" name="inputEquipment" required>
                                   </div>
                                 </div>
                                 
                                 <div class="row mb-3">
-                                  <label for="inputEmail3" class="col-sm-2 col-form-label">Price</label>
+                                  <label for="inputPrice" class="col-sm-2 col-form-label">Price</label>
                                   <div class="col-sm-10">
                                       <input type="number" class="form-control" name="inputPrice" step="0.01" required>
                                   </div>
@@ -92,16 +92,18 @@
 
     <script>
         var contextPath = "${pageContext.request.contextPath}";
+        var csrfToken = $("meta[name='csrf-token']").attr("content");
         $(document).ready(function() {
             // Handle form submission
             $('#addRoomForm').submit(function(e) {
                 e.preventDefault(); // Prevent default form submission
-                
+                var csrfToken = $("meta[name='csrf-token']").attr("content");
                 // Perform AJAX request
                 $.ajax({
                     url: contextPath+'/admin/rooms/addRoom', // The servlet URL
                     method: 'POST',
                     data: $(this).serialize(), // Serialize the form data
+                    headers: {'X-CSRF-Token': csrfToken},
                     dataType: 'json', // Expect a JSON response
                     success: function(response) {
                         // Handle successful form submission (response will contain messageType and message)

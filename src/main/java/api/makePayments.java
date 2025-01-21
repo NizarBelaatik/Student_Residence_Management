@@ -14,6 +14,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 
+import jakarta.servlet.http.HttpSession;
 import model.Notification;
 import model.Payment;
 import service.EmailSender;
@@ -29,6 +30,7 @@ public class makePayments  extends HttpServlet{
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
 
         // Set response type to JSON
         response.setContentType("application/json");

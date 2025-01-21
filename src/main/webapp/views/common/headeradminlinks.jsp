@@ -1,5 +1,13 @@
-<meta http-equiv=<"Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<%
+    String csrfToken = (String) session.getAttribute("csrfToken");
+    if (csrfToken == null) {
+        csrfToken = ""; // You can either set an empty string or handle it as needed
+    }
+%>
+<meta name="csrf-token" content="<%= csrfToken %>">
+
 
 <!-- Google Fonts -->
 <link href="https://fonts.gstatic.com" rel="preconnect">
@@ -24,3 +32,4 @@
 
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/component/css/style.css">
+

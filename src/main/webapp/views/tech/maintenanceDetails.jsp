@@ -86,6 +86,7 @@
 
 <script>
             var contextPath = "${pageContext.request.contextPath}";
+            var csrfToken = $("meta[name='csrf-token']").attr("content");
             $(document).ready(function() {
                 // Handle form submission
                 $('#editMaintenanceRequestForm').submit(function(e) {
@@ -97,6 +98,7 @@
                         method: 'POST',
                         data: $(this).serialize(), // Serialize the form data
                         dataType: 'json', // Expect a JSON response
+                        headers: {'X-CSRF-Token': csrfToken},
                         success: function(response) {
                             // Handle successful form submission (response will contain messageType and message)
                             if (response.messageType === "success") {

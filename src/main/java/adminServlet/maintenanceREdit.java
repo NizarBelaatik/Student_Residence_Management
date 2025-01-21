@@ -29,6 +29,7 @@ public class maintenanceREdit extends HttpServlet {
         String requestId = request.getParameter("requestId");
         MaintenanceRequests maintenanceR;
 
+
         try{
             maintenanceR = maintenanceRDAO.getMaintenanceRequestById(requestId);
         } catch (SQLException e) {throw new RuntimeException(e);}

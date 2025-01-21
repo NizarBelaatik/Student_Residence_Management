@@ -10,6 +10,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import model.*;
 
 import java.io.IOException;
@@ -41,7 +42,7 @@ public class maintenanceDetails  extends HttpServlet {
         try {
             // Retrieve the maintenance request by ID
             request.setAttribute("M_data", mainreDAO.getMaintenanceRequestById(requestId));
-
+            request.setAttribute("getTechnicianName", mainreDAO.getMaintenanceRequestById(requestId).getTechnicianName());
             // Get all technicians without passwords
             List<User> userTechList = userDAO.getAllUsersWithoutPW("tech");
 
@@ -65,6 +66,7 @@ public class maintenanceDetails  extends HttpServlet {
         // Set the technician information in the request
         request.setAttribute("technician", userTinfoList);
 
+
         // Forward to the JSP page
         RequestDispatcher dispatcher = request.getRequestDispatcher("/views/admin/maintenanceDetails.jsp");
         request.setAttribute("activePage", "maintenance");  // Set active page
@@ -74,6 +76,17 @@ public class maintenanceDetails  extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+
+        HttpSession session = request.getSession(false);
+        String csrfTokenFromSession = (String) session.getAttribute("csrfToken");
+        String csrfTokenFromRequest = request.getHeader("X-CSRF-Token");
+        if (csrfTokenFromRequest == null || !csrfTokenFromRequest.equals(csrfTokenFromSession)) {
+            response.sendError(HttpServletResponse.SC_FORBIDDEN, "CSRF token validation failed");
+            return;
+        }
+
+
         String inputTechnician = request.getParameter("inputTechnician");
         String inputStatus = request.getParameter("inputStatus");
         String inputRequestId = request.getParameter("inputRequestId");

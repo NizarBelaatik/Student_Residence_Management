@@ -32,6 +32,14 @@ public class updateNotificationStatus extends HttpServlet {
         HttpSession session = req.getSession(false);
         User user = (User) session.getAttribute("user");
         String email= user.getEmail() ;
+
+        String csrfTokenFromSession = (String) session.getAttribute("csrfToken");
+        String csrfTokenFromRequest = request.getHeader("X-CSRF-Token");
+        if (csrfTokenFromRequest == null || !csrfTokenFromRequest.equals(csrfTokenFromSession)) {
+            response.sendError(HttpServletResponse.SC_FORBIDDEN, "CSRF token validation failed");
+            return;
+        }
+
         // Assuming NotificationDAO is properly implemented
 
 

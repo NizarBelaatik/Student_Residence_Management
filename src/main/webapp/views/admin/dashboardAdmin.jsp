@@ -232,8 +232,11 @@
     <%@ include file="/views/common/footer.jsp" %>
     <script>
         var contextPath = "${pageContext.request.contextPath}";
+        var csrfToken = $("meta[name='csrf-token']").attr("content");
         // Fetch data from the Servlet
-        fetch(contextPath + '/admin-api/getPaymentGraph')
+        fetch(contextPath + '/admin-api/getPaymentGraph',{
+             method: 'GET',  // GET request
+             headers: {'X-CSRF-Token': csrfToken,'Content-Type': 'application/json'}})
             .then(response => response.json())
             .then(data => {
                 console.log('Fetched data:', data);  // Log to see what data we receive
@@ -301,86 +304,95 @@
 
    <script>
        var contextPath = "${pageContext.request.contextPath}";
+       var csrfToken = $("meta[name='csrf-token']").attr("content");
+
        // Fetch data from the Servlet
-       fetch(contextPath + '/admin-api/getMaintenanceRequestsGraph')
-           .then(response => response.json())
-           .then(data => {
-               console.log('Fetched data:', data);  // Log to see what data we receive
+       fetch(contextPath + '/admin-api/getMaintenanceRequestsGraph', {
+           method: 'GET',  // GET request
+           headers: {
+               'X-CSRF-Token': csrfToken,  // Include the CSRF token in the request headers
+               'Content-Type': 'application/json'  // Specify the content type (optional)
+           }
+       })
+       .then(response => response.json())  // Parse the JSON response
+       .then(data => {
+           console.log('Fetched data:', data);  // Log to see what data we receive
 
-               // Ensure all the data is present
-               const dates = data.dates;
-               const pending = data.pending;
-               const resolved = data.resolved;
-               const inProgress = data.in_progress;
+           // Ensure all the data is present
+           const dates = data.dates;
+           const pending = data.pending;
+           const resolved = data.resolved;
+           const inProgress = data.in_progress;
 
-               if (!dates || !pending || !resolved || !inProgress) {
-                   console.error('Data is missing some fields!');
-                   return;
-               }
+           if (!dates || !pending || !resolved || !inProgress) {
+               console.error('Data is missing some fields!');
+               return;
+           }
 
-               // Reverse the arrays to display the most recent date on the left
-               const reversedDates = dates.reverse();
-               const reversedPending = pending.reverse();
-               const reversedResolved = resolved.reverse();
-               const reversedInProgress = inProgress.reverse();
+           // Reverse the arrays to display the most recent date on the left
+           const reversedDates = dates.reverse();
+           const reversedPending = pending.reverse();
+           const reversedResolved = resolved.reverse();
+           const reversedInProgress = inProgress.reverse();
 
-               // Create the chart using Chart.js
-               const ctx = document.getElementById('maintenanceChart').getContext('2d');
-               const maintenanceChart = new Chart(ctx, {
-                   type: 'bar',
-                   data: {
-                       labels: reversedDates,  // X-axis (dates)
-                       datasets: [
-                           {
-                               label: 'Pending Requests',
-                               data: reversedPending, // Y-axis (pending counts)
-                               backgroundColor: 'rgba(255, 0, 0, 0.9)',
-                           },
-                           {
-                               label: 'Resolved Requests',
-                               data: reversedResolved, // Y-axis (resolved counts)
-                               backgroundColor: 'rgba(0, 200, 0, 0.9)',
-                           },
-                           {
-                               label: 'In Progress Requests',
-                               data: reversedInProgress, // Y-axis (in progress counts)
-                               backgroundColor: 'rgba(255, 206, 86, 0.9)',
-                           }
-                       ]
-                   },
-                   options: {
-                       responsive: true,
-                       scales: {
-                           x: {
-                               title: {
-                                   display: true,
-                                   text: 'Date'
-                               }
-                           },
-                           y: {
-                               title: {
-                                   display: true,
-                                   text: 'Number of Requests'
-                               },
-                               beginAtZero: true
-                           }
+           // Create the chart using Chart.js
+           const ctx = document.getElementById('maintenanceChart').getContext('2d');
+           const maintenanceChart = new Chart(ctx, {
+               type: 'bar',
+               data: {
+                   labels: reversedDates,  // X-axis (dates)
+                   datasets: [
+                       {
+                           label: 'Pending Requests',
+                           data: reversedPending, // Y-axis (pending counts)
+                           backgroundColor: 'rgba(255, 0, 0, 0.9)',
                        },
-                       plugins: {
-                           legend: {
-                               position: 'top',
-                           },
+                       {
+                           label: 'Resolved Requests',
+                           data: reversedResolved, // Y-axis (resolved counts)
+                           backgroundColor: 'rgba(0, 200, 0, 0.9)',
+                       },
+                       {
+                           label: 'In Progress Requests',
+                           data: reversedInProgress, // Y-axis (in progress counts)
+                           backgroundColor: 'rgba(255, 206, 86, 0.9)',
+                       }
+                   ]
+               },
+               options: {
+                   responsive: true,
+                   scales: {
+                       x: {
                            title: {
                                display: true,
-                               text: 'Maintenance Requests Over the Last 30 Days',
-                           },
+                               text: 'Date'
+                           }
                        },
-                   }
-               });
-           })
-           .catch(error => {
-               console.error('Error fetching data:', error);
+                       y: {
+                           title: {
+                               display: true,
+                               text: 'Number of Requests'
+                           },
+                           beginAtZero: true
+                       }
+                   },
+                   plugins: {
+                       legend: {
+                           position: 'top',
+                       },
+                       title: {
+                           display: true,
+                           text: 'Maintenance Requests Over the Last 30 Days',
+                       },
+                   },
+               }
            });
+       })
+       .catch(error => {
+           console.error('Error fetching data:', error);
+       });
    </script>
+
 
 
     <script src="${pageContext.request.contextPath}/component/js/tools/jquery-3.3.1.min.js"></script>

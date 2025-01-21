@@ -83,7 +83,7 @@
 <script>
     $(document).ready(function() {
         var contextPath = "${pageContext.request.contextPath}"; // Get the context path
-
+        var csrfToken = $("meta[name='csrf-token']").attr("content");
         $('#payment-form').on('submit', function(event) {
             event.preventDefault(); // Prevent the default form submission
 
@@ -102,6 +102,7 @@
                 method: 'POST',
                 contentType: 'application/json', // Set content type to JSON
                 data: JSON.stringify(formData), // Convert form data to JSON
+                headers: {'X-CSRF-Token': csrfToken},
                 dataType: 'json', // Expect JSON response
                 success: function(response) {
                     if (response.status === "success") {

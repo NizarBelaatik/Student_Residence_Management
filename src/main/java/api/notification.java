@@ -33,13 +33,20 @@ public class notification extends HttpServlet {
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             return; // Return unauthorized if the session doesn't exist
         }
-
         // Get the logged-in user
         User user = (User) session.getAttribute("user");
         if (user == null) {
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             return; // Return unauthorized if the user is not logged in
         }
+
+        String csrfTokenFromSession = (String) session.getAttribute("csrfToken");
+        String csrfTokenFromRequest = request.getHeader("X-CSRF-Token");
+        if (csrfTokenFromRequest == null || !csrfTokenFromRequest.equals(csrfTokenFromSession)) {
+            response.sendError(HttpServletResponse.SC_FORBIDDEN, "CSRF token validation failed");
+            return;
+        }
+
 
         // Get notifications for the user
         String email = user.getEmail();
