@@ -1,6 +1,7 @@
 package techServlet;
 
 import dao.MaintenanceRequestsDAO;
+import dao.NotificationDAO;
 import dao.UserAdminTInfoDAO;
 import dao.UserDAO;
 import jakarta.servlet.RequestDispatcher;
@@ -9,10 +10,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import model.MaintenanceRequests;
-import model.Payment;
-import model.User;
-import model.UserAdminTInfo;
+import model.*;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -23,6 +21,8 @@ import java.util.List;
 @WebServlet( urlPatterns = {"/t/maintenance/maintenanceDetails"})
 public class maintenanceDetails  extends HttpServlet {
     private MaintenanceRequestsDAO mainreDAO = new MaintenanceRequestsDAO();
+    private NotificationDAO notificationDAO = new NotificationDAO();
+
 
     public maintenanceDetails() {
         super();
@@ -65,6 +65,15 @@ public class maintenanceDetails  extends HttpServlet {
             mainreDAO.updateMaintenanceRequestStatusT(inputRequestId,inputStatus);
             success = true;
             message = "Maintenance has been successfully Edited!";
+            if("resolved".equals(inputStatus)) {
+                //SEND NOTIFICATION TO RESIDENT
+                String subjectResident = "Maintenance Request Fixed";
+                String notifMSGResident = "Your maintenance request has been successfully fixed. Maintenance Request ID: " + inputRequestId + ". Thank you for your patience!";
+                String residentEmail = mainreDAO.getMaintenanceRequestById(inputRequestId).getResidentEmail();
+                Notification notifResident = new Notification(1, "TECH", residentEmail, subjectResident, notifMSGResident, false, "resolved", null, null);
+                notificationDAO.add(notifResident);
+            }
+
         } catch (SQLException e) {
             // Handle SQL exceptions and set error message
             success = false;

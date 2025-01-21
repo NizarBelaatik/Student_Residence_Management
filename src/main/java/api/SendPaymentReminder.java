@@ -21,8 +21,8 @@ import service.PaymentManager;
  */
 @WebServlet(name = "SendPaymentReminder", urlPatterns = {"/admin-api/SendPaymentReminder"})
 public class SendPaymentReminder extends HttpServlet{
-    PaymentManager paymentManager= new PaymentManager();
-    ResidentDAO residentDAO = new ResidentDAO();
+    private PaymentManager paymentManager= new PaymentManager();
+    private ResidentDAO residentDAO = new ResidentDAO();
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

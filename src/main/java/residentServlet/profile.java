@@ -26,7 +26,7 @@ import static utils.DateUtils.formatTimestampToDate;
 public class profile  extends HttpServlet {
     private ResidentDAO residentDAO = new ResidentDAO();
     private RoomDAO roomDAO = new RoomDAO();
-    NotificationDAO notificationDAO = new NotificationDAO();
+    private NotificationDAO notificationDAO = new NotificationDAO();
 
     public profile(){
         super();

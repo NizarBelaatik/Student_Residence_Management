@@ -21,10 +21,10 @@ import service.PaymentManager;
 
 @WebServlet(name = "MakePayments", urlPatterns = {"/admin-api/MakePayments"})
 public class makePayments  extends HttpServlet{
-    PaymentManager paymentManager= new PaymentManager();
-    ResidentDAO residentDAO = new ResidentDAO();
-    PaymentDAO paymentDAO = new PaymentDAO();
-    NotificationDAO notificationDAO = new NotificationDAO();
+    private PaymentManager paymentManager= new PaymentManager();
+    private ResidentDAO residentDAO = new ResidentDAO();
+    private PaymentDAO paymentDAO = new PaymentDAO();
+    private NotificationDAO notificationDAO = new NotificationDAO();
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)

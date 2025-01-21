@@ -20,7 +20,7 @@ import com.fasterxml.jackson.databind.ObjectMapper; // Add the Jackson dependenc
 @WebServlet( urlPatterns = {"/api/notification"})
 public class notification extends HttpServlet {
 
-    NotificationDAO notificationDAO = new NotificationDAO();
+    private NotificationDAO notificationDAO = new NotificationDAO();
     public notification(){
         super();
     }

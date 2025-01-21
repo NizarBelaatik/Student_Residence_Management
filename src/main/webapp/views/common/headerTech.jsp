@@ -77,11 +77,14 @@
 
                     // Set the correct icon based on the notification type
                     const icon = $('<i>', { class: 'notification-icon' });
-                    if (notif.type === 'reminder') {
+                    if (notif.type === 'reminder' || notif.type ==='pending' ) {
                         icon.addClass('notification-icon icon-reminder bi bi-exclamation-triangle-fill');
-                    } else if (notif.type === 'danger') {
+                   } else if (notif.type ==='in_progress') {
+                   icon.addClass('notification-icon icon-reminder bi bi-arrow-repeat');
+
+                    } else if (notif.type === 'danger' || notif.type ==='in_progress') {
                         icon.addClass('notification-icon icon-danger bi bi-exclamation-octagon');
-                    } else if (notif.type === 'success') {
+                    } else if (notif.type === 'success' || notif.type === 'resolved') {
                         icon.addClass('notification-icon icon-success bi bi-check-circle');
                     }
 

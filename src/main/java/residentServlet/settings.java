@@ -26,7 +26,7 @@ import java.util.List;
 @WebServlet( urlPatterns = {"/u/settings"})
 public class settings  extends HttpServlet {
     private ResidentDAO residentDAO = new ResidentDAO();
-    NotificationDAO notificationDAO = new NotificationDAO();
+    private NotificationDAO notificationDAO = new NotificationDAO();
 
     public settings(){
         super();

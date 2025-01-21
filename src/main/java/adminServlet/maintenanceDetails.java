@@ -1,6 +1,7 @@
 package adminServlet;
 
 import dao.MaintenanceRequestsDAO;
+import dao.NotificationDAO;
 import dao.UserAdminTInfoDAO;
 import dao.UserDAO;
 import jakarta.servlet.RequestDispatcher;
@@ -9,10 +10,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import model.MaintenanceRequests;
-import model.Payment;
-import model.User;
-import model.UserAdminTInfo;
+import model.*;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -25,6 +23,9 @@ public class maintenanceDetails  extends HttpServlet {
     private MaintenanceRequestsDAO mainreDAO = new MaintenanceRequestsDAO();
     private UserDAO userDAO = new UserDAO();
     private UserAdminTInfoDAO useratinfoDAO = new UserAdminTInfoDAO();
+    private NotificationDAO notificationDAO = new NotificationDAO();
+
+
     public maintenanceDetails() {
         super();
     }
@@ -82,6 +83,14 @@ public class maintenanceDetails  extends HttpServlet {
             mainreDAO.updateMaintenanceRequestStatus(inputRequestId,inputStatus, inputTechnician);
             success = true;
             message = "Maintenance has been successfully Edited!";
+
+            //SEND NOTIFICATION TO TECHNICIAN
+            String subjectTech = "New Maintenance Request Assigned";
+            String notifMSGTech = "You have been assigned to a new maintenance request. Please review the request details and proceed to fix the issue. Maintenance Request ID: " + inputRequestId + ". Thank you!";
+
+            Notification notifTech = new Notification(1, "ADMIN", inputTechnician, subjectTech, notifMSGTech, false, inputStatus, null, null);
+            notificationDAO.add(notifTech);
+
         } catch (SQLException e) {
             // Handle SQL exceptions and set error message
             success = false;
