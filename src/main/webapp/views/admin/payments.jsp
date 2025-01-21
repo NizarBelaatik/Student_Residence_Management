@@ -234,12 +234,9 @@
                                                         <td><%= data.getPaymentDate() %></td>
                                                         <td><span class="StatusSpan" data-badge='<%= data.getStatus() %>'><%= data.getStatus() %></span></td>
                                                         <td>
-
                                                             <a class="btn btn-info" href="<%= request.getContextPath() %>/downloadReceipt?paymentId=<%= data.getPaymentId() %>" class="btn btn-success">
                                                                 <i class="bi bi-file-earmark-pdf"></i> Download Receipt
                                                             </a>
-
-
                                                         </td>
                                                     </tr>
                                         <% } } %>

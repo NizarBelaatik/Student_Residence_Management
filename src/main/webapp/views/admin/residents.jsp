@@ -80,7 +80,10 @@
                                               <td><%= data.getCEndDate() %></td>
                                               
                                               <td>
-                                                  <a class="actions_button" href="${pageContext.request.contextPath}/admin/residents/editResident?email=<%= data.getEmail() %>"><i class="bi bi-pencil-square actions_button_orange"></i></a>                                              </td>
+                                                  <a class="btn btn_eye" href="${pageContext.request.contextPath}/admin/residents/view?email=<%= data.getEmail() %>">
+                                                    <i class="bi bi-eye-fill fa-2x"></i>
+                                                  </a>
+                                              </td>
                                             </tr>
                                     
                                         <% } %>

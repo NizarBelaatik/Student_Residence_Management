@@ -4,6 +4,7 @@
  */
 package adminServlet;
 
+import dao.PaymentDAO;
 import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -19,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.servlet.http.HttpSession;
+import model.Payment;
 import utils.DateUtils;
 
 import model.Resident;
@@ -31,10 +33,12 @@ import dao.RoomDAO;
  *
  * @author night
  */
-@WebServlet(name = "residentsEdit", urlPatterns = {"/admin/residents/editResident"})
+@WebServlet(name = "residentsView", urlPatterns = {"/admin/residents/view"})
 public class residentsEdit extends HttpServlet {
     private ResidentDAO residentDAO = new ResidentDAO();
     private RoomDAO roomDAO = new RoomDAO();
+    private PaymentDAO paymentDAO = new PaymentDAO();
+
     public residentsEdit(){
         super();
         }
@@ -53,7 +57,27 @@ public class residentsEdit extends HttpServlet {
             request.setAttribute("roomList", roomList);
         }catch(SQLException e){
         }
-        
+
+        List<Resident> residentList = new ArrayList<>();
+        try{
+            residentList = residentDAO.getAllResidentsForPaymentGeneration();
+            List<String> paymentL=new ArrayList<String>();
+            paymentL.add("overdue");
+            paymentL.add("paid");
+            paymentL.add("pending");
+
+            paymentL.forEach(p->{
+                try{
+                    List<Payment> p_list = paymentDAO.getPaymentRByStatus(p,email);
+                    request.setAttribute("P_"+p, p_list);
+                } catch (SQLException e) {e.printStackTrace();}
+
+            });
+
+
+
+
+        }catch(SQLException e){e.printStackTrace(); }
         RequestDispatcher dispatcher = request.getRequestDispatcher("/views/admin/residentsEdit.jsp");
         request.setAttribute("activePage", "residents");  // Set active page
         dispatcher.forward(request, response);
