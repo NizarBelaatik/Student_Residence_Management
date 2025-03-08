@@ -21,11 +21,11 @@
     <!-- Main content -->
     <main class="main" id="main">
         <div class="pagetitle">
-            <h1>Manage Users</h1>
+            <h1>Manage Staff</h1>
             <nav>
               <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="${pageContext.request.contextPath}/admin">Dashboard</a></li>
-                <li class="breadcrumb-item"><a href="${pageContext.request.contextPath}/admin/users">Users</a></li>
+                <li class="breadcrumb-item"><a href="${pageContext.request.contextPath}/admin/users">Staff</a></li>
                 <li class="breadcrumb-item active">ADD</li>
               </ol>
             </nav>

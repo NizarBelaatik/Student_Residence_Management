@@ -17,7 +17,6 @@ public class ScheduledPaymentManager {
 
         long delay = ChronoUnit.DAYS.between(today, firstDayOfNextMonth);
 
-        // Schedule to run on the 1st day of the next month
         scheduler.schedule(() -> generatePayments(), delay, TimeUnit.DAYS);
     }
 
